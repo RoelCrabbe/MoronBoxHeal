@@ -1,0 +1,21 @@
+## Interface: 11200
+## Title: MoronBoxHeal
+## Author: MoRoN 
+## Notes: Pairs with MoRoN-Box for healing
+## Dependencies: MoronBox
+## LoadOnDemand: 0
+## SavedVariablesPerCharacter: MoronBoxHeal_Options, MoronBoxHeal_Debug
+
+..\Ace2\AceLibrary\AceLibrary.lua
+..\Ace2\AceOO-2.0\AceOO-2.0.lua
+..\Ace2\AceEvent-2.0\AceEvent-2.0.lua
+..\Ace2\RosterLib-2.0\RosterLib-2.0.lua
+..\Ace2\HealComm-1.0\HealComm-1.0.lua
+..\Ace2\Banzai-1.0\Banzai-1.0.lua
+..\Ace2\AceAddon-2.0\AceAddon-2.0.lua
+
+Core\Localization.lua
+Core\GroupData.lua
+Core\Range.lua
+Core\Main.lua
+Core\MoronBoxHeal.xml
