@@ -15,7 +15,7 @@
     </Frame>
 
     <Frame name="MoronBoxHealMainFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" inherits="MoronBoxHealBackdrop">
-
+        
         <Size>
             <AbsDimension x="800" y="550" />
         </Size>
@@ -70,7 +70,7 @@
             </OnHide>
         </Scripts>
 
-        <Frames>
+        <Frames inherits="MoronBoxHealMainFrameGeneral">
             <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
 
                 <Size>
@@ -104,7 +104,6 @@
                         this:SetBackdropBorderColor(0, 0, 0);
                     </OnShow>
                 </Scripts>
-
             </Frame>
 
             <Button name="MoronBoxHealMainFrameGeneral" inherits="MoronBoxHealBackdrop">
@@ -149,6 +148,12 @@
                         this:SetBackdropColor(getColorRGBA("gray_600"));
                         this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnShow>
+                    <OnClick>
+                        if ( not MoronBoxHealMainFrame:IsShown() ) then
+                            MoronBoxHealMainFrame:Show()
+                        end
+                        MoronBoxHealOptionFrame:Hide()
+                    </OnClick>
                 </Scripts>
             </Button>
             
@@ -195,7 +200,9 @@
                         this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnShow>
                     <OnClick>
-                        MoronBoxHealOptionFrame:Show()
+                        if ( not MoronBoxHealOptionFrame:IsShown() ) then
+                            MoronBoxHealOptionFrame:Show()
+                        end
                         MoronBoxHealMainFrame:Hide()
                     </OnClick>
                 </Scripts>
@@ -347,42 +354,26 @@
         </Frames>
     </Frame>
 
-    <Frame name="MoronBoxHealOptionFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent">
-        
+    <Frame name="MoronBoxHealOptionFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" inherits="MoronBoxHealBackdrop">
+
         <Size>
             <AbsDimension x="800" y="550" />
         </Size>
 
-        <Anchors>
-            <Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER" />
-        </Anchors>
-
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-            <EdgeSize>
-                <AbsValue val="8"/>
-            </EdgeSize>
-            <TileSize>
-                <AbsValue val="16"/>
-            </TileSize>
-            <BackgroundInsets>
-                <AbsInset left="1" right="1" top="1" bottom="1"/>
-            </BackgroundInsets>
-        </Backdrop>
-
         <Layers>
             <Layer level="OVERLAY">
-                <FontString name="MoronBoxHealOptionFrameTitle" inherits="GameFontNormalHuge" text="MBH_TITLE" justifyH="CENTER">
+                <FontString name="MoronBoxHealMainFrameTitle" inherits="GameFontNormalHuge" text="MBH_TITLE" justifyH="CENTER">
                     <Anchors>
                         <Anchor point="CENTER" relativePoint="TOP">
                             <Offset>
-                                <AbsDimension x="0" y="-25"/>
+                                <AbsDimension x="0" y="-30"/>
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
             </Layer>
             <Layer level="OVERLAY">
-                <FontString name="MoronBoxHealOptionFrameAuthor" inherits="GameFontNormal" text="MBH_AUTHOR" justifyH="CENTER">
+                <FontString name="MoronBoxHealMainFrameAuthor" inherits="GameFontNormal" text="MBH_AUTHOR" justifyH="CENTER">
                     <Anchors>
                         <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
                             <Offset>
@@ -390,20 +381,15 @@
                             </Offset>
                         </Anchor>
                     </Anchors>
-                    <Scripts>
-                        <OnClick>
-                            MBH_RestoreDefaultValuesOnClick()
-                        </OnClick>
-                    </Scripts>
                 </FontString>
             </Layer>
         </Layers>
 
         <Scripts>
-           <OnLoad>
-                this:SetBackdropColor(0, 0, 0, 0.75);
-                this:SetBackdropBorderColor(0, 0, 0);
-            </OnLoad>
+            <OnShow>
+                this:SetBackdropColor(getColorRGBA("gray_750"));
+                this:SetBackdropBorderColor(getColorRGBA("gray_750"));
+            </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
                     this:StopMovingOrSizing();
@@ -425,8 +411,7 @@
         </Scripts>
 
         <Frames>
-
-            <Button name="MoronBoxHealOptionFrameGeneral">
+            <Button name="MoronBoxHealOptionFrameGeneral" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="60" y="25" />
@@ -435,22 +420,10 @@
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
                         <Offset>
-                            <AbsDimension x="10" y="-10" />
+                            <AbsDimension x="10" y="-15" />
                         </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -468,24 +441,28 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_GENERAL");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                     <OnClick>
-                        MoronBoxHealMainFrame:Show()
+                        if ( not MoronBoxHealMainFrame:IsShown() ) then
+                            MoronBoxHealMainFrame:Show()
+                        end
                         MoronBoxHealOptionFrame:Hide()
                     </OnClick>
                 </Scripts>
             </Button>
-            
-            <Button name="MoronBoxHealOptionFrameOption">
+
+            <Button name="MoronBoxHealOptionFrameOption" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="60" y="25" />
@@ -493,21 +470,11 @@
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealOptionFrameGeneral">
-         
+                        <Offset>
+                            <AbsDimension x="4" />
+                        </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -525,77 +492,27 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_OPTIONS");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
-                </Scripts>
-            </Button>
-
-            <Button name="MoronBoxHealOptionFrameClose">
-
-                <Size>
-                    <AbsDimension x="60" y="25" />
-                </Size>
-
-                <Anchors>
-                    <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
-                        <Offset>
-                            <AbsDimension x="-10" y="-10" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
-
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealOptionFrameText" inherits="GameFontNormal" text="MBH_HIDE">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
-                    </OnLeave>
-                    <OnLoad>
-                        this:SetText("MBH_HIDE");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                     <OnClick>
-                        MoronBoxHealOptionFrame:Hide()
+                        if ( not MoronBoxHealOptionFrame:IsShown() ) then
+                            MoronBoxHealOptionFrame:Show()
+                        end
+                        MoronBoxHealMainFrame:Hide()
                     </OnClick>
                 </Scripts>
             </Button>
-            
+
             <Frame name="MoronBoxHealOptionAutoHealFrame">
                             
                 <Size>
@@ -1305,5 +1222,5 @@
                 MBH_OnUpdate(arg1);
             </OnUpdate>
         </Scripts>
-    </Frame>  
+    </Frame>
 </Ui>
