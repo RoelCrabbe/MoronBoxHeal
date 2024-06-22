@@ -1,22 +1,24 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
 
-    <Frame name="MoronBoxHealMainFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent">
-
-        <Size>
-            <AbsDimension x="800" y="550" />
-        </Size>
-
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+    <Frame name="MoronBoxHealBackdrop" virtual="true">
+        <Backdrop bgFile="Interface/Buttons/WHITE8X8" edgeFile="Interface/Tooltips/UI-Tooltip-Border" tile="false">
             <EdgeSize>
-                <AbsValue val="8"/>
+                <AbsValue val="4"/>
             </EdgeSize>
             <TileSize>
                 <AbsValue val="16"/>
             </TileSize>
             <BackgroundInsets>
-                <AbsInset left="1" right="1" top="1" bottom="1"/>
+                <AbsInset left="0" right="0" top="0" bottom="0"/>
             </BackgroundInsets>
         </Backdrop>
+    </Frame>
+
+    <Frame name="MoronBoxHealMainFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" inherits="MoronBoxHealBackdrop">
+
+        <Size>
+            <AbsDimension x="800" y="550" />
+        </Size>
 
         <Layers>
             <Layer level="OVERLAY">
@@ -44,10 +46,10 @@
         </Layers>
 
         <Scripts>
-            <OnLoad>
-                this:SetBackdropColor(0, 0, 0, 0.75);
+            <OnShow>
+                this:SetBackdropColor(getColorRGBA("gray_750"))
                 this:SetBackdropBorderColor(0, 0, 0);
-            </OnLoad>
+            </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
                     this:StopMovingOrSizing();
@@ -69,8 +71,7 @@
         </Scripts>
 
         <Frames>
-
-            <Frame name="MoronBoxHealMainFrameTextContainer">
+            <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="680" y="400" /> 
@@ -80,18 +81,6 @@
                     <Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parent">
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -109,16 +98,16 @@
                 </Layers>
 
                 <Scripts>
-                    <OnLoad>
+                    <OnShow>
                         MoronBoxHealMainFrameText:SetText(MBH_INFORMATION);
-                        MoronBoxHealMainFrameTextContainer:SetBackdropColor(0, 0, 0, 0.75); 
-                        MoronBoxHealMainFrameTextContainer:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(0, 0, 0);
+                    </OnShow>
                 </Scripts>
 
             </Frame>
 
-            <Button name="MoronBoxHealMainFrameGeneral">
+            <Button name="MoronBoxHealMainFrameGeneral" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="60" y="25" />
@@ -127,22 +116,10 @@
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
                         <Offset>
-                            <AbsDimension x="10" y="-10" />
+                            <AbsDimension x="10" y="-15" />
                         </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -160,20 +137,22 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_GENERAL");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                 </Scripts>
             </Button>
             
-            <Button name="MoronBoxHealMainFrameOption">
+            <Button name="MoronBoxHealMainFrameOption" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="60" y="25" />
@@ -181,21 +160,11 @@
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealMainFrameGeneral">
-         
+                        <Offset>
+                            <AbsDimension x="4" />
+                        </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -213,24 +182,26 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_OPTIONS");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                     <OnClick>
                         MoronBoxHealOptionFrame:Show()
-                        MoronBoxHealMainFrame:Hide() <!-- Add this line to hide the main frame -->
+                        MoronBoxHealMainFrame:Hide()
                     </OnClick>
                 </Scripts>
             </Button>
 
-            <Button name="MoronBoxHealMainFrameClose">
+            <Button name="MoronBoxHealMainFrameClose" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="60" y="25" />
@@ -239,22 +210,10 @@
                 <Anchors>
                     <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
                         <Offset>
-                            <AbsDimension x="-10" y="-10" />
+                            <AbsDimension x="-10" y="-15" />
                         </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -272,23 +231,25 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_HIDE");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                     <OnClick>
                         MoronBoxHealMainFrame:Hide()
                     </OnClick>
                 </Scripts>
             </Button>
 
-            <Button name="MoronBoxHealMainFrameDefault">
+            <Button name="MoronBoxHealMainFrameDefault" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="120" y="25" />
@@ -297,22 +258,10 @@
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
                         <Offset>
-                            <AbsDimension x="10" y="10" />
+                            <AbsDimension x="10" y="15" />
                         </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -330,23 +279,25 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_RESTOREDEFAULT");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                     <OnClick>
                         MBH_RestoreDefaultValues()
                     </OnClick>
                 </Scripts>
             </Button>
 
-            <Button name="MoronBoxHealMainFramePreset">
+            <Button name="MoronBoxHealMainFramePreset" inherits="MoronBoxHealBackdrop">
 
                 <Size>
                     <AbsDimension x="100" y="25" />
@@ -354,21 +305,11 @@
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealMainFrameDefault">
-         
+                        <Offset>
+                            <AbsDimension x="4" />
+                        </Offset>
                     </Anchor>
                 </Anchors>
-
-                <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="8"/>
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16"/>
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="1" right="1" top="1" bottom="1"/>
-                    </BackgroundInsets>
-                </Backdrop>
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -386,16 +327,18 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(0, 0, 0, 1);
+                        this:SetBackdropColor(getColorRGBA("gray_400"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(0, 0, 0, 0);
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
                     </OnLeave>
-                    <OnLoad>
+                    <OnShow>
                         this:SetText("MBH_PRESETSETTINGS");
-                        this:SetBackdropColor(0, 0, 0, 0);
-                        this:SetBackdropBorderColor(0, 0, 0);
-                    </OnLoad>
+                        this:SetBackdropColor(getColorRGBA("gray_600"));
+                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                    </OnShow>
                     <OnClick>
                         MBH_SetPresetValues()
                     </OnClick>
