@@ -9,7 +9,7 @@
                 <AbsValue val="16"/>
             </TileSize>
             <BackgroundInsets>
-                <AbsInset left="0" right="0" top="0" bottom="0"/>
+                <AbsInset left="1" right="1" top="1" bottom="1"/>
             </BackgroundInsets>
         </Backdrop>
     </Frame>
@@ -26,7 +26,7 @@
                     <Anchors>
                         <Anchor point="CENTER" relativePoint="TOP">
                             <Offset>
-                                <AbsDimension x="0" y="-25"/>
+                                <AbsDimension x="0" y="-30"/>
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -47,8 +47,8 @@
 
         <Scripts>
             <OnShow>
-                this:SetBackdropColor(getColorRGBA("gray_750"))
-                this:SetBackdropBorderColor(0, 0, 0);
+                this:SetBackdropColor(getColorRGBA("gray_750"));
+                this:SetBackdropBorderColor(getColorRGBA("gray_750"));
             </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
