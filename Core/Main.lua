@@ -755,40 +755,44 @@ function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)
 	end
 end
 
+function MBH_ManaProtectionThresholdCheck(PCT) 
+    return mb_manaPct("player") < (PCT / 100)
+end
+
 ManaProtectionThresholds = {
     ["Flash Heal"] = {
         {
-            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.5 end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(66) end,
             ["NewSpellName"] = "Flash Heal",
             ["NewLowRank"] = 1,
             ["NewHighRank"] = 4,
         },
         {
-            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.3 end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(33) end,
             ["NewSpellName"] = "Heal",
         },
     },
     ["Greater Heal"] = {
         {
-            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.5 end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(50) end,
             ["NewSpellName"] = "Heal",
         },
     },
     ["Heal"] = {
         {
-            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.05 end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(5) end,
             ["NewSpellName"] = "Lesser Heal",
         },
     },
     ["Lesser Healing Wave"] = {
         {
-            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.3 end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(35) end,
             ["NewSpellName"] = "Healing Wave",
         },
     },
     ["Chain Heal"] = {
         {
-            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.2 end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(25) end,
             ["NewSpellName"] = "Healing Wave",
         },
     },
