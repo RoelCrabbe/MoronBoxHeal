@@ -993,7 +993,7 @@ function MBH_LineOfSightTimeOutSlider_OnValueChanged()
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
-function MoronBoxHealMiniMapButton_OnUpdate(self)
+function MBH_MoronBoxHealMiniMapButton_OnUpdate(self)
     if ( this.isMiniMapMoving ) then
 
         local xpos, ypos = GetCursorPosition()
@@ -1013,5 +1013,13 @@ function MoronBoxHealMiniMapButton_OnUpdate(self)
             54 - (78 * cos(iconPos)),
             (78 * sin(iconPos)) - 55
         )
+    end
+end
+
+function MBH_ShowFrame(Frame)
+
+    if ( not Frame:IsShown() ) then
+        MBH_ResetAllWindow()
+        Frame:Show()
     end
 end
