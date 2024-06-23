@@ -214,8 +214,10 @@ function MBH_Init()
 
     SLASH_MORONBOXHEALSHOW1 = MBH_SHOW_SLASH;
     SlashCmdList["MORONBOXHEALSHOW"] = function(msg)
-        MBH_ResetAllWindow()
-        MoronBoxHealMainFrame:Show()
+        if ( not MoronBoxHealMainFrame:IsShown() ) then
+            MBH_ResetAllWindow()
+            MoronBoxHealMainFrame:Show()
+        end
     end
 end
 

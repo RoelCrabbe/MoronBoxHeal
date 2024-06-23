@@ -1177,6 +1177,7 @@
 			<OnClick>
                 MoronBoxHealMiniMapButtonIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925);
                 if ( not MoronBoxHealMainFrame:IsShown() ) then
+                    MBH_ResetAllWindow()
                     MoronBoxHealMainFrame:Show()
                 else 
                     MoronBoxHealMainFrame:Hide()
