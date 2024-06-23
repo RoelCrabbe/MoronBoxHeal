@@ -88,11 +88,14 @@
             <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
 
                 <Size>
-                    <AbsDimension x="680" y="400" /> 
+                    <AbsDimension x="730" y="415" /> 
                 </Size>
 
                 <Anchors>
-                    <Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parent">
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="35" y="-75" />
+                        </Offset>
                     </Anchor>
                 </Anchors>
 
