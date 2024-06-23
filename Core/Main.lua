@@ -107,6 +107,15 @@ ColorPicker = {
     Red500 = { r = 0.937, g = 0.267, b = 0.267, a = 1 },    -- #ef4444 equivalent
     Red700 = { r = 0.725, g = 0.110, b = 0.110, a = 1 },    -- #b91c1c equivalent
     Purple = { r = 0.670, g = 0.408, b = 1, a = 1 },        -- #ab68ff equivalent
+
+    Blue50 = { r = 0.678, g = 0.725, b = 0.776, a = 1 },    -- #adb9c6 equivalent
+    Blue100 = { r = 0.620, g = 0.675, b = 0.737, a = 1 },   -- #9eaebd equivalent
+    Blue200 = { r = 0.561, g = 0.624, b = 0.698, a = 1 },   -- #8fa0b2 equivalent
+    Blue300 = { r = 0.502, g = 0.576, b = 0.659, a = 1 },   -- #8093a8 equivalent
+    Blue400 = { r = 0.443, g = 0.529, b = 0.620, a = 1 },   -- #71879e equivalent
+    Blue500 = { r = 0.384, g = 0.482, b = 0.682, a = 1 },   -- #627bb0 equivalent
+    Blue600 = { r = 0.325, g = 0.435, b = 0.643, a = 1 },   -- #5370a4 equivalent
+    Blue700 = { r = 0.267, g = 0.388, b = 0.604, a = 1 },   -- #44639a equivalent
 }
 
 -------------------------------------------------------------------------------
@@ -296,6 +305,7 @@ end
 function MBH_ResetAllWindow()
     MBH_ResetMoronBoxHealMainFramePosition()
     MBH_ResetMoronBoxHealOptionFramePosition()
+    MBH_ResetMoronBoxHealProtectionFramePosition()
 end
 
 function MBH_ResetMoronBoxHealMainFramePosition()
@@ -308,6 +318,12 @@ function MBH_ResetMoronBoxHealOptionFramePosition()
     MoronBoxHealOptionFrame:ClearAllPoints()
     MoronBoxHealOptionFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
     MoronBoxHealOptionFrame:Hide()
+end
+
+function MBH_ResetMoronBoxHealProtectionFramePosition()
+    MoronBoxHealProtectionFrame:ClearAllPoints()
+    MoronBoxHealProtectionFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    MoronBoxHealProtectionFrame:Hide()
 end
 
 function MBH_SetupAceData()
