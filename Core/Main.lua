@@ -749,45 +749,71 @@ function MBH_UpdateCheckBox(Frame, Value)
 end
 
 function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)
-	LowestAllowedRank = LowestAllowedRank or 1
-	HighestAllowedRank = HighestAllowedRank or MBH_GetMaxSpellRank(SpellName)
     ManaProtectedHeal, ManaProtectedLowRank , ManaProtectedHighRank = MBH_ManaProtection(SpellName, LowestAllowedRank, HighestAllowedRank)
-	Session.SpellName = ManaProtectedHeal
 	if Session.CastTime[Session.SpellName] then
 		MBH_Cast(Session.SpellName, ManaProtectedLowRank, ManaProtectedHighRank)
 	end
 end
 
-function MBH_ManaProtection(SpellName, LowestAllowedRank, HighestAllowedRank)
+local ManaProtectionThresholds = {
+    ["Flash Heal"] = {
+        {
+            ["ThresholdCheck"] = mb_manaPct("player") < 0.66,
+            ["NewSpellName"] = "Flash Heal",
+            ["NewLowRank"] = 1,
+            ["NewHighRank"] = 5,
+        },
+        {
+            ["ThresholdCheck"] = mb_manaPct("player") < 0.3,
+            ["NewSpellName"] = "Heal",
+        },
+    },
+    ["Heal"] = {
+        {
+            ["ThresholdCheck"] = mb_manaPct("player") < 0.05,
+            ["NewSpellName"] = "Lesser Heal",
+        },
+    },
+    ["Lesser Healing Wave"] = {
+        {
+            ["ThresholdCheck"] = mb_manaPct("player") < 0.3,
+            ["NewSpellName"] = "Healing Wave",
+        },
+    },
+    ["Chain Heal"] = {
+        {
+            ["ThresholdCheck"] = mb_manaPct("player") < 0.2,
+            ["NewSpellName"] = "Healing Wave",
+        },
+    },
+}
+
+function MBH_ManaProtection(SPN, LAR, HAR)
 
     if MoronBoxHeal_Options.AdvancedOptions.Mana_Protection then
-        if SpellName == "Flash Heal" then
-
-            if mb_manaPct("player") < 0.05 then
-
-                SpellName = "Lesser Heal"
-                LowestAllowedRank = 3
-                HighestAllowedRank = 3
-
-            elseif mb_manaPct("player") < 0.3 then
-
-                SpellName = "Heal"
-                LowestAllowedRank = 1
-                HighestAllowedRank = MBH_GetMaxSpellRank(SpellName)
-            end
-
-        elseif SpellName == "Lesser Healing Wave" then
-
-            if mb_manaPct("player") < 0.3 then
-
-                SpellName = "Healing Wave"
-                LowestAllowedRank = 1
-                HighestAllowedRank = MBH_GetMaxSpellRank(SpellName)
+        local spellDataList = ManaProtectionThresholds[Session.SpellName]
+        if spellDataList then
+            for _, spellData in ipairs(spellDataList) do
+                if spellData.ThresholdCheck then
+                    SPN = spellData.NewSpellName
+                    LAR = spellData.NewLowRank
+                    HAR = spellData.NewHighRank
+                    break
+                end
             end
         end
     end
-    return SpellName, LowestAllowedRank, HighestAllowedRank
+
+    LAR = LAR or 1
+    HAR = HAR or MBH_GetMaxSpellRank(SPN)
+
+    Session.SpellName = SPN
+    return Session.SpellName, LAR, HAR
 end
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
 function MBH_RestoreDefaultValues()
     -- Define the popup dialog
@@ -825,11 +851,6 @@ function MBH_SetPresetValues()
 
     -- Show the confirmation popup
     StaticPopup_Show("SET_PRESET_VALUES_CONFIRM")
-end
-
-
-function MBH_SetText(text)
-    getglobal(this:GetName().."Text"):SetText(text);
 end
 
 function MBH_AllowedOverhealPercentageSlider_OnShow()
