@@ -2,62 +2,58 @@
 -- Variables {{{
 -------------------------------------------------------------------------------
 
-colors = {
-    white = { r = 1, g = 1, b = 1, a = 1 },         -- #ffffff equivalent
-    black = { r = 0, g = 0, b = 0, a = 1 },         -- #000000 equivalent
-    gray_50 = { r = 0.976, g = 0.976, b = 0.976, a = 1 },  -- #f9f9f9 equivalent
-    gray_100 = { r = 0.925, g = 0.925, b = 0.925, a = 1 },  -- #ececec equivalent
-    gray_200 = { r = 0.890, g = 0.890, b = 0.890, a = 1 },  -- #e3e3e3 equivalent
-    gray_300 = { r = 0.804, g = 0.804, b = 0.804, a = 1 },  -- #cdcdcd equivalent
-    gray_400 = { r = 0.706, g = 0.706, b = 0.706, a = 1 },  -- #b4b4b4 equivalent
-    gray_500 = { r = 0.608, g = 0.608, b = 0.608, a = 1 },  -- #9b9b9b equivalent
-    gray_600 = { r = 0.404, g = 0.404, b = 0.404, a = 1 },  -- #676767 equivalent
-    gray_700 = { r = 0.259, g = 0.259, b = 0.259, a = 1 },  -- #424242 equivalent
-    gray_750 = { r = 0.184, g = 0.184, b = 0.184, a = 1 },  -- #2f2f2f equivalent
-    gray_800 = { r = 0.129, g = 0.129, b = 0.129, a = 1 },  -- #212121 equivalent
-    gray_900 = { r = 0.090, g = 0.090, b = 0.090, a = 1 },  -- #171717 equivalent
-    gray_950 = { r = 0.051, g = 0.051, b = 0.051, a = 1 },  -- #0d0d0d equivalent
-    red_500 = { r = 0.937, g = 0.267, b = 0.267, a = 1 },  -- #ef4444 equivalent
-    red_700 = { r = 0.725, g = 0.110, b = 0.110, a = 1 },  -- #b91c1c equivalent
-    brand_purple = { r = 0.670, g = 0.408, b = 1, a = 1 },  -- #ab68ff equivalent
+local ManaProtectionThresholds = {
+    ["Flash Heal"] = {
+        {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(66) end,
+            ["NewSpellName"] = "Flash Heal",
+            ["NewLowRank"] = 1,
+            ["NewHighRank"] = 4,
+        },
+        {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(33) end,
+            ["NewSpellName"] = "Heal",
+        },
+    },
+    ["Greater Heal"] = {
+        {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(50) end,
+            ["NewSpellName"] = "Heal",
+        },
+    },
+    ["Heal"] = {
+        {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(5) end,
+            ["NewSpellName"] = "Lesser Heal",
+        },
+    },
+    ["Lesser Healing Wave"] = {
+        {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(35) end,
+            ["NewSpellName"] = "Healing Wave",
+        },
+    },
+    ["Chain Heal"] = {
+        {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(25) end,
+            ["NewSpellName"] = "Healing Wave",
+        },
+    },
 }
 
 -------------------------------------------------------------------------------
--- The Stored Variables {{{
+-- The Global Variables {{{
 -------------------------------------------------------------------------------
-
-DefaultOptions = {
-
-    AutoHeal = {
-        Smart_Heal = true,
-        Allowed_Overheal_Percentage = 11,
-        Random_Target = false,
-        Heal_Target_Number = 1
-    },
-    ExtendedRange = {
-        Enable = true,
-        Frequency = 5
-    },
-    LineOfSight = {
-        Enable = true,
-        TimeOut = 4
-    },
-    AdvancedOptions = {
-        Mana_Protection = true
-    }
-}
 
 Session = {
     SpellName = nil,
     CurrentUnit = nil,
     MaxData = 60, -- Max. amount of players in the buffer -- change this to increase/decrease performance.
-    -- Sort = true, -- We sort by % auto
-    -- DisplayPet = true; -- I don't want to track Pets
     HealSpell = nil, -- Track Spell Location
     InCombat = nil,
     PlayerName = UnitName("player"),
 	PlayerClass = UnitClass("player"),
-    Elapsed = 0, -- elapsed time for onupdate function
+    Elapsed = 0,
     I = 1,
     Group = {
         1,
@@ -91,6 +87,51 @@ Session = {
         Time = 0
     },
     Debug = false
+}
+
+ColorPicker = {
+    White = { r = 1, g = 1, b = 1, a = 1 },         -- #ffffff equivalent
+    Black = { r = 0, g = 0, b = 0, a = 1 },         -- #000000 equivalent
+    Gray50 = { r = 0.976, g = 0.976, b = 0.976, a = 1 },  -- #f9f9f9 equivalent
+    Gray100 = { r = 0.925, g = 0.925, b = 0.925, a = 1 },  -- #ececec equivalent
+    Gray200 = { r = 0.890, g = 0.890, b = 0.890, a = 1 },  -- #e3e3e3 equivalent
+    Gray300 = { r = 0.804, g = 0.804, b = 0.804, a = 1 },  -- #cdcdcd equivalent
+    Gray400 = { r = 0.706, g = 0.706, b = 0.706, a = 1 },  -- #b4b4b4 equivalent
+    Gray500 = { r = 0.608, g = 0.608, b = 0.608, a = 1 },  -- #9b9b9b equivalent
+    Gray600 = { r = 0.404, g = 0.404, b = 0.404, a = 1 },  -- #676767 equivalent
+    Gray700 = { r = 0.259, g = 0.259, b = 0.259, a = 1 },  -- #424242 equivalent
+    Gray750 = { r = 0.184, g = 0.184, b = 0.184, a = 1 },  -- #2f2f2f equivalent
+    Gray800 = { r = 0.129, g = 0.129, b = 0.129, a = 1 },  -- #212121 equivalent
+    Gray900 = { r = 0.090, g = 0.090, b = 0.090, a = 1 },  -- #171717 equivalent
+    Gray950 = { r = 0.051, g = 0.051, b = 0.051, a = 1 },  -- #0d0d0d equivalent
+    Red500 = { r = 0.937, g = 0.267, b = 0.267, a = 1 },  -- #ef4444 equivalent
+    Red700 = { r = 0.725, g = 0.110, b = 0.110, a = 1 },  -- #b91c1c equivalent
+    Purple = { r = 0.670, g = 0.408, b = 1, a = 1 },  -- #ab68ff equivalent
+}
+
+-------------------------------------------------------------------------------
+-- The Stored Variables {{{
+-------------------------------------------------------------------------------
+
+DefaultOptions = {
+
+    AutoHeal = {
+        Smart_Heal = true,
+        Allowed_Overheal_Percentage = 11,
+        Random_Target = false,
+        Heal_Target_Number = 1
+    },
+    ExtendedRange = {
+        Enable = true,
+        Frequency = 5
+    },
+    LineOfSight = {
+        Enable = true,
+        TimeOut = 4
+    },
+    AdvancedOptions = {
+        Mana_Protection = true
+    }
 }
 
 -------------------------------------------------------------------------------
@@ -314,8 +355,8 @@ function MBH_LogDebug(Msg)
     end
 end
 
-function getColorRGBA(colorKey)
-    return colors[colorKey].r, colors[colorKey].g, colors[colorKey].b, colors[colorKey].a
+function GetColorValue(colorKey)
+    return ColorPicker[colorKey].r, ColorPicker[colorKey].g, ColorPicker[colorKey].b, ColorPicker[colorKey].a
 end
 
 function MBH_DisableTargetEvents()
@@ -758,45 +799,6 @@ end
 function MBH_ManaProtectionThresholdCheck(PCT) 
     return mb_manaPct("player") < (PCT / 100)
 end
-
-ManaProtectionThresholds = {
-    ["Flash Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(66) end,
-            ["NewSpellName"] = "Flash Heal",
-            ["NewLowRank"] = 1,
-            ["NewHighRank"] = 4,
-        },
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(33) end,
-            ["NewSpellName"] = "Heal",
-        },
-    },
-    ["Greater Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(50) end,
-            ["NewSpellName"] = "Heal",
-        },
-    },
-    ["Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(5) end,
-            ["NewSpellName"] = "Lesser Heal",
-        },
-    },
-    ["Lesser Healing Wave"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(35) end,
-            ["NewSpellName"] = "Healing Wave",
-        },
-    },
-    ["Chain Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(25) end,
-            ["NewSpellName"] = "Healing Wave",
-        },
-    },
-}
 
 function MBH_ManaProtection(SPN, LAR, HAR)
 

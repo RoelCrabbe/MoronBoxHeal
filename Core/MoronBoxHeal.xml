@@ -61,8 +61,8 @@
 
         <Scripts>
             <OnShow>
-                this:SetBackdropColor(getColorRGBA("gray_750"));
-                this:SetBackdropBorderColor(getColorRGBA("gray_750"));
+                this:SetBackdropColor(GetColorValue("Gray750"));
+                this:SetBackdropBorderColor(GetColorValue("Gray750"));
             </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
@@ -114,8 +114,8 @@
                 <Scripts>
                     <OnShow>
                         MoronBoxHealMainFrameText:SetText(MBH_INFORMATION);
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                 </Scripts>
             </Frame>
@@ -150,17 +150,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_GENERAL");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         if ( not MoronBoxHealMainFrame:IsShown() ) then
@@ -201,17 +201,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_OPTIONS");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         if ( not MoronBoxHealOptionFrame:IsShown() ) then
@@ -252,17 +252,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_HIDE");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         MoronBoxHealMainFrame:Hide()
@@ -300,17 +300,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_RESTOREDEFAULT");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         MBH_RestoreDefaultValues()
@@ -348,17 +348,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_PRESETSETTINGS");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         MBH_SetPresetValues()
@@ -401,8 +401,8 @@
 
         <Scripts>
             <OnShow>
-                this:SetBackdropColor(getColorRGBA("gray_750"));
-                this:SetBackdropBorderColor(getColorRGBA("gray_750"));
+                this:SetBackdropColor(GetColorValue("Gray750"));
+                this:SetBackdropBorderColor(GetColorValue("Gray750"));
             </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
@@ -455,17 +455,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_GENERAL");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         if ( not MoronBoxHealMainFrame:IsShown() ) then
@@ -506,17 +506,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_OPTIONS");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         if ( not MoronBoxHealOptionFrame:IsShown() ) then
@@ -557,17 +557,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_HIDE");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         MoronBoxHealOptionFrame:Hide()
@@ -605,17 +605,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_RESTOREDEFAULT");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         MBH_RestoreDefaultValues()
@@ -653,17 +653,17 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(getColorRGBA("gray_400"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_400"));
+                        this:SetBackdropColor(GetColorValue("Gray400"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
                     </OnEnter>
                     <OnLeave>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
                         this:SetText("MBH_PRESETSETTINGS");
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
                         MBH_SetPresetValues()
@@ -701,8 +701,8 @@
 
                 <Scripts>
                     <OnShow>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                 </Scripts>
 
@@ -760,8 +760,8 @@
                         
                         <Scripts>
                             <OnShow>
-                                this:SetBackdropColor(getColorRGBA("gray_950"));
-                                this:SetBackdropBorderColor(getColorRGBA("gray_950"));
+                                this:SetBackdropColor(GetColorValue("gray_950"));
+                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
                             </OnShow>
                             <OnValueChanged>
                                 MBH_AllowedOverhealPercentageSlider_OnValueChanged()
@@ -825,8 +825,8 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetBackdropColor(getColorRGBA("gray_950"));
-                                this:SetBackdropBorderColor(getColorRGBA("gray_950"));
+                                this:SetBackdropColor(GetColorValue("gray_950"));
+                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
                             </OnShow>
                             <OnValueChanged>
                                 MBH_HealTargetNumberSlider_OnValueChanged()
@@ -869,8 +869,8 @@
 
                 <Scripts>
                     <OnShow>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                 </Scripts>
 
@@ -928,8 +928,8 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetBackdropColor(getColorRGBA("gray_950"));
-                                this:SetBackdropBorderColor(getColorRGBA("gray_950"));
+                                this:SetBackdropColor(GetColorValue("gray_950"));
+                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
                             </OnShow>
                             <OnValueChanged>
                                 MBH_ExtendedRangeFrequencySlider_OnValueChanged()
@@ -972,8 +972,8 @@
 
                 <Scripts>
                     <OnShow>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                 </Scripts>
 
@@ -1031,8 +1031,8 @@
                         
                         <Scripts>
                             <OnShow>
-                                this:SetBackdropColor(getColorRGBA("gray_950"));
-                                this:SetBackdropBorderColor(getColorRGBA("gray_950"));
+                                this:SetBackdropColor(GetColorValue("gray_950"));
+                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
                             </OnShow>
                             <OnValueChanged>
                                 MBH_LineOfSightTimeOutSlider_OnValueChanged()
@@ -1075,8 +1075,8 @@
 
                 <Scripts>
                     <OnShow>
-                        this:SetBackdropColor(getColorRGBA("gray_600"));
-                        this:SetBackdropBorderColor(getColorRGBA("gray_600"));
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                 </Scripts>
 
