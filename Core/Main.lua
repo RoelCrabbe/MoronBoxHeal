@@ -864,7 +864,7 @@ function MBH_HealTargetNumberSlider_OnShow()
     getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_HEALTARGETNUMBER, "$p", MoronBoxHeal_Options.AutoHeal.Heal_Target_Number))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
-    Frame:SetMinMaxValues(1, 10)
+    Frame:SetMinMaxValues(1, 5)
     Frame:SetValueStep(1)
     Frame:SetValue(MoronBoxHeal_Options.AutoHeal.Heal_Target_Number)
 
@@ -876,8 +876,8 @@ function MBH_HealTargetNumberSlider_OnShow()
     minValueText:SetPoint("CENTER", Frame, "LEFT", -8, 0)
     
     local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
-    maxValueText:SetText("10")
-    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
+    maxValueText:SetText("5")
+    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 8, 0)
 end
 
 function MBH_HealTargetNumberSlider_OnValueChanged()
@@ -893,7 +893,7 @@ function MBH_ExtendedRangeFrequencySlider_OnShow()
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(1, 5)
-    Frame:SetValueStep(0.5)
+    Frame:SetValueStep(0.25)
     Frame:SetValue(MoronBoxHeal_Options.ExtendedRange.Frequency)
 
 	getglobal(Frame:GetName().."Low"):Hide()
@@ -921,7 +921,7 @@ function MBH_LineOfSightTimeOutSlider_OnShow()
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(0.5, 5)
-    Frame:SetValueStep(0.5)
+    Frame:SetValueStep(0.25)
     Frame:SetValue(MoronBoxHeal_Options.LineOfSight.TimeOut)
 
 	getglobal(Frame:GetName().."Low"):Hide()

@@ -17,13 +17,13 @@
     <Frame name="MoronBoxHealSlicerBackdrop" inherits="OptionsSliderTemplate" virtual="true">
         <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="false">
             <EdgeSize>
-                <AbsValue val="4"/>
+                <AbsValue val="1"/>
             </EdgeSize>
             <TileSize>
                 <AbsValue val="16"/>
             </TileSize>
             <BackgroundInsets>
-                <AbsInset left="1" right="1" top="1" bottom="1"/>
+                <AbsInset left="0" right="0" top="0" bottom="0"/>
             </BackgroundInsets>
         </Backdrop>
     </Frame>
@@ -747,7 +747,7 @@
                     <Slider name="MoronBoxHealOptionFrameAllowedOverhealSlider" inherits="MoronBoxHealSlicerBackdrop">
                         
                         <Size>
-                            <AbsDimension x="220" y="17"/>
+                            <AbsDimension x="220" y="16"/>
                         </Size>
                         
                         <Anchors>
@@ -812,7 +812,7 @@
                     <Slider name="MoronBoxHealOptionFrameHealTargetNumberSlider" inherits="MoronBoxHealSlicerBackdrop">
                         
                         <Size>
-                            <AbsDimension x="220" y="17"/>
+                            <AbsDimension x="220" y="16"/>
                         </Size>
                         
                         <Anchors>
@@ -915,7 +915,7 @@
                     <Slider name="MoronBoxHealOptionExtendedRangeSlider" inherits="MoronBoxHealSlicerBackdrop">
                         
                         <Size>
-                            <AbsDimension x="220" y="17"/>
+                            <AbsDimension x="220" y="16"/>
                         </Size>
                         
                         <Anchors>
@@ -1018,7 +1018,7 @@
                     <Slider name="MoronBoxHealOptionLineOfSightSlider" inherits="MoronBoxHealSlicerBackdrop">
                         
                         <Size>
-                            <AbsDimension x="220" y="17"/>
+                            <AbsDimension x="220" y="16"/>
                         </Size>
                         
                         <Anchors>
