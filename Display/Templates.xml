@@ -1,0 +1,177 @@
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+    <Frame name="MoronBoxHealBackdrop" virtual="true">
+        <Backdrop bgFile="Interface/Buttons/WHITE8X8" edgeFile="Interface/Tooltips/UI-Tooltip-Border" tile="false">
+            <EdgeSize>
+                <AbsValue val="4"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+            <BackgroundInsets>
+                <AbsInset left="1" right="1" top="1" bottom="1"/>
+            </BackgroundInsets>
+        </Backdrop>
+    </Frame>
+
+    <Frame name="MoronBoxHealScrollFrameBackdrop" inherits="UIPanelScrollFrameTemplate" virtual="true">
+        <Backdrop bgFile="Interface/Buttons/WHITE8X8" edgeFile="Interface/Tooltips/UI-Tooltip-Border" tile="false">
+            <EdgeSize>
+                <AbsValue val="4"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+            <BackgroundInsets>
+                <AbsInset left="1" right="1" top="1" bottom="1"/>
+            </BackgroundInsets>
+        </Backdrop>
+    </Frame>
+
+    <Frame name="MoronBoxHealSlicerBackdrop" inherits="OptionsSliderTemplate" virtual="true">
+        <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="false">
+            <EdgeSize>
+                <AbsValue val="1"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+            <BackgroundInsets>
+                <AbsInset left="0" right="0" top="0" bottom="0"/>
+            </BackgroundInsets>
+        </Backdrop>
+    </Frame>
+
+    <Button name="MoronBoxHealCloseButtonTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        <Size>
+            <AbsDimension x="60" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealCloseButtonTemplateText" inherits="GameFontNormal" text="MBH_HIDE">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_SetBackdropColors("Red500");
+            </OnEnter>
+            <OnLeave>
+                MBH_SetBackdropColors("Gray600");
+            </OnLeave>
+            <OnShow>
+                MBH_SetBackdropColors("Gray600");
+            </OnShow>
+            <OnClick>
+                this:GetParent():Hide();
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="MoronBoxHealGeneralTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        <Size>
+            <AbsDimension x="60" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainFrameGeneralText" inherits="GameFontNormal" text="MBH_GENERAL">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_IsFrameOnEnter(MoronBoxHealMainFrame);
+            </OnEnter>
+            <OnLeave>
+                MBH_IsFrameOnShowOrLeave(MoronBoxHealMainFrame);
+            </OnLeave>
+            <OnShow>
+                MBH_IsFrameOnShowOrLeave(MoronBoxHealMainFrame);
+            </OnShow>
+            <OnClick>
+                MBH_ShowFrameAndHideParent(MoronBoxHealMainFrame);
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="MoronBoxHealOptionTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        <Size>
+            <AbsDimension x="60" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealOptionTemplateText" inherits="GameFontNormal" text="MBH_OPTIONS">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_IsFrameOnEnter(MoronBoxHealOptionFrame);
+            </OnEnter>
+            <OnLeave>
+                MBH_IsFrameOnShowOrLeave(MoronBoxHealOptionFrame);
+            </OnLeave>
+            <OnShow>
+                MBH_IsFrameOnShowOrLeave(MoronBoxHealOptionFrame);
+            </OnShow>
+            <OnClick>
+                MBH_ShowFrameAndHideParent(MoronBoxHealOptionFrame);
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="MoronBoxHealProtectionTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        <Size>
+            <AbsDimension x="60" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealProtectionTemplateText" inherits="GameFontNormal" text="MBH_PROTECTION">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_IsFrameOnEnter(MoronBoxHealProtectionFrame);
+            </OnEnter>
+            <OnLeave>
+                MBH_IsFrameOnShowOrLeave(MoronBoxHealProtectionFrame);
+            </OnLeave>
+            <OnShow>
+                MBH_IsFrameOnShowOrLeave(MoronBoxHealProtectionFrame);
+            </OnShow>
+            <OnClick>
+                MBH_ShowFrameAndHideParent(MoronBoxHealProtectionFrame);
+            </OnClick>
+        </Scripts>
+    </Button>
+</Ui>

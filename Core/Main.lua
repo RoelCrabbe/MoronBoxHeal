@@ -1018,10 +1018,58 @@ end
 
 function MBH_ShowFrameAndHideParent(Frame)
 
+    local ParentUI = this:GetParent()
+
+    if not (ParentUI and Frame) then return end
+
     if ( not Frame:IsShown() ) then
         MBH_ResetAllWindow()
         Frame:Show()
     end
 
-    this:GetParent():Hide();
+    if ParentUI:GetName() == Frame:GetName() then
+        return
+    end
+
+    ParentUI:Hide();
+end
+
+function MBH_SetBackdropColors(Name)
+
+    if not Name then
+        return
+    end
+
+    this:SetBackdropColor(GetColorValue(Name))
+    this:SetBackdropBorderColor(GetColorValue(Name))
+end
+
+function MBH_IsFrameOnShowOrLeave(Frame)
+
+    local ParentUI = this:GetParent()
+
+    if not (ParentUI and Frame) then return end
+
+    if ParentUI:GetName() == Frame:GetName() then
+
+        MBH_SetBackdropColors("Blue600");
+        return
+    end
+
+    MBH_SetBackdropColors("Gray600");
+end
+
+function MBH_IsFrameOnEnter(Frame)
+
+    local ParentUI = this:GetParent()
+
+    if not (ParentUI and Frame) then return end
+
+    if ParentUI:GetName() == Frame:GetName() then
+
+        MBH_SetBackdropColors("Blue500");
+        return
+    end
+
+    MBH_SetBackdropColors("Gray400");
 end

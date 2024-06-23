@@ -18,4 +18,6 @@ Core\Localization.lua
 Core\GroupData.lua
 Core\Range.lua
 Core\Main.lua
-Core\MoronBoxHeal.xml
+
+Display\Templates.xml
+Display\Main.xml
