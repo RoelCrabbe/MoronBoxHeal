@@ -165,8 +165,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Blue600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealMainFrame)
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealMainFrame)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -214,8 +213,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealOptionFrame)
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealOptionFrame)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -263,8 +261,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealProtectionFrame)
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealProtectionFrame)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -516,8 +513,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealMainFrame)
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealMainFrame)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -564,8 +560,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Blue600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealOptionFrame)
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealOptionFrame)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -612,8 +607,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealProtectionFrame)
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealProtectionFrame)
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1314,8 +1308,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealMainFrame);
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealMainFrame);
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1363,8 +1356,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealOptionFrame);
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealOptionFrame);
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1411,8 +1403,7 @@
                         this:SetBackdropBorderColor(GetColorValue("Blue600"));
                     </OnShow>
                     <OnClick>
-                        MBH_ShowFrame(MoronBoxHealProtectionFrame);
-                        this:GetParent():Hide();
+                        MBH_ShowFrameAndHideParent(MoronBoxHealProtectionFrame);
                     </OnClick>
                 </Scripts>
             </Button>

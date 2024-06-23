@@ -1016,10 +1016,12 @@ function MBH_MoronBoxHealMiniMapButton_OnUpdate(self)
     end
 end
 
-function MBH_ShowFrame(Frame)
+function MBH_ShowFrameAndHideParent(Frame)
 
     if ( not Frame:IsShown() ) then
         MBH_ResetAllWindow()
         Frame:Show()
     end
+
+    this:GetParent():Hide();
 end
