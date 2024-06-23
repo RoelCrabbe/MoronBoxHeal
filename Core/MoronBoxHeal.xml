@@ -1081,7 +1081,7 @@
                 </Scripts>
 
                 <Frames>
-                    <CheckButton name="MoronBoxHealOptionManaProtectionCheckbox" inherits="OptionsCheckButtonTemplate">
+                    <CheckButton name="MoronBoxHealOptionManaProtectionCheckbox" inherits="SMOptionsCheckButtonTemplate">
 
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealAdvancedOptionFrame">
@@ -1121,6 +1121,120 @@
             </Frame>
         </Frames>
     </Frame>
+
+	<CheckButton name="SMOptionsCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" inherits="GameFontBlack">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="-2" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+		<PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+		<HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check"/>
+		<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled"/>
+		<Scripts>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</CheckButton>
+
+	<Button name="MoronBoxHealMiniMapButton" frameStrata="LOW" parent="Minimap" enableMouse="true" movable="true" toplevel="true" hidden="false">
+
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+
+        <Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="MoronBoxHealMiniMapButtonIcon" file="Interface\Icons\Spell_Nature_HealingTouch">
+					<Size>
+						<AbsDimension x="18" y="18"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.075" right="0.925" top="0.075" bottom="0.925"/>
+				</Texture>
+			</Layer>
+            <Layer level="OVERLAY">
+                <Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+                    <Size>
+                        <AbsDimension x="52" y="52"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+		</Layers>
+
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+                this:RegisterForDrag("LeftButton");
+			</OnLoad>
+            <OnEnter>
+                GameTooltip:SetOwner(this, "ANCHOR_BOTTOMLEFT");
+                GameTooltip:SetText("MoronBoxHeal", 1, 1, 0.5);
+                GameTooltip:AddLine("Click to show/hide the main frame.");
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+			<OnClick>
+                MoronBoxHealMiniMapButtonIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925);
+                if ( not MoronBoxHealMainFrame:IsShown() ) then
+                    MoronBoxHealMainFrame:Show()
+                else 
+                    MoronBoxHealMainFrame:Hide()
+                end
+			</OnClick>
+            <OnDragStart>
+                MoronBoxHealMiniMapButtonIcon:SetTexCoord(0, 1, 0, 1);
+                if (  ( not this.isMiniMapMoving ) and ( arg1 == "LeftButton" ) ) then
+                    this:SetScript("OnUpdate", MoronBoxHealMiniMapButton_OnUpdate);
+                    this.isMiniMapMoving = true;
+                end
+            </OnDragStart>
+            <OnDragStop>
+                MoronBoxHealMiniMapButtonIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925);
+                if ( this.isMiniMapMoving ) then
+                    this:SetScript("OnUpdate", nil);
+                    this.isMiniMapMoving = false;
+                end
+            </OnDragStop>
+            <OnMouseDown>
+				MoronBoxHealMiniMapButtonIcon:SetTexCoord(0, 1, 0, 1);
+			</OnMouseDown>
+			<OnMouseUp>
+				MoronBoxHealMiniMapButtonIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925);
+			</OnMouseUp>
+		</Scripts>
+
+        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+	</Button>
 
     <GameTooltip name="ScanningTooltip" inherits="GameTooltipTemplate">
         <Scripts>

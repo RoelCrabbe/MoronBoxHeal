@@ -941,3 +941,26 @@ function MBH_LineOfSightTimeOutSlider_OnValueChanged()
     getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_LINEOFSIGHTFREQUENCY, "$p", MoronBoxHeal_Options.LineOfSight.TimeOut))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
+
+function MoronBoxHealMiniMapButton_OnUpdate(self)
+    if ( this.isMiniMapMoving ) then
+
+        local xpos, ypos = GetCursorPosition()
+        local xmin, ymin = Minimap:GetLeft(), Minimap:GetBottom()
+        xpos = xmin - xpos / UIParent:GetScale() + 70
+        ypos = ypos / UIParent:GetScale() - ymin - 70
+        local iconPos = math.deg(math.atan2(ypos, xpos))
+
+        if iconPos < 0 then
+            iconPos = iconPos + 360
+        end
+
+        MoronBoxHealMiniMapButton:SetPoint(
+            "TOPLEFT",
+            "Minimap",
+            "TOPLEFT",
+            54 - (78 * cos(iconPos)),
+            (78 * sin(iconPos)) - 55
+        )
+    end
+end
