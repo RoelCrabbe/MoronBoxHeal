@@ -51,6 +51,8 @@ MBH_RESTOREDEFAULT = "Restore Default Settings"
 MBH_RESTOREDEFAULTCONFIRM = "Are you sure you want to restore default values?"
 MBH_YES = "Yes"
 MBH_NO = "No"
+MBH_CLOSE = "X"
+MBH_EXIT = "Get lost!"
 MBH_RESTOREDEFAULTSUCCES = "Default values restored successfully."
 MBH_RESTOREDEFAULTUPTODATE = "Values are already up to date."
 

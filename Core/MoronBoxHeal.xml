@@ -255,15 +255,16 @@
 
                 <Scripts>
                     <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
+                        MoronBoxHealMainFrameCloseText:SetText(MBH_EXIT);
+                        this:SetBackdropColor(GetColorValue("Red500"));
+                        this:SetBackdropBorderColor(GetColorValue("Red500"));
                     </OnEnter>
                     <OnLeave>
+                        MoronBoxHealMainFrameCloseText:SetText(MBH_HIDE);
                         this:SetBackdropColor(GetColorValue("Gray600"));
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
-                        this:SetText("MBH_HIDE");
                         this:SetBackdropColor(GetColorValue("Gray600"));
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
@@ -559,16 +560,17 @@
                 </Layers>
 
                 <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
+                  <OnEnter>
+                        MoronBoxHealOptionFrameCloseText:SetText(MBH_EXIT);
+                        this:SetBackdropColor(GetColorValue("Red500"));
+                        this:SetBackdropBorderColor(GetColorValue("Red500"));
                     </OnEnter>
                     <OnLeave>
+                        MoronBoxHealOptionFrameCloseText:SetText(MBH_HIDE);
                         this:SetBackdropColor(GetColorValue("Gray600"));
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnLeave>
                     <OnShow>
-                        this:SetText("MBH_HIDE");
                         this:SetBackdropColor(GetColorValue("Gray600"));
                         this:SetBackdropBorderColor(GetColorValue("Gray600"));
                     </OnShow>
