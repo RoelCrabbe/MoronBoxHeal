@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- Variables {{{
+-- Local Variables {{{
 -------------------------------------------------------------------------------
 
 local ManaProtectionThresholds = {
@@ -90,23 +90,23 @@ Session = {
 }
 
 ColorPicker = {
-    White = { r = 1, g = 1, b = 1, a = 1 },         -- #ffffff equivalent
-    Black = { r = 0, g = 0, b = 0, a = 1 },         -- #000000 equivalent
-    Gray50 = { r = 0.976, g = 0.976, b = 0.976, a = 1 },  -- #f9f9f9 equivalent
-    Gray100 = { r = 0.925, g = 0.925, b = 0.925, a = 1 },  -- #ececec equivalent
-    Gray200 = { r = 0.890, g = 0.890, b = 0.890, a = 1 },  -- #e3e3e3 equivalent
-    Gray300 = { r = 0.804, g = 0.804, b = 0.804, a = 1 },  -- #cdcdcd equivalent
-    Gray400 = { r = 0.706, g = 0.706, b = 0.706, a = 1 },  -- #b4b4b4 equivalent
-    Gray500 = { r = 0.608, g = 0.608, b = 0.608, a = 1 },  -- #9b9b9b equivalent
-    Gray600 = { r = 0.404, g = 0.404, b = 0.404, a = 1 },  -- #676767 equivalent
-    Gray700 = { r = 0.259, g = 0.259, b = 0.259, a = 1 },  -- #424242 equivalent
-    Gray750 = { r = 0.184, g = 0.184, b = 0.184, a = 1 },  -- #2f2f2f equivalent
-    Gray800 = { r = 0.129, g = 0.129, b = 0.129, a = 1 },  -- #212121 equivalent
-    Gray900 = { r = 0.090, g = 0.090, b = 0.090, a = 1 },  -- #171717 equivalent
-    Gray950 = { r = 0.051, g = 0.051, b = 0.051, a = 1 },  -- #0d0d0d equivalent
-    Red500 = { r = 0.937, g = 0.267, b = 0.267, a = 1 },  -- #ef4444 equivalent
-    Red700 = { r = 0.725, g = 0.110, b = 0.110, a = 1 },  -- #b91c1c equivalent
-    Purple = { r = 0.670, g = 0.408, b = 1, a = 1 },  -- #ab68ff equivalent
+    White = { r = 1, g = 1, b = 1, a = 1 },                 -- #ffffff equivalent
+    Black = { r = 0, g = 0, b = 0, a = 1 },                 -- #000000 equivalent
+    Gray50 = { r = 0.976, g = 0.976, b = 0.976, a = 1 },    -- #f9f9f9 equivalent
+    Gray100 = { r = 0.925, g = 0.925, b = 0.925, a = 1 },   -- #ececec equivalent
+    Gray200 = { r = 0.890, g = 0.890, b = 0.890, a = 1 },   -- #e3e3e3 equivalent
+    Gray300 = { r = 0.804, g = 0.804, b = 0.804, a = 1 },   -- #cdcdcd equivalent
+    Gray400 = { r = 0.706, g = 0.706, b = 0.706, a = 1 },   -- #b4b4b4 equivalent
+    Gray500 = { r = 0.608, g = 0.608, b = 0.608, a = 1 },   -- #9b9b9b equivalent
+    Gray600 = { r = 0.404, g = 0.404, b = 0.404, a = 1 },   -- #676767 equivalent
+    Gray700 = { r = 0.259, g = 0.259, b = 0.259, a = 1 },   -- #424242 equivalent
+    Gray750 = { r = 0.184, g = 0.184, b = 0.184, a = 1 },   -- #2f2f2f equivalent
+    Gray800 = { r = 0.129, g = 0.129, b = 0.129, a = 1 },   -- #212121 equivalent
+    Gray900 = { r = 0.090, g = 0.090, b = 0.090, a = 1 },   -- #171717 equivalent
+    Gray950 = { r = 0.051, g = 0.051, b = 0.051, a = 1 },   -- #0d0d0d equivalent
+    Red500 = { r = 0.937, g = 0.267, b = 0.267, a = 1 },    -- #ef4444 equivalent
+    Red700 = { r = 0.725, g = 0.110, b = 0.110, a = 1 },    -- #b91c1c equivalent
+    Purple = { r = 0.670, g = 0.408, b = 1, a = 1 },        -- #ab68ff equivalent
 }
 
 -------------------------------------------------------------------------------
