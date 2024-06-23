@@ -85,44 +85,6 @@
         </Scripts>
 
         <Frames>
-            <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="730" y="415" /> 
-                </Size>
-
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
-                        <Offset>
-                            <AbsDimension x="35" y="-75" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameText" inherits="GameFontNormal" text="MBH_INFORMATION" wordWrap="true">
-                            <Size>
-                                <AbsDimension x="480" y="350" /> <!-- Adjust size to fit the text -->
-                            </Size>
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnShow>
-                        MoronBoxHealMainFrameText:SetText(MBH_INFORMATION);
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                </Scripts>
-            </Frame>
-
             <Button name="MoronBoxHealMainFrameGeneral" inherits="MoronBoxHealBackdrop">
 
                 <Size>
@@ -410,6 +372,44 @@
                     </OnClick>
                 </Scripts>
             </Button>
+
+            <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
+
+                <Size>
+                    <AbsDimension x="730" y="415" /> 
+                </Size>
+
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="35" y="-75" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameText" inherits="GameFontNormal" text="MBH_INFORMATION" wordWrap="true">
+                            <Size>
+                                <AbsDimension x="480" y="350" /> <!-- Adjust size to fit the text -->
+                            </Size>
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="CENTER">
+                                    
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Scripts>
+                    <OnShow>
+                        MoronBoxHealMainFrameText:SetText(MBH_INFORMATION);
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
+                    </OnShow>
+                </Scripts>
+            </Frame>
         </Frames>
     </Frame>
 
@@ -1552,6 +1552,28 @@
                     </OnClick>
                 </Scripts>
             </Button>
+
+            <Frame name="MoronBoxHealProtectionFrameTextContainer" inherits="MoronBoxHealBackdrop">
+
+                <Size>
+                    <AbsDimension x="730" y="415" /> 
+                </Size>
+
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="35" y="-75" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+                <Scripts>
+                    <OnShow>
+                        this:SetBackdropColor(GetColorValue("Gray600"));
+                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
+                    </OnShow>
+                </Scripts>
+            </Frame>
         </Frames>
     </Frame>
 
