@@ -755,34 +755,40 @@ function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)
 	end
 end
 
-local ManaProtectionThresholds = {
+ManaProtectionThresholds = {
     ["Flash Heal"] = {
         {
-            ["ThresholdCheck"] = mb_manaPct("player") < 0.66,
+            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.5 end,
             ["NewSpellName"] = "Flash Heal",
             ["NewLowRank"] = 1,
-            ["NewHighRank"] = 5,
+            ["NewHighRank"] = 4,
         },
         {
-            ["ThresholdCheck"] = mb_manaPct("player") < 0.3,
+            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.3 end,
+            ["NewSpellName"] = "Heal",
+        },
+    },
+    ["Greater Heal"] = {
+        {
+            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.5 end,
             ["NewSpellName"] = "Heal",
         },
     },
     ["Heal"] = {
         {
-            ["ThresholdCheck"] = mb_manaPct("player") < 0.05,
+            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.05 end,
             ["NewSpellName"] = "Lesser Heal",
         },
     },
     ["Lesser Healing Wave"] = {
         {
-            ["ThresholdCheck"] = mb_manaPct("player") < 0.3,
+            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.3 end,
             ["NewSpellName"] = "Healing Wave",
         },
     },
     ["Chain Heal"] = {
         {
-            ["ThresholdCheck"] = mb_manaPct("player") < 0.2,
+            ["ThresholdCheck"] = function() return mb_manaPct("player") < 0.2 end,
             ["NewSpellName"] = "Healing Wave",
         },
     },
@@ -794,7 +800,7 @@ function MBH_ManaProtection(SPN, LAR, HAR)
         local spellDataList = ManaProtectionThresholds[Session.SpellName]
         if spellDataList then
             for _, spellData in ipairs(spellDataList) do
-                if spellData.ThresholdCheck then
+                if spellData.ThresholdCheck() then
                     SPN = spellData.NewSpellName
                     LAR = spellData.NewLowRank
                     HAR = spellData.NewHighRank
