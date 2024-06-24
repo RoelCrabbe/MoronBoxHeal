@@ -3,7 +3,7 @@ MBH_AUTHOR = 'MoRoN'
 MBH_OPTIONS = 'Options'
 MBH_GENERAL = 'General'
 MBH_HIDE = 'Close'
-MBH_PROTECTION = 'M Protection'
+MBH_PROTECTION = 'Mana Protection'
 
 MBG_DEBUGTIME = date("%H:%M:%S")
 
