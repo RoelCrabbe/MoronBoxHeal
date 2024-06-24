@@ -24,6 +24,18 @@ function MBH_InitializeManaProtectionThresholds()
             ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR,
         },
+        ["Chain Heal"] = {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold) end,
+            ["Spell"] = "Healing Wave",
+            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR,
+        },
+        ["Lesser Healing Wave"] = {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_Threshold) end,
+            ["Spell"] = "Healing Wave",
+            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR,
+            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_HAR,
+        },
     }
 end
 
