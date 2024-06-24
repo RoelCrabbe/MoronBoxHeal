@@ -310,7 +310,7 @@
         
         <Scripts>
             <OnShow>
-                MBH_SetBackdropColors("gray_950");
+                MBH_SetBackdropColors("Gray950");
             </OnShow>
         </Scripts>
     </Slider>
