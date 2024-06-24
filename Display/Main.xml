@@ -49,6 +49,27 @@
                     </Anchor>
                 </Anchors>
 
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameFrameCloseText" inherits="GameFontNormal" text="MBH_HIDE">
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="CENTER" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Scripts>
+                    <OnEnter>
+                        MoronBoxHealMainFrameFrameCloseText:SetText(MBH_EXIT);
+                        MBH_SetBackdropColors("Red500");
+                    </OnEnter>
+                    <OnLeave>
+                        MoronBoxHealMainFrameFrameCloseText:SetText(MBH_HIDE);
+                        MBH_SetBackdropColors("Gray600");
+                    </OnLeave>
+                </Scripts>
+                
             </Button>
 
             <Button name="MoronBoxHealMainFrameDefault" inherits="MoronBoxHealDefaultTemplate">
@@ -159,6 +180,27 @@
                         </Offset>
                     </Anchor>
                 </Anchors>
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealOptionFrameCloseText" inherits="GameFontNormal" text="MBH_HIDE">
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="CENTER" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Scripts>
+                    <OnEnter>
+                        MoronBoxHealOptionFrameCloseText:SetText(MBH_EXIT);
+                        MBH_SetBackdropColors("Red500");
+                    </OnEnter>
+                    <OnLeave>
+                        MoronBoxHealOptionFrameCloseText:SetText(MBH_HIDE);
+                        MBH_SetBackdropColors("Gray600");
+                    </OnLeave>
+                </Scripts>
 
             </Button>
 
@@ -685,6 +727,27 @@
                         </Offset>
                     </Anchor>
                 </Anchors>
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealProtectionFrameCloseText" inherits="GameFontNormal" text="MBH_HIDE">
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="CENTER" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Scripts>
+                    <OnEnter>
+                        MoronBoxHealProtectionFrameCloseText:SetText(MBH_EXIT);
+                        MBH_SetBackdropColors("Red500");
+                    </OnEnter>
+                    <OnLeave>
+                        MoronBoxHealProtectionFrameCloseText:SetText(MBH_HIDE);
+                        MBH_SetBackdropColors("Gray600");
+                    </OnLeave>
+                </Scripts>
 
             </Button>
 

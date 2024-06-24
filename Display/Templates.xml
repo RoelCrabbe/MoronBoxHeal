@@ -105,16 +105,6 @@
             <AbsDimension x="60" y="25" />
         </Size>
 
-        <Layers>
-            <Layer level="OVERLAY">
-                <FontString name="MoronBoxHealCloseButtonTemplateText" inherits="GameFontNormal" text="MBH_HIDE">
-                    <Anchors>
-                        <Anchor point="CENTER" relativePoint="CENTER" />
-                    </Anchors>
-                </FontString>
-            </Layer>
-        </Layers>
-
         <Scripts>
             <OnEnter>
                 MBH_SetBackdropColors("Red500");
