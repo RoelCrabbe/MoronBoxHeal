@@ -7,36 +7,30 @@ MBH_PROTECTION = 'Mana Protection'
 
 MBG_DEBUGTIME = date("%H:%M:%S")
 
-MBH_INFORMATION = "WELCOME TO MORONBOXHEAL\n\n" ..
-                "Addon based on 420's MultiBoxHeal based on Renew's VHM addon!\n" ..
-                "Check out the original : github.com/voidmenull.\n" ..
-                "Now optimised by MoRoN for custom box support.\n\n" ..
+MBH_WELCOME = "|cffe3e3e3Welcome To "..MBH_TITLE.."|r"
+MBH_INFORMATION = 
+"The addon is based on 420's & Renew's MultiBoxHeal\n" ..
+"UI & Features optimised by MoRoN for custom box support.\n\n" ..
 
-                "Example on how to use this:\n\n" ..
+"|cffe3e3e3How to use the addon?|r\n" ..
+"This functions is build as follows : |cffC79C6EMBH_CastHeal(spell, LowRank, HighestRank);|r\n\n" ..
 
-                "/script MBH_CastHeal(\"Healing Wave\")\n\n" ..
+"|cffe3e3e3Example:|r\n" ..
+"|cffC79C6E/script MBH_CastHeal(\"Healing Wave\");|r\n\n" ..
 
-                "Or define heal-rank:\n\n" ..
+"|cffe3e3e3Or define spell ranks:|r\n" ..
+"|cffC79C6E/script MBH_CastHeal(\"Healing Wave\", 3, 7);|r\n\n" ..
 
-                "/script MBH_CastHeal(\"Healing Wave\", LowestAllowedRank, HighestAllowedRank);\n\n" ..
+"- LowRank: The lowest rank a player is allowed to use.\n" ..
+"- HighestRank: The highest rank a player is allowed to use.\n\n" ..
+        
+"|cffe3e3e3Supported spells are:|r \n" ..
+"|cffffffffPriest|r: Lesser Heal, Heal, Flash Heal, Greater Heal.\n" ..
+"|cffFF7D0ADruids|r: Healing Touch, Regrowth.\n" ..
+"|cff0070DEShamans|r: Healing Wave, Lesser Healing Wave, Chain Heal.\n" ..
+"|cffF58CBAPaladins|r: Holy Light, Flash of Light.\n\n" ..
 
-                "That would look like this:\n\n" ..
-
-                "/script MBH_CastHeal(\"Healing Wave\", 3, 7);\n\n" ..
-
-                "- LowestAllowedRank (number): The lowest heal a player is allowed to use.\n" ..
-                "- HighestAllowedRank (number): The highest heal a player is allowed to use.\n\n" ..
-                      
-                "Supported spells are:\n" ..
-                "Priest: Lesser Heal, Heal, Flash Heal, Greater Heal.\n" ..
-                "Druids: Healing Touch, Regrowth.\n" ..
-                "Shamans: Healing Wave, Lesser Healing Wave, Chain Heal.\n" ..
-                "Paladins: Holy Light, Flash of Light.\n\n" ..
-
-                "Be sure to checkout the option's panel!";
-
-
-                --/script MBH_CastHeal("Lesser Heal")
+"Be sure to checkout the option's panel!";
 
 MBH_SHOW_SLASH = '/MBH'
 MBH_SHOW_SLASH_OPTIONS = '/MBHO'

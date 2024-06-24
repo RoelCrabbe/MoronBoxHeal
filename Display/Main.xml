@@ -100,7 +100,18 @@
 
                 <Layers>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameText" inherits="GameFontNormal" text="MBH_INFORMATION" wordWrap="true">
+                        <FontString name="MoronBoxHealMainFrameWelcomeText" inherits="GameFontNormalHuge" text="MBH_WELCOME">
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="TOP">
+                                    <Offset>
+                                        <AbsDimension y="-30" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameInformationText" inherits="GameFontNormal" text="MBH_INFORMATION" wordWrap="true">
                             <Size>
                                 <AbsDimension x="480" y="350" />
                             </Size>
@@ -110,6 +121,12 @@
                         </FontString>
                     </Layer>
                 </Layers>
+
+                <Scripts>
+                    <Onload>
+                        MBH_SetFontSize(MoronBoxHealMainFrameInformationText, 13)
+                    </Onload>
+                </Scripts>
             </Frame>
         </Frames>
     </Frame>

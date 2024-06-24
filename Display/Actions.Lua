@@ -605,3 +605,8 @@ function MBH_IsFrameOnEnter(Frame)
 
     MBH_SetBackdropColors("Gray400");
 end
+
+function MBH_SetFontSize(fontString, size)
+    local font, _, flags = fontString:GetFont()
+    fontString:SetFont(font, size, flags)
+end
