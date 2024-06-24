@@ -678,13 +678,13 @@
 
             </Button>
 
-            <Frame name="MoronBoxHealProtectionFrameContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
+            <Frame name="MoronBoxHealProtectionFramePriestContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
 
                 <Layers>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameFlashHealText" inherits="GameFontNormalHuge" text="Flash Heal" justifyH="CENTER">
+                        <FontString name="MoronBoxHealMainFrameFlashHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_FLASH_HEAL" justifyH="CENTER">
                             <Anchors>
-                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                     <Offset>
                                         <AbsDimension x="90" y="-25" />
                                     </Offset>
@@ -693,9 +693,9 @@
                         </FontString>
                     </Layer>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameHealText" inherits="GameFontNormalHuge" text="Heal" justifyH="CENTER">
+                        <FontString name="MoronBoxHealMainFrameHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_HEAL" justifyH="CENTER">
                             <Anchors>
-                                <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                     <Offset>
                                         <AbsDimension y="-35" />
                                     </Offset>
@@ -704,9 +704,9 @@
                         </FontString>
                     </Layer>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameGreaterHealText" inherits="GameFontNormalHuge" text="Greater Heal" justifyH="CENTER">
+                        <FontString name="MoronBoxHealMainFrameGreaterHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_GREATER_HEAL" justifyH="CENTER">
                             <Anchors>
-                                <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                    <Offset>
                                         <AbsDimension x="-85" y="-25" />
                                     </Offset>
@@ -726,7 +726,7 @@
                         </Size>
 
                         <Anchors>
-                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                 <Offset>
                                     <AbsDimension x="35" y="-75" />
                                 </Offset>
@@ -755,7 +755,7 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealFlashHealProtectionhresholdLARText" inherits="GameFontNormal" text="Lowest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealFlashHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
                                         <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
                                             <Offset>
@@ -772,11 +772,11 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
-                               MBH_ValidateFlashHealInputLAR();
+                                MBH_ValidateFlashHealInputLAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                               MBH_ValidateFlashHealInputLAR();
-                               this:ClearFocus();
+                                MBH_ValidateFlashHealInputLAR();
+                                this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
@@ -803,7 +803,7 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealFlashHealProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealFlashHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
                                         <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdHAR">
                                             <Offset>
@@ -820,11 +820,11 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
-                               MBH_ValidateFlashHealInputHAR();
+                                MBH_ValidateFlashHealInputHAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                               MBH_ValidateFlashHealInputHAR();
-                               this:ClearFocus();
+                                MBH_ValidateFlashHealInputHAR();
+                                this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
@@ -876,7 +876,7 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealHealProtectionhresholdLARText" inherits="GameFontNormal" text="Lowest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
                                         <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionhresholdLAR">
                                             <Offset>
@@ -893,11 +893,11 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
-                               MBH_ValidateHealInputLAR();
+                                MBH_ValidateHealInputLAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                               MBH_ValidateHealInputLAR();
-                               this:ClearFocus();
+                                MBH_ValidateHealInputLAR();
+                                this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR);
@@ -924,7 +924,7 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealHealProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
                                         <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionhresholdHAR">
                                             <Offset>
@@ -941,11 +941,11 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
-                               MBH_ValidateHealInputHAR();
+                                MBH_ValidateHealInputHAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                               MBH_ValidateHealInputHAR();
-                               this:ClearFocus();
+                                MBH_ValidateHealInputHAR();
+                                this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR);
@@ -968,7 +968,7 @@
                         </Size>
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                 <Offset>
                                     <AbsDimension x="-35" y="-75" />
                                 </Offset>
@@ -997,7 +997,7 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdLARText" inherits="GameFontNormal" text="Lowest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
                                         <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdLAR">
                                             <Offset>
@@ -1014,11 +1014,11 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
-                               MBH_ValidateGreaterHealInputLAR();
+                                MBH_ValidateGreaterHealInputLAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                               MBH_ValidateGreaterHealInputLAR();
-                               this:ClearFocus();
+                                MBH_ValidateGreaterHealInputLAR();
+                                this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
@@ -1045,7 +1045,7 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
                                         <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdHAR">
                                             <Offset>
@@ -1062,11 +1062,276 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
-                               MBH_ValidateGreaterHealInputHAR();
+                                MBH_ValidateGreaterHealInputHAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                               MBH_ValidateGreaterHealInputHAR();
-                               this:ClearFocus();
+                                MBH_ValidateGreaterHealInputHAR();
+                                this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
+                            <OnTabPressed>
+                                this:ClearFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+
+            <Frame name="MoronBoxHealProtectionFrameShamanContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameFlashHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_CHAIN_HEAL" justifyH="CENTER">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
+                                    <Offset>
+                                        <AbsDimension x="125" y="-25" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameGreaterHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_LESSER_HEALING_WAVE" justifyH="CENTER">
+                            <Anchors>
+                                <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
+                                   <Offset>
+                                        <AbsDimension x="-125" y="-25" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Frames>
+
+                    <!-- Chain Heal -->
+                    <Slider name="MoronBoxHealChainHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
+                                <Offset>
+                                    <AbsDimension x="65" y="-75" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_ChainHealProtectionThresholdSlider_OnValueChanged();
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_ChainHealProtectionThresholdSlider_OnShow();
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
+
+                    <EditBox name="MoronBoxHealChainHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealChainHealProtectionhresholdSlider">
+                                <Offset>
+                                    <AbsDimension x="50" y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealChainHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                            </OnShow>
+                            <OnTextChanged>
+                                MBH_ValidateFlashHealInputLAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                                MBH_ValidateFlashHealInputLAR();
+                                this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
+                            <OnTabPressed>
+                                MoronBoxHealFlashHealProtectionhresholdHAR:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                    </EditBox>
+
+                    <EditBox name="MoronBoxHealChainHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealChainHealProtectionhresholdLAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealChainHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionhresholdHAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                            </OnShow>
+                            <OnTextChanged>
+                                MBH_ValidateFlashHealInputHAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                                MBH_ValidateFlashHealInputHAR();
+                                this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
+                            <OnTabPressed>
+                                MoronBoxHealHealProtectionhresholdLAR:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                    </EditBox>
+
+                    <!-- Lesser Healing Wave -->
+                    <Slider name="MoronBoxHealLesserHealingWaveProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
+                                <Offset>
+                                    <AbsDimension x="-35" y="-75" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged();
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_LesserHealingWaveProtectionThresholdSlider_OnShow();
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
+
+                    <EditBox name="MoronBoxHealLesserHealingWaveProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdSlider">
+                                <Offset>
+                                    <AbsDimension x="50" y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealLesserHealingWaveProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdLAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                            </OnShow>
+                            <OnTextChanged>
+                                MBH_ValidateGreaterHealInputLAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                                MBH_ValidateGreaterHealInputLAR();
+                                this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
+                            <OnTabPressed>
+                                MoronBoxHealGreaterHealProtectionhresholdHAR:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                    </EditBox>
+
+                    <EditBox name="MoronBoxHealLesserHealingWaveProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdLAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealLesserHealingWaveProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdHAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
+                            </OnShow>
+                            <OnTextChanged>
+                                MBH_ValidateGreaterHealInputHAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                                MBH_ValidateGreaterHealInputHAR();
+                                this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);

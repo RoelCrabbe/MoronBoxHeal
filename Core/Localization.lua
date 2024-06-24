@@ -49,10 +49,6 @@ MBH_ALLOWEDOVERHEAL = "Allowed Overheal: $p %"
 MBH_HEALTARGETNUMBER = "Heal Target Number: $p"
 MBH_RESTOREDEFAULT = "Restore Default Settings"
 
-MBH_FLASHHEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Heal: $p %"
-MBH_HEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Lesser Heal: $p %"
-MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to Heal: $p %"
-
 MBH_RESTOREDEFAULTCONFIRM = "Are you sure you want to restore default values?"
 MBH_YES = "Yes"
 MBH_NO = "No"
@@ -78,3 +74,20 @@ MBH_SPECIALSETTINGS = "Special Settings: "
 MBH_LOSETTINGS = "Line of Sight Settings: "
 MBH_RANGSETTINGS = "Extended Range Settings: "
 MBH_HEALSETTINGS = "Healing Settings: "
+
+MBH_SPELL_FLASH_HEAL = "Flash Heal"
+MBH_SPELL_HEAL = "Heal"
+MBH_SPELL_GREATER_HEAL = "Greater Heal"
+
+MBH_SPELL_CHAIN_HEAL = "Chain Heal"
+MBH_SPELL_LESSER_HEALING_WAVE = "Lesser Healing Wave"
+
+MBH_FLASHHEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Heal: $p %"
+MBH_HEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Lesser Heal: $p %"
+MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to Heal: $p %"
+
+MBH_CHAINHEALPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
+MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
+
+MBH_LOWEST_RANK = "Lowest Rank: "
+MBH_HIGHEST_RANK = "Highest Rank: "
