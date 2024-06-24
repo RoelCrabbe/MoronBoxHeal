@@ -1,3 +1,34 @@
+-------------------------------------------------------------------------------
+-- MiniMap {{{
+-------------------------------------------------------------------------------
+
+function MBH_MoronBoxHealMiniMapButton_OnUpdate(self)
+    if ( this.isMiniMapMoving ) then
+
+        local xpos, ypos = GetCursorPosition()
+        local xmin, ymin = Minimap:GetLeft(), Minimap:GetBottom()
+        xpos = xmin - xpos / UIParent:GetScale() + 70
+        ypos = ypos / UIParent:GetScale() - ymin - 70
+        local iconPos = math.deg(math.atan2(ypos, xpos))
+
+        if iconPos < 0 then
+            iconPos = iconPos + 360
+        end
+
+        MoronBoxHealMiniMapButton:SetPoint(
+            "TOPLEFT",
+            "Minimap",
+            "TOPLEFT",
+            54 - (78 * cos(iconPos)),
+            (78 * sin(iconPos)) - 55
+        )
+    end
+end
+
+-------------------------------------------------------------------------------
+-- Slicers {{{
+-------------------------------------------------------------------------------
+
 function MBH_AllowedOverhealPercentageSlider_OnShow()
 
 	local Frame = MoronBoxHealOptionFrameAllowedOverhealSlider
@@ -250,6 +281,10 @@ function MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged()
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
+-------------------------------------------------------------------------------
+-- EditBox {{{
+-------------------------------------------------------------------------------
+
 function MBH_ValidateFlashHealInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealFlashHealProtectionhresholdHAR:GetText())
@@ -393,4 +428,66 @@ function MBH_ValidateLesserHealingWaveInputHAR()
 
         this:SetText(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_HAR)
     end
+end
+
+-------------------------------------------------------------------------------
+-- Helpers {{{
+-------------------------------------------------------------------------------
+
+function MBH_ShowFrameAndHideParent(Frame)
+
+    local ParentUI = this:GetParent()
+
+    if not (ParentUI and Frame) then return end
+
+    if ( not Frame:IsShown() ) then
+        MBH_ResetAllWindow()
+        Frame:Show()
+    end
+
+    if ParentUI:GetName() == Frame:GetName() then
+        return
+    end
+
+    ParentUI:Hide();
+end
+
+function MBH_SetBackdropColors(Name)
+
+    if not Name then
+        return
+    end
+
+    this:SetBackdropColor(GetColorValue(Name))
+    this:SetBackdropBorderColor(GetColorValue(Name))
+end
+
+function MBH_IsFrameOnShowOrLeave(Frame)
+
+    local ParentUI = this:GetParent()
+
+    if not (ParentUI and Frame) then return end
+
+    if ParentUI:GetName() == Frame:GetName() then
+
+        MBH_SetBackdropColors("Blue600");
+        return
+    end
+
+    MBH_SetBackdropColors("Gray600");
+end
+
+function MBH_IsFrameOnEnter(Frame)
+
+    local ParentUI = this:GetParent()
+
+    if not (ParentUI and Frame) then return end
+
+    if ParentUI:GetName() == Frame:GetName() then
+
+        MBH_SetBackdropColors("Blue500");
+        return
+    end
+
+    MBH_SetBackdropColors("Gray400");
 end
