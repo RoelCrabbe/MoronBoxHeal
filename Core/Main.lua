@@ -154,6 +154,12 @@ DefaultOptions = {
         Lesser_Healing_Wave_Threshold = 35,
         Lesser_Healing_Wave_LAR = 1,
         Lesser_Healing_Wave_HAR = 10,
+        Holy_Light_Threshold = 35,
+        Holy_Light_LAR = 1,
+        Holy_Light_HAR = 6,
+        Regrowth_Threshold = 50,
+        Regrowth_LAR = 1,
+        Regrowth_HAR = 11,
     }
 }
 
@@ -344,14 +350,18 @@ end
 function MBH_RaceChangeMoronBoxHealProtectionFrame()
     local isPriest = Session.PlayerClass == "Priest";
     local isShaman = Session.PlayerClass == "Shaman";
+    local isPaladin = Session.PlayerClass == "Paladin";
 
     MoronBoxHealProtectionFramePriestContainer:Hide()
     MoronBoxHealProtectionFrameShamanContainer:Hide()
+    MoronBoxHealProtectionFramePaladinContainer:Hide()
 
     if ( isPriest ) then
         MoronBoxHealProtectionFramePriestContainer:Show()
     elseif ( isShaman ) then
         MoronBoxHealProtectionFrameShamanContainer:Show()
+    elseif ( isPaladin ) then
+        MoronBoxHealProtectionFramePaladinContainer:Show()
     end
 end
 

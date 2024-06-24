@@ -281,6 +281,35 @@ function MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged()
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
+function MBH_HolyLightProtectionThresholdSlider_OnShow()
+
+	local Frame = MoronBoxHealHolyLightProtectionhresholdSlider
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_HOLYLIGHTPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_Threshold))
+    getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
+
+    Frame:SetMinMaxValues(1, 100)
+    Frame:SetValueStep(1)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_Threshold)
+
+	getglobal(Frame:GetName().."Low"):Hide()
+    getglobal(Frame:GetName().."High"):Hide()
+
+	local minValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    minValueText:SetText("1")
+    minValueText:SetPoint("CENTER", Frame, "LEFT", -8, 0)
+    
+    local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    maxValueText:SetText("100")
+    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
+end
+
+function MBH_HolyLightProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_HOLYLIGHTPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_Threshold))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
+end
+
+
 -------------------------------------------------------------------------------
 -- EditBox {{{
 -------------------------------------------------------------------------------
@@ -427,6 +456,35 @@ function MBH_ValidateLesserHealingWaveInputHAR()
         end
 
         this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR)
+    end
+end
+
+function MBH_ValidateHolyLightInputLAR()
+    local larValue = tonumber(this:GetText())
+    local harValue = tonumber(MoronBoxHealHolyLightProtectionhresholdHAR:GetText())
+
+    if ( larValue ) then
+        if ( harValue and larValue <= harValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR = larValue
+        end
+        
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR)
+    end
+end
+
+function MBH_ValidateHolyLightInputHAR()
+    local harValue = tonumber(this:GetText())
+    local larValue = tonumber(MoronBoxHealHolyLightProtectionhresholdLAR:GetText())
+    local maxRank = MBH_GetMaxSpellRank("Flash of Light")
+
+    if ( harValue ) then
+        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR = harValue
+        else
+            MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR = maxRank
+        end
+
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR)
     end
 end
 

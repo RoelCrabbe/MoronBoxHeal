@@ -89,5 +89,7 @@ MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to Heal: $p %"
 MBH_CHAINHEALPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
 MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
 
+MBH_HOLYLIGHTPROTECTIONTHRESHOLD = "Mana Percentage to Flash of Light: $p %"
+
 MBH_LOWEST_RANK = "Lowest Rank: "
 MBH_HIGHEST_RANK = "Highest Rank: "
