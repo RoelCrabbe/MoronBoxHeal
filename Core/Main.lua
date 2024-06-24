@@ -139,7 +139,10 @@ DefaultOptions = {
         TimeOut = 4
     },
     AdvancedOptions = {
-        Mana_Protection = true
+        Mana_Protection = true,
+        Flash_Heal_Threshold = 66,
+        Heal_Threshold = 5,
+        Greater_Heal_Threshold = 50,
     }
 }
 
@@ -990,6 +993,90 @@ end
 function MBH_LineOfSightTimeOutSlider_OnValueChanged()
     MoronBoxHeal_Options.LineOfSight.TimeOut = this:GetValue()
     getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_LINEOFSIGHTFREQUENCY, "$p", MoronBoxHeal_Options.LineOfSight.TimeOut))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
+end
+
+function MBH_FlashHealProtectionThresholdSlider_OnShow()
+
+	local Frame = MoronBoxHealFlashHealProtectionhresholdSlider
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_FLASHHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
+
+    Frame:SetMinMaxValues(1, 100)
+    Frame:SetValueStep(1)
+    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold)
+
+	getglobal(Frame:GetName().."Low"):Hide()
+    getglobal(Frame:GetName().."High"):Hide()
+
+	local minValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    minValueText:SetText("1")
+    minValueText:SetPoint("CENTER", Frame, "LEFT", -8, 0)
+    
+    local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    maxValueText:SetText("100")
+    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
+end
+
+function MBH_FlashHealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_FLASHHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
+end
+
+function MBH_HealProtectionThresholdSlider_OnShow()
+
+	local Frame = MoronBoxHealHealProtectionhresholdSlider
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
+
+    Frame:SetMinMaxValues(1, 100)
+    Frame:SetValueStep(1)
+    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold)
+
+	getglobal(Frame:GetName().."Low"):Hide()
+    getglobal(Frame:GetName().."High"):Hide()
+
+	local minValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    minValueText:SetText("1")
+    minValueText:SetPoint("CENTER", Frame, "LEFT", -8, 0)
+    
+    local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    maxValueText:SetText("100")
+    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
+end
+
+function MBH_HealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
+end
+
+function MBH_GreaterHealProtectionThresholdSlider_OnShow()
+
+	local Frame = MoronBoxHealGreaterHealProtectionhresholdSlider
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
+
+    Frame:SetMinMaxValues(1, 100)
+    Frame:SetValueStep(1)
+    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold)
+
+	getglobal(Frame:GetName().."Low"):Hide()
+    getglobal(Frame:GetName().."High"):Hide()
+
+	local minValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    minValueText:SetText("1")
+    minValueText:SetPoint("CENTER", Frame, "LEFT", -8, 0)
+    
+    local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    maxValueText:SetText("100")
+    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
+end
+
+function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 

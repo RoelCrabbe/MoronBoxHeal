@@ -49,6 +49,10 @@ MBH_ALLOWEDOVERHEAL = "Allowed Overheal: $p %"
 MBH_HEALTARGETNUMBER = "Heal Target Number: $p"
 MBH_RESTOREDEFAULT = "Restore Default Settings"
 
+MBH_FLASHHEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Heal: $p %"
+MBH_HEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Lesser Heal: $p %"
+MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to Heal: $p %"
+
 MBH_RESTOREDEFAULTCONFIRM = "Are you sure you want to restore default values?"
 MBH_YES = "Yes"
 MBH_NO = "No"

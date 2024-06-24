@@ -96,19 +96,7 @@
 
             </Button>
 
-            <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="730" y="415" /> 
-                </Size>
-
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
-                        <Offset>
-                            <AbsDimension x="35" y="-75" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
+            <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
 
                 <Layers>
                     <Layer level="OVERLAY">
@@ -122,12 +110,6 @@
                         </FontString>
                     </Layer>
                 </Layers>
-
-                <Scripts>
-                    <OnShow>
-                        MBH_SetBackdropColors("Gray600");
-                    </OnShow>
-                </Scripts>
             </Frame>
         </Frames>
     </Frame>
@@ -696,89 +678,133 @@
 
             </Button>
 
-            <ScrollFrame name="MoronBoxHealProtectionFrameContainer" inherits="MoronBoxHealScrollFrameBackdrop">
+            <Frame name="MoronBoxHealProtectionFrameContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
 
-                <Size>
-                    <AbsDimension x="730" y="415" /> 
-                </Size>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameFlashHealText" inherits="GameFontNormalHuge" text="Flash Heal" justifyH="CENTER">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                    <Offset>
+                                        <AbsDimension x="90" y="-25" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameHealText" inherits="GameFontNormalHuge" text="Heal" justifyH="CENTER">
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                    <Offset>
+                                        <AbsDimension y="-35" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameGreaterHealText" inherits="GameFontNormalHuge" text="Greater Heal" justifyH="CENTER">
+                            <Anchors>
+                                <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                   <Offset>
+                                        <AbsDimension x="-90" y="-25" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
 
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
-                        <Offset>
-                            <AbsDimension x="35" y="-75" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-
-                <Scripts>
-                    <OnShow>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                </Scripts>
-
-                <ScrollChild>
-                    <Frame name="MoronBoxHealProtectionFrameSettings" inherits="MoronBoxHealBackdrop">
-                                    
+                <Frames>
+                    <Slider name="MoronBoxHealFlashHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
                         <Size>
-                            <AbsDimension x="350" y="900" />
+                            <AbsDimension x="180" y="16"/>
                         </Size>
 
                         <Anchors>
                             <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameContainer">
                                 <Offset>
-                                    <AbsDimension x="5" y="-5" />
+                                    <AbsDimension x="35" y="-75" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_FlashHealProtectionThresholdSlider_OnValueChanged();
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_FlashHealProtectionThresholdSlider_OnShow();
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
+
+                    <Slider name="MoronBoxHealHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
+                        <Size>
+                            <AbsDimension x="180" y="16"/>
+                        </Size>
+
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionhresholdSlider">
+                                <Offset>
+                                    <AbsDimension x="60" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_HealProtectionThresholdSlider_OnValueChanged();
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_HealProtectionThresholdSlider_OnShow();
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
+
+                    <Slider name="MoronBoxHealGreaterHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
+                        <Size>
+                            <AbsDimension x="180" y="16"/>
+                        </Size>
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                <Offset>
+                                    <AbsDimension x="-35" y="-75" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_GreaterHealProtectionThresholdSlider_OnValueChanged();
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_GreaterHealProtectionThresholdSlider_OnShow();
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
+
+                    <!-- <EditBox name="$parentEditBox" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                                <Offset>
+                                    <AbsDimension x="35" y="-75" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
 
-                        <Layers>
-                            <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealOptionFrameTitle" inherits="GameFontNormal" text="MBH_HEALSETTINGS" justifyH="CENTER">
-                                    <Anchors>
-                                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
-                                            <Offset>
-                                                <AbsDimension x="5" y="-5"/>
-                                            </Offset>
-                                        </Anchor>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-
                         <Scripts>
-                            <OnShow>
-                                this:SetBackdropColor(nil);
-                                this:SetBackdropBorderColor(nil);
-                            </OnShow>
+
                         </Scripts>
-
-                        <Frames>
-                            <EditBox name="MoronBoxHealProtectionInputField" inherits="MoronBoxHealEditBoxTemplate">
-
-                                <Anchors>
-                                    <Anchor point="TOPLEFT">
-                                        <Offset>
-                                            <AbsDimension x="76" y="-12"/>
-                                        </Offset>
-                                    </Anchor>
-                                </Anchors>
-                                
-                                <Scripts>
-                                    <OnEscapePressed>
-                                        Print("out")
-                                        Print("Entered text: " .. this:GetText());
-                                    </OnEscapePressed>
-                                    <OnEnterPressed>
-                                        Print("enter")
-                                        Print("Entered text: " .. this:GetText());
-                                    </OnEnterPressed>
-                                </Scripts>
-                            </EditBox>
-                        </Frames>
-                    </Frame>
-                </ScrollChild>
-            </ScrollFrame>
+                    </EditBox> -->
+                </Frames>
+            </Frame>
         </Frames>
     </Frame>
 
