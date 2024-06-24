@@ -240,7 +240,7 @@
 
                 <Layers>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealOptionFrameTitle" inherits="GameFontNormal" text="MBH_HEALSETTINGS" justifyH="CENTER">
+                        <FontString name="MoronBoxHealOptionFrameTitle" inherits="GameFontNormal" text="MBH_HEALSETTINGS">
                             <Anchors>
                                 <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
                                     <Offset>
@@ -269,7 +269,7 @@
                                      <Anchors>
                                         <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealOptionFrameSmartHealCheckbox">
                                             <Offset>
-                                                <AbsDimension x="-5" y="0"/>
+                                                <AbsDimension x="-5" y="0" />
                                             </Offset>
                                         </Anchor>
                                     </Anchors>
@@ -281,20 +281,13 @@
                             <OnClick>
                                 MoronBoxHeal_Options.AutoHeal.Smart_Heal = (this:GetChecked() == 1);
                             </OnClick>
-                            <OnLoad>
-                                this:SetText(MBH_SMARTHEAL);
-                            </OnLoad>
                             <OnShow>
                                 this:SetChecked(MoronBoxHeal_Options.AutoHeal.Smart_Heal and 1 or 0);
                             </OnShow>
                         </Scripts>
                     </CheckButton>
 
-                    <Slider name="MoronBoxHealOptionFrameAllowedOverhealSlider" inherits="MoronBoxHealSlicerBackdrop">
-                        
-                        <Size>
-                            <AbsDimension x="220" y="16"/>
-                        </Size>
+                    <Slider name="MoronBoxHealOptionFrameAllowedOverhealSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealOptionAutoHealFrame">
@@ -305,10 +298,6 @@
                         </Anchors>
                         
                         <Scripts>
-                            <OnShow>
-                                this:SetBackdropColor(GetColorValue("gray_950"));
-                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
-                            </OnShow>
                             <OnValueChanged>
                                 MBH_AllowedOverhealPercentageSlider_OnValueChanged()
                             </OnValueChanged>
@@ -355,11 +344,7 @@
                         </Scripts>
                     </CheckButton>
                     
-                    <Slider name="MoronBoxHealOptionFrameHealTargetNumberSlider" inherits="MoronBoxHealSlicerBackdrop">
-                        
-                        <Size>
-                            <AbsDimension x="220" y="16"/>
-                        </Size>
+                    <Slider name="MoronBoxHealOptionFrameHealTargetNumberSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealOptionAutoHealFrame">
@@ -370,10 +355,6 @@
                         </Anchors>
 
                         <Scripts>
-                            <OnShow>
-                                this:SetBackdropColor(GetColorValue("gray_950"));
-                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
-                            </OnShow>
                             <OnValueChanged>
                                 MBH_HealTargetNumberSlider_OnValueChanged()
                             </OnValueChanged>
@@ -447,11 +428,7 @@
                         </Scripts>
                     </CheckButton>
 
-                    <Slider name="MoronBoxHealOptionExtendedRangeSlider" inherits="MoronBoxHealSlicerBackdrop">
-                        
-                        <Size>
-                            <AbsDimension x="220" y="16"/>
-                        </Size>
+                    <Slider name="MoronBoxHealOptionExtendedRangeSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealOptionExtendedRangeFrame">
@@ -462,10 +439,6 @@
                         </Anchors>
 
                         <Scripts>
-                            <OnShow>
-                                this:SetBackdropColor(GetColorValue("gray_950"));
-                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
-                            </OnShow>
                             <OnValueChanged>
                                 MBH_ExtendedRangeFrequencySlider_OnValueChanged()
                             </OnValueChanged>
@@ -539,11 +512,7 @@
                         </Scripts>
                     </CheckButton>
 
-                    <Slider name="MoronBoxHealOptionLineOfSightSlider" inherits="MoronBoxHealSlicerBackdrop">
-                        
-                        <Size>
-                            <AbsDimension x="220" y="16"/>
-                        </Size>
+                    <Slider name="MoronBoxHealOptionLineOfSightSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealOptionLineOfSightFrame">
@@ -554,10 +523,6 @@
                         </Anchors>
                         
                         <Scripts>
-                            <OnShow>
-                                this:SetBackdropColor(GetColorValue("gray_950"));
-                                this:SetBackdropBorderColor(GetColorValue("gray_950"));
-                            </OnShow>
                             <OnValueChanged>
                                 MBH_LineOfSightTimeOutSlider_OnValueChanged()
                             </OnValueChanged>

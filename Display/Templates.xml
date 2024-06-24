@@ -301,4 +301,17 @@
             </OnShow>
         </Scripts>
     </Frame>
+
+    <Slider name="MoronBoxHealOptionSlicerTemplate" inherits="MoronBoxHealSlicerBackdrop" virtual="true">
+        
+        <Size>
+            <AbsDimension x="220" y="16"/>
+        </Size>
+        
+        <Scripts>
+            <OnShow>
+                MBH_SetBackdropColors("gray_950");
+            </OnShow>
+        </Scripts>
+    </Slider>
 </Ui>
