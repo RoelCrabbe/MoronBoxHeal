@@ -769,8 +769,22 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR)
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
                             </OnShow>
+                            <OnTextChanged>
+                               MBH_ValidateFlashHealInputLAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                               MBH_ValidateFlashHealInputLAR();
+                               this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
                             <OnTabPressed>
                                 MoronBoxHealFlashHealProtectionhresholdHAR:SetFocus();
                             </OnTabPressed>
@@ -803,8 +817,22 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR)
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
                             </OnShow>
+                            <OnTextChanged>
+                               MBH_ValidateFlashHealInputHAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                               MBH_ValidateFlashHealInputHAR();
+                               this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
                             <OnTabPressed>
                                 MoronBoxHealHealProtectionhresholdLAR:SetFocus();
                             </OnTabPressed>
@@ -862,8 +890,22 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR)
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR);
                             </OnShow>
+                            <OnTextChanged>
+                               MBH_ValidateHealInputLAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                               MBH_ValidateHealInputLAR();
+                               this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
                             <OnTabPressed>
                                 MoronBoxHealHealProtectionhresholdHAR:SetFocus();
                             </OnTabPressed>
@@ -896,8 +938,22 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR)
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR);
                             </OnShow>
+                            <OnTextChanged>
+                               MBH_ValidateHealInputHAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                               MBH_ValidateHealInputHAR();
+                               this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
                             <OnTabPressed>
                                 MoronBoxHealGreaterHealProtectionhresholdLAR:SetFocus();
                             </OnTabPressed>
@@ -955,11 +1011,22 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR)
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
                             </OnShow>
+                            <OnTextChanged>
+                               MBH_ValidateGreaterHealInputLAR();
+                            </OnTextChanged>
                             <OnEnterPressed>
-                            
+                               MBH_ValidateGreaterHealInputLAR();
+                               this:ClearFocus();
                             </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
                             <OnTabPressed>
                                 MoronBoxHealGreaterHealProtectionhresholdHAR:SetFocus();
                             </OnTabPressed>
@@ -992,8 +1059,22 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR)
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
                             </OnShow>
+                            <OnTextChanged>
+                               MBH_ValidateGreaterHealInputHAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                               MBH_ValidateGreaterHealInputHAR();
+                               this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
                             <OnTabPressed>
                                 this:ClearFocus();
                             </OnTabPressed>

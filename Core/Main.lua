@@ -2,44 +2,30 @@
 -- Local Variables {{{
 -------------------------------------------------------------------------------
 
-local ManaProtectionThresholds = {
-    ["Flash Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(66) end,
-            ["NewSpellName"] = "Flash Heal",
-            ["NewLowRank"] = 1,
-            ["NewHighRank"] = 4,
+local ManaProtectionThresholds = {}
+
+function MBH_InitializeManaProtectionThresholds()
+    ManaProtectionThresholds = {
+        ["Flash Heal"] = {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold) end,
+            ["Spell"] = "Heal",
+            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR,
         },
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(33) end,
-            ["NewSpellName"] = "Heal",
+        ["Heal"] = {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold) end,
+            ["Spell"] = "Lesser Heal",
+            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Heal_HAR,
         },
-    },
-    ["Greater Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(50) end,
-            ["NewSpellName"] = "Heal",
+        ["Greater Heal"] = {
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold) end,
+            ["Spell"] = "Heal",
+            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR,
         },
-    },
-    ["Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(5) end,
-            ["NewSpellName"] = "Lesser Heal",
-        },
-    },
-    ["Lesser Healing Wave"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(35) end,
-            ["NewSpellName"] = "Healing Wave",
-        },
-    },
-    ["Chain Heal"] = {
-        {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(25) end,
-            ["NewSpellName"] = "Healing Wave",
-        },
-    },
-}
+    }
+end
 
 -------------------------------------------------------------------------------
 -- The Global Variables {{{
@@ -107,7 +93,6 @@ ColorPicker = {
     Red500 = { r = 0.937, g = 0.267, b = 0.267, a = 1 },    -- #ef4444 equivalent
     Red700 = { r = 0.725, g = 0.110, b = 0.110, a = 1 },    -- #b91c1c equivalent
     Purple = { r = 0.670, g = 0.408, b = 1, a = 1 },        -- #ab68ff equivalent
-
     Blue50 = { r = 0.678, g = 0.725, b = 0.776, a = 1 },    -- #adb9c6 equivalent
     Blue100 = { r = 0.620, g = 0.675, b = 0.737, a = 1 },   -- #9eaebd equivalent
     Blue200 = { r = 0.561, g = 0.624, b = 0.698, a = 1 },   -- #8fa0b2 equivalent
@@ -816,6 +801,7 @@ end
 
 function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)
     ManaProtectedHeal, ManaProtectedLowRank , ManaProtectedHighRank = MBH_ManaProtection(SpellName, LowestAllowedRank, HighestAllowedRank)
+    Session.SpellName = ManaProtectedHeal
 	if Session.CastTime[Session.SpellName] then
 		MBH_Cast(Session.SpellName, ManaProtectedLowRank, ManaProtectedHighRank)
 	end
@@ -827,25 +813,25 @@ end
 
 function MBH_ManaProtection(SPN, LAR, HAR)
 
-    if MoronBoxHeal_Options.AdvancedOptions.Mana_Protection then
-        local spellDataList = ManaProtectionThresholds[Session.SpellName]
-        if spellDataList then
-            for _, spellData in ipairs(spellDataList) do
-                if spellData.ThresholdCheck() then
-                    SPN = spellData.NewSpellName
-                    LAR = spellData.NewLowRank
-                    HAR = spellData.NewHighRank
-                    break
-                end
-            end
-        end
+    if not MoronBoxHeal_Options.AdvancedOptions.Mana_Protection then
+        return SPN, LAR or 1, HAR or MBH_GetMaxSpellRank(SPN)
     end
 
-    LAR = LAR or 1
-    HAR = HAR or MBH_GetMaxSpellRank(SPN)
+    if not next(ManaProtectionThresholds) then
+        MBH_InitializeManaProtectionThresholds()
+    end
 
-    Session.SpellName = SPN
-    return Session.SpellName, LAR, HAR
+    local spellData = ManaProtectionThresholds[SPN]
+
+    if spellData and spellData.ThresholdCheck() then
+        SPN = spellData.Spell
+        LAR = spellData.LAR or 1
+        HAR = spellData.HAR or MBH_GetMaxSpellRank(SPN)
+    else
+        LAR = LAR or 1
+        HAR = HAR or MBH_GetMaxSpellRank(SPN)
+    end
+    return SPN, LAR, HAR
 end
 
 ------------------------------------------------------------------------------------------------------
@@ -1165,4 +1151,92 @@ function MBH_IsFrameOnEnter(Frame)
     end
 
     MBH_SetBackdropColors("Gray400");
+end
+
+
+function MBH_ValidateFlashHealInputLAR()
+    local larValue = tonumber(this:GetText())
+    local harValue = tonumber(MoronBoxHealFlashHealProtectionhresholdHAR:GetText())
+
+    if ( larValue ) then
+        if ( harValue and larValue <= harValue ) then
+            MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR = larValue
+        end
+
+        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR)
+    end
+end
+
+function MBH_ValidateFlashHealInputHAR()
+    local harValue = tonumber(this:GetText())
+    local larValue = tonumber(MoronBoxHealFlashHealProtectionhresholdLAR:GetText())
+    local maxRank = MBH_GetMaxSpellRank("Heal")
+
+    if ( harValue ) then
+        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
+            MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR = harValue
+        else
+            MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR = maxRank
+        end
+
+        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR)
+    end
+end
+
+function MBH_ValidateHealInputLAR()
+    local larValue = tonumber(this:GetText())
+    local harValue = tonumber(MoronBoxHealHealProtectionhresholdHAR:GetText())
+
+    if ( larValue ) then
+        if ( harValue and larValue <= harValue ) then
+            MoronBoxHeal_Options.AdvancedOptions.Heal_LAR = larValue
+        end
+        
+        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR)
+    end
+end
+
+function MBH_ValidateHealInputHAR()
+    local harValue = tonumber(this:GetText())
+    local larValue = tonumber(MoronBoxHealHealProtectionhresholdLAR:GetText())
+    local maxRank = MBH_GetMaxSpellRank("Lesser Heal")
+
+    if ( harValue ) then
+        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
+            MoronBoxHeal_Options.AdvancedOptions.Heal_HAR = harValue
+        else
+            MoronBoxHeal_Options.AdvancedOptions.Heal_HAR = maxRank
+        end
+
+        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR)
+    end
+end
+
+function MBH_ValidateGreaterHealInputLAR()
+    local larValue = tonumber(this:GetText())
+    local harValue = tonumber(MoronBoxHealHealProtectionhresholdHAR:GetText())
+
+    if ( larValue ) then
+        if ( harValue and larValue <= harValue ) then
+            MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR = larValue
+        end
+        
+        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR)
+    end
+end
+
+function MBH_ValidateGreaterHealInputHAR()
+    local harValue = tonumber(this:GetText())
+    local larValue = tonumber(MoronBoxHealGreaterHealProtectionhresholdHAR:GetText())
+    local maxRank = MBH_GetMaxSpellRank("Heal")
+
+    if ( harValue ) then
+        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
+            MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR = harValue
+        else
+            MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR = maxRank
+        end
+
+        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR)
+    end
 end
