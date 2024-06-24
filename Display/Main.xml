@@ -708,7 +708,7 @@
                             <Anchors>
                                 <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameContainer">
                                    <Offset>
-                                        <AbsDimension x="-90" y="-25" />
+                                        <AbsDimension x="-85" y="-25" />
                                     </Offset>
                                 </Anchor>
                             </Anchors>
@@ -717,6 +717,8 @@
                 </Layers>
 
                 <Frames>
+
+                    <!-- Flash Heal -->
                     <Slider name="MoronBoxHealFlashHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Size>
@@ -741,6 +743,69 @@
                         </Scripts>
                     </Slider>
 
+                    <EditBox name="MoronBoxHealFlashHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealFlashHealProtectionhresholdSlider">
+                                <Offset>
+                                    <AbsDimension x="50" y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealFlashHealProtectionhresholdLARText" inherits="GameFontNormal" text="Lowest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR)
+                            </OnShow>
+                        </Scripts>
+                    </EditBox>
+
+                    <EditBox name="MoronBoxHealFlashHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealFlashHealProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdHAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR)
+                            </OnShow>
+                        </Scripts>
+                    </EditBox>
+
+                    <!-- Heal -->
                     <Slider name="MoronBoxHealHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Size>
@@ -765,6 +830,69 @@
                         </Scripts>
                     </Slider>
 
+                    <EditBox name="MoronBoxHealHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealHealProtectionhresholdSlider">
+                                <Offset>
+                                    <AbsDimension x="50" y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealHealProtectionhresholdLARText" inherits="GameFontNormal" text="Lowest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionhresholdLAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR)
+                            </OnShow>
+                        </Scripts>
+                    </EditBox>
+
+                    <EditBox name="MoronBoxHealHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHealProtectionhresholdLAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealHealProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionhresholdHAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR)
+                            </OnShow>
+                        </Scripts>
+                    </EditBox>
+
+                    <!-- Greater Heal -->
                     <Slider name="MoronBoxHealGreaterHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Size>
@@ -789,20 +917,67 @@
                         </Scripts>
                     </Slider>
 
-                    <!-- <EditBox name="$parentEditBox" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealGreaterHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameContainer">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealGreaterHealProtectionhresholdSlider">
                                 <Offset>
-                                    <AbsDimension x="35" y="-75" />
+                                    <AbsDimension x="50" y="-50" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
 
-                        <Scripts>
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdLARText" inherits="GameFontNormal" text="Lowest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdLAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
 
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR)
+                            </OnShow>
                         </Scripts>
-                    </EditBox> -->
+                    </EditBox>
+
+                    <EditBox name="MoronBoxHealGreaterHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdLAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdHAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR)
+                            </OnShow>
+                        </Scripts>
+                    </EditBox>
                 </Frames>
             </Frame>
         </Frames>

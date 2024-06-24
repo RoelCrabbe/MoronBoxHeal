@@ -304,7 +304,7 @@
     <EditBox name="MoronBoxHealEditBoxTemplate" historyLines="0" enableMouse="true" autoFocus="false" letters="256" virtual="true">
 
         <Size>
-            <AbsDimension x="20" y="20"/>
+            <AbsDimension x="50" y="20"/>
         </Size>
 
         <Layers>

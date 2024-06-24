@@ -141,8 +141,14 @@ DefaultOptions = {
     AdvancedOptions = {
         Mana_Protection = true,
         Flash_Heal_Threshold = 66,
+        Flash_Heal_LAR = 1,
+        Flash_Heal_HAR = 4,
         Heal_Threshold = 5,
+        Heal_LAR = 1,
+        Heal_HAR = 3,
         Greater_Heal_Threshold = 50,
+        Greater_Heal_LAR = 1,
+        Greater_Heal_HAR = 4,
     }
 }
 
@@ -1076,7 +1082,7 @@ end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold))
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
