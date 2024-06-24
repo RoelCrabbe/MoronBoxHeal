@@ -7,34 +7,34 @@ local ManaProtectionThresholds = {}
 function MBH_InitializeManaProtectionThresholds()
     ManaProtectionThresholds = {
         ["Flash Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_Threshold) end,
             ["Spell"] = "Heal",
-            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR,
         },
         ["Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Heal_Threshold) end,
             ["Spell"] = "Lesser Heal",
-            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR,
         },
         ["Greater Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold) end,
             ["Spell"] = "Heal",
-            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR,
         },
         ["Chain Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold) end,
             ["Spell"] = "Healing Wave",
-            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR,
         },
         ["Lesser Healing Wave"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_Threshold) end,
             ["Spell"] = "Healing Wave",
-            ["LAR"] = MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR,
-            ["HAR"] = MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR,
         },
     }
 end
@@ -137,6 +137,8 @@ DefaultOptions = {
     },
     AdvancedOptions = {
         Mana_Protection = true,
+    },
+    ManaProtectionValues = {
         Flash_Heal_Threshold = 66,
         Flash_Heal_LAR = 1,
         Flash_Heal_HAR = 4,

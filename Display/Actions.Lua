@@ -144,12 +144,12 @@ end
 function MBH_FlashHealProtectionThresholdSlider_OnShow()
 
 	local Frame = MoronBoxHealFlashHealProtectionhresholdSlider
-    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_FLASHHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_FLASHHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_Threshold))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(1, 100)
     Frame:SetValueStep(1)
-    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_Threshold)
 
 	getglobal(Frame:GetName().."Low"):Hide()
     getglobal(Frame:GetName().."High"):Hide()
@@ -164,20 +164,20 @@ function MBH_FlashHealProtectionThresholdSlider_OnShow()
 end
 
 function MBH_FlashHealProtectionThresholdSlider_OnValueChanged()
-    MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_FLASHHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_Threshold))
+    MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_FLASHHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
 function MBH_HealProtectionThresholdSlider_OnShow()
 
 	local Frame = MoronBoxHealHealProtectionhresholdSlider
-    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Heal_Threshold))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(1, 100)
     Frame:SetValueStep(1)
-    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Heal_Threshold)
 
 	getglobal(Frame:GetName().."Low"):Hide()
     getglobal(Frame:GetName().."High"):Hide()
@@ -192,20 +192,20 @@ function MBH_HealProtectionThresholdSlider_OnShow()
 end
 
 function MBH_HealProtectionThresholdSlider_OnValueChanged()
-    MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Heal_Threshold))
+    MoronBoxHeal_Options.ManaProtectionValues.Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_HEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnShow()
 
 	local Frame = MoronBoxHealGreaterHealProtectionhresholdSlider
-    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(1, 100)
     Frame:SetValueStep(1)
-    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold)
 
 	getglobal(Frame:GetName().."Low"):Hide()
     getglobal(Frame:GetName().."High"):Hide()
@@ -220,20 +220,20 @@ function MBH_GreaterHealProtectionThresholdSlider_OnShow()
 end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
-    MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold))
+    MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
 function MBH_ChainHealProtectionThresholdSlider_OnShow()
 
 	local Frame = MoronBoxHealChainHealProtectionhresholdSlider
-    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_CHAINHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold))
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_CHAINHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(1, 100)
     Frame:SetValueStep(1)
-    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold)
 
 	getglobal(Frame:GetName().."Low"):Hide()
     getglobal(Frame:GetName().."High"):Hide()
@@ -248,20 +248,20 @@ function MBH_ChainHealProtectionThresholdSlider_OnShow()
 end
 
 function MBH_ChainHealProtectionThresholdSlider_OnValueChanged()
-    MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_CHAINHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_Threshold))
+    MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_CHAINHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
 function MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
 
 	local Frame = MoronBoxHealLesserHealingWaveProtectionhresholdSlider
-    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_Threshold))
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_Threshold))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     Frame:SetMinMaxValues(1, 100)
     Frame:SetValueStep(1)
-    Frame:SetValue(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_Threshold)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_Threshold)
 
 	getglobal(Frame:GetName().."Low"):Hide()
     getglobal(Frame:GetName().."High"):Hide()
@@ -276,8 +276,8 @@ function MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
 end
 
 function MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged()
-    MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_Threshold))
+    MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
@@ -291,10 +291,10 @@ function MBH_ValidateFlashHealInputLAR()
 
     if ( larValue ) then
         if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR = larValue
+            MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR = larValue
         end
 
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR)
     end
 end
 
@@ -305,12 +305,12 @@ function MBH_ValidateFlashHealInputHAR()
 
     if ( harValue ) then
         if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR = harValue
+            MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR = harValue
         else
-            MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR = maxRank
+            MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR = maxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR)
     end
 end
 
@@ -320,10 +320,10 @@ function MBH_ValidateHealInputLAR()
 
     if ( larValue ) then
         if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Heal_LAR = larValue
+            MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR = larValue
         end
         
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_LAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR)
     end
 end
 
@@ -334,12 +334,12 @@ function MBH_ValidateHealInputHAR()
 
     if ( harValue ) then
         if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Heal_HAR = harValue
+            MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR = harValue
         else
-            MoronBoxHeal_Options.AdvancedOptions.Heal_HAR = maxRank
+            MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR = maxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Heal_HAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR)
     end
 end
 
@@ -349,10 +349,10 @@ function MBH_ValidateGreaterHealInputLAR()
 
     if ( larValue ) then
         if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR = larValue
+            MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR = larValue
         end
         
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR)
     end
 end
 
@@ -363,12 +363,12 @@ function MBH_ValidateGreaterHealInputHAR()
 
     if ( harValue ) then
         if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR = harValue
+            MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR = harValue
         else
-            MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR = maxRank
+            MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR = maxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR)
     end
 end
 
@@ -378,10 +378,10 @@ function MBH_ValidateChainHealInputLAR()
 
     if ( larValue ) then
         if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR = larValue
+            MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR = larValue
         end
         
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR)
     end
 end
 
@@ -392,12 +392,12 @@ function MBH_ValidateChainHealInputHAR()
 
     if ( harValue ) then
         if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR = harValue
+            MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR = harValue
         else
-            MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR = maxRank
+            MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR = maxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR)
     end
 end
 
@@ -407,10 +407,10 @@ function MBH_ValidateLesserHealingWaveInputLAR()
 
     if ( larValue ) then
         if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR = larValue
+            MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR = larValue
         end
         
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR)
     end
 end
 
@@ -421,12 +421,12 @@ function MBH_ValidateLesserHealingWaveInputHAR()
 
     if ( harValue ) then
         if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_HAR = harValue
+            MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR = harValue
         else
-            MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_HAR = maxRank
+            MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR = maxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_HAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR)
     end
 end
 
