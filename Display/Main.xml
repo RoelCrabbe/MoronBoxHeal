@@ -105,11 +105,7 @@
 
             </Button>
 
-            <Button name="MoronBoxHealMainFrameDefault" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="120" y="25" />
-                </Size>
+            <Button name="MoronBoxHealMainFrameDefault" inherits="MoronBoxHealDefaultTemplate">
 
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
@@ -119,45 +115,9 @@
                     </Anchor>
                 </Anchors>
 
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameDefaultText" inherits="GameFontNormal" text="MBH_RESTOREDEFAULT">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnLeave>
-                    <OnShow>
-                        this:SetText("MBH_RESTOREDEFAULT");
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                    <OnClick>
-                        MBH_RestoreDefaultValues()
-                    </OnClick>
-                </Scripts>
             </Button>
 
-            <Button name="MoronBoxHealMainFramePreset" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="100" y="25" />
-                </Size>
+            <Button name="MoronBoxHealMainFramePreset" inherits="MoronBoxHealPresetTemplate">
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealMainFrameDefault">
@@ -167,38 +127,6 @@
                     </Anchor>
                 </Anchors>
 
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFramePresetText" inherits="GameFontNormal" text="MBH_PRESETSETTINGS">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnLeave>
-                    <OnShow>
-                        this:SetText("MBH_PRESETSETTINGS");
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                    <OnClick>
-                        MBH_SetPresetValues()
-                    </OnClick>
-                </Scripts>
             </Button>
 
             <Frame name="MoronBoxHealMainFrameTextContainer" inherits="MoronBoxHealBackdrop">
@@ -219,12 +147,10 @@
                     <Layer level="OVERLAY">
                         <FontString name="MoronBoxHealMainFrameText" inherits="GameFontNormal" text="MBH_INFORMATION" wordWrap="true">
                             <Size>
-                                <AbsDimension x="480" y="350" /> <!-- Adjust size to fit the text -->
+                                <AbsDimension x="480" y="350" />
                             </Size>
                             <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    
-                                </Anchor>
+                                <Anchor point="CENTER" relativePoint="CENTER" />
                             </Anchors>
                         </FontString>
                     </Layer>
@@ -232,9 +158,7 @@
 
                 <Scripts>
                     <OnShow>
-                        MoronBoxHealMainFrameText:SetText(MBH_INFORMATION);
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
+                        MBH_SetBackdropColors("Gray600");
                     </OnShow>
                 </Scripts>
             </Frame>
@@ -274,8 +198,7 @@
 
         <Scripts>
             <OnShow>
-                this:SetBackdropColor(GetColorValue("Gray750"));
-                this:SetBackdropBorderColor(GetColorValue("Gray750"));
+                MBH_SetBackdropColors("Gray750");
             </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
@@ -346,11 +269,7 @@
 
             </Button>
 
-            <Button name="MoronBoxHealOptionFrameDefault" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="120" y="25" />
-                </Size>
+            <Button name="MoronBoxHealOptionFrameDefault" inherits="MoronBoxHealDefaultTemplate">
 
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
@@ -360,45 +279,9 @@
                     </Anchor>
                 </Anchors>
 
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealOptionFrameDefaultText" inherits="GameFontNormal" text="MBH_RESTOREDEFAULT">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnLeave>
-                    <OnShow>
-                        this:SetText("MBH_RESTOREDEFAULT");
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                    <OnClick>
-                        MBH_RestoreDefaultValues()
-                    </OnClick>
-                </Scripts>
             </Button>
 
-            <Button name="MoronBoxHealOptionFramePreset" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="100" y="25" />
-                </Size>
+            <Button name="MoronBoxHealOptionFramePreset" inherits="MoronBoxHealPresetTemplate">
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealOptionFrameDefault">
@@ -408,38 +291,6 @@
                     </Anchor>
                 </Anchors>
 
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealOptionFramePresetText" inherits="GameFontNormal" text="MBH_PRESETSETTINGS">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnLeave>
-                    <OnShow>
-                        this:SetText("MBH_PRESETSETTINGS");
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                    <OnClick>
-                        MBH_SetPresetValues()
-                    </OnClick>
-                </Scripts>
             </Button>
 
             <Frame name="MoronBoxHealOptionAutoHealFrame" inherits="MoronBoxHealBackdrop">
@@ -998,11 +849,7 @@
 
             </Button>
 
-            <Button name="MoronBoxHealProtectionFrameDefault" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="120" y="25" />
-                </Size>
+            <Button name="MoronBoxHealProtectionFrameDefault" inherits="MoronBoxHealDefaultTemplate">
 
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
@@ -1012,45 +859,9 @@
                     </Anchor>
                 </Anchors>
 
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealProtectionFrameDefaultText" inherits="GameFontNormal" text="MBH_RESTOREDEFAULT">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnLeave>
-                    <OnShow>
-                        this:SetText("MBH_RESTOREDEFAULT");
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                    <OnClick>
-                        MBH_RestoreDefaultValues()
-                    </OnClick>
-                </Scripts>
             </Button>
 
-            <Button name="MoronBoxHealProtectionFramePreset" inherits="MoronBoxHealBackdrop">
-
-                <Size>
-                    <AbsDimension x="100" y="25" />
-                </Size>
+            <Button name="MoronBoxHealProtectionFramePreset" inherits="MoronBoxHealPresetTemplate">
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameDefault">
@@ -1060,38 +871,6 @@
                     </Anchor>
                 </Anchors>
 
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealProtectionFramePresetText" inherits="GameFontNormal" text="MBH_PRESETSETTINGS">
-                            <Anchors>
-                                <Anchor point="CENTER" relativePoint="CENTER">
-                                    <Offset>
-                                        <AbsDimension x="0" y="0"/>
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-
-                <Scripts>
-                    <OnEnter>
-                        this:SetBackdropColor(GetColorValue("Gray400"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray400"));
-                    </OnEnter>
-                    <OnLeave>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnLeave>
-                    <OnShow>
-                        this:SetText("MBH_PRESETSETTINGS");
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                    <OnClick>
-                        MBH_SetPresetValues()
-                    </OnClick>
-                </Scripts>
             </Button>
 
             <ScrollFrame name="MoronBoxHealProtectionFrameContainer" inherits="MoronBoxHealScrollFrameBackdrop">

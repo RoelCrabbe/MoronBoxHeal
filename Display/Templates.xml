@@ -174,4 +174,67 @@
             </OnClick>
         </Scripts>
     </Button>
+
+    <Button name="MoronBoxHealDefaultTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+
+        <Size>
+            <AbsDimension x="120" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealDefaultTemplateText" inherits="GameFontNormal" text="MBH_RESTOREDEFAULT">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_SetBackdropColors("Gray400");
+            </OnEnter>
+            <OnLeave>
+                MBH_SetBackdropColors("Gray600");
+            </OnLeave>
+            <OnShow>
+                MBH_SetBackdropColors("Gray600");
+            </OnShow>
+            <OnClick>
+                MBH_RestoreDefaultValues()
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="MoronBoxHealPresetTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        <Size>
+            <AbsDimension x="100" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealPresetTemplateText" inherits="GameFontNormal" text="MBH_PRESETSETTINGS">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_SetBackdropColors("Gray400");
+            </OnEnter>
+            <OnLeave>
+                MBH_SetBackdropColors("Gray600");
+            </OnLeave>
+            <OnShow>
+                MBH_SetBackdropColors("Gray600");
+            </OnShow>
+            <OnClick>
+                MBH_SetPresetValues()
+            </OnClick>
+        </Scripts>
+    </Button>
 </Ui>
