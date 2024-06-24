@@ -1091,7 +1091,7 @@
                             <Anchors>
                                 <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                     <Offset>
-                                        <AbsDimension x="125" y="-25" />
+                                        <AbsDimension x="145" y="-25" />
                                     </Offset>
                                 </Anchor>
                             </Anchors>
@@ -1102,7 +1102,7 @@
                             <Anchors>
                                 <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                    <Offset>
-                                        <AbsDimension x="-125" y="-25" />
+                                        <AbsDimension x="-110" y="-25" />
                                     </Offset>
                                 </Anchor>
                             </Anchors>
@@ -1118,7 +1118,7 @@
                         <Anchors>
                             <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                 <Offset>
-                                    <AbsDimension x="65" y="-75" />
+                                    <AbsDimension x="75" y="-75" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
@@ -1147,7 +1147,7 @@
                             <Layer level="OVERLAY">
                                 <FontString name="MoronBoxHealChainHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionhresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1159,24 +1159,24 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
-                                MBH_ValidateFlashHealInputLAR();
+                                MBH_ValidateChainHealInputLAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                                MBH_ValidateFlashHealInputLAR();
+                                MBH_ValidateChainHealInputLAR();
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealFlashHealProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealChainHealProtectionhresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
@@ -1207,24 +1207,24 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
-                                MBH_ValidateFlashHealInputHAR();
+                                MBH_ValidateChainHealInputHAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                                MBH_ValidateFlashHealInputHAR();
+                                MBH_ValidateChainHealInputHAR();
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Flash_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Chain_Heal_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealHealProtectionhresholdLAR:SetFocus();
+                                MoronBoxHealLesserHealingWaveProtectionhresholdLAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
@@ -1235,7 +1235,7 @@
                         <Anchors>
                             <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                 <Offset>
-                                    <AbsDimension x="-35" y="-75" />
+                                    <AbsDimension x="-75" y="-75" />
                                 </Offset>
                             </Anchor>
                         </Anchors>
@@ -1276,24 +1276,24 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR);
                             </OnShow>
                             <OnTextChanged>
-                                MBH_ValidateGreaterHealInputLAR();
+                                MBH_ValidateLesserHealingWaveInputLAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                                MBH_ValidateGreaterHealInputLAR();
+                                MBH_ValidateLesserHealingWaveInputLAR();
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.AdvancedOptions.Lesser_Healing_Wave_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealGreaterHealProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealLesserHealingWaveProtectionhresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
@@ -1327,10 +1327,10 @@
                                 this:SetText(MoronBoxHeal_Options.AdvancedOptions.Greater_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
-                                MBH_ValidateGreaterHealInputHAR();
+                                MBH_ValidateLesserHealingWaveInputHAR();
                             </OnTextChanged>
                             <OnEnterPressed>
-                                MBH_ValidateGreaterHealInputHAR();
+                                MBH_ValidateLesserHealingWaveInputHAR();
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>

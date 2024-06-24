@@ -18,6 +18,7 @@ Core\Localization.lua
 Core\GroupData.lua
 Core\Range.lua
 Core\Main.lua
+Display\Actions.lua
 
 Display\Templates.xml
 Display\Main.xml
