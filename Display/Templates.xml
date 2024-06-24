@@ -43,7 +43,64 @@
         </Backdrop>
     </Frame>
 
+    <Frame name="MoronBoxHealFrameTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        
+        <Size>
+            <AbsDimension x="800" y="550" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainFrameTitle" inherits="GameFontNormalHuge" text="MBH_TITLE" justifyH="CENTER">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-30"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainFrameAuthor" inherits="GameFontNormal" text="MBH_AUTHOR" justifyH="CENTER">
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+                            <Offset>
+                                <AbsDimension x="-10" y="15"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnShow>
+                MBH_SetBackdropColors("Gray750");
+            </OnShow>
+            <OnMouseUp>
+                if ( this.isMoving ) then
+                    this:StopMovingOrSizing();
+                    this.isMoving = false;
+                end
+            </OnMouseUp>
+            <OnMouseDown>
+                if ( ( ( not this.isLocked ) or ( this.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) ) then
+                    this:StartMoving();
+                    this.isMoving = true;
+                end
+            </OnMouseDown>
+            <OnHide>
+                if ( this.isMoving ) then
+                    this:StopMovingOrSizing();
+                    this.isMoving = false;
+                end
+            </OnHide>
+        </Scripts>
+    </Frame>
+
     <Button name="MoronBoxHealCloseButtonTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+       
         <Size>
             <AbsDimension x="60" y="25" />
         </Size>
@@ -75,6 +132,7 @@
     </Button>
 
     <Button name="MoronBoxHealGeneralTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+       
         <Size>
             <AbsDimension x="60" y="25" />
         </Size>
@@ -110,6 +168,7 @@
     </Button>
 
     <Button name="MoronBoxHealOptionTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        
         <Size>
             <AbsDimension x="60" y="25" />
         </Size>
@@ -141,6 +200,7 @@
     </Button>
 
     <Button name="MoronBoxHealProtectionTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+       
         <Size>
             <AbsDimension x="60" y="25" />
         </Size>
@@ -208,6 +268,7 @@
     </Button>
 
     <Button name="MoronBoxHealPresetTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+       
         <Size>
             <AbsDimension x="100" y="25" />
         </Size>
