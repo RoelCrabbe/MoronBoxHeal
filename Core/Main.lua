@@ -351,10 +351,12 @@ function MBH_RaceChangeMoronBoxHealProtectionFrame()
     local isPriest = Session.PlayerClass == "Priest";
     local isShaman = Session.PlayerClass == "Shaman";
     local isPaladin = Session.PlayerClass == "Paladin";
+    local isDruid = Session.PlayerClass == "Druid";
 
     MoronBoxHealProtectionFramePriestContainer:Hide()
     MoronBoxHealProtectionFrameShamanContainer:Hide()
     MoronBoxHealProtectionFramePaladinContainer:Hide()
+    MoronBoxHealProtectionFrameDruidContainer:Hide()
 
     if ( isPriest ) then
         MoronBoxHealProtectionFramePriestContainer:Show()
@@ -362,6 +364,8 @@ function MBH_RaceChangeMoronBoxHealProtectionFrame()
         MoronBoxHealProtectionFrameShamanContainer:Show()
     elseif ( isPaladin ) then
         MoronBoxHealProtectionFramePaladinContainer:Show()
+    elseif ( isDruid ) then
+        MoronBoxHealProtectionFrameDruidContainer:Show()
     end
 end
 

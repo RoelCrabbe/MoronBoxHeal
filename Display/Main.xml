@@ -678,6 +678,7 @@
 
             </Button>
 
+            <!-- Priests -->
             <Frame name="MoronBoxHealProtectionFramePriestContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
 
                 <Layers>
@@ -1083,11 +1084,12 @@
                 </Frames>
             </Frame>
 
+            <!-- Shamans -->
             <Frame name="MoronBoxHealProtectionFrameShamanContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
 
                 <Layers>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameFlashHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_CHAIN_HEAL" justifyH="CENTER">
+                        <FontString name="MoronBoxHealMainFrameChainHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_CHAIN_HEAL" justifyH="CENTER">
                             <Anchors>
                                 <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                     <Offset>
@@ -1098,7 +1100,7 @@
                         </FontString>
                     </Layer>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameGreaterHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_LESSER_HEALING_WAVE" justifyH="CENTER">
+                        <FontString name="MoronBoxHealMainFrameLesserHealingWaveText" inherits="GameFontNormalHuge" text="MBH_SPELL_LESSER_HEALING_WAVE" justifyH="CENTER">
                             <Anchors>
                                 <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                    <Offset>
@@ -1348,11 +1350,12 @@
                 </Frames>
             </Frame>
 
+            <!-- Paladins -->
             <Frame name="MoronBoxHealProtectionFramePaladinContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
 
                 <Layers>
                     <Layer level="OVERLAY">
-                        <FontString name="MoronBoxHealMainFrameHealText" inherits="GameFontNormalHuge" text="MBH_SPELL_HEAL" justifyH="CENTER">
+                        <FontString name="MoronBoxHealMainFrameHolyLightText" inherits="GameFontNormalHuge" text="MBH_SPELL_HOLY_LIGHT" justifyH="CENTER">
                             <Anchors>
                                 <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                     <Offset>
@@ -1478,7 +1481,145 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealLesserHealingWaveProtectionhresholdLAR:SetFocus();
+                                this:ClearFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+
+            <!-- Druids -->
+            <Frame name="MoronBoxHealProtectionFrameDruidContainer" inherits="MoronBoxHealFrameInnerContainerTemplate">
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString name="MoronBoxHealMainFrameRegrowthText" inherits="GameFontNormalHuge" text="MBH_SPELL_REGROWTH" justifyH="CENTER">
+                            <Anchors>
+                                <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFramePriestContainer">
+                                    <Offset>
+                                        <AbsDimension y="-35" />
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Frames>
+
+                    <!-- Regrowth -->
+                    <Slider name="MoronBoxHealRegrowthProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFrameDruidContainer">
+                                <Offset>
+                                    <AbsDimension y="-83" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_RegrowthProtectionThresholdSlider_OnValueChanged();
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_RegrowthProtectionThresholdSlider_OnShow();
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
+
+                    <EditBox name="MoronBoxHealRegrowthProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealRegrowthProtectionhresholdSlider">
+                                <Offset>
+                                    <AbsDimension x="50" y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealRegrowthProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionhresholdLAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR);
+                            </OnShow>
+                            <OnTextChanged>
+                                MBH_ValidateRegrowthInputLAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                                MBH_ValidateRegrowthInputLAR();
+                                this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
+                            <OnTabPressed>
+                                MoronBoxHealRegrowthProtectionhresholdHAR:SetFocus();
+                            </OnTabPressed>
+                        </Scripts>
+                    </EditBox>
+
+                    <EditBox name="MoronBoxHealRegrowthProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealRegrowthProtectionhresholdLAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealRegrowthProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionhresholdHAR">
+                                            <Offset>
+                                                <AbsDimension x="-70" />
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnShow>
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR);
+                            </OnShow>
+                            <OnTextChanged>
+                                MBH_ValidateRegrowthInputHAR();
+                            </OnTextChanged>
+                            <OnEnterPressed>
+                                MBH_ValidateRegrowthInputHAR();
+                                this:ClearFocus();
+                            </OnEnterPressed>
+                            <OnEditFocusLost>
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR);
+                            </OnEditFocusLost>
+                            <OnEscapePressed>
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR);
+                                this:ClearFocus();
+                            </OnEscapePressed>
+                            <OnTabPressed>
+                                this:ClearFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>

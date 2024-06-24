@@ -309,6 +309,33 @@ function MBH_HolyLightProtectionThresholdSlider_OnValueChanged()
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
+function MBH_RegrowthProtectionThresholdSlider_OnShow()
+
+	local Frame = MoronBoxHealRegrowthProtectionhresholdSlider
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(MBH_REGROWTHPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Regrowth_Threshold))
+    getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
+
+    Frame:SetMinMaxValues(1, 100)
+    Frame:SetValueStep(1)
+    Frame:SetValue(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_Threshold)
+
+	getglobal(Frame:GetName().."Low"):Hide()
+    getglobal(Frame:GetName().."High"):Hide()
+
+	local minValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    minValueText:SetText("1")
+    minValueText:SetPoint("CENTER", Frame, "LEFT", -8, 0)
+    
+    local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    maxValueText:SetText("100")
+    maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
+end
+
+function MBH_RegrowthProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Regrowth_Threshold = this:GetValue()
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_REGROWTHPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Regrowth_Threshold))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
+end
 
 -------------------------------------------------------------------------------
 -- EditBox {{{
@@ -485,6 +512,35 @@ function MBH_ValidateHolyLightInputHAR()
         end
 
         this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR)
+    end
+end
+
+function MBH_ValidateRegrowthInputLAR()
+    local larValue = tonumber(this:GetText())
+    local harValue = tonumber(MoronBoxHealRegrowthProtectionhresholdHAR:GetText())
+
+    if ( larValue ) then
+        if ( harValue and larValue <= harValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR = larValue
+        end
+        
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR)
+    end
+end
+
+function MBH_ValidateRegrowthInputHAR()
+    local harValue = tonumber(this:GetText())
+    local larValue = tonumber(MoronBoxHealRegrowthProtectionhresholdLAR:GetText())
+    local maxRank = MBH_GetMaxSpellRank("Healing Touch")
+
+    if ( harValue ) then
+        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR = harValue
+        else
+            MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR = maxRank
+        end
+
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR)
     end
 end
 

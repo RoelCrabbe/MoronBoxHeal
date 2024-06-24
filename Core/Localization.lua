@@ -82,6 +82,10 @@ MBH_SPELL_GREATER_HEAL = "Greater Heal"
 MBH_SPELL_CHAIN_HEAL = "Chain Heal"
 MBH_SPELL_LESSER_HEALING_WAVE = "Lesser Healing Wave"
 
+MBH_SPELL_HOLY_LIGHT = "Holy Light"
+
+MBH_SPELL_REGROWTH = "Regrowth"
+
 MBH_FLASHHEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Heal: $p %"
 MBH_HEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Lesser Heal: $p %"
 MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to Heal: $p %"
@@ -90,6 +94,8 @@ MBH_CHAINHEALPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
 MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
 
 MBH_HOLYLIGHTPROTECTIONTHRESHOLD = "Mana Percentage to Flash of Light: $p %"
+
+MBH_REGROWTHPROTECTIONTHRESHOLD = "Mana Percentage to Healing Touch: $p %"
 
 MBH_LOWEST_RANK = "Lowest Rank: "
 MBH_HIGHEST_RANK = "Highest Rank: "
