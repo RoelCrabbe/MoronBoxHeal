@@ -835,17 +835,48 @@ function MBH_UpdateDisplay(message)
 	MBH_HealTargetNumberSlider_OnShow()
 	MBH_ExtendedRangeFrequencySlider_OnShow()
 	MBH_LineOfSightTimeOutSlider_OnShow()
+
 	MBH_UpdateCheckBox(MoronBoxHealOptionFrameSmartHealCheckbox, MoronBoxHeal_Options.AutoHeal.Smart_Heal)
 	MBH_UpdateCheckBox(MoronBoxHealOptionFrameRandomTargetCheckbox, MoronBoxHeal_Options.AutoHeal.Random_Target)
 	MBH_UpdateCheckBox(MoronBoxHealOptionExtendedRangeCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable)
 	MBH_UpdateCheckBox(MoronBoxHealOptionLineOfSightCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable)
     MBH_UpdateCheckBox(MoronBoxHealOptionManaProtectionCheckbox, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection)
 
-	if message then MBH_PrintMessage(message) end
+    MBH_FlashHealProtectionThresholdSlider_OnShow()
+    MBH_HealProtectionThresholdSlider_OnShow()
+    MBH_GreaterHealProtectionThresholdSlider_OnShow()
+    MBH_ChainHealProtectionThresholdSlider_OnShow()
+    MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
+    MBH_HolyLightProtectionThresholdSlider_OnShow()
+    MBH_RegrowthProtectionThresholdSlider_OnShow()
+
+    MBH_UpdateInputField(MoronBoxHealFlashHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR)
+    MBH_UpdateInputField(MoronBoxHealFlashHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR)
+	MBH_UpdateInputField(MoronBoxHealHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR)
+    MBH_UpdateInputField(MoronBoxHealHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR)
+    MBH_UpdateInputField(MoronBoxHealGreaterHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR)
+    MBH_UpdateInputField(MoronBoxHealGreaterHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR)
+
+    MBH_UpdateInputField(MoronBoxHealChainHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR)
+    MBH_UpdateInputField(MoronBoxHealChainHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR)
+	MBH_UpdateInputField(MoronBoxHealLesserHealingWaveProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR)
+    MBH_UpdateInputField(MoronBoxHealLesserHealingWaveProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR)
+    
+    MBH_UpdateInputField(MoronBoxHealHolyLightProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR)
+    MBH_UpdateInputField(MoronBoxHealHolyLightProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR)
+
+    MBH_UpdateInputField(MoronBoxHealRegrowthProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR)
+    MBH_UpdateInputField(MoronBoxHealRegrowthProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR)
+
+    if message then MBH_PrintMessage(message) end
 end
 
 function MBH_UpdateCheckBox(Frame, Value)
 	Frame:SetChecked(Value)
+end
+
+function MBH_UpdateInputField(Frame, Value)
+	Frame:SetText(Value)
 end
 
 function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)

@@ -1326,7 +1326,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateLesserHealingWaveInputHAR();
@@ -1336,10 +1336,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
