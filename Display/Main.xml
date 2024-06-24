@@ -228,11 +228,7 @@
 
             </Button>
 
-            <Frame name="MoronBoxHealOptionAutoHealFrame" inherits="MoronBoxHealBackdrop">
-                            
-                <Size>
-                    <AbsDimension x="350" y="200" />
-                </Size>
+            <Frame name="MoronBoxHealOptionAutoHealFrame" inherits="MoronBoxHealOptionContainerTemplate">
 
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent">
@@ -255,13 +251,6 @@
                         </FontString>
                     </Layer>
                 </Layers>
-
-                <Scripts>
-                    <OnShow>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                </Scripts>
 
                 <Frames>
                     <CheckButton name="MoronBoxHealOptionFrameSmartHealCheckbox" inherits="OptionsCheckButtonTemplate">
@@ -396,12 +385,8 @@
                 </Frames>
             </Frame>
 
-            <Frame name="MoronBoxHealOptionExtendedRangeFrame" inherits="MoronBoxHealBackdrop">
+            <Frame name="MoronBoxHealOptionExtendedRangeFrame" inherits="MoronBoxHealOptionContainerTemplate">
                             
-                <Size>
-                    <AbsDimension x="350" y="200" />
-                </Size>
-
                 <Anchors>
                     <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent">
                         <Offset>
@@ -423,13 +408,6 @@
                         </FontString>
                     </Layer>
                 </Layers>
-
-                <Scripts>
-                    <OnShow>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                </Scripts>
 
                 <Frames>
                     <CheckButton name="MoronBoxHealOptionExtendedRangeCheckbox" inherits="OptionsCheckButtonTemplate">
@@ -499,12 +477,8 @@
                 </Frames>
             </Frame>
 
-            <Frame name="MoronBoxHealOptionLineOfSightFrame" inherits="MoronBoxHealBackdrop">
+            <Frame name="MoronBoxHealOptionLineOfSightFrame" inherits="MoronBoxHealOptionContainerTemplate">
                             
-                <Size>
-                    <AbsDimension x="350" y="200" />
-                </Size>
-
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="MoronBoxHealOptionAutoHealFrame">
                         <Offset>
@@ -526,13 +500,6 @@
                         </FontString>
                     </Layer>
                 </Layers>
-
-                <Scripts>
-                    <OnShow>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                </Scripts>
 
                 <Frames>
                     <CheckButton name="MoronBoxHealOptionLineOfSightCheckbox" inherits="OptionsCheckButtonTemplate">
@@ -602,12 +569,8 @@
                 </Frames>
             </Frame>
 
-            <Frame name="MoronBoxHealAdvancedOptionFrame" inherits="MoronBoxHealBackdrop">
+            <Frame name="MoronBoxHealAdvancedOptionFrame" inherits="MoronBoxHealOptionContainerTemplate">
                             
-                <Size>
-                    <AbsDimension x="350" y="200" />
-                </Size>
-
                 <Anchors>
                     <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="MoronBoxHealOptionExtendedRangeFrame">
                         <Offset>
@@ -629,13 +592,6 @@
                         </FontString>
                     </Layer>
                 </Layers>
-
-                <Scripts>
-                    <OnShow>
-                        this:SetBackdropColor(GetColorValue("Gray600"));
-                        this:SetBackdropBorderColor(GetColorValue("Gray600"));
-                    </OnShow>
-                </Scripts>
 
                 <Frames>
                     <CheckButton name="MoronBoxHealOptionManaProtectionCheckbox" inherits="SMOptionsCheckButtonTemplate">
