@@ -62,7 +62,7 @@
 
         <Scripts>
             <OnShow>
-                MBH_SetBackdropColors("Gray750");
+                MBH_SetBackdropColors("Gray800");
             </OnShow>
             <OnMouseUp>
                 if ( this.isMoving ) then
@@ -229,7 +229,7 @@
 
         <Scripts>
             <OnEnter>
-                MBH_SetBackdropColors("Gray400");
+                MBH_SetBackdropColors("Green600");
             </OnEnter>
             <OnLeave>
                 MBH_SetBackdropColors("Gray600");
@@ -261,7 +261,7 @@
 
         <Scripts>
             <OnEnter>
-                MBH_SetBackdropColors("Gray400");
+                MBH_SetBackdropColors("Blue600");
             </OnEnter>
             <OnLeave>
                 MBH_SetBackdropColors("Gray600");
@@ -294,11 +294,6 @@
             <AbsDimension x="220" y="16"/>
         </Size>
         
-        <Scripts>
-            <OnShow>
-                MBH_SetBackdropColors("Gray950");
-            </OnShow>
-        </Scripts>
     </Slider>
 
     <EditBox name="MoronBoxHealEditBoxTemplate" historyLines="0" enableMouse="true" autoFocus="false" letters="256" virtual="true">
