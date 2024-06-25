@@ -345,7 +345,7 @@ function MBH_ValidateFlashHealInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealFlashHealProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR = larValue
         end
@@ -374,7 +374,7 @@ function MBH_ValidateHealInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealHealProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR = larValue
         end
@@ -403,7 +403,7 @@ function MBH_ValidateGreaterHealInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealHealProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR = larValue
         end
@@ -432,7 +432,7 @@ function MBH_ValidateChainHealInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealChainHealProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR = larValue
         end
@@ -461,7 +461,7 @@ function MBH_ValidateLesserHealingWaveInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealLesserHealingWaveProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR = larValue
         end
@@ -490,7 +490,7 @@ function MBH_ValidateHolyLightInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealHolyLightProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR = larValue
         end
@@ -519,7 +519,7 @@ function MBH_ValidateRegrowthInputLAR()
     local larValue = tonumber(this:GetText())
     local harValue = tonumber(MoronBoxHealRegrowthProtectionhresholdHAR:GetText())
 
-    if ( larValue ) then
+    if ( larValue and larValue >= 1) then
         if ( harValue and larValue <= harValue ) then
             MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR = larValue
         end
