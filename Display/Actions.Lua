@@ -31,105 +31,121 @@ end
 
 function MBH_AllowedOverhealPercentageSlider_OnShow()
     local Frame = MoronBoxHealOptionFrameAllowedOverhealSlider
-    MBH_InitializeSlider(Frame, MBH_ALLOWEDOVERHEAL, "AutoHeal", "Allowed_Overheal_Percentage")
+    MBH_InitializeSlider(Frame, MBH_ALLOWEDOVERHEAL, MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
+end
+
+function MBH_AllowedOverhealPercentageSlider_OnValueChanged()
+    MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage, MBH_ALLOWEDOVERHEAL)
 end
 
 function MBH_HealTargetNumberSlider_OnShow()
     local Frame = MoronBoxHealOptionFrameHealTargetNumberSlider
-    MBH_InitializeSlider(Frame, MBH_HEALTARGETNUMBER, "AutoHeal", "Heal_Target_Number", 1, 5, 1)
+    MBH_InitializeSlider(Frame, MBH_HEALTARGETNUMBER, MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, 1, 5, 1)
+end
+
+function MBH_HealTargetNumberSlider_OnValueChanged()
+    MoronBoxHeal_Options.AutoHeal.Heal_Target_Number = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, MBH_HEALTARGETNUMBER)
 end
 
 function MBH_ExtendedRangeFrequencySlider_OnShow()
     local Frame = MoronBoxHealOptionExtendedRangeSlider
-    MBH_InitializeSlider(Frame, MBH_EXTENDEDRANGEFREQUENCY, "ExtendedRange", "Frequency", 1, 5, 0.25)
+    MBH_InitializeSlider(Frame, MBH_EXTENDEDRANGEFREQUENCY, MoronBoxHeal_Options.ExtendedRange.Frequency, 1, 5, 0.25)
+end
+
+function MBH_ExtendedRangeFrequencySlider_OnValueChanged()
+    MoronBoxHeal_Options.ExtendedRange.Frequency = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ExtendedRange.Frequency, MBH_EXTENDEDRANGEFREQUENCY)
 end
 
 function MBH_LineOfSightTimeOutSlider_OnShow()
     local Frame = MoronBoxHealOptionLineOfSightSlider
-    MBH_InitializeSlider(Frame, MBH_LINEOFSIGHTFREQUENCY, "LineOfSight", "TimeOut", 0.5, 5, 0.25)
+    MBH_InitializeSlider(Frame, MBH_LINEOFSIGHTFREQUENCY, MoronBoxHeal_Options.LineOfSight.TimeOut, 0.5, 5, 0.25)
+end
+
+function MBH_LineOfSightTimeOutSlider_OnValueChanged()
+    MoronBoxHeal_Options.LineOfSight.TimeOut = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.LineOfSight.TimeOut, MBH_LINEOFSIGHTFREQUENCY)
 end
 
 function MBH_FlashHealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealFlashHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_FLASHHEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Flash_Heal_Threshold")
+    MBH_InitializeSlider(Frame, MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
+end
+
+function MBH_FlashHealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold, MBH_FLASHHEALPROTECTIONTHRESHOLD)
 end
 
 function MBH_HealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_HEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Heal_Threshold")
+    MBH_InitializeSlider(Frame, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
+end
+
+function MBH_HealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold, MBH_HEALPROTECTIONTHRESHOLD)
 end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealGreaterHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_GREATERHEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Greater_Heal_Threshold")
+    MBH_InitializeSlider(Frame, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
+end
+
+function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold, MBH_GREATERHEALPROTECTIONTHRESHOLD)
 end
 
 function MBH_ChainHealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealChainHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_CHAINHEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Chain_Heal_Threshold")
+    MBH_InitializeSlider(Frame, MBH_CHAINHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold)
+end
+
+function MBH_ChainHealProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold, MBH_CHAINHEALPROTECTIONTHRESHOLD)
 end
 
 function MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealLesserHealingWaveProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, "ManaProtectionValues", "Lesser_Healing_Wave_Threshold")
+    MBH_InitializeSlider(Frame, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold)
+end
+
+function MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD)
 end
 
 function MBH_HolyLightProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealHolyLightProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, "ManaProtectionValues", "Holy_Light_Threshold")
+    MBH_InitializeSlider(Frame, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
+end
+
+function MBH_HolyLightProtectionThresholdSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold, MBH_HOLYLIGHTPROTECTIONTHRESHOLD)
 end
 
 function MBH_RegrowthProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealRegrowthProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, MBH_REGROWTHPROTECTIONTHRESHOLD, "ManaProtectionValues", "Regrowth_Threshold")
-end
-
-function MBH_AllowedOverhealPercentageSlider_OnValueChanged()
-    MBH_SliderValueChanged("AutoHeal", "Allowed_Overheal_Percentage", MBH_ALLOWEDOVERHEAL)
-end
-
-function MBH_HealTargetNumberSlider_OnValueChanged()
-    MBH_SliderValueChanged("AutoHeal", "Heal_Target_Number", MBH_HEALTARGETNUMBER)
-end
-
-function MBH_ExtendedRangeFrequencySlider_OnValueChanged()
-    MBH_SliderValueChanged("ExtendedRange", "Frequency", MBH_EXTENDEDRANGEFREQUENCY)
-end
-
-function MBH_LineOfSightTimeOutSlider_OnValueChanged()
-    MBH_SliderValueChanged("LineOfSight", "TimeOut", MBH_LINEOFSIGHTFREQUENCY)
-end
-
-function MBH_FlashHealProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Flash_Heal_Threshold", MBH_FLASHHEALPROTECTIONTHRESHOLD)
-end
-
-function MBH_HealProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Heal_Threshold", MBH_HEALPROTECTIONTHRESHOLD)
-end
-
-function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Greater_Heal_Threshold", MBH_GREATERHEALPROTECTIONTHRESHOLD)
-end
-
-function MBH_ChainHealProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Chain_Heal_Threshold", MBH_CHAINHEALPROTECTIONTHRESHOLD)
-end
-
-function MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Lesser_Healing_Wave_Threshold", MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD)
-end
-
-function MBH_HolyLightProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Holy_Light_Threshold", MBH_HOLYLIGHTPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
 end
 
 function MBH_RegrowthProtectionThresholdSlider_OnValueChanged()
-    MBH_SliderValueChanged("ManaProtectionValues", "Regrowth", MBH_REGROWTHPROTECTIONTHRESHOLD)
+    MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold, MBH_REGROWTHPROTECTIONTHRESHOLD)
 end
 
-function MBH_InitializeSlider(Frame, String, Category, Value, MinStep, MaxStep, ValStep)
-    getglobal(Frame:GetName().."Text"):SetText(string.gsub(String, "$p", MoronBoxHeal_Options[Category][Value]))
+function MBH_SliderValueChanged(Value, String)
+    getglobal(this:GetName().."Text"):SetText(string.gsub(String, "$p", Value))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
+end
+
+function MBH_InitializeSlider(Frame, String, Value, MinStep, MaxStep, ValStep)
+    getglobal(Frame:GetName().."Text"):SetText(string.gsub(String, "$p", Value))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 
     MinStep = MinStep or 1
@@ -137,7 +153,7 @@ function MBH_InitializeSlider(Frame, String, Category, Value, MinStep, MaxStep, 
 
     Frame:SetMinMaxValues(MinStep, MaxStep)
     Frame:SetValueStep(ValStep or 1)
-    Frame:SetValue(MoronBoxHeal_Options[Category][Value])
+    Frame:SetValue(Value)
 
     getglobal(Frame:GetName().."Low"):Hide()
     getglobal(Frame:GetName().."High"):Hide()
@@ -149,12 +165,6 @@ function MBH_InitializeSlider(Frame, String, Category, Value, MinStep, MaxStep, 
     local maxValueText = Frame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
     maxValueText:SetText(MaxStep)
     maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
-end
-
-function MBH_SliderValueChanged(Category, Value, String)
-    MoronBoxHeal_Options[Category][Value] = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(String, "$p", MoronBoxHeal_Options[Category][Value]))
-    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
 function MBH_UpdateSliders()
@@ -233,30 +243,30 @@ function MBH_ValidateRegrowthInputHAR()
 end
 
 function MBH_ValidateLAR(FrameHAR, Value)
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(FrameHAR:GetText())
+    local LARValue = tonumber(this:GetText())
+    local HARValue = tonumber(FrameHAR:GetText())
 
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue >= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues[Value .. "_LAR"] = larValue
+    if ( LARValue and LARValue >= 1) then
+        if ( HARValue and LARValue <= HARValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"] = LARValue
         end
         
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Value .. "_LAR"])
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"])
     end
 end
 
 function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(FrameLAR:GetText())
+    local HARValue = tonumber(this:GetText())
+    local LARValue = tonumber(FrameLAR:GetText())
 
-    if ( harValue ) then
-        if ( harValue <= MaxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues[Value .. "_HAR"] = harValue
+    if ( HARValue ) then
+        if ( HARValue <= MaxRank ) and ( LARValue and HARValue >= LARValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = HARValue
         else
-            MoronBoxHeal_Options.ManaProtectionValues[Value .. "_HAR"] = MaxRank
+            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = MaxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Value .. "_HAR"])
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"])
     end
 end
 

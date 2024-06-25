@@ -787,7 +787,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateFlashHealInputLAR();
@@ -797,10 +797,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -835,7 +835,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateFlashHealInputHAR();
@@ -845,10 +845,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -908,7 +908,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateHealInputLAR();
@@ -918,10 +918,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -956,7 +956,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateHealInputHAR();
@@ -966,10 +966,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1029,7 +1029,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateGreaterHealInputLAR();
@@ -1039,10 +1039,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1077,7 +1077,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateGreaterHealInputHAR();
@@ -1087,10 +1087,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1178,7 +1178,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateChainHealInputLAR();
@@ -1188,10 +1188,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1226,7 +1226,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateChainHealInputHAR();
@@ -1236,10 +1236,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1295,7 +1295,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateLesserHealingWaveInputLAR();
@@ -1305,10 +1305,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1343,7 +1343,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateLesserHealingWaveInputHAR();
@@ -1353,10 +1353,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1433,7 +1433,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateHolyLightInputLAR();
@@ -1443,10 +1443,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1481,7 +1481,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateHolyLightInputHAR();
@@ -1491,10 +1491,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1571,7 +1571,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateRegrowthInputLAR();
@@ -1581,10 +1581,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
@@ -1619,7 +1619,7 @@
 
                         <Scripts>
                             <OnShow>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR);
                             </OnShow>
                             <OnTextChanged>
                                 MBH_ValidateRegrowthInputHAR();
@@ -1629,10 +1629,10 @@
                                 this:ClearFocus();
                             </OnEnterPressed>
                             <OnEditFocusLost>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR);
                             </OnEditFocusLost>
                             <OnEscapePressed>
-                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR);
+                                this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR);
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>

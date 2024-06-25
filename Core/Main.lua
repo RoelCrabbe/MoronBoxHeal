@@ -7,52 +7,46 @@ ManaProtectionThresholds = {}
 function MBH_InitializeManaProtectionThresholds()
     ManaProtectionThresholds = {
         ["Flash Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold) end,
             ["Spell"] = "Heal",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR,
         },
         ["Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold) end,
             ["Spell"] = "Lesser Heal",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR,
         },
         ["Greater Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold) end,
             ["Spell"] = "Heal",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR,
         },
         ["Chain Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold) end,
             ["Spell"] = "Healing Wave",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR,
         },
         ["Lesser Healing Wave"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold) end,
             ["Spell"] = "Healing Wave",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR,
         },
         ["Holy Light"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold) end,
             ["Spell"] = "Flash of Light",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR,
-        },
-        ["Holy Light"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_Threshold) end,
-            ["Spell"] = "Flash of Light",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR,
         },
         ["Regrowth"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_Threshold) end,
+            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold) end,
             ["Spell"] = "Healing Touch",
-            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR,
-            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR,
+            ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR,
+            ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR,
         },
     }
 end
@@ -78,18 +72,14 @@ PresetSettings = {
                 Mana_Protection = true,
             },
             ManaProtectionValues = {
-                Chain_Heal_Threshold = 12.5,
-                Chain_Heal_LAR = 3,
-                Chain_Heal_HAR = 7,
-                Lesser_Healing_Wave_Threshold = 35,
-                Lesser_Healing_Wave_LAR = 3,
-                Lesser_Healing_Wave_HAR = 7,
-                Holy_Light_Threshold = 35,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
-                Regrowth_Threshold = 50,
-                Regrowth_LAR = 1,
-                Regrowth_HAR = 11,
+                Shaman = {
+                    Chain_Heal_Threshold = 12.5,
+                    Chain_Heal_LAR = 3,
+                    Chain_Heal_HAR = 7,
+                    Lesser_Healing_Wave_Threshold = 35,
+                    Lesser_Healing_Wave_LAR = 3,
+                    Lesser_Healing_Wave_HAR = 7
+                }
             }
         },
         ["Healing Wave"] = {
@@ -111,18 +101,14 @@ PresetSettings = {
                 Mana_Protection = true,
             },
             ManaProtectionValues = {
-                Chain_Heal_Threshold = 12.5,
-                Chain_Heal_LAR = 3,
-                Chain_Heal_HAR = 7,
-                Lesser_Healing_Wave_Threshold = 35,
-                Lesser_Healing_Wave_LAR = 3,
-                Lesser_Healing_Wave_HAR = 7,
-                Holy_Light_Threshold = 35,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
-                Regrowth_Threshold = 50,
-                Regrowth_LAR = 1,
-                Regrowth_HAR = 11,
+                Shaman = {
+                    Chain_Heal_Threshold = 12.5,
+                    Chain_Heal_LAR = 3,
+                    Chain_Heal_HAR = 7,
+                    Lesser_Healing_Wave_Threshold = 35,
+                    Lesser_Healing_Wave_LAR = 3,
+                    Lesser_Healing_Wave_HAR = 7
+                }
             }
         }
     },
@@ -146,30 +132,11 @@ PresetSettings = {
                 Mana_Protection = true,
             },
             ManaProtectionValues = {
-                Holy_Light_Threshold = 5,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
-                Flash_Heal_Threshold = 20,
-                Flash_Heal_LAR = 1,
-                Flash_Heal_HAR = 4,
-                Heal_Threshold = 5,
-                Heal_LAR = 1,
-                Heal_HAR = 3,
-                Greater_Heal_Threshold = 50,
-                Greater_Heal_LAR = 1,
-                Greater_Heal_HAR = 4,
-                Chain_Heal_Threshold = 20,
-                Chain_Heal_LAR = 1,
-                Chain_Heal_HAR = 10,
-                Lesser_Healing_Wave_Threshold = 35,
-                Lesser_Healing_Wave_LAR = 1,
-                Lesser_Healing_Wave_HAR = 10,
-                Holy_Light_Threshold = 35,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
-                Regrowth_Threshold = 50,
-                Regrowth_LAR = 1,
-                Regrowth_HAR = 11,
+                Paladin = {
+                    Holy_Light_Threshold = 5,
+                    Holy_Light_LAR = 1,
+                    Holy_Light_HAR = 6
+                }
             }
         }
     },
@@ -193,27 +160,17 @@ PresetSettings = {
                 Mana_Protection = true,
             },
             ManaProtectionValues = {
-                Flash_Heal_Threshold = 20,
-                Flash_Heal_LAR = 1,
-                Flash_Heal_HAR = 4,
-                Heal_Threshold = 5,
-                Heal_LAR = 1,
-                Heal_HAR = 3,
-                Greater_Heal_Threshold = 50,
-                Greater_Heal_LAR = 1,
-                Greater_Heal_HAR = 4,
-                Chain_Heal_Threshold = 20,
-                Chain_Heal_LAR = 1,
-                Chain_Heal_HAR = 10,
-                Lesser_Healing_Wave_Threshold = 35,
-                Lesser_Healing_Wave_LAR = 1,
-                Lesser_Healing_Wave_HAR = 10,
-                Holy_Light_Threshold = 35,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
-                Regrowth_Threshold = 50,
-                Regrowth_LAR = 1,
-                Regrowth_HAR = 11,
+                Priest = {
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 1,
+                    Heal_HAR = 3,
+                    Greater_Heal_Threshold = 50,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                }
             }
         },
         ["Flash Heal"] = {
@@ -235,27 +192,17 @@ PresetSettings = {
                 Mana_Protection = true,
             },
             ManaProtectionValues = {
-                Flash_Heal_Threshold = 20,
-                Flash_Heal_LAR = 1,
-                Flash_Heal_HAR = 4,
-                Heal_Threshold = 5,
-                Heal_LAR = 1,
-                Heal_HAR = 3,
-                Greater_Heal_Threshold = 50,
-                Greater_Heal_LAR = 1,
-                Greater_Heal_HAR = 4,
-                Chain_Heal_Threshold = 20,
-                Chain_Heal_LAR = 1,
-                Chain_Heal_HAR = 10,
-                Lesser_Healing_Wave_Threshold = 35,
-                Lesser_Healing_Wave_LAR = 1,
-                Lesser_Healing_Wave_HAR = 10,
-                Holy_Light_Threshold = 35,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
-                Regrowth_Threshold = 50,
-                Regrowth_LAR = 1,
-                Regrowth_HAR = 11,
+                Priest = {
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 1,
+                    Heal_HAR = 3,
+                    Greater_Heal_Threshold = 50,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                }
             }
         }
     },
@@ -279,27 +226,11 @@ PresetSettings = {
                 Mana_Protection = true,
             },
             ManaProtectionValues = {
-                Regrowth_Threshold = 50,
-                Regrowth_LAR = 1,
-                Regrowth_HAR = 11,
-                Flash_Heal_Threshold = 20,
-                Flash_Heal_LAR = 1,
-                Flash_Heal_HAR = 4,
-                Heal_Threshold = 5,
-                Heal_LAR = 1,
-                Heal_HAR = 3,
-                Greater_Heal_Threshold = 50,
-                Greater_Heal_LAR = 1,
-                Greater_Heal_HAR = 4,
-                Chain_Heal_Threshold = 20,
-                Chain_Heal_LAR = 1,
-                Chain_Heal_HAR = 10,
-                Lesser_Healing_Wave_Threshold = 35,
-                Lesser_Healing_Wave_LAR = 1,
-                Lesser_Healing_Wave_HAR = 10,
-                Holy_Light_Threshold = 35,
-                Holy_Light_LAR = 1,
-                Holy_Light_HAR = 6,
+                Druid = {
+                    Regrowth_Threshold = 50,
+                    Regrowth_LAR = 1,
+                    Regrowth_HAR = 11,
+                }
             }
         }
     }
@@ -367,27 +298,35 @@ DefaultOptions = {
         Mana_Protection = true,
     },
     ManaProtectionValues = {
-        Flash_Heal_Threshold = 20,
-        Flash_Heal_LAR = 1,
-        Flash_Heal_HAR = 4,
-        Heal_Threshold = 5,
-        Heal_LAR = 1,
-        Heal_HAR = 3,
-        Greater_Heal_Threshold = 50,
-        Greater_Heal_LAR = 1,
-        Greater_Heal_HAR = 4,
-        Chain_Heal_Threshold = 20,
-        Chain_Heal_LAR = 1,
-        Chain_Heal_HAR = 10,
-        Lesser_Healing_Wave_Threshold = 35,
-        Lesser_Healing_Wave_LAR = 1,
-        Lesser_Healing_Wave_HAR = 10,
-        Holy_Light_Threshold = 35,
-        Holy_Light_LAR = 1,
-        Holy_Light_HAR = 6,
-        Regrowth_Threshold = 50,
-        Regrowth_LAR = 1,
-        Regrowth_HAR = 11,
+        Priest = {
+            Flash_Heal_Threshold = 20,
+            Flash_Heal_LAR = 1,
+            Flash_Heal_HAR = 4,
+            Heal_Threshold = 5,
+            Heal_LAR = 1,
+            Heal_HAR = 3,
+            Greater_Heal_Threshold = 50,
+            Greater_Heal_LAR = 1,
+            Greater_Heal_HAR = 4
+        },
+        Shaman = {
+            Chain_Heal_Threshold = 20,
+            Chain_Heal_LAR = 1,
+            Chain_Heal_HAR = 10,
+            Lesser_Healing_Wave_Threshold = 35,
+            Lesser_Healing_Wave_LAR = 1,
+            Lesser_Healing_Wave_HAR = 10
+        },
+        Paladin = {
+            Holy_Light_Threshold = 35,
+            Holy_Light_LAR = 1,
+            Holy_Light_HAR = 6
+        },
+        Druid = {
+            Regrowth_Threshold = 50,
+            Regrowth_LAR = 1,
+            Regrowth_HAR = 11
+        }
     }
 }
 
