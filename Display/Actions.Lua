@@ -167,21 +167,6 @@ function MBH_InitializeSlider(Frame, String, Value, MinStep, MaxStep, ValStep)
     maxValueText:SetPoint("CENTER", Frame, "RIGHT", 10, 0)
 end
 
-function MBH_UpdateSliders()
-    MBH_AllowedOverhealPercentageSlider_OnShow()
-	MBH_HealTargetNumberSlider_OnShow()
-	MBH_ExtendedRangeFrequencySlider_OnShow()
-	MBH_LineOfSightTimeOutSlider_OnShow()
-
-    MBH_FlashHealProtectionThresholdSlider_OnShow()
-    MBH_HealProtectionThresholdSlider_OnShow()
-    MBH_GreaterHealProtectionThresholdSlider_OnShow()
-    MBH_ChainHealProtectionThresholdSlider_OnShow()
-    MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
-    MBH_HolyLightProtectionThresholdSlider_OnShow()
-    MBH_RegrowthProtectionThresholdSlider_OnShow()
-end
-
 -------------------------------------------------------------------------------
 -- EditBox {{{
 -------------------------------------------------------------------------------
@@ -270,40 +255,24 @@ function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
     end
 end
 
-function MBH_UpdateInputFields()
-    local inputFieldReset = {
-        {MoronBoxHealFlashHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR},
-        {MoronBoxHealFlashHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR},
-        {MoronBoxHealHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR},
-        {MoronBoxHealHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR},
-        {MoronBoxHealGreaterHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR},
-        {MoronBoxHealGreaterHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR},
-        {MoronBoxHealChainHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR},
-        {MoronBoxHealChainHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR},
-        {MoronBoxHealLesserHealingWaveProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR},
-        {MoronBoxHealLesserHealingWaveProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR},
-        {MoronBoxHealHolyLightProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR},
-        {MoronBoxHealHolyLightProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR},
-        {MoronBoxHealRegrowthProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR},
-        {MoronBoxHealRegrowthProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR}
-    }
-
-    for _, inputFieldData in ipairs(inputFieldReset) do
-        MBH_UpdateInputField(inputFieldData[1], inputFieldData[2])
-    end
-end
-
 -------------------------------------------------------------------------------
 -- Helpers {{{
 -------------------------------------------------------------------------------
 
-function MBH_UpdateDisplay(Message)
+function MBH_PriestProtectionCheck(newVal)
+    local FlashHealCheck = not MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch
+    local HealCheck = not MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch
+    local GreaterHealCheck = not MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch
 
-    MBH_UpdateSliders()
-    MBH_UpdateCheckboxes()
-    MBH_UpdateInputFields()
+    if ( MoronBoxHeal_Options.AdvancedOptions.Mana_Protection ) and ( FlashHealCheck and HealCheck and GreaterHealCheck ) then
+        MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = true
+        MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = true
+        MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = true
+    end
 
-    if Message then MBH_PrintMessage(Message) end
+    if ( FlashHealCheck and HealCheck and GreaterHealCheck ) then
+        MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = newVal
+    end
 end
 
 function MBH_ResetAllWindow()
@@ -311,20 +280,6 @@ function MBH_ResetAllWindow()
     MBH_ResetFramePosition(MoronBoxHealOptionFrame)
     MBH_ResetFramePosition(MoronBoxHealProtectionFrame)
     MBH_RaceChangeMoronBoxHealProtectionFrame()
-end
-
-function MBH_UpdateCheckboxes()
-    local checkBoxesReset = {
-        {MoronBoxHealOptionFrameSmartHealCheckbox, MoronBoxHeal_Options.AutoHeal.Smart_Heal},
-        {MoronBoxHealOptionFrameRandomTargetCheckbox, MoronBoxHeal_Options.AutoHeal.Random_Target},
-        {MoronBoxHealOptionExtendedRangeCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable},
-        {MoronBoxHealOptionLineOfSightCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable},
-        {MoronBoxHealOptionManaProtectionCheckbox, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection}
-    }
-
-    for _, checkboxData in ipairs(checkBoxesReset) do
-        MBH_UpdateCheckBox(checkboxData[1], checkboxData[2])
-    end
 end
 
 function MBH_ResetFramePosition(Frame)

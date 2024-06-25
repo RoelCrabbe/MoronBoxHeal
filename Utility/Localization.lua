@@ -95,3 +95,7 @@ MBH_LOWEST_RANK = "Lowest Rank: "
 MBH_HIGHEST_RANK = "Highest Rank: "
 
 MBH_RELOADUI = "(This settings will reload your UI)"
+
+MBH_ACTIVE_FLASH_HEAL_SWITCH = MBH_SPELL_FLASH_HEAL.." Active Switch:"
+MBH_ACTIVE_HEAL_SWITCH = MBH_SPELL_HEAL.." Active Switch:"
+MBH_ACTIVE_GREATER_HEAL_SWITCH = MBH_SPELL_GREATER_HEAL.." Active Switch:"

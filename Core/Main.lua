@@ -7,19 +7,34 @@ ManaProtectionThresholds = {}
 function MBH_InitializeManaProtectionThresholds()
     ManaProtectionThresholds = {
         ["Flash Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return ( 
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch 
+                )
+            end,
             ["Spell"] = "Heal",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR,
         },
         ["Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return ( 
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch 
+                )
+            end,
             ["Spell"] = "Lesser Heal",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR,
         },
         ["Greater Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return ( 
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch 
+                )
+            end,
             ["Spell"] = "Heal",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR,
@@ -299,12 +314,15 @@ DefaultOptions = {
     },
     ManaProtectionValues = {
         Priest = {
+            Flash_Heal_Switch = true,
             Flash_Heal_Threshold = 20,
             Flash_Heal_LAR = 1,
             Flash_Heal_HAR = 4,
+            Heal_Switch = true,
             Heal_Threshold = 5,
             Heal_LAR = 1,
             Heal_HAR = 3,
+            Greater_Heal_Switch = true,
             Greater_Heal_Threshold = 50,
             Greater_Heal_LAR = 1,
             Greater_Heal_HAR = 4

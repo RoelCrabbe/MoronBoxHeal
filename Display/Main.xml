@@ -558,7 +558,7 @@
                 </Layers>
 
                 <Frames>
-                    <CheckButton name="MoronBoxHealOptionManaProtectionCheckbox" inherits="SMOptionsCheckButtonTemplate">
+                    <CheckButton name="MoronBoxHealOptionManaProtectionCheckbox" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealAdvancedOptionFrame">
@@ -585,10 +585,8 @@
                         <Scripts>
                             <OnClick>
                                 MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = (this:GetChecked() == 1);
+                                MBH_PriestProtectionCheck(true);
                             </OnClick>
-                            <OnLoad>
-                                this:SetText(MBH_MANAPROTECTION);
-                            </OnLoad>
                             <OnShow>
                                 this:SetChecked(MoronBoxHeal_Options.AdvancedOptions.Mana_Protection and 1 or 0);
                             </OnShow>
@@ -857,6 +855,41 @@
                         </Scripts>
                     </EditBox>
 
+                    <CheckButton name="MoronBoxHealFlashHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealFlashHealProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_FLASH_HEAL_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = (this:GetChecked() == 1);
+                                MBH_PriestProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
+
                     <!-- Heal -->
                     <Slider name="MoronBoxHealHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
@@ -978,6 +1011,41 @@
                         </Scripts>
                     </EditBox>
 
+                    <CheckButton name="MoronBoxHealHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHealProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealHealProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_HEAL_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = (this:GetChecked() == 1);
+                                MBH_PriestProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
+
                     <!-- Greater Heal -->
                     <Slider name="MoronBoxHealGreaterHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
@@ -1098,6 +1166,41 @@
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
+
+                    <CheckButton name="MoronBoxHealGreaterHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealGreaterHealProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_GREATER_HEAL_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = (this:GetChecked() == 1);
+                                MBH_PriestProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
                 </Frames>
             </Frame>
 
