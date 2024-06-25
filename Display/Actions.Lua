@@ -157,6 +157,21 @@ function MBH_SliderValueChanged(Category, Value, String)
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
+function MBH_UpdateSliders()
+    MBH_AllowedOverhealPercentageSlider_OnShow()
+	MBH_HealTargetNumberSlider_OnShow()
+	MBH_ExtendedRangeFrequencySlider_OnShow()
+	MBH_LineOfSightTimeOutSlider_OnShow()
+
+    MBH_FlashHealProtectionThresholdSlider_OnShow()
+    MBH_HealProtectionThresholdSlider_OnShow()
+    MBH_GreaterHealProtectionThresholdSlider_OnShow()
+    MBH_ChainHealProtectionThresholdSlider_OnShow()
+    MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
+    MBH_HolyLightProtectionThresholdSlider_OnShow()
+    MBH_RegrowthProtectionThresholdSlider_OnShow()
+end
+
 -------------------------------------------------------------------------------
 -- EditBox {{{
 -------------------------------------------------------------------------------
@@ -245,9 +260,83 @@ function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
     end
 end
 
+function MBH_UpdateInputFields()
+    local inputFieldReset = {
+        {MoronBoxHealFlashHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR},
+        {MoronBoxHealFlashHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR},
+        {MoronBoxHealHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR},
+        {MoronBoxHealHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR},
+        {MoronBoxHealGreaterHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR},
+        {MoronBoxHealGreaterHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR},
+        {MoronBoxHealChainHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR},
+        {MoronBoxHealChainHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR},
+        {MoronBoxHealLesserHealingWaveProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR},
+        {MoronBoxHealLesserHealingWaveProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR},
+        {MoronBoxHealHolyLightProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR},
+        {MoronBoxHealHolyLightProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR},
+        {MoronBoxHealRegrowthProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR},
+        {MoronBoxHealRegrowthProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR}
+    }
+
+    for _, inputFieldData in ipairs(inputFieldReset) do
+        MBH_UpdateInputField(inputFieldData[1], inputFieldData[2])
+    end
+end
+
 -------------------------------------------------------------------------------
 -- Helpers {{{
 -------------------------------------------------------------------------------
+
+function MBH_ResetAllWindow()
+    MBH_ResetFramePosition(MoronBoxHealMainFrame)
+    MBH_ResetFramePosition(MoronBoxHealOptionFrame)
+    MBH_ResetFramePosition(MoronBoxHealProtectionFrame)
+    MBH_RaceChangeMoronBoxHealProtectionFrame()
+end
+
+function MBH_UpdateCheckboxes()
+    local checkBoxesReset = {
+        {MoronBoxHealOptionFrameSmartHealCheckbox, MoronBoxHeal_Options.AutoHeal.Smart_Heal},
+        {MoronBoxHealOptionFrameRandomTargetCheckbox, MoronBoxHeal_Options.AutoHeal.Random_Target},
+        {MoronBoxHealOptionExtendedRangeCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable},
+        {MoronBoxHealOptionLineOfSightCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable},
+        {MoronBoxHealOptionManaProtectionCheckbox, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection}
+    }
+
+    for _, checkboxData in ipairs(checkBoxesReset) do
+        MBH_UpdateCheckBox(checkboxData[1], checkboxData[2])
+    end
+end
+
+function MBH_ResetFramePosition(Frame)
+    if not Frame then return end
+
+    Frame:ClearAllPoints()
+    Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    Frame:Hide()
+end
+
+function MBH_RaceChangeMoronBoxHealProtectionFrame()
+    local isPriest = Session.PlayerClass == "Priest";
+    local isShaman = Session.PlayerClass == "Shaman";
+    local isPaladin = Session.PlayerClass == "Paladin";
+    local isDruid = Session.PlayerClass == "Druid";
+
+    MoronBoxHealProtectionFramePriestContainer:Hide()
+    MoronBoxHealProtectionFrameShamanContainer:Hide()
+    MoronBoxHealProtectionFramePaladinContainer:Hide()
+    MoronBoxHealProtectionFrameDruidContainer:Hide()
+
+    if ( isPriest ) then
+        MoronBoxHealProtectionFramePriestContainer:Show()
+    elseif ( isShaman ) then
+        MoronBoxHealProtectionFrameShamanContainer:Show()
+    elseif ( isPaladin ) then
+        MoronBoxHealProtectionFramePaladinContainer:Show()
+    elseif ( isDruid ) then
+        MoronBoxHealProtectionFrameDruidContainer:Show()
+    end
+end
 
 function MBH_ShowFrameAndHideParent(Frame)
 
@@ -310,4 +399,12 @@ end
 function MBH_SetFontSize(fontString, size)
     local font, _, flags = fontString:GetFont()
     fontString:SetFont(font, size, flags)
+end
+
+function MBH_UpdateCheckBox(Frame, Value)
+	Frame:SetChecked(Value)
+end
+
+function MBH_UpdateInputField(Frame, Value)
+	Frame:SetText(Value)
 end

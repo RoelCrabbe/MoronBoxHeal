@@ -351,53 +351,6 @@ function MBH_UpdateHealCastTime()
     end
 end
 
-function MBH_ResetAllWindow()
-    MBH_ResetMoronBoxHealMainFramePosition()
-    MBH_ResetMoronBoxHealOptionFramePosition()
-    MBH_ResetMoronBoxHealProtectionFramePosition()
-    MBH_RaceChangeMoronBoxHealProtectionFrame()
-end
-
-function MBH_ResetMoronBoxHealMainFramePosition()
-    MoronBoxHealMainFrame:ClearAllPoints()
-    MoronBoxHealMainFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-    MoronBoxHealMainFrame:Hide()
-end
-
-function MBH_ResetMoronBoxHealOptionFramePosition()
-    MoronBoxHealOptionFrame:ClearAllPoints()
-    MoronBoxHealOptionFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-    MoronBoxHealOptionFrame:Hide()
-end
-
-function MBH_ResetMoronBoxHealProtectionFramePosition()
-    MoronBoxHealProtectionFrame:ClearAllPoints()
-    MoronBoxHealProtectionFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-    MoronBoxHealProtectionFrame:Hide()
-end
-
-function MBH_RaceChangeMoronBoxHealProtectionFrame()
-    local isPriest = Session.PlayerClass == "Priest";
-    local isShaman = Session.PlayerClass == "Shaman";
-    local isPaladin = Session.PlayerClass == "Paladin";
-    local isDruid = Session.PlayerClass == "Druid";
-
-    MoronBoxHealProtectionFramePriestContainer:Hide()
-    MoronBoxHealProtectionFrameShamanContainer:Hide()
-    MoronBoxHealProtectionFramePaladinContainer:Hide()
-    MoronBoxHealProtectionFrameDruidContainer:Hide()
-
-    if ( isPriest ) then
-        MoronBoxHealProtectionFramePriestContainer:Show()
-    elseif ( isShaman ) then
-        MoronBoxHealProtectionFrameShamanContainer:Show()
-    elseif ( isPaladin ) then
-        MoronBoxHealProtectionFramePaladinContainer:Show()
-    elseif ( isDruid ) then
-        MoronBoxHealProtectionFrameDruidContainer:Show()
-    end
-end
-
 function MBH_SetupAceData()
     MultiBoxHeal.ACE = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0")
     MultiBoxHeal.ACE.HealComm = AceLibrary("HealComm-1.0")
@@ -655,7 +608,6 @@ function MBH_CalculateHeal(spell, rank, unitID)
     return heal
 end
 
-
 function MBH_ExtractRank(str)
     local num = ""
     local foundDigit = false
@@ -724,8 +676,7 @@ function MBH_SetDefaultValues()
 	if MoronBoxHeal_Options then
 		MoronBoxHeal_Options = {}
         MoronBoxHeal_Options = DefaultOptions
-		MBH_UpdateDisplay()
-        MBH_PrintMessage(MBH_RESTOREDEFAULTSUCCES)
+		MBH_UpdateDisplay(MBH_RESTOREDEFAULTSUCCES)
 	end
 end
 
@@ -860,52 +811,11 @@ end
 
 function MBH_UpdateDisplay(message)
 
-	MBH_AllowedOverhealPercentageSlider_OnShow()
-	MBH_HealTargetNumberSlider_OnShow()
-	MBH_ExtendedRangeFrequencySlider_OnShow()
-	MBH_LineOfSightTimeOutSlider_OnShow()
-
-	MBH_UpdateCheckBox(MoronBoxHealOptionFrameSmartHealCheckbox, MoronBoxHeal_Options.AutoHeal.Smart_Heal)
-	MBH_UpdateCheckBox(MoronBoxHealOptionFrameRandomTargetCheckbox, MoronBoxHeal_Options.AutoHeal.Random_Target)
-	MBH_UpdateCheckBox(MoronBoxHealOptionExtendedRangeCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable)
-	MBH_UpdateCheckBox(MoronBoxHealOptionLineOfSightCheckbox, MoronBoxHeal_Options.ExtendedRange.Enable)
-    MBH_UpdateCheckBox(MoronBoxHealOptionManaProtectionCheckbox, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection)
-
-    MBH_FlashHealProtectionThresholdSlider_OnShow()
-    MBH_HealProtectionThresholdSlider_OnShow()
-    MBH_GreaterHealProtectionThresholdSlider_OnShow()
-    MBH_ChainHealProtectionThresholdSlider_OnShow()
-    MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
-    MBH_HolyLightProtectionThresholdSlider_OnShow()
-    MBH_RegrowthProtectionThresholdSlider_OnShow()
-
-    MBH_UpdateInputField(MoronBoxHealFlashHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR)
-    MBH_UpdateInputField(MoronBoxHealFlashHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR)
-	MBH_UpdateInputField(MoronBoxHealHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR)
-    MBH_UpdateInputField(MoronBoxHealHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR)
-    MBH_UpdateInputField(MoronBoxHealGreaterHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR)
-    MBH_UpdateInputField(MoronBoxHealGreaterHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR)
-
-    MBH_UpdateInputField(MoronBoxHealChainHealProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR)
-    MBH_UpdateInputField(MoronBoxHealChainHealProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR)
-	MBH_UpdateInputField(MoronBoxHealLesserHealingWaveProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR)
-    MBH_UpdateInputField(MoronBoxHealLesserHealingWaveProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR)
-    
-    MBH_UpdateInputField(MoronBoxHealHolyLightProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR)
-    MBH_UpdateInputField(MoronBoxHealHolyLightProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR)
-
-    MBH_UpdateInputField(MoronBoxHealRegrowthProtectionhresholdLAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR)
-    MBH_UpdateInputField(MoronBoxHealRegrowthProtectionhresholdHAR, MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR)
+    MBH_UpdateSliders()
+    MBH_UpdateCheckboxes()
+    MBH_UpdateInputFields()
 
     if message then MBH_PrintMessage(message) end
-end
-
-function MBH_UpdateCheckBox(Frame, Value)
-	Frame:SetChecked(Value)
-end
-
-function MBH_UpdateInputField(Frame, Value)
-	Frame:SetText(Value)
 end
 
 function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)
