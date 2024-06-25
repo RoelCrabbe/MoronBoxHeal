@@ -31,57 +31,57 @@ end
 
 function MBH_AllowedOverhealPercentageSlider_OnShow()
     local Frame = MoronBoxHealOptionFrameAllowedOverhealSlider
-    MBH_InitializeSlider(Frame, "AutoHeal", "Allowed_Overheal_Percentage", MBH_ALLOWEDOVERHEAL)
+    MBH_InitializeSlider(Frame, MBH_ALLOWEDOVERHEAL, "AutoHeal", "Allowed_Overheal_Percentage")
 end
 
 function MBH_HealTargetNumberSlider_OnShow()
     local Frame = MoronBoxHealOptionFrameHealTargetNumberSlider
-    MBH_InitializeSlider(Frame, "AutoHeal", "Heal_Target_Number", MBH_HEALTARGETNUMBER, 1, 5, 1)
+    MBH_InitializeSlider(Frame, MBH_HEALTARGETNUMBER, "AutoHeal", "Heal_Target_Number", 1, 5, 1)
 end
 
 function MBH_ExtendedRangeFrequencySlider_OnShow()
     local Frame = MoronBoxHealOptionExtendedRangeSlider
-    MBH_InitializeSlider(Frame, "ExtendedRange", "Frequency", MBH_EXTENDEDRANGEFREQUENCY, 1, 5, 0.25)
+    MBH_InitializeSlider(Frame, MBH_EXTENDEDRANGEFREQUENCY, "ExtendedRange", "Frequency", 1, 5, 0.25)
 end
 
 function MBH_LineOfSightTimeOutSlider_OnShow()
     local Frame = MoronBoxHealOptionLineOfSightSlider
-    MBH_InitializeSlider(Frame, "LineOfSight", "TimeOut", MBH_LINEOFSIGHTFREQUENCY, 0.5, 5, 0.25)
+    MBH_InitializeSlider(Frame, MBH_LINEOFSIGHTFREQUENCY, "LineOfSight", "TimeOut", 0.5, 5, 0.25)
 end
 
 function MBH_FlashHealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealFlashHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Flash_Heal_Threshold", MBH_FLASHHEALPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_FLASHHEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Flash_Heal_Threshold")
 end
 
 function MBH_HealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Heal_Threshold", MBH_HEALPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_HEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Heal_Threshold")
 end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealGreaterHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Greater_Heal_Threshold", MBH_GREATERHEALPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_GREATERHEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Greater_Heal_Threshold")
 end
 
 function MBH_ChainHealProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealChainHealProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Chain_Heal_Threshold", MBH_CHAINHEALPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_CHAINHEALPROTECTIONTHRESHOLD, "ManaProtectionValues", "Chain_Heal_Threshold")
 end
 
 function MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealLesserHealingWaveProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Lesser_Healing_Wave_Threshold", MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, "ManaProtectionValues", "Lesser_Healing_Wave_Threshold")
 end
 
 function MBH_HolyLightProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealHolyLightProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Holy_Light_Threshold", MBH_HOLYLIGHTPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, "ManaProtectionValues", "Holy_Light_Threshold")
 end
 
 function MBH_RegrowthProtectionThresholdSlider_OnShow()
     local Frame = MoronBoxHealRegrowthProtectionhresholdSlider
-    MBH_InitializeSlider(Frame, "ManaProtectionValues", "Regrowth_Threshold", MBH_REGROWTHPROTECTIONTHRESHOLD)
+    MBH_InitializeSlider(Frame, MBH_REGROWTHPROTECTIONTHRESHOLD, "ManaProtectionValues", "Regrowth_Threshold")
 end
 
 function MBH_AllowedOverhealPercentageSlider_OnValueChanged()
@@ -128,7 +128,7 @@ function MBH_RegrowthProtectionThresholdSlider_OnValueChanged()
     MBH_SliderValueChanged("ManaProtectionValues", "Regrowth", MBH_REGROWTHPROTECTIONTHRESHOLD)
 end
 
-function MBH_InitializeSlider(Frame, Category, Value, String, MinStep, MaxStep, ValStep)
+function MBH_InitializeSlider(Frame, String, Category, Value, MinStep, MaxStep, ValStep)
     getglobal(Frame:GetName().."Text"):SetText(string.gsub(String, "$p", MoronBoxHeal_Options[Category][Value]))
     getglobal(Frame:GetName().."Text"):SetPoint("BOTTOM", Frame, "TOP", 0, 5)
 

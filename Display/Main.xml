@@ -1752,4 +1752,110 @@
             </OnUpdate>
         </Scripts>
     </Frame>
+
+    <Frame name="MoronBoxHealMainPopupPresetFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" inherits="MoronBoxHealMainPopupFrameTemplate">
+        
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainPopupPresetFrameText" inherits="GameFontNormalLarge" text="MBH_PRESETSETTINGSCONFIRM">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealMainPopupPresetFrame">
+                            <Offset>
+                                <AbsDimension y="-25" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <Button name="MoronBoxHealMainPopupPresetFrameYes" inherits="MoronBoxHealMainPopupFrameYesTemplate">
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="15" y="15" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+                <Scripts>
+                    <OnClick>
+                        MBH_LoadPresetSettings();
+                        this:GetParent():Hide();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            
+            <Button name="MoronBoxHealMainPopupPresetFrameNO" inherits="MoronBoxHealMainPopupFrameNoTemplate">
+
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="-15" y="15" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+            </Button>
+        </Frames>
+    </Frame>
+
+    <Frame name="MoronBoxHealMainPopupDefaultFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" inherits="MoronBoxHealMainPopupFrameTemplate">
+        
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainPopupDefaultFrameText" inherits="GameFontNormalLarge" text="MBH_RESTOREDEFAULTCONFIRM">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealMainPopupDefaultFrame">
+                            <Offset>
+                                <AbsDimension y="-25" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <Button name="MoronBoxHealMainPopupDefaultFrameYes" inherits="MoronBoxHealMainPopupFrameYesTemplate">
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="15" y="15" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+                <Scripts>
+                    <OnClick>
+                        MBH_SetDefaultValues();
+                        this:GetParent():Hide();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            
+            <Button name="MoronBoxHealMainPopupDefaultFrameNe" inherits="MoronBoxHealMainPopupFrameNoTemplate">
+
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="-15" y="15" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+            </Button>
+        </Frames>
+    </Frame>
 </Ui>

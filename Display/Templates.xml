@@ -229,7 +229,7 @@
 
         <Scripts>
             <OnEnter>
-                MBH_SetBackdropColors("Green600");
+                MBH_SetBackdropColors("Blue600");
             </OnEnter>
             <OnLeave>
                 MBH_SetBackdropColors("Gray600");
@@ -238,7 +238,10 @@
                 MBH_SetBackdropColors("Gray600");
             </OnShow>
             <OnClick>
-                MBH_RestoreDefaultValues()
+                if ( MoronBoxHealMainPopupPresetFrame:IsShown() ) then
+                    MoronBoxHealMainPopupPresetFrame:Hide();
+                end
+                MoronBoxHealMainPopupDefaultFrame:Show();
             </OnClick>
         </Scripts>
     </Button>
@@ -270,10 +273,94 @@
                 MBH_SetBackdropColors("Gray600");
             </OnShow>
             <OnClick>
-                MBH_SetPresetValues()
+                if ( MoronBoxHealMainPopupDefaultFrame:IsShown() ) then
+                    MoronBoxHealMainPopupDefaultFrame:Hide();
+                end
+                MoronBoxHealMainPopupPresetFrame:Show();
             </OnClick>
         </Scripts>
     </Button>
+
+    <Button name="MoronBoxHealMainPopupFrameYesTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+       
+        <Size>
+            <AbsDimension x="100" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainPopupFrameYesTemplateText" inherits="GameFontNormal" text="MBH_YES">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_SetBackdropColors("Green600");
+            </OnEnter>
+            <OnLeave>
+                MBH_SetBackdropColors("Gray600");
+            </OnLeave>
+            <OnShow>
+                MBH_SetBackdropColors("Gray600");
+            </OnShow>
+            <OnClick>
+                this:GetParent():Hide();
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="MoronBoxHealMainPopupFrameNoTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+        
+        <Size>
+            <AbsDimension x="100" y="25" />
+        </Size>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainPopupFrameNoTemplateText" inherits="GameFontNormal" text="MBH_NO">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Scripts>
+            <OnEnter>
+                MBH_SetBackdropColors("Red500");
+            </OnEnter>
+            <OnLeave>
+                MBH_SetBackdropColors("Gray600");
+            </OnLeave>
+            <OnShow>
+                MBH_SetBackdropColors("Gray600");
+            </OnShow>
+            <OnClick>
+                this:GetParent():Hide();
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Frame name="MoronBoxHealMainPopupFrameTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
+
+        <Size>
+            <AbsDimension x="300" y="90" />
+        </Size>
+
+        <Scripts>
+            <OnShow>
+                MBH_SetBackdropColors("Gray800");
+            </OnShow>
+        </Scripts>
+    </Frame>
 
     <Frame name="MoronBoxHealOptionContainerTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
                     
