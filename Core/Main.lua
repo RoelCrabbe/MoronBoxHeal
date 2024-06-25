@@ -2,7 +2,7 @@
 -- Local Variables {{{
 -------------------------------------------------------------------------------
 
-local ManaProtectionThresholds = {}
+ManaProtectionThresholds = {}
 
 function MBH_InitializeManaProtectionThresholds()
     ManaProtectionThresholds = {
@@ -57,7 +57,7 @@ function MBH_InitializeManaProtectionThresholds()
     }
 end
 
-local PresetSettings = {
+PresetSettings = {
     ["Shaman"] = {
         ["Chain Heal"] = {
             AutoHeal = {
@@ -305,54 +305,6 @@ local PresetSettings = {
     }
 }
 
--------------------------------------------------------------------------------
--- The Global Variables {{{
--------------------------------------------------------------------------------
-
-Session = {
-    SpellName = nil,
-    CurrentUnit = nil,
-    MaxData = 60, -- Max. amount of players in the buffer -- change this to increase/decrease performance.
-    HealSpell = nil, -- Track Spell Location
-    InCombat = nil,
-    PlayerName = UnitName("player"),
-	PlayerClass = UnitClass("player"),
-    Elapsed = 0,
-    I = 1,
-    Group = {
-        1,
-        1,
-        "player"
-    },
-    CastTime = {
-        ["Chain Heal"] = 2.5,
-		["Holy Light"] = 2.5,
-		["Flash of Light"] = 1.5,
-		["Healing Wave"] = 2,
-		["Lesser Healing Wave"] = 1.5,
-		["Lesser Heal"] = 2,
-		["Heal"] = 2.5,
-		["Flash Heal"] = 1.5,
-		["Greater Heal"] = 2.5,
-		["Healing Touch"] = 2.5,
-		["Regrowth"] = 2,
-        ["Renew"] = 15,
-		["Rejuvenation"] = 12,
-	},
-    Autoheal = {
-		IsCasting = nil,
-        UnitID = nil,
-        PlusHeal = 0,
-        SortBuffer = {}
-    },
-    ExtendedRange = {
-        UnitName = nil,
-        OpenedFrames = nil,
-        Time = 0
-    },
-    Debug = false
-}
-
 ColorPicker = {
     White = { r = 1, g = 1, b = 1, a = 1 },                 -- #ffffff equivalent
     Black = { r = 0, g = 0, b = 0, a = 1 },                 -- #000000 equivalent
@@ -440,31 +392,112 @@ DefaultOptions = {
 }
 
 -------------------------------------------------------------------------------
+-- DO NOT CHANGE {{{
+-------------------------------------------------------------------------------
 
-function MBH_OnLoad(Frame)
-    Frame:RegisterEvent("ADDON_LOADED")
+Session = {
+    SpellName = nil,
+    CurrentUnit = nil,
+    MaxData = 60, -- Max. amount of players in the buffer -- change this to increase/decrease performance.
+    HealSpell = nil, -- Track Spell Location
+    InCombat = nil,
+    PlayerName = UnitName("player"),
+	PlayerClass = UnitClass("player"),
+    Elapsed = 0,
+    I = 1,
+    Group = {
+        1,
+        1,
+        "player"
+    },
+    CastTime = {
+        ["Chain Heal"] = 2.5,
+		["Holy Light"] = 2.5,
+		["Flash of Light"] = 1.5,
+		["Healing Wave"] = 2,
+		["Lesser Healing Wave"] = 1.5,
+		["Lesser Heal"] = 2,
+		["Heal"] = 2.5,
+		["Flash Heal"] = 1.5,
+		["Greater Heal"] = 2.5,
+		["Healing Touch"] = 2.5,
+		["Regrowth"] = 2,
+        ["Renew"] = 15,
+		["Rejuvenation"] = 12,
+	},
+    Autoheal = {
+		IsCasting = nil,
+        UnitID = nil,
+        PlusHeal = 0,
+        SortBuffer = {}
+    },
+    ExtendedRange = {
+        UnitName = nil,
+        OpenedFrames = nil,
+        Time = 0
+    },
+    Debug = false
+}
+-------------------------------------------------------------------------------
+-- Core Event Code {{{
+-------------------------------------------------------------------------------
+
+MBH = CreateFrame("Frame", "MBH", UIParent)
+MBH:SetScript("OnEvent", MBH.OnEvent) 
+
+do
+	for _, event in {
+		"ADDON_LOADED", 
+        "RAID_ROSTER_UPDATE",
+        "PARTY_MEMBERS_CHANGED",
+        "SPELLCAST_START",
+        "SPELLCAST_STOP",
+        "SPELLCAST_FAILED",
+        "UNIT_INVENTORY_CHANGED",
+        "SPELLCAST_INTERRUPTED",
+        "UI_ERROR_MESSAGE",
+        "ACTIONBAR_SLOT_CHANGED",
+        "PLAYER_REGEN_ENABLED",
+        "PLAYER_REGEN_DISABLED"
+		} 
+		do MBH:RegisterEvent(event)
+	end
 end
 
-function MBH_OnEvent(event)
-    local Frame = this
+function MBH:OnEvent()
+    if ( event == "ADDON_LOADED" and arg1 == "MoronBoxHeal" ) then
 
-    if (event == "ADDON_LOADED" and arg1 == "MoronBoxHeal") then
+        MBH_SetupSavedVariables()
 
 		Session.CurrentUnit = nil
 		Session.Autoheal.IsCasting = nil
 		Session.Autoheal.PlusHeal = 0
 		Session.Autoheal.UnitID = nil
 
-		MBH_Init()
+        if mb_equippedSetCount("Stormcaller's Garb") == 5 then
+            Session.CastTime["Chain Heal"] = 2.1
+        else
+            Session.CastTime["Chain Heal"] = 2.5
+        end
 
-    elseif (event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED") then
+        MBH.ACE = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0")
+        MBH.ACE.HealComm = AceLibrary("HealComm-1.0")
+        MBH.ACE.Banzai = AceLibrary("Banzai-1.0")
+        MBH.ACE.ItemBonus = AceLibrary("ItemBonusLib-1.0")
+
+        MBH_ResetAllWindow()
+        MBH_SetupData()
+        MBH_GetHealSpell()
+        MBH_InitalData()
+
+    elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 
 		Session.CurrentUnit = nil
 		Session.Autoheal.IsCasting = nil
 		Session.Autoheal.PlusHeal = 0
 		Session.Autoheal.UnitID = nil
 		
-	elseif (event == "SPELLCAST_START") then
+	elseif ( event == "SPELLCAST_START" ) then
 
 		if Session.CastTime[arg1] then
 			Session.Autoheal.IsCasting = true
@@ -474,178 +507,67 @@ function MBH_OnEvent(event)
 			end
 		end
 
-	elseif (event == "PLAYER_REGEN_ENABLED") then
-
-		Session.InCombat = nil
-		-- MBH_ClearAggro()
-
-	elseif (event == "PLAYER_REGEN_DISABLED") then
-
-		Session.InCombat = nil
-		
-	elseif (event == "RAID_ROSTER_UPDATE") then
-
-		MBH_SetupData()
-
-	elseif (event == "PARTY_MEMBERS_CHANGED") then
-
-		MBH_SetupData()
-
-	elseif (event == "UI_ERROR_MESSAGE") then
+    elseif ( event == "UI_ERROR_MESSAGE" ) then
 
 		if MoronBoxHeal_Options.LineOfSight.Enable and arg1 == "Target not in line of sight" and Session.CurrentUnit then
 
 			for i = 1, Session.MaxData do 
-				if MultiBoxHeal.GroupData[i].UnitID == Session.CurrentUnit then
-                    MultiBoxHeal.Track[MultiBoxHeal.GroupData[i].UnitID].LOS = MoronBoxHeal_Options.LineOfSight.TimeOut
+				if MBH.GroupData[i].UnitID == Session.CurrentUnit then
+                    MBH.Track[MBH.GroupData[i].UnitID].LOS = MoronBoxHeal_Options.LineOfSight.TimeOut
                     break
                 end
 			end
 		end
 
-	elseif (event == "ACTIONBAR_SLOT_CHANGED") then
+    elseif ( event == "PLAYER_REGEN_ENABLED" ) then
 
-		MBH_getHealSpell()
+		Session.InCombat = nil
+
+	elseif ( event == "PLAYER_REGEN_DISABLED" ) then
+
+		Session.InCombat = true
+		
+	elseif ( event == "RAID_ROSTER_UPDATE" or event == "PARTY_MEMBERS_CHANGED" ) then
+
+		MBH_SetupData()
+
+	elseif ( event == "ACTIONBAR_SLOT_CHANGED" ) then
+
+		MBH_GetHealSpell()
 	
-    elseif (event == "UNIT_INVENTORY_CHANGED") then
+    elseif ( event == "UNIT_INVENTORY_CHANGED" ) then
 
-        MBH_UpdateHealCastTime()
+        if mb_equippedSetCount("Stormcaller's Garb") == 5 then
+            Session.CastTime["Chain Heal"] = 2.1
+        else
+            Session.CastTime["Chain Heal"] = 2.5
+        end
     end
 end
 
-function MBH_OnUpdate(arg1)
+MBH:SetScript("OnEvent", MBH.OnEvent) 
+
+function MBH:OnUpdate()
     MBH_ClearData(arg1)
     MBH_UpdateData()
     if MoronBoxHeal_Options.ExtendedRange.Enable then MBH_UpdateRange() end
 end
 
-function MBH_DisableAddon()
-    if GetAddOnInfo(MBH_TITLE) then
-        DisableAddOn(MBH_TITLE)
-        MBH_ErrorMessage("Addon Has Been Disabled! Be Sure To ReloadUI.")
-    end
-end
+MBH:SetScript("OnUpdate", MBH.OnUpdate) 
 
-local MBH_Post_Init = CreateFrame("Button", "MBH", UIParent)
-
-MBH_Post_Init.Timer = GetTime()
-
-function MBH_Post_Init:OnUpdate()
-	if GetTime() - MBH_Post_Init.Timer < 2.6 then return end
-
-	--------------------------------------------------------
-
-    MBH_PrintMessage("Has been succesfully loaded.")
-
-    if (UnitClass("player") == "Rogue" or UnitClass("player") == "Mage" or UnitClass("player") == "Warrior" or UnitClass("player") == "Hunter" or UnitClass("player") == "Warlock" or MB_mySpecc == "Feral") then
-        MBH_DisableAddon()
-    end
-
-	--------------------------------------------------------
-
-	MBH_Post_Init:SetScript("OnUpdate", nil)
-	MBH_Post_Init.Timer = nil
-	MBH_Post_Init.OnUpdate = nil
-end
-
-function MBH_Init()
-
-    MBH_Post_Init:SetScript("OnUpdate", MBH_Post_Init.OnUpdate) -- >  Starts a second INIT after logging in
-
-    MBH_DefaultSettings()
-
-    MBH_UpdateHealCastTime()
-
-    MBH_Config()
-
-    SLASH_MORONBOXHEALSHOW1 = MBH_SHOW_SLASH;
-    SlashCmdList["MORONBOXHEALSHOW"] = function(msg)
-        if ( not MoronBoxHealMainFrame:IsShown() ) then
-            MBH_ResetAllWindow()
-            MoronBoxHealMainFrame:Show()
-        end
-    end
-end
-
-function MBH_Config()
-    MBH_ResetAllWindow()
-
-    MBH_SetupData()
-    MBH_getHealSpell()
-    MBH_InitalData()
-
-    MBH_SetupAceData()
-
-    MultiBoxHeal:RegisterEvent("RAID_ROSTER_UPDATE")
-    MultiBoxHeal:RegisterEvent("PARTY_MEMBERS_CHANGED")
-    MultiBoxHeal:RegisterEvent("SPELLCAST_START")
-    MultiBoxHeal:RegisterEvent("SPELLCAST_STOP")
-    MultiBoxHeal:RegisterEvent("SPELLCAST_FAILED")
-    MultiBoxHeal:RegisterEvent("UNIT_INVENTORY_CHANGED")
-    MultiBoxHeal:RegisterEvent("SPELLCAST_INTERRUPTED")
-    MultiBoxHeal:RegisterEvent("UI_ERROR_MESSAGE")
-    MultiBoxHeal:RegisterEvent("ACTIONBAR_SLOT_CHANGED")
-    MultiBoxHeal:RegisterEvent("PLAYER_REGEN_ENABLED")
-    MultiBoxHeal:RegisterEvent("PLAYER_REGEN_DISABLED")
-end
-
-function MBH_UpdateHealCastTime()
-
-    if mb_equippedSetCount("Stormcaller's Garb") == 5 then
-        Session.CastTime["Chain Heal"] = 2.1
-    else
-        Session.CastTime["Chain Heal"] = 2.5
-    end
-end
-
-function MBH_SetupAceData()
-    MultiBoxHeal.ACE = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0")
-    MultiBoxHeal.ACE.HealComm = AceLibrary("HealComm-1.0")
-    MultiBoxHeal.ACE.Banzai = AceLibrary("Banzai-1.0")
-    MultiBoxHeal.ACE.ItemBonus = AceLibrary("ItemBonusLib-1.0")
-end
-
-function MBH_DefaultSettings()
+function MBH_SetupSavedVariables()
     if not MoronBoxHeal_Options then 
         MoronBoxHeal_Options = DefaultOptions
-    else
-        for key, value in pairs(DefaultOptions) do
-            if MoronBoxHeal_Options[key] == nil then
-                MoronBoxHeal_Options[key] = value
-            end
-        end
     end
 
     if not MoronBoxHeal_Debug then
         MoronBoxHeal_Debug = {}
-	else
-		MoronBoxHeal_Debug = {}
 	end
 end
 
-function MBH_DisableTargetEvents()
-	-- Blizzard Actionbuttons
-	for i = 1, 12 do
-		getglobal("ActionButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarLeftButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarRightButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarBottomLeftButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarBottomRightButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("BonusActionButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
-	end
-end
-
-function MBH_EnableTargetEvents()
-	-- Blizzard Actionbuttons
-	for i = 1, 12 do
-		getglobal("ActionButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarLeftButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarRightButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarBottomLeftButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("MultiBarBottomRightButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
-		getglobal("BonusActionButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
-	end
-end
+-------------------------------------------------------------------------------
+-- Core Code {{{
+-------------------------------------------------------------------------------
 
 function MBH_Cast(spellName, lowestAllowedRank, highestAllowedRank)
 	local healUnitID
@@ -681,7 +603,7 @@ function MBH_CastSpell(spellName, lowestAllowedRank, highestAllowedRank, unitID)
 
     Cache.Spell, Cache.Rank = MBH_ExtractSpell(Cache.DefaultSpell)
 
-    if MultiBoxHeal.ACE.HealComm.Spells[Cache.Spell] then
+    if MBH.ACE.HealComm.Spells[Cache.Spell] then
         Cache.Rank, Cache.HealNeed = MBH_CalculateRank(Cache.Spell, unitID)
 
 		-- Ensure spell rank is within allowed range
@@ -746,16 +668,16 @@ function MBH_CalculateRank(spell, unitID)
     end
 
     -- Get item bonus
-    local bonus = MultiBoxHeal.ACE.ItemBonus:GetBonus("HEAL")
+    local bonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
 
     -- Get maximum spell rank
     local max_rank = MBH_GetMaxSpellRank(spell)
 
     -- Get unit spell power
-    local target_power, target_mod = MultiBoxHeal.ACE.HealComm:GetUnitSpellPower(unitID, spell)
+    local target_power, target_mod = MBH.ACE.HealComm:GetUnitSpellPower(unitID, spell)
 
     -- Get buff spell power 
-    local buff_power, buff_mod = MultiBoxHeal.ACE.HealComm:GetBuffSpellPower()
+    local buff_power, buff_mod = MBH.ACE.HealComm:GetBuffSpellPower()
 
     -- Add bonus to spell power
     bonus = bonus + buff_power
@@ -769,13 +691,13 @@ function MBH_CalculateRank(spell, unitID)
 
     -- Iterate through spell ranks
     for rank = max_rank, 1, -1 do
-        local amount = ((math.floor(MultiBoxHeal.ACE.HealComm.Spells[spell][rank](bonus)) + target_power) * buff_mod * target_mod)
+        local amount = ((math.floor(MBH.ACE.HealComm.Spells[spell][rank](bonus)) + target_power) * buff_mod * target_mod)
 
         -- Check if amount is sufficient to fulfill heal need
         if amount < heal_need then
             if rank < max_rank then
                 result = rank + 1
-                heal = ((math.floor(MultiBoxHeal.ACE.HealComm.Spells[spell][rank + 1](bonus)) + target_power) * buff_mod * target_mod)
+                heal = ((math.floor(MBH.ACE.HealComm.Spells[spell][rank + 1](bonus)) + target_power) * buff_mod * target_mod)
                 break
             else
                 result = rank
@@ -802,13 +724,13 @@ function MBH_CalculateHeal(spell, rank, unitID)
     end
 
 	-- Get item bonus
-	local bonus = MultiBoxHeal.ACE.ItemBonus:GetBonus("HEAL")
+	local bonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
 
     -- Get unit spell power
-    local target_power, target_mod = MultiBoxHeal.ACE.HealComm:GetUnitSpellPower(unitID, spell)
+    local target_power, target_mod = MBH.ACE.HealComm:GetUnitSpellPower(unitID, spell)
 
     -- Get buff spell power
-    local buff_power, buff_mod = MultiBoxHeal.ACE.HealComm:GetUnitSpellPower()
+    local buff_power, buff_mod = MBH.ACE.HealComm:GetUnitSpellPower()
 
     -- Add bonus to spell power
     bonus = bonus + buff_power
@@ -819,45 +741,9 @@ function MBH_CalculateHeal(spell, rank, unitID)
     end
 
     -- Calculate heal amount
-    local heal = ((math.floor(MultiBoxHeal.ACE.HealComm.Spells[spell][rank](bonus)) + target_power) * buff_mod * target_mod)
+    local heal = ((math.floor(MBH.ACE.HealComm.Spells[spell][rank](bonus)) + target_power) * buff_mod * target_mod)
 
     return heal
-end
-
-function MBH_SetDefaultValues()
-	if MoronBoxHeal_Options then
-		MoronBoxHeal_Options = {}
-        MoronBoxHeal_Options = DefaultOptions
-        ReloadUI()
-        return
-	end
-
-    MBH_ErrorMessage("Unable to reset back to default, clear WDB.")
-end
-
-function MBH_LoadPresetSettings()
-    local Settings = PresetSettings[Session.PlayerClass]
-
-    if Settings then
-        local SpecialSettings = Settings[MB_myHealSpell] or Settings["Default"]
-        
-        if SpecialSettings then
-            MoronBoxHeal_Options = SpecialSettings
-            ReloadUI()
-            return
-        end
-    end
-
-    MBH_ErrorMessage("There is no preset for you.")
-end
-
-function MBH_UpdateDisplay(Message)
-
-    MBH_UpdateSliders()
-    MBH_UpdateCheckboxes()
-    MBH_UpdateInputFields()
-
-    if Message then MBH_PrintMessage(Message) end
 end
 
 function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)

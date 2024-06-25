@@ -1739,20 +1739,6 @@
         </Scripts>
     </GameTooltip>
 
-    <Frame name="MultiBoxHeal">
-        <Scripts>
-            <OnLoad>
-                MBH_OnLoad(this);
-            </OnLoad>
-            <OnEvent>
-                MBH_OnEvent(event);
-            </OnEvent>
-            <OnUpdate>
-                MBH_OnUpdate(arg1);
-            </OnUpdate>
-        </Scripts>
-    </Frame>
-
     <Frame name="MoronBoxHealMainPopupPresetFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent" inherits="MoronBoxHealMainPopupFrameTemplate">
         
         <Anchors>

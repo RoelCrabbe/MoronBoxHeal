@@ -2,7 +2,7 @@
 -- Healing Range / Calculating
 -------------------------------------------------------------------------------
 
-function MBH_getHealSpell()
+function MBH_GetHealSpell()
 
 	local spellNames = {
 		"Holy Light", 
@@ -43,11 +43,11 @@ function MBH_UpdateRange()
         Session.ExtendedRange.OpenedFrames = nil
 		
 		for i = 1, 40 do
-			MultiBoxHeal.Track["raid"..i].ExtRange = true
+			MBH.Track["raid"..i].ExtRange = true
 		end
 
 		for i = 1, 4 do
-			MultiBoxHeal.Track["party"..i].ExtRange = true
+			MBH.Track["party"..i].ExtRange = true
 		end
 
 		if Session.InCombat then 
@@ -66,22 +66,22 @@ function MBH_UpdateRange()
 
 			for i = 1, Session.MaxData do
                 
-				if MultiBoxHeal.GroupData[i].UnitID == UNKNOWNOBJECT or MultiBoxHeal.GroupData[i].UnitID == UKNOWNBEING or not MultiBoxHeal.GroupData[i].UnitID then
+				if MBH.GroupData[i].UnitID == UNKNOWNOBJECT or MBH.GroupData[i].UnitID == UKNOWNBEING or not MBH.GroupData[i].UnitID then
 					return
 				end
 
-				if MultiBoxHeal.GroupData[i].Visible and not MultiBoxHeal.GroupData[i].UnitRange and not UnitIsUnit("target", MultiBoxHeal.GroupData[i].UnitID) and not UnitIsUnit("player", MultiBoxHeal.GroupData[i].UnitID) and not Session.ExtendedRange.OpenedFrames then
+				if MBH.GroupData[i].Visible and not MBH.GroupData[i].UnitRange and not UnitIsUnit("target", MBH.GroupData[i].UnitID) and not UnitIsUnit("player", MBH.GroupData[i].UnitID) and not Session.ExtendedRange.OpenedFrames then
 					
-					TargetUnit(MultiBoxHeal.GroupData[i].UnitID)
+					TargetUnit(MBH.GroupData[i].UnitID)
 					
 					if IsActionInRange(Session.HealSpell) then
-						MultiBoxHeal.Track[MultiBoxHeal.GroupData[i].UnitID].ExtRange = true
+						MBH.Track[MBH.GroupData[i].UnitID].ExtRange = true
 					end
 
-				elseif UnitIsUnit("target", MultiBoxHeal.GroupData[i].UnitID) and not UnitIsUnit("player", "target") then
+				elseif UnitIsUnit("target", MBH.GroupData[i].UnitID) and not UnitIsUnit("player", "target") then
 					
 					if IsActionInRange(Session.HealSpell) then
-						MultiBoxHeal.Track[MultiBoxHeal.GroupData[i].UnitID].ExtRange = true
+						MBH.Track[MBH.GroupData[i].UnitID].ExtRange = true
 					end
 				end
 			end
@@ -101,3 +101,26 @@ function MBH_UpdateRange()
 	end
 end
 
+function MBH_DisableTargetEvents()
+	-- Blizzard Actionbuttons
+	for i = 1, 12 do
+		getglobal("ActionButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarLeftButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarRightButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarBottomLeftButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarBottomRightButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("BonusActionButton"..i):UnregisterEvent("PLAYER_TARGET_CHANGED")
+	end
+end
+
+function MBH_EnableTargetEvents()
+	-- Blizzard Actionbuttons
+	for i = 1, 12 do
+		getglobal("ActionButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarLeftButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarRightButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarBottomLeftButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("MultiBarBottomRightButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
+		getglobal("BonusActionButton"..i):RegisterEvent("PLAYER_TARGET_CHANGED")
+	end
+end

@@ -1,4 +1,31 @@
 
+function MBH_SetDefaultValues()
+	if MoronBoxHeal_Options then
+		MoronBoxHeal_Options = {}
+        MoronBoxHeal_Options = DefaultOptions
+        ReloadUI()
+        return
+	end
+
+    MBH_ErrorMessage("Unable to reset back to default, clear WDB.")
+end
+
+function MBH_LoadPresetSettings()
+    local Settings = PresetSettings[Session.PlayerClass]
+
+    if Settings then
+        local SpecialSettings = Settings[MB_myHealSpell] or Settings["Default"]
+        
+        if SpecialSettings then
+            MoronBoxHeal_Options = SpecialSettings
+            ReloadUI()
+            return
+        end
+    end
+
+    MBH_ErrorMessage("There is no preset for you.")
+end
+
 function GetColorValue(colorKey)
     return ColorPicker[colorKey].r, ColorPicker[colorKey].g, ColorPicker[colorKey].b, ColorPicker[colorKey].a
 end

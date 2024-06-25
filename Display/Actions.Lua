@@ -287,6 +287,15 @@ end
 -- Helpers {{{
 -------------------------------------------------------------------------------
 
+function MBH_UpdateDisplay(Message)
+
+    MBH_UpdateSliders()
+    MBH_UpdateCheckboxes()
+    MBH_UpdateInputFields()
+
+    if Message then MBH_PrintMessage(Message) end
+end
+
 function MBH_ResetAllWindow()
     MBH_ResetFramePosition(MoronBoxHealMainFrame)
     MBH_ResetFramePosition(MoronBoxHealOptionFrame)

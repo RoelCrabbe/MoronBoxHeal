@@ -31,55 +31,55 @@ function MBH_SetupData()
 end
 
 function MBH_InitalData()
-	if not MultiBoxHeal.GroupData then MultiBoxHeal.GroupData = {} end
+	if not MBH.GroupData then MBH.GroupData = {} end
 	
 	for i = 1, Session.MaxData do
-		MultiBoxHeal.GroupData[i] = {}
-		MultiBoxHeal.GroupData[i].UnitID = ""
-		MultiBoxHeal.GroupData[i].HealthDeficite = 0
-		MultiBoxHeal.GroupData[i].UnitRange = nil
-		MultiBoxHeal.GroupData[i].ExtRange = nil
-		MultiBoxHeal.GroupData[i].LOS = nil
-		MultiBoxHeal.GroupData[i].Visible = nil
-		MultiBoxHeal.GroupData[i].HealValue = 1
+		MBH.GroupData[i] = {}
+		MBH.GroupData[i].UnitID = ""
+		MBH.GroupData[i].HealthDeficite = 0
+		MBH.GroupData[i].UnitRange = nil
+		MBH.GroupData[i].ExtRange = nil
+		MBH.GroupData[i].LOS = nil
+		MBH.GroupData[i].Visible = nil
+		MBH.GroupData[i].HealValue = 1
 	end
 
-	if not MultiBoxHeal.Track then MultiBoxHeal.Track = {} end
+	if not MBH.Track then MBH.Track = {} end
 	
 	for i = 1, 40 do
-		MultiBoxHeal.Track["raid"..i] = {}
-		MultiBoxHeal.Track["raid"..i].ExtRange = nil
-		MultiBoxHeal.Track["raid"..i].LOS = nil
-		MultiBoxHeal.Track["raid"..i].Heal = nil
-		MultiBoxHeal.Track["raid"..i].HealTime = nil
-		MultiBoxHeal.Track["raid"..i].HealName = nil
+		MBH.Track["raid"..i] = {}
+		MBH.Track["raid"..i].ExtRange = nil
+		MBH.Track["raid"..i].LOS = nil
+		MBH.Track["raid"..i].Heal = nil
+		MBH.Track["raid"..i].HealTime = nil
+		MBH.Track["raid"..i].HealName = nil
 	end
 	
 	for i = 1, 4 do
-		MultiBoxHeal.Track["party"..i] = {}
-		MultiBoxHeal.Track["party"..i].ExtRange = nil
-		MultiBoxHeal.Track["party"..i].LOS = nil
-		MultiBoxHeal.Track["party"..i].Heal = nil
-		MultiBoxHeal.Track["party"..i].HealTime = nil
-		MultiBoxHeal.Track["party"..i].HealName = nil
+		MBH.Track["party"..i] = {}
+		MBH.Track["party"..i].ExtRange = nil
+		MBH.Track["party"..i].LOS = nil
+		MBH.Track["party"..i].Heal = nil
+		MBH.Track["party"..i].HealTime = nil
+		MBH.Track["party"..i].HealName = nil
 	end
 	
-	MultiBoxHeal.Track["player"] = {}
-	MultiBoxHeal.Track["player"].Heal = nil
-	MultiBoxHeal.Track["player"].HealTime = nil
-	MultiBoxHeal.Track["player"].HealName = nil
+	MBH.Track["player"] = {}
+	MBH.Track["player"].Heal = nil
+	MBH.Track["player"].HealTime = nil
+	MBH.Track["player"].HealName = nil
 end
 
 function MBH_ClearData(elapsed)
 	Session.Elapsed = elapsed
 	
 	for i = 1, Session.MaxData do
-		MultiBoxHeal.GroupData[i].HealthDeficite = 0
-		MultiBoxHeal.GroupData[i].UnitID = ""
-		MultiBoxHeal.GroupData[i].UnitRange = nil
-		MultiBoxHeal.GroupData[i].ExtRange = false
-		MultiBoxHeal.GroupData[i].Visible = nil
-		MultiBoxHeal.GroupData[i].HealValue = 1	
+		MBH.GroupData[i].HealthDeficite = 0
+		MBH.GroupData[i].UnitID = ""
+		MBH.GroupData[i].UnitRange = nil
+		MBH.GroupData[i].ExtRange = false
+		MBH.GroupData[i].Visible = nil
+		MBH.GroupData[i].HealValue = 1	
 	end
 end
 
@@ -89,39 +89,39 @@ function MBH_UpdateData()
 	if Session.Group[1] == 3 or Session.Group[1] == 2 then -- We are in raid or party
 		for i = 1, Session.Group[2] do -- Members
 
-			MultiBoxHeal.GroupData[Session.I].UnitID = Session.Group[3]..Session.I
-			MultiBoxHeal.GroupData[Session.I].HealthDeficite = UnitHealthMax(MultiBoxHeal.GroupData[Session.I].UnitID)-UnitHealth(MultiBoxHeal.GroupData[Session.I].UnitID)
-			MultiBoxHeal.GroupData[Session.I].UnitRange = CheckInteractDistance(MultiBoxHeal.GroupData[Session.I].UnitID, 4)
-			MultiBoxHeal.GroupData[Session.I].Visible = UnitIsVisible(MultiBoxHeal.GroupData[Session.I].UnitID) and UnitIsConnected(MultiBoxHeal.GroupData[Session.I].UnitID) and not UnitIsGhost(MultiBoxHeal.GroupData[Session.I].UnitID) and not UnitIsDead(MultiBoxHeal.GroupData[Session.I].UnitID) and not UnitIsEnemy(MultiBoxHeal.GroupData[Session.I].UnitID,"player") and not UnitCanAttack("player",MultiBoxHeal.GroupData[Session.I].UnitID)
+			MBH.GroupData[Session.I].UnitID = Session.Group[3]..Session.I
+			MBH.GroupData[Session.I].HealthDeficite = UnitHealthMax(MBH.GroupData[Session.I].UnitID)-UnitHealth(MBH.GroupData[Session.I].UnitID)
+			MBH.GroupData[Session.I].UnitRange = CheckInteractDistance(MBH.GroupData[Session.I].UnitID, 4)
+			MBH.GroupData[Session.I].Visible = UnitIsVisible(MBH.GroupData[Session.I].UnitID) and UnitIsConnected(MBH.GroupData[Session.I].UnitID) and not UnitIsGhost(MBH.GroupData[Session.I].UnitID) and not UnitIsDead(MBH.GroupData[Session.I].UnitID) and not UnitIsEnemy(MBH.GroupData[Session.I].UnitID,"player") and not UnitCanAttack("player",MBH.GroupData[Session.I].UnitID)
 
 			-- Extended Range
-			if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].ExtRange then
-				MultiBoxHeal.GroupData[Session.I].ExtRange = true
+			if MBH.Track[MBH.GroupData[Session.I].UnitID].ExtRange then
+				MBH.GroupData[Session.I].ExtRange = true
 			else 
-				MultiBoxHeal.GroupData[Session.I].ExtRange = nil 
+				MBH.GroupData[Session.I].ExtRange = nil 
 			end
 			
 			-- LOS
-			if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS then
-				if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS > 0 then 
-					MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS = MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS - Session.Elapsed
+			if MBH.Track[MBH.GroupData[Session.I].UnitID].LOS then
+				if MBH.Track[MBH.GroupData[Session.I].UnitID].LOS > 0 then 
+					MBH.Track[MBH.GroupData[Session.I].UnitID].LOS = MBH.Track[MBH.GroupData[Session.I].UnitID].LOS - Session.Elapsed
 				else 
-					MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS = nil 
+					MBH.Track[MBH.GroupData[Session.I].UnitID].LOS = nil 
 				end 
 			end
 			
 			-- Healcomm
-			if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime then 
-				if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime > 0 then 
-					MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime = MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime - Session.Elapsed
-					MultiBoxHeal.GroupData[Session.I].HealValue = (UnitHealth(MultiBoxHeal.GroupData[Session.I].UnitID)+MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].Heal)/UnitHealthMax(MultiBoxHeal.GroupData[Session.I].UnitID)
-					if MultiBoxHeal.GroupData[Session.I].HealValue > 1 then 
-						MultiBoxHeal.GroupData[Session.I].HealValue = 1 
+			if MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime then 
+				if MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime > 0 then 
+					MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime = MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime - Session.Elapsed
+					MBH.GroupData[Session.I].HealValue = (UnitHealth(MBH.GroupData[Session.I].UnitID)+MBH.Track[MBH.GroupData[Session.I].UnitID].Heal)/UnitHealthMax(MBH.GroupData[Session.I].UnitID)
+					if MBH.GroupData[Session.I].HealValue > 1 then 
+						MBH.GroupData[Session.I].HealValue = 1 
 					end
 				else 
-					MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].Heal = nil
-					MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime = nil
-					MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealName = nil
+					MBH.Track[MBH.GroupData[Session.I].UnitID].Heal = nil
+					MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime = nil
+					MBH.Track[MBH.GroupData[Session.I].UnitID].HealName = nil
 				end
 			end
 			
@@ -131,43 +131,43 @@ function MBH_UpdateData()
 	
 	if Session.Group[1] == 2 or Session.Group[1] == 1 then -- Add player
 
-		MultiBoxHeal.GroupData[Session.I].UnitID = "player"
-		MultiBoxHeal.GroupData[Session.I].HealthDeficite = UnitHealthMax(MultiBoxHeal.GroupData[Session.I].UnitID)-UnitHealth(MultiBoxHeal.GroupData[Session.I].UnitID)
-		MultiBoxHeal.GroupData[Session.I].UnitRange = CheckInteractDistance(MultiBoxHeal.GroupData[Session.I].UnitID, 4)
-		MultiBoxHeal.GroupData[Session.I].Visible = true
+		MBH.GroupData[Session.I].UnitID = "player"
+		MBH.GroupData[Session.I].HealthDeficite = UnitHealthMax(MBH.GroupData[Session.I].UnitID)-UnitHealth(MBH.GroupData[Session.I].UnitID)
+		MBH.GroupData[Session.I].UnitRange = CheckInteractDistance(MBH.GroupData[Session.I].UnitID, 4)
+		MBH.GroupData[Session.I].Visible = true
 		
 		-- Extended Range
-		MultiBoxHeal.GroupData[Session.I].ExtRange = true
+		MBH.GroupData[Session.I].ExtRange = true
 		
 		-- LOS
-		if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS then
-			if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS > 0 then 
-				MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS = MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS - Session.Elapsed
+		if MBH.Track[MBH.GroupData[Session.I].UnitID].LOS then
+			if MBH.Track[MBH.GroupData[Session.I].UnitID].LOS > 0 then 
+				MBH.Track[MBH.GroupData[Session.I].UnitID].LOS = MBH.Track[MBH.GroupData[Session.I].UnitID].LOS - Session.Elapsed
 			else 
-				MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].LOS = nil 
+				MBH.Track[MBH.GroupData[Session.I].UnitID].LOS = nil 
 			end 
 		end
 		
 		-- Healcomm
-		if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime then 
-			if MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime > 0 then 
-				MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime = MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime - Session.Elapsed
-				MultiBoxHeal.GroupData[Session.I].HealValue = (UnitHealth(MultiBoxHeal.GroupData[Session.I].UnitID)+MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].Heal)/UnitHealthMax(MultiBoxHeal.GroupData[Session.I].UnitID)
-				if MultiBoxHeal.GroupData[Session.I].HealValue > 1 then 
-					MultiBoxHeal.GroupData[Session.I].HealValue = 1 
+		if MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime then 
+			if MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime > 0 then 
+				MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime = MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime - Session.Elapsed
+				MBH.GroupData[Session.I].HealValue = (UnitHealth(MBH.GroupData[Session.I].UnitID)+MBH.Track[MBH.GroupData[Session.I].UnitID].Heal)/UnitHealthMax(MBH.GroupData[Session.I].UnitID)
+				if MBH.GroupData[Session.I].HealValue > 1 then 
+					MBH.GroupData[Session.I].HealValue = 1 
 				end
 			else 
-				MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].Heal = nil
-				MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealTime = nil
-				MultiBoxHeal.Track[MultiBoxHeal.GroupData[Session.I].UnitID].HealName = nil
+				MBH.Track[MBH.GroupData[Session.I].UnitID].Heal = nil
+				MBH.Track[MBH.GroupData[Session.I].UnitID].HealTime = nil
+				MBH.Track[MBH.GroupData[Session.I].UnitID].HealName = nil
 			end
 		end
 		
 		Session.I = Session.I + 1
 	end
 	
-	table.sort(MultiBoxHeal.GroupData, function(a, b) return a.HealthDeficite > b.HealthDeficite end)
-	Session.Autoheal.SortBuffer = MultiBoxHeal.GroupData
+	table.sort(MBH.GroupData, function(a, b) return a.HealthDeficite > b.HealthDeficite end)
+	Session.Autoheal.SortBuffer = MBH.GroupData
 end
 
 function MBH_GetHealUnitID(SpellName)
@@ -177,17 +177,17 @@ function MBH_GetHealUnitID(SpellName)
 	if MoronBoxHeal_Options.AutoHeal.Smart_Heal and CastTime then
 		
 		for i = 1, Session.MaxData do	
-			if Session.Autoheal.SortBuffer[i].Visible and (Session.Autoheal.SortBuffer[i].UnitRange or Session.Autoheal.SortBuffer[i].ExtRange) and not MultiBoxHeal.Track[Session.Autoheal.SortBuffer[i].UnitID].LOS then
-				if not MultiBoxHeal.Track[Session.Autoheal.SortBuffer[i].UnitID].HealTime then 
+			if Session.Autoheal.SortBuffer[i].Visible and (Session.Autoheal.SortBuffer[i].UnitRange or Session.Autoheal.SortBuffer[i].ExtRange) and not MBH.Track[Session.Autoheal.SortBuffer[i].UnitID].LOS then
+				if not MBH.Track[Session.Autoheal.SortBuffer[i].UnitID].HealTime then 
 					return Session.Autoheal.SortBuffer[i].UnitID
-				elseif MultiBoxHeal.Track[Session.Autoheal.SortBuffer[i].UnitID].HealTime and CastTime < MultiBoxHeal.Track[Session.Autoheal.SortBuffer[i].UnitID].HealTime then 
+				elseif MBH.Track[Session.Autoheal.SortBuffer[i].UnitID].HealTime and CastTime < MBH.Track[Session.Autoheal.SortBuffer[i].UnitID].HealTime then 
 					return Session.Autoheal.SortBuffer[i].UnitID
 				end
 			end
 		end
 		
 		for i = 1, Session.MaxData do
-			if Session.Autoheal.SortBuffer[i].Visible and (Session.Autoheal.SortBuffer[i].UnitRange or Session.Autoheal.SortBuffer[i].ExtRange) and not MultiBoxHeal.Track[Session.Autoheal.SortBuffer[i].UnitID].LOS then
+			if Session.Autoheal.SortBuffer[i].Visible and (Session.Autoheal.SortBuffer[i].UnitRange or Session.Autoheal.SortBuffer[i].ExtRange) and not MBH.Track[Session.Autoheal.SortBuffer[i].UnitID].LOS then
 				return Session.Autoheal.SortBuffer[i].UnitID
 			end
 		end
@@ -200,7 +200,7 @@ function MBH_GetHealUnitID(SpellName)
 		end
 		
 		for i = RandomTarget, Session.MaxData do
-			if Session.Autoheal.SortBuffer[i].Visible and (Session.Autoheal.SortBuffer[i].UnitRange or Session.Autoheal.SortBuffer[i].ExtRange) and not MultiBoxHeal.Track[Session.Autoheal.SortBuffer[i].UnitID].LOS then
+			if Session.Autoheal.SortBuffer[i].Visible and (Session.Autoheal.SortBuffer[i].UnitRange or Session.Autoheal.SortBuffer[i].ExtRange) and not MBH.Track[Session.Autoheal.SortBuffer[i].UnitID].LOS then
 				return Session.Autoheal.SortBuffer[i].UnitID
 			end
 		end
