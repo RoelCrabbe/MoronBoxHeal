@@ -338,11 +338,13 @@ DefaultOptions = {
             Lesser_Healing_Wave_HAR = 10
         },
         Paladin = {
+            Holy_Light_Switch = true,
             Holy_Light_Threshold = 35,
             Holy_Light_LAR = 1,
             Holy_Light_HAR = 6
         },
         Druid = {
+            Regrowth_Switch = true,
             Regrowth_Threshold = 50,
             Regrowth_LAR = 1,
             Regrowth_HAR = 11

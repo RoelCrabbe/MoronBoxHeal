@@ -264,6 +264,10 @@ function MBH_ProtectionSettingCheck(newVal)
         MBH_PriestProtectionCheck(newVal)
     elseif ( Session.PlayerClass == "Shaman" ) then
         MBH_ShamanProtectionCheck(newVal)
+    elseif ( Session.PlayerClass == "Paladin" ) then
+        MBH_PaladinProtectionCheck(newVal)
+    elseif ( Session.PlayerClass == "Druid" ) then
+        MBH_DruidProtectionCheck(newVal)
     end
 end
 
@@ -293,6 +297,30 @@ function MBH_ShamanProtectionCheck(newVal)
     end
 
     if ( ChainHealCheck and LesserHealingWaveCheck ) then
+        MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = newVal
+    end
+end
+
+function MBH_PaladinProtectionCheck(newVal)
+    local HolyLightCheck = not MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch
+
+    if ( MoronBoxHeal_Options.AdvancedOptions.Mana_Protection ) and ( HolyLightCheck ) then
+        MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = true
+    end
+
+    if ( HolyLightCheck ) then
+        MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = newVal
+    end
+end
+
+function MBH_DruidProtectionCheck(newVal)
+    local RegrowthCheck = not MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch
+
+    if ( MoronBoxHeal_Options.AdvancedOptions.Mana_Protection ) and ( RegrowthCheck ) then
+        MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = true
+    end
+
+    if ( RegrowthCheck ) then
         MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = newVal
     end
 end

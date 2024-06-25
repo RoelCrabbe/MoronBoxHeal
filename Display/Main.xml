@@ -1675,6 +1675,41 @@
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
+
+                    <CheckButton name="MoronBoxHealHolyLighProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHolyLightProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealHolyLighProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_HOLY_LIGHT_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealHolyLighProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (this:GetChecked() == 1);
+                                MBH_PaladinProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
                 </Frames>
             </Frame>
 
@@ -1813,6 +1848,41 @@
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
+
+                    <CheckButton name="MoronBoxHealRegrowthProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealRegrowthProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealRegrowthProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_REGROWTH_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (this:GetChecked() == 1);
+                                MBH_DruidProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
                 </Frames>
             </Frame>
         </Frames>
