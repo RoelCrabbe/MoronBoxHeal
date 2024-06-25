@@ -57,6 +57,254 @@ function MBH_InitializeManaProtectionThresholds()
     }
 end
 
+local PresetSettings = {
+    ["Shaman"] = {
+        ["Chain Heal"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 19,
+                Random_Target = true,
+                Heal_Target_Number = 2
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Chain_Heal_Threshold = 12.5,
+                Chain_Heal_LAR = 3,
+                Chain_Heal_HAR = 7,
+                Lesser_Healing_Wave_Threshold = 35,
+                Lesser_Healing_Wave_LAR = 3,
+                Lesser_Healing_Wave_HAR = 7,
+                Holy_Light_Threshold = 35,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+                Regrowth_Threshold = 50,
+                Regrowth_LAR = 1,
+                Regrowth_HAR = 11,
+            }
+        },
+        ["Healing Wave"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 25,
+                Random_Target = false,
+                Heal_Target_Number = 1
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Chain_Heal_Threshold = 12.5,
+                Chain_Heal_LAR = 3,
+                Chain_Heal_HAR = 7,
+                Lesser_Healing_Wave_Threshold = 35,
+                Lesser_Healing_Wave_LAR = 3,
+                Lesser_Healing_Wave_HAR = 7,
+                Holy_Light_Threshold = 35,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+                Regrowth_Threshold = 50,
+                Regrowth_LAR = 1,
+                Regrowth_HAR = 11,
+            }
+        }
+    },
+    ["Paladin"] = {
+        ["Default"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 35,
+                Random_Target = true,
+                Heal_Target_Number = 2
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Holy_Light_Threshold = 5,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+                Flash_Heal_Threshold = 20,
+                Flash_Heal_LAR = 1,
+                Flash_Heal_HAR = 4,
+                Heal_Threshold = 5,
+                Heal_LAR = 1,
+                Heal_HAR = 3,
+                Greater_Heal_Threshold = 50,
+                Greater_Heal_LAR = 1,
+                Greater_Heal_HAR = 4,
+                Chain_Heal_Threshold = 20,
+                Chain_Heal_LAR = 1,
+                Chain_Heal_HAR = 10,
+                Lesser_Healing_Wave_Threshold = 35,
+                Lesser_Healing_Wave_LAR = 1,
+                Lesser_Healing_Wave_HAR = 10,
+                Holy_Light_Threshold = 35,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+                Regrowth_Threshold = 50,
+                Regrowth_LAR = 1,
+                Regrowth_HAR = 11,
+            }
+        }
+    },
+    ["Priest"] = {
+        ["Heal"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 25,
+                Random_Target = false,
+                Heal_Target_Number = 1
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Flash_Heal_Threshold = 20,
+                Flash_Heal_LAR = 1,
+                Flash_Heal_HAR = 4,
+                Heal_Threshold = 5,
+                Heal_LAR = 1,
+                Heal_HAR = 3,
+                Greater_Heal_Threshold = 50,
+                Greater_Heal_LAR = 1,
+                Greater_Heal_HAR = 4,
+                Chain_Heal_Threshold = 20,
+                Chain_Heal_LAR = 1,
+                Chain_Heal_HAR = 10,
+                Lesser_Healing_Wave_Threshold = 35,
+                Lesser_Healing_Wave_LAR = 1,
+                Lesser_Healing_Wave_HAR = 10,
+                Holy_Light_Threshold = 35,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+                Regrowth_Threshold = 50,
+                Regrowth_LAR = 1,
+                Regrowth_HAR = 11,
+            }
+        },
+        ["Flash Heal"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 9,
+                Random_Target = false,
+                Heal_Target_Number = 2
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Flash_Heal_Threshold = 20,
+                Flash_Heal_LAR = 1,
+                Flash_Heal_HAR = 4,
+                Heal_Threshold = 5,
+                Heal_LAR = 1,
+                Heal_HAR = 3,
+                Greater_Heal_Threshold = 50,
+                Greater_Heal_LAR = 1,
+                Greater_Heal_HAR = 4,
+                Chain_Heal_Threshold = 20,
+                Chain_Heal_LAR = 1,
+                Chain_Heal_HAR = 10,
+                Lesser_Healing_Wave_Threshold = 35,
+                Lesser_Healing_Wave_LAR = 1,
+                Lesser_Healing_Wave_HAR = 10,
+                Holy_Light_Threshold = 35,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+                Regrowth_Threshold = 50,
+                Regrowth_LAR = 1,
+                Regrowth_HAR = 11,
+            }
+        }
+    },
+    ["Druid"] = {
+        ["Default"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 13,
+                Random_Target = true,
+                Heal_Target_Number = 1
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Regrowth_Threshold = 50,
+                Regrowth_LAR = 1,
+                Regrowth_HAR = 11,
+                Flash_Heal_Threshold = 20,
+                Flash_Heal_LAR = 1,
+                Flash_Heal_HAR = 4,
+                Heal_Threshold = 5,
+                Heal_LAR = 1,
+                Heal_HAR = 3,
+                Greater_Heal_Threshold = 50,
+                Greater_Heal_LAR = 1,
+                Greater_Heal_HAR = 4,
+                Chain_Heal_Threshold = 20,
+                Chain_Heal_LAR = 1,
+                Chain_Heal_HAR = 10,
+                Lesser_Healing_Wave_Threshold = 35,
+                Lesser_Healing_Wave_LAR = 1,
+                Lesser_Healing_Wave_HAR = 10,
+                Holy_Light_Threshold = 35,
+                Holy_Light_LAR = 1,
+                Holy_Light_HAR = 6,
+            }
+        }
+    }
+}
+
 -------------------------------------------------------------------------------
 -- The Global Variables {{{
 -------------------------------------------------------------------------------
@@ -149,7 +397,6 @@ ColorPicker = {
 -------------------------------------------------------------------------------
 
 DefaultOptions = {
-
     AutoHeal = {
         Smart_Heal = true,
         Allowed_Overheal_Percentage = 11,
@@ -168,7 +415,7 @@ DefaultOptions = {
         Mana_Protection = true,
     },
     ManaProtectionValues = {
-        Flash_Heal_Threshold = 66,
+        Flash_Heal_Threshold = 20,
         Flash_Heal_LAR = 1,
         Flash_Heal_HAR = 4,
         Heal_Threshold = 5,
@@ -424,8 +671,7 @@ function MBH_EnableTargetEvents()
 	end
 end
 
-
-function MBH_ConvertToPrecentage(value)
+function MBH_ConvertToFractionFromPercentage(value)
 	local commaValue = value / 100
 	local newValue = 1 - commaValue
 	return newValue
@@ -435,7 +681,7 @@ function MBH_Cast(spellName, lowestAllowedRank, highestAllowedRank)
 	local healUnitID
 
 	if Session.Autoheal.IsCasting and Session.Autoheal.UnitID then
-		if Session.Autoheal.PlusHeal * MBH_ConvertToPrecentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage) > UnitHealthMax(Session.Autoheal.UnitID) - UnitHealth(Session.Autoheal.UnitID) then
+		if Session.Autoheal.PlusHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage) > UnitHealthMax(Session.Autoheal.UnitID) - UnitHealth(Session.Autoheal.UnitID) then
 			SpellStopCasting()
 		end
 	else
@@ -676,146 +922,36 @@ function MBH_SetDefaultValues()
 	if MoronBoxHeal_Options then
 		MoronBoxHeal_Options = {}
         MoronBoxHeal_Options = DefaultOptions
-		MBH_UpdateDisplay(MBH_RESTOREDEFAULTSUCCES)
+        ReloadUI()
+        return
 	end
+
+    MBH_ErrorMessage("Unable to reset back to default, clear WDB.")
 end
 
 function MBH_LoadPresetSettings()
+    local Settings = PresetSettings[Session.PlayerClass]
 
-	if MB_myHealSpell == "Chain Heal" then
-
-        MoronBoxHeal_Options = {
-            AutoHeal = {
-                Smart_Heal = true,
-                Allowed_Overheal_Percentage = 19,
-                Random_Target = true,
-                Heal_Target_Number = 2
-            },
-			ExtendedRange = {
-				Enable = true,
-				Frequency = 5
-			},
-			LineOfSight = {
-				Enable = true,
-				TimeOut = 4
-			},
-            AdvancedOptions = {
-                Mana_Protection = true
-            }
-        }
-
-		MBH_UpdateDisplay(MBH_MORONSETTINGS)
-
-	elseif (Session.PlayerClass == "Paladin") then
-
-        MoronBoxHeal_Options = {
-            AutoHeal = {
-                Smart_Heal = true,
-                Allowed_Overheal_Percentage = 35,
-                Random_Target = true,
-                Heal_Target_Number = 2
-            },
-			ExtendedRange = {
-				Enable = true,
-				Frequency = 5
-			},
-			LineOfSight = {
-				Enable = true,
-				TimeOut = 4
-			},
-            AdvancedOptions = {
-                Mana_Protection = true
-            }
-        }
-
-		MBH_UpdateDisplay(MBH_MORONSETTINGS)
-
-	elseif (MB_myHealSpell == "Healing Wave" or MB_myHealSpell == "Heal") then
-
-		MoronBoxHeal_Options = {
-			AutoHeal = {
-				Smart_Heal = true,
-				Allowed_Overheal_Percentage = 25,
-				Random_Target = false,
-				Heal_Target_Number = 1
-			},
-			ExtendedRange = {
-				Enable = true,
-				Frequency = 5
-			},
-			LineOfSight = {
-				Enable = true,
-				TimeOut = 4
-			},
-            AdvancedOptions = {
-                Mana_Protection = true
-            }
-		}
-
-		MBH_UpdateDisplay(MBH_MORONSETTINGS)
-
-	elseif MB_myHealSpell == "Flash Heal" then
-
-		MoronBoxHeal_Options = {
-			AutoHeal = {
-				Smart_Heal = true,
-				Allowed_Overheal_Percentage = 9,
-				Random_Target = false,
-				Heal_Target_Number = 2
-			},
-			ExtendedRange = {
-				Enable = true,
-				Frequency = 5
-			},
-			LineOfSight = {
-				Enable = true,
-				TimeOut = 4
-			},
-            AdvancedOptions = {
-                Mana_Protection = true
-            }
-		}
-
-		MBH_UpdateDisplay(MBH_MORONSETTINGS)
-
-	elseif MB_myHealSpell == "Rejuvenation" then
-
-		MoronBoxHeal_Options = {
-			AutoHeal = {
-				Smart_Heal = true,
-				Allowed_Overheal_Percentage = 13,
-				Random_Target = true,
-				Heal_Target_Number = 1
-			},
-			ExtendedRange = {
-				Enable = true,
-				Frequency = 5
-			},
-			LineOfSight = {
-				Enable = true,
-				TimeOut = 4
-			},
-            AdvancedOptions = {
-                Mana_Protection = true
-            }
-		}
-
-		MBH_UpdateDisplay(MBH_MORONSETTINGS)
-    else
-		
-		MoronBoxHeal_Options = DefaultOptions
-		MBH_UpdateDisplay()
-        MBH_ErrorMessage("There is no preset for you.")
+    if Settings then
+        local SpecialSettings = Settings[MB_myHealSpell] or Settings["Default"]
+        
+        if SpecialSettings then
+            MoronBoxHeal_Options = SpecialSettings
+            ReloadUI()
+            return
+        end
     end
+
+    MBH_ErrorMessage("There is no preset for you.")
 end
 
-function MBH_UpdateDisplay(message)
+function MBH_UpdateDisplay(Message)
 
     MBH_UpdateSliders()
     MBH_UpdateCheckboxes()
     MBH_UpdateInputFields()
 
-    if message then MBH_PrintMessage(message) end
+    if Message then MBH_PrintMessage(Message) end
 end
 
 function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)

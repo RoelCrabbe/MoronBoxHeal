@@ -352,7 +352,7 @@
     <Frame name="MoronBoxHealMainPopupFrameTemplate" inherits="MoronBoxHealBackdrop" virtual="true">
 
         <Size>
-            <AbsDimension x="300" y="90" />
+            <AbsDimension x="300" y="110" />
         </Size>
 
         <Scripts>

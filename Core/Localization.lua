@@ -93,3 +93,5 @@ MBH_REGROWTHPROTECTIONTHRESHOLD = "Mana Percentage to Healing Touch: $p %"
 
 MBH_LOWEST_RANK = "Lowest Rank: "
 MBH_HIGHEST_RANK = "Highest Rank: "
+
+MBH_RELOADUI = "(This settings will reload your UI)"

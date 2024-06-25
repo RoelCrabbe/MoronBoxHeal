@@ -1771,6 +1771,17 @@
                     </Anchors>
                 </FontString>
             </Layer>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainPopupPresetFrameReloadText" inherits="GameFontNormalSmall" text="MBH_RELOADUI">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealMainPopupPresetFrameText">
+                            <Offset>
+                                <AbsDimension y="-25" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
         </Layers>
 
         <Frames>
@@ -1817,6 +1828,17 @@
                 <FontString name="MoronBoxHealMainPopupDefaultFrameText" inherits="GameFontNormalLarge" text="MBH_RESTOREDEFAULTCONFIRM">
                     <Anchors>
                         <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealMainPopupDefaultFrame">
+                            <Offset>
+                                <AbsDimension y="-25" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+            <Layer level="OVERLAY">
+                <FontString name="MoronBoxHealMainPopupDefaultFrameReloadText" inherits="GameFontNormalSmall" text="MBH_RELOADUI">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealMainPopupDefaultFrameText">
                             <Offset>
                                 <AbsDimension y="-25" />
                             </Offset>
