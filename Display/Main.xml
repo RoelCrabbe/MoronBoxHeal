@@ -726,7 +726,7 @@
                             <Anchors>
                                 <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFramePriestContainer">
                                    <Offset>
-                                        <AbsDimension x="-85" y="-25" />
+                                        <AbsDimension x="-75" y="-25" />
                                     </Offset>
                                 </Anchor>
                             </Anchors>
@@ -1121,7 +1121,7 @@
                             <Anchors>
                                 <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
                                    <Offset>
-                                        <AbsDimension x="-110" y="-25" />
+                                        <AbsDimension x="-105" y="-25" />
                                     </Offset>
                                 </Anchor>
                             </Anchors>

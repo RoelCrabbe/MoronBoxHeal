@@ -221,7 +221,7 @@ end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold = this:GetValue()
-    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_Threshold))
+    getglobal(this:GetName().."Text"):SetText(string.gsub(MBH_GREATERHEALPROTECTIONTHRESHOLD, "$p", MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_Threshold))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
@@ -342,205 +342,86 @@ end
 -------------------------------------------------------------------------------
 
 function MBH_ValidateFlashHealInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealFlashHealProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR = larValue
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealFlashHealProtectionhresholdHAR, "Flash_Heal")
 end
 
 function MBH_ValidateFlashHealInputHAR()
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealFlashHealProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Heal")
-
-    if ( harValue ) then
-        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR = harValue
-        else
-            MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR = maxRank
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Flash_Heal_HAR)
-    end
+    MBH_ValidateHAR(MoronBoxHealFlashHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
 end
 
 function MBH_ValidateHealInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealHealProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR = larValue
-        end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealHealProtectionhresholdHAR, "Heal")
 end
 
 function MBH_ValidateHealInputHAR()
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealHealProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Lesser Heal")
-
-    if ( harValue ) then
-        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR = harValue
-        else
-            MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR = maxRank
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Heal_HAR)
-    end
+    MBH_ValidateHAR(MoronBoxHealFlashHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
 end
 
 function MBH_ValidateGreaterHealInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealHealProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR = larValue
-        end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealHealProtectionhresholdHAR, "Greater_Heal")
 end
 
 function MBH_ValidateGreaterHealInputHAR()
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealGreaterHealProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Heal")
-
-    if ( harValue ) then
-        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR = harValue
-        else
-            MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR = maxRank
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Greater_Heal_HAR)
-    end
+    MBH_ValidateHAR(MoronBoxHealGreaterHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
 end
 
 function MBH_ValidateChainHealInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealChainHealProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR = larValue
-        end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealChainHealProtectionhresholdHAR, "Chain_Heal")
 end
 
 function MBH_ValidateChainHealInputHAR()
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealChainHealProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Healing Wave")
-
-    if ( harValue ) then
-        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR = harValue
-        else
-            MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR = maxRank
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Chain_Heal_HAR)
-    end
+    MBH_ValidateHAR(MoronBoxHealChainHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
 end
 
 function MBH_ValidateLesserHealingWaveInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealLesserHealingWaveProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR = larValue
-        end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealLesserHealingWaveProtectionhresholdHAR, "Lesser_Healing_Wave")
 end
 
 function MBH_ValidateLesserHealingWaveInputHAR()
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealLesserHealingWaveProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Healing Wave")
-
-    if ( harValue ) then
-        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR = harValue
-        else
-            MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR = maxRank
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Lesser_Healing_Wave_HAR)
-    end
+    MBH_ValidateHAR(MoronBoxHealLesserHealingWaveProtectionhresholdLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
 end
 
 function MBH_ValidateHolyLightInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealHolyLightProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR = larValue
-        end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealHolyLightProtectionhresholdHAR, "Holy_Light")
 end
 
 function MBH_ValidateHolyLightInputHAR()
-    local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealHolyLightProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Flash of Light")
-
-    if ( harValue ) then
-        if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR = harValue
-        else
-            MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR = maxRank
-        end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Holy_Light_HAR)
-    end
+    MBH_ValidateHAR(MoronBoxHealHolyLightProtectionhresholdLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
 end
 
 function MBH_ValidateRegrowthInputLAR()
-    local larValue = tonumber(this:GetText())
-    local harValue = tonumber(MoronBoxHealRegrowthProtectionhresholdHAR:GetText())
-
-    if ( larValue and larValue >= 1) then
-        if ( harValue and larValue <= harValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR = larValue
-        end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_LAR)
-    end
+    MBH_ValidateLAR(MoronBoxHealRegrowthProtectionhresholdHAR, "Regrowth")
 end
 
 function MBH_ValidateRegrowthInputHAR()
+    MBH_ValidateHAR(MoronBoxHealRegrowthProtectionhresholdLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+end
+
+function MBH_ValidateLAR(harThresholdTextbox, spellName)
+    local larValue = tonumber(this:GetText())
+    local harValue = tonumber(harThresholdTextbox:GetText())
+
+    if ( larValue and larValue >= 1) then
+        if ( harValue and larValue >= harValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues[spellName .. "_LAR"] = larValue
+        end
+        
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[spellName .. "_LAR"])
+    end
+end
+
+function MBH_ValidateHAR(larThresholdTextbox, maxRank, spellName)
     local harValue = tonumber(this:GetText())
-    local larValue = tonumber(MoronBoxHealRegrowthProtectionhresholdLAR:GetText())
-    local maxRank = MBH_GetMaxSpellRank("Healing Touch")
+    local larValue = tonumber(larThresholdTextbox:GetText())
 
     if ( harValue ) then
         if ( harValue <= maxRank ) and ( larValue and harValue >= larValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR = harValue
+            MoronBoxHeal_Options.ManaProtectionValues[spellName .. "_HAR"] = harValue
         else
-            MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR = maxRank
+            MoronBoxHeal_Options.ManaProtectionValues[spellName .. "_HAR"] = maxRank
         end
 
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues.Regrowth_HAR)
+        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[spellName .. "_HAR"])
     end
 end
 

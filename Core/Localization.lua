@@ -82,7 +82,7 @@ MBH_SPELL_REGROWTH = "Regrowth"
 
 MBH_FLASHHEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Heal: $p %"
 MBH_HEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Lesser Heal: $p %"
-MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to Heal: $p %"
+MBH_GREATERHEALPROTECTIONTHRESHOLD = "Mana Percentage to cast Heal: $p %"
 
 MBH_CHAINHEALPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
 MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD = "Mana Percentage to Healing Wave: $p %"
