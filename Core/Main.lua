@@ -40,25 +40,45 @@ function MBH_InitializeManaProtectionThresholds()
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR,
         },
         ["Chain Heal"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return ( 
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch
+                )
+            end,
             ["Spell"] = "Healing Wave",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR,
         },
         ["Lesser Healing Wave"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return (
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch
+                )
+            end,
             ["Spell"] = "Healing Wave",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR,
         },
         ["Holy Light"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return (
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch
+                )
+            end,
             ["Spell"] = "Flash of Light",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR,
         },
         ["Regrowth"] = {
-            ["ThresholdCheck"] = function() return MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold) end,
+            ["ThresholdCheck"] = function() 
+                return (
+                    MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold) 
+                    and MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch
+                )
+            end,
             ["Spell"] = "Healing Touch",
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR,
