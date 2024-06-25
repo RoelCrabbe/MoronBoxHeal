@@ -14,11 +14,13 @@
 ..\Ace2\Banzai-1.0\Banzai-1.0.lua
 ..\Ace2\AceAddon-2.0\AceAddon-2.0.lua
 
-Core\Localization.lua
+Utility\Localization.lua
+Utility\Utility.lua
+
 Core\GroupData.lua
 Core\Range.lua
 Core\Main.lua
-Display\Actions.lua
 
+Display\Actions.lua
 Display\Templates.xml
 Display\Main.xml
