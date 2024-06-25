@@ -259,6 +259,14 @@ end
 -- Helpers {{{
 -------------------------------------------------------------------------------
 
+function MBH_ProtectionSettingCheck(newVal)
+    if ( Session.PlayerClass == "Priest" ) then
+        MBH_PriestProtectionCheck(newVal)
+    elseif ( Session.PlayerClass == "Shaman" ) then
+        MBH_ShamanProtectionCheck(newVal)
+    end
+end
+
 function MBH_PriestProtectionCheck(newVal)
     local FlashHealCheck = not MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch
     local HealCheck = not MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch
@@ -271,6 +279,20 @@ function MBH_PriestProtectionCheck(newVal)
     end
 
     if ( FlashHealCheck and HealCheck and GreaterHealCheck ) then
+        MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = newVal
+    end
+end
+
+function MBH_ShamanProtectionCheck(newVal)
+    local ChainHealCheck = not MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch
+    local LesserHealingWaveCheck = not MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch
+
+    if ( MoronBoxHeal_Options.AdvancedOptions.Mana_Protection ) and ( ChainHealCheck and LesserHealingWaveCheck ) then
+        MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = true
+        MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = true
+    end
+
+    if ( ChainHealCheck and LesserHealingWaveCheck ) then
         MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = newVal
     end
 end

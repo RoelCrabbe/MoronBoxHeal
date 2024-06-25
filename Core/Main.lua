@@ -328,9 +328,11 @@ DefaultOptions = {
             Greater_Heal_HAR = 4
         },
         Shaman = {
+            Chain_Heal_Switch = true,
             Chain_Heal_Threshold = 20,
             Chain_Heal_LAR = 1,
             Chain_Heal_HAR = 10,
+            Lesser_Healing_Wave_Switch = true,
             Lesser_Healing_Wave_Threshold = 35,
             Lesser_Healing_Wave_LAR = 1,
             Lesser_Healing_Wave_HAR = 10

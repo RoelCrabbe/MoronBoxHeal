@@ -585,7 +585,7 @@
                         <Scripts>
                             <OnClick>
                                 MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = (this:GetChecked() == 1);
-                                MBH_PriestProtectionCheck(true);
+                                MBH_ProtectionSettingCheck(true);
                             </OnClick>
                             <OnShow>
                                 this:SetChecked(MoronBoxHeal_Options.AdvancedOptions.Mana_Protection and 1 or 0);
@@ -1351,6 +1351,41 @@
                         </Scripts>
                     </EditBox>
 
+                    <CheckButton name="MoronBoxHealChainHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealChainHealProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealChainHealProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_CHAIN_HEAL_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = (this:GetChecked() == 1);
+                                MBH_ShamanProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
+
                     <!-- Lesser Healing Wave -->
                     <Slider name="MoronBoxHealLesserHealingWaveProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
@@ -1467,6 +1502,41 @@
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
+
+                    <CheckButton name="MoronBoxHealLesserHealingWaveProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
+
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdHAR">
+                                <Offset>
+                                    <AbsDimension y="-50" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealLesserHealingWaveProtectionCheckButtonText" inherits="GameFontNormal" text="MBH_ACTIVE_LESSER_HEALING_WAVE_SWITCH">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (this:GetChecked() == 1);
+                                MBH_ShamanProtectionCheck(false);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
                 </Frames>
             </Frame>
 
