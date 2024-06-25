@@ -88,41 +88,6 @@ end
 
 PresetSettings = {
     ["Priest"] = {
-        ["Heal"] = {
-            AutoHeal = {
-                Smart_Heal = true,
-                Allowed_Overheal_Percentage = 25,
-                Random_Target = false,
-                Heal_Target_Number = 1
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = true,
-            },
-            ManaProtectionValues = {
-                Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
-                    Heal_LAR = 1,
-                    Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
-                }
-            }
-        },
         ["Flash Heal"] = {
             AutoHeal = {
                 Smart_Heal = true,
@@ -149,7 +114,7 @@ PresetSettings = {
                     Flash_Heal_HAR = 4,
                     Heal_Switch = true,
                     Heal_Threshold = 5,
-                    Heal_LAR = 1,
+                    Heal_LAR = 3,
                     Heal_HAR = 3,
                     Greater_Heal_Switch = false,
                     Greater_Heal_Threshold = 50,
@@ -157,7 +122,77 @@ PresetSettings = {
                     Greater_Heal_HAR = 4
                 }
             }
-        }
+        },
+        ["Heal"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 25,
+                Random_Target = false,
+                Heal_Target_Number = 1
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Switch = true,
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Switch = true,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                    Greater_Heal_Switch = true,
+                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                }
+            }
+        },
+        ["Greater Heal"] = {
+            AutoHeal = {
+                Smart_Heal = true,
+                Allowed_Overheal_Percentage = 35,
+                Random_Target = false,
+                Heal_Target_Number = 1
+            },
+            ExtendedRange = {
+                Enable = true,
+                Frequency = 5
+            },
+            LineOfSight = {
+                Enable = true,
+                TimeOut = 4
+            },
+            AdvancedOptions = {
+                Mana_Protection = true,
+            },
+            ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Switch = true,
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Switch = true,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                    Greater_Heal_Switch = true,
+                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                }
+            }
+        },
     },
     ["Shaman"] = {
         ["Chain Heal"] = {
