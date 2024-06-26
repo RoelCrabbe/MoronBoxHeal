@@ -592,6 +592,26 @@
                             </OnShow>
                         </Scripts>
                     </CheckButton>
+
+                    <Slider name="MoronBoxHealIdleProtectionlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                        
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealOptionManaProtectionCheckbox">
+                                <Offset>
+                                    <AbsDimension y="-83" />
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnValueChanged>
+                                MBH_IdleProtectionSlider_OnValueChanged()
+                            </OnValueChanged>
+                            <OnShow>
+                                MBH_IdleProtectionSlider_OnShow()
+                            </OnShow>
+                        </Scripts>
+                    </Slider>
                 </Frames>
             </Frame>
         </Frames>
@@ -735,7 +755,7 @@
                 <Frames>
 
                     <!-- Flash Heal -->
-                    <Slider name="MoronBoxHealFlashHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealFlashHealProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Size>
                             <AbsDimension x="180" y="16"/>
@@ -759,10 +779,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealFlashHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealFlashHealProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealFlashHealProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealFlashHealProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -771,9 +791,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealFlashHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealFlashHealProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -802,15 +822,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealFlashHealProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealFlashHealProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealFlashHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealFlashHealProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -819,9 +839,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealFlashHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealFlashHealProtectionThresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealFlashHealProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -850,7 +870,7 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealHealProtectionhresholdLAR:SetFocus();
+                                MoronBoxHealHealProtectionThresholdLAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
@@ -858,7 +878,7 @@
                     <CheckButton name="MoronBoxHealFlashHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealFlashHealProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -891,7 +911,7 @@
                     </CheckButton>
 
                     <!-- Heal -->
-                    <Slider name="MoronBoxHealHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealHealProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Size>
                             <AbsDimension x="180" y="16"/>
@@ -915,10 +935,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealHealProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealHealProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealHealProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -927,9 +947,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealHealProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -958,15 +978,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealHealProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealHealProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealHealProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHealProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHealProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -975,9 +995,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealHealProtectionThresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHealProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1006,7 +1026,7 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealGreaterHealProtectionhresholdLAR:SetFocus();
+                                MoronBoxHealGreaterHealProtectionThresholdLAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
@@ -1014,7 +1034,7 @@
                     <CheckButton name="MoronBoxHealHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHealProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHealProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1047,7 +1067,7 @@
                     </CheckButton>
 
                     <!-- Greater Heal -->
-                    <Slider name="MoronBoxHealGreaterHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealGreaterHealProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Size>
                             <AbsDimension x="180" y="16"/>
@@ -1071,10 +1091,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealGreaterHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealGreaterHealProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealGreaterHealProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealGreaterHealProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -1083,9 +1103,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealGreaterHealProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1114,15 +1134,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealGreaterHealProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealGreaterHealProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealGreaterHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealGreaterHealProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealGreaterHealProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1131,9 +1151,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealGreaterHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealGreaterHealProtectionThresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealGreaterHealProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1170,7 +1190,7 @@
                     <CheckButton name="MoronBoxHealGreaterHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealGreaterHealProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealGreaterHealProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1235,7 +1255,7 @@
                 <Frames>
 
                     <!-- Chain Heal -->
-                    <Slider name="MoronBoxHealChainHealProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealChainHealProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
@@ -1255,10 +1275,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealChainHealProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealChainHealProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealChainHealProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealChainHealProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -1267,9 +1287,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealChainHealProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealChainHealProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1298,15 +1318,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealChainHealProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealChainHealProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealChainHealProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealChainHealProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealChainHealProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealChainHealProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1315,9 +1335,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealChainHealProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealChainHealProtectionThresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealChainHealProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1346,7 +1366,7 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealLesserHealingWaveProtectionhresholdLAR:SetFocus();
+                                MoronBoxHealLesserHealingWaveProtectionThresholdLAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
@@ -1354,7 +1374,7 @@
                     <CheckButton name="MoronBoxHealChainHealProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealChainHealProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealChainHealProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1387,7 +1407,7 @@
                     </CheckButton>
 
                     <!-- Lesser Healing Wave -->
-                    <Slider name="MoronBoxHealLesserHealingWaveProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealLesserHealingWaveProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealProtectionFrameShamanContainer">
@@ -1407,10 +1427,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealLesserHealingWaveProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealLesserHealingWaveProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealLesserHealingWaveProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -1419,9 +1439,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealLesserHealingWaveProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealLesserHealingWaveProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1450,15 +1470,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealLesserHealingWaveProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealLesserHealingWaveProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealLesserHealingWaveProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealLesserHealingWaveProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealLesserHealingWaveProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1467,9 +1487,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealLesserHealingWaveProtectionhresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
+                                <FontString name="MoronBoxHealLesserHealingWaveProtectionThresholdHARText" inherits="GameFontNormal" text="Highest Rank: " justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealLesserHealingWaveProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1506,7 +1526,7 @@
                     <CheckButton name="MoronBoxHealLesserHealingWaveProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealLesserHealingWaveProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealLesserHealingWaveProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1560,7 +1580,7 @@
                 <Frames>
 
                     <!-- Holy Light -->
-                    <Slider name="MoronBoxHealHolyLightProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealHolyLightProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFramePaladinContainer">
@@ -1580,10 +1600,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealHolyLightProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealHolyLightProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealHolyLightProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealHolyLightProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -1592,9 +1612,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealHolyLightProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealHolyLightProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHolyLightProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHolyLightProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1623,15 +1643,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealHolyLightProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealHolyLightProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealHolyLightProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealHolyLightProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHolyLightProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHolyLightProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1640,9 +1660,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealHolyLightProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealHolyLightProtectionThresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHolyLightProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealHolyLightProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1679,7 +1699,7 @@
                     <CheckButton name="MoronBoxHealHolyLighProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHolyLightProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealHolyLightProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1733,7 +1753,7 @@
                 <Frames>
 
                     <!-- Regrowth -->
-                    <Slider name="MoronBoxHealRegrowthProtectionhresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                    <Slider name="MoronBoxHealRegrowthProtectionThresholdSlider" inherits="MoronBoxHealOptionSlicerTemplate">
                         
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealProtectionFrameDruidContainer">
@@ -1753,10 +1773,10 @@
                         </Scripts>
                     </Slider>
 
-                    <EditBox name="MoronBoxHealRegrowthProtectionhresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealRegrowthProtectionThresholdLAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealRegrowthProtectionhresholdSlider">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealRegrowthProtectionThresholdSlider">
                                 <Offset>
                                     <AbsDimension x="50" y="-50" />
                                 </Offset>
@@ -1765,9 +1785,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealRegrowthProtectionhresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealRegrowthProtectionThresholdLARText" inherits="GameFontNormal" text="MBH_LOWEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionhresholdLAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionThresholdLAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1796,15 +1816,15 @@
                                 this:ClearFocus();
                             </OnEscapePressed>
                             <OnTabPressed>
-                                MoronBoxHealRegrowthProtectionhresholdHAR:SetFocus();
+                                MoronBoxHealRegrowthProtectionThresholdHAR:SetFocus();
                             </OnTabPressed>
                         </Scripts>
                     </EditBox>
 
-                    <EditBox name="MoronBoxHealRegrowthProtectionhresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
+                    <EditBox name="MoronBoxHealRegrowthProtectionThresholdHAR" inherits="MoronBoxHealEditBoxTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealRegrowthProtectionhresholdLAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealRegrowthProtectionThresholdLAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>
@@ -1813,9 +1833,9 @@
 
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="MoronBoxHealRegrowthProtectionhresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
+                                <FontString name="MoronBoxHealRegrowthProtectionThresholdHARText" inherits="GameFontNormal" text="MBH_HIGHEST_RANK" justifyH="CENTER">
                                     <Anchors>
-                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionhresholdHAR">
+                                        <Anchor point="CENTER" relativePoint="LEFT" relativeTo="MoronBoxHealRegrowthProtectionThresholdHAR">
                                             <Offset>
                                                 <AbsDimension x="-70" />
                                             </Offset>
@@ -1852,7 +1872,7 @@
                     <CheckButton name="MoronBoxHealRegrowthProtectionCheckButton" inherits="OptionsCheckButtonTemplate">
 
                         <Anchors>
-                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealRegrowthProtectionhresholdHAR">
+                            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="MoronBoxHealRegrowthProtectionThresholdHAR">
                                 <Offset>
                                     <AbsDimension y="-50" />
                                 </Offset>

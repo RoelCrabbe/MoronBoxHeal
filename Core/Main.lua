@@ -378,6 +378,9 @@ DefaultOptions = {
     },
     AdvancedOptions = {
         Mana_Protection = true,
+        LagPrevention = {
+            Frequency = 0,
+        },
     },
     ManaProtectionValues = {
         Priest = {
@@ -464,8 +467,14 @@ Session = {
         OpenedFrames = nil,
         Time = 0
     },
+    AdvancedOptions = {
+        LagPrevention = {
+            Time = 0,
+        },
+    },
     Debug = false
 }
+
 -------------------------------------------------------------------------------
 -- Core Event Code {{{
 -------------------------------------------------------------------------------
@@ -578,11 +587,22 @@ MBH:SetScript("OnEvent", MBH.OnEvent)
 function MBH:OnUpdate()
     Session.Elapsed = arg1
 
-    MBH_ClearData()
-    MBH_UpdateData()
+    local Time = MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency
+    if Session.InCombat then
+        Time = 0
+    end
 
-    if MoronBoxHeal_Options.ExtendedRange.Enable then 
-        MBH_UpdateRange() 
+    Session.AdvancedOptions.LagPrevention.Time = Session.AdvancedOptions.LagPrevention.Time + Session.Elapsed
+	if ( Session.AdvancedOptions.LagPrevention.Time >= Time ) then
+
+        Session.AdvancedOptions.LagPrevention.Time = 0
+
+        MBH_ClearData()
+        MBH_UpdateData()
+
+        if MoronBoxHeal_Options.ExtendedRange.Enable then 
+            MBH_UpdateRange() 
+        end
     end
 end
 

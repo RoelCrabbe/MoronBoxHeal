@@ -70,7 +70,7 @@ function MBH_LineOfSightTimeOutSlider_OnValueChanged()
 end
 
 function MBH_FlashHealProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealFlashHealProtectionhresholdSlider
+    local Frame = MoronBoxHealFlashHealProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
 end
 
@@ -80,7 +80,7 @@ function MBH_FlashHealProtectionThresholdSlider_OnValueChanged()
 end
 
 function MBH_HealProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealHealProtectionhresholdSlider
+    local Frame = MoronBoxHealHealProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
 end
 
@@ -90,7 +90,7 @@ function MBH_HealProtectionThresholdSlider_OnValueChanged()
 end
 
 function MBH_GreaterHealProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealGreaterHealProtectionhresholdSlider
+    local Frame = MoronBoxHealGreaterHealProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
 end
 
@@ -100,7 +100,7 @@ function MBH_GreaterHealProtectionThresholdSlider_OnValueChanged()
 end
 
 function MBH_ChainHealProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealChainHealProtectionhresholdSlider
+    local Frame = MoronBoxHealChainHealProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_CHAINHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold)
 end
 
@@ -110,7 +110,7 @@ function MBH_ChainHealProtectionThresholdSlider_OnValueChanged()
 end
 
 function MBH_LesserHealingWaveProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealLesserHealingWaveProtectionhresholdSlider
+    local Frame = MoronBoxHealLesserHealingWaveProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold)
 end
 
@@ -120,7 +120,7 @@ function MBH_LesserHealingWaveProtectionThresholdSlider_OnValueChanged()
 end
 
 function MBH_HolyLightProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealHolyLightProtectionhresholdSlider
+    local Frame = MoronBoxHealHolyLightProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
 end
 
@@ -130,13 +130,23 @@ function MBH_HolyLightProtectionThresholdSlider_OnValueChanged()
 end
 
 function MBH_RegrowthProtectionThresholdSlider_OnShow()
-    local Frame = MoronBoxHealRegrowthProtectionhresholdSlider
+    local Frame = MoronBoxHealRegrowthProtectionThresholdSlider
     MBH_InitializeSlider(Frame, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
 end
 
 function MBH_RegrowthProtectionThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold, MBH_REGROWTHPROTECTIONTHRESHOLD)
+end
+
+function MBH_IdleProtectionSlider_OnShow()
+    local Frame = MoronBoxHealIdleProtectionlider
+    MBH_InitializeSlider(Frame, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 0, 5, 0.25)
+end
+
+function MBH_IdleProtectionSlider_OnValueChanged()
+    MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, MBH_IDLEPROTECTIONFREQUENCY)
 end
 
 function MBH_SliderValueChanged(Value, String)
@@ -172,59 +182,59 @@ end
 -------------------------------------------------------------------------------
 
 function MBH_ValidateFlashHealInputLAR()
-    MBH_ValidateLAR(MoronBoxHealFlashHealProtectionhresholdHAR, "Flash_Heal")
+    MBH_ValidateLAR(MoronBoxHealFlashHealProtectionThresholdHAR, "Flash_Heal")
 end
 
 function MBH_ValidateFlashHealInputHAR()
-    MBH_ValidateHAR(MoronBoxHealFlashHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
+    MBH_ValidateHAR(MoronBoxHealFlashHealProtectionThresholdLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
 end
 
 function MBH_ValidateHealInputLAR()
-    MBH_ValidateLAR(MoronBoxHealHealProtectionhresholdHAR, "Heal")
+    MBH_ValidateLAR(MoronBoxHealHealProtectionThresholdHAR, "Heal")
 end
 
 function MBH_ValidateHealInputHAR()
-    MBH_ValidateHAR(MoronBoxHealFlashHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
+    MBH_ValidateHAR(MoronBoxHealFlashHealProtectionThresholdLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
 end
 
 function MBH_ValidateGreaterHealInputLAR()
-    MBH_ValidateLAR(MoronBoxHealHealProtectionhresholdHAR, "Greater_Heal")
+    MBH_ValidateLAR(MoronBoxHealHealProtectionThresholdHAR, "Greater_Heal")
 end
 
 function MBH_ValidateGreaterHealInputHAR()
-    MBH_ValidateHAR(MoronBoxHealGreaterHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
+    MBH_ValidateHAR(MoronBoxHealGreaterHealProtectionThresholdLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
 end
 
 function MBH_ValidateChainHealInputLAR()
-    MBH_ValidateLAR(MoronBoxHealChainHealProtectionhresholdHAR, "Chain_Heal")
+    MBH_ValidateLAR(MoronBoxHealChainHealProtectionThresholdHAR, "Chain_Heal")
 end
 
 function MBH_ValidateChainHealInputHAR()
-    MBH_ValidateHAR(MoronBoxHealChainHealProtectionhresholdLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
+    MBH_ValidateHAR(MoronBoxHealChainHealProtectionThresholdLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
 end
 
 function MBH_ValidateLesserHealingWaveInputLAR()
-    MBH_ValidateLAR(MoronBoxHealLesserHealingWaveProtectionhresholdHAR, "Lesser_Healing_Wave")
+    MBH_ValidateLAR(MoronBoxHealLesserHealingWaveProtectionThresholdHAR, "Lesser_Healing_Wave")
 end
 
 function MBH_ValidateLesserHealingWaveInputHAR()
-    MBH_ValidateHAR(MoronBoxHealLesserHealingWaveProtectionhresholdLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
+    MBH_ValidateHAR(MoronBoxHealLesserHealingWaveProtectionThresholdLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
 end
 
 function MBH_ValidateHolyLightInputLAR()
-    MBH_ValidateLAR(MoronBoxHealHolyLightProtectionhresholdHAR, "Holy_Light")
+    MBH_ValidateLAR(MoronBoxHealHolyLightProtectionThresholdHAR, "Holy_Light")
 end
 
 function MBH_ValidateHolyLightInputHAR()
-    MBH_ValidateHAR(MoronBoxHealHolyLightProtectionhresholdLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+    MBH_ValidateHAR(MoronBoxHealHolyLightProtectionThresholdLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
 end
 
 function MBH_ValidateRegrowthInputLAR()
-    MBH_ValidateLAR(MoronBoxHealRegrowthProtectionhresholdHAR, "Regrowth")
+    MBH_ValidateLAR(MoronBoxHealRegrowthProtectionThresholdHAR, "Regrowth")
 end
 
 function MBH_ValidateRegrowthInputHAR()
-    MBH_ValidateHAR(MoronBoxHealRegrowthProtectionhresholdLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+    MBH_ValidateHAR(MoronBoxHealRegrowthProtectionThresholdLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
 end
 
 function MBH_ValidateLAR(FrameHAR, Value)
