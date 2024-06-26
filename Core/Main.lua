@@ -479,7 +479,7 @@ Session = {
 -- Core Event Code {{{
 -------------------------------------------------------------------------------
 
-MBH = CreateFrame("Frame", "MBH", UIParent)
+MBH = CreateFrame("Frame", "MBH")
 MBH:SetScript("OnEvent", MBH.OnEvent) 
 
 do
@@ -622,28 +622,29 @@ end
 -- Core Code {{{
 -------------------------------------------------------------------------------
 
-function MBH_Cast(spellName, lowestAllowedRank, highestAllowedRank)
-	local healUnitID
+function MBH_Cast(SPN, LAR, HAR)
 
 	if Session.Autoheal.IsCasting and Session.Autoheal.UnitID then
-		if Session.Autoheal.PlusHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage) > UnitHealthMax(Session.Autoheal.UnitID) - UnitHealth(Session.Autoheal.UnitID) then
+        local OverHealVal = Session.Autoheal.PlusHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
+
+		if OverHealVal > mb_healthDown(Session.Autoheal.UnitID) then
 			SpellStopCasting()
 		end
 	else
-		healUnitID = MBH_GetHealUnitID(spellName)
+		local HealUnitID = MBH_GetHealUnitID(SPN)
 		
-		if healUnitID then
-			Session.Autoheal.UnitID = healUnitID
-			Session.CurrentUnit = healUnitID
+		if HealUnitID then
+			Session.Autoheal.UnitID = HealUnitID
+			Session.CurrentUnit = HealUnitID
 
-			MBH_CastSpell(spellName, lowestAllowedRank, highestAllowedRank, Session.Autoheal.UnitID)
+			MBH_CastSpell(SPN, LAR, HAR, Session.Autoheal.UnitID)
 		end
 	end
 end
 
-function MBH_CastSpell(spellName, lowestAllowedRank, highestAllowedRank, unitID)
-    -- Error handling for invalid unit
-    if unitID == UNKNOWNOBJECT or unitID == UKNOWNBEING then
+function MBH_CastSpell(SPN, LAR, HAR, UnitID)
+
+    if UnitID == UNKNOWNOBJECT or UnitID == UKNOWNBEING then
         return
     end
 
@@ -651,55 +652,49 @@ function MBH_CastSpell(spellName, lowestAllowedRank, highestAllowedRank, unitID)
         HealNeed = 0,
         Spell = nil,
         Rank = nil,
-        DefaultSpell = spellName .. "(Rank 1)"
+        DefaultSpell = SPN .. "(Rank 1)"
     }
 
     Cache.Spell, Cache.Rank = MBH_ExtractSpell(Cache.DefaultSpell)
 
     if MBH.ACE.HealComm.Spells[Cache.Spell] then
-        Cache.Rank, Cache.HealNeed = MBH_CalculateRank(Cache.Spell, unitID)
+        Cache.Rank, Cache.HealNeed = MBH_CalculateRank(Cache.Spell, UnitID)
 
-		-- Ensure spell rank is within allowed range
-		if lowestAllowedRank then
-			Cache.Rank = math.max(Cache.Rank, lowestAllowedRank)
+		-- Ensures Cache.Rank stays within the allowed spell rank range defined by LAR and HAR.
+		if LAR then
+			Cache.Rank = math.max(Cache.Rank, LAR)
 		end
 
-		if highestAllowedRank then
-			Cache.Rank = math.min(Cache.Rank, highestAllowedRank)
+		if HAR then
+			Cache.Rank = math.min(Cache.Rank, HAR)
 		end
 
-        -- Adjust spell rank for specific spells
+        -- If Nature's Grace buff is active set Cache.Rank to 4 otherwise 3.
         if Cache.Spell == "Healing Touch" then
             if mb_hasBuffOrDebuff("Nature's Grace", "player", "buff") then
                 Cache.Rank = 4
-            else
-                Cache.Rank = 3
             end
+
+            Cache.Rank = 3            
         end
 
-        -- Adjust spell name for Chain Heal
-        if Cache.Spell == "Chain Heal" and Cache.LowestRank == 1 and Cache.HighestRank == 1 then
-            spellName = "Chain Heal(Rank 1)"
-        else
-            spellName = Cache.Spell .. "(Rank " .. Cache.Rank .. ")"
-        end
+        -- Verifies if the current heal amount meets requirements and casts the spell accordingly.
+        if Cache.HealNeed >= MBH_CalculateHeal(Cache.Spell, Cache.Rank, UnitID) then
 
-        -- mb_cooldownPrint(spellName)
+            local Castable = Cache.Spell.."(Rank "..Cache.Rank..")"   
 
-        -- Check if the heal amount is sufficient and cast the spell
-        if Cache.HealNeed >= MBH_CalculateHeal(Cache.Spell, Cache.Rank, unitID) then
             -- Clear target if necessary
-            if UnitCanAttack("player", unitID) or (UnitExists("target") and not UnitCanAttack("player", "target") and not UnitIsUnit(unitID, "target")) then
+            if UnitCanAttack("player", UnitID) or (UnitExists("target") and not UnitCanAttack("player", "target") and not UnitIsUnit(UnitID, "target")) then
                 ClearTarget()
             end
 
-            -- Cast the spell
-            CastSpellByName(spellName)
-            MBH_LogDebug("Casting: " .. spellName .. " on " .. UnitName(unitID))
+            -- Cast spell & log if enabled
+            CastSpellByName(Castable)
+            MBH_LogDebug("Casting: "..Castable.." on "..UnitName(UnitID))
 
             -- Target the unit if the spell requires targeting
             if SpellIsTargeting() then
-                SpellTargetUnit(unitID)
+                SpellTargetUnit(UnitID)
             end
 
             -- Stop targeting if still targeting
@@ -713,97 +708,71 @@ function MBH_CastSpell(spellName, lowestAllowedRank, highestAllowedRank, unitID)
     end
 end
 
-function MBH_CalculateRank(spell, unitID)
+function MBH_CalculateRank(SPN, UnitID)
 
-    -- Error handling for invalid unit
-    if unitID == UNKNOWNOBJECT or unitID == UKNOWNBEING then
-        return nil
+    if UnitID == UNKNOWNOBJECT or UnitID == UKNOWNBEING then
+        return
     end
 
-    -- Get item bonus
-    local bonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
+    local HealBonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
+    local MaxRank = MBH_GetMaxSpellRank(SPN)
+	local HealNeed = mb_healthDown(UnitID)
 
-    -- Get maximum spell rank
-    local max_rank = MBH_GetMaxSpellRank(spell)
+    local TargetPower, TargetMod = MBH.ACE.HealComm:GetUnitSpellPower(UnitID, SPN)
+    local BuffPower, BuffMod = MBH.ACE.HealComm:GetBuffSpellPower()
 
-    -- Get unit spell power
-    local target_power, target_mod = MBH.ACE.HealComm:GetUnitSpellPower(unitID, spell)
+    HealBonus = HealBonus + BuffPower
 
-    -- Get buff spell power 
-    local buff_power, buff_mod = MBH.ACE.HealComm:GetBuffSpellPower()
+    local CalculatedRank = 1
+    local OutgoingHealing = 0
 
-    -- Add bonus to spell power
-    bonus = bonus + buff_power
+    for i = MaxRank, 1, -1 do
+        local HealOutput = ((math.floor(MBH.ACE.HealComm.Spells[SPN][i](HealBonus)) + TargetPower) * BuffMod * TargetMod)
 
-    -- Calculate heal need
-    local heal_need = UnitHealthMax(unitID) - UnitHealth(unitID)
-
-    -- Initialize result and heal variables
-    local result = 1
-    local heal = 0
-
-    -- Iterate through spell ranks
-    for rank = max_rank, 1, -1 do
-        local amount = ((math.floor(MBH.ACE.HealComm.Spells[spell][rank](bonus)) + target_power) * buff_mod * target_mod)
-
-        -- Check if amount is sufficient to fulfill heal need
-        if amount < heal_need then
-            if rank < max_rank then
-                result = rank + 1
-                heal = ((math.floor(MBH.ACE.HealComm.Spells[spell][rank + 1](bonus)) + target_power) * buff_mod * target_mod)
+        if HealOutput < HealNeed then
+            if i < MaxRank then
+                CalculatedRank = i + 1
+                OutgoingHealing = ((math.floor(MBH.ACE.HealComm.Spells[SPN][CalculatedRank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
                 break
             else
-                result = rank
-                heal = amount
+                CalculatedRank = i
+                OutgoingHealing = HealOutput
                 break
             end
         else
-            heal = amount
+            OutgoingHealing = HealOutput
         end
     end
 
-    -- Store calculated plus heal in session
-    Session.Autoheal.PlusHeal = heal
-
-    -- Return result and heal need
-    return result, heal_need
+    Session.Autoheal.PlusHeal = OutgoingHealing
+    return CalculatedRank, HealNeed
 end
 
-function MBH_CalculateHeal(spell, rank, unitID)
+function MBH_CalculateHeal(SPN, Rank, UnitID)
 
-    -- Error handling for invalid unit
-    if unitID == UNKNOWNOBJECT or unitID == UKNOWNBEING then
-        return nil
+    if UnitID == UNKNOWNOBJECT or UnitID == UKNOWNBEING then
+        return
+	end
+
+	local HealBonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
+    local TargetPower, TargetMod = MBH.ACE.HealComm:GetUnitSpellPower(UnitID, SPN)
+    local BuffPower, BuffMod = MBH.ACE.HealComm:GetBuffSpellPower()
+
+	HealBonus = HealBonus + BuffPower
+
+    if Rank > 1 then
+        Rank = Rank - 1
     end
 
-	-- Get item bonus
-	local bonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
-
-    -- Get unit spell power
-    local target_power, target_mod = MBH.ACE.HealComm:GetUnitSpellPower(unitID, spell)
-
-    -- Get buff spell power
-    local buff_power, buff_mod = MBH.ACE.HealComm:GetUnitSpellPower()
-
-    -- Add bonus to spell power
-    bonus = bonus + buff_power
-
-    -- Subtract 1 from the number, but ensure it doesn't go below 1
-    if rank > 1 then
-        rank = rank - 1
-    end
-
-    -- Calculate heal amount
-    local heal = ((math.floor(MBH.ACE.HealComm.Spells[spell][rank](bonus)) + target_power) * buff_mod * target_mod)
-
-    return heal
+	local HealOutput = ((math.floor(MBH.ACE.HealComm.Spells[SPN][Rank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
+    return HealOutput
 end
 
-function MBH_CastHeal(SpellName, LowestAllowedRank, HighestAllowedRank)
-    ManaProtectedHeal, ManaProtectedLowRank , ManaProtectedHighRank = MBH_ManaProtection(SpellName, LowestAllowedRank, HighestAllowedRank)
-    Session.SpellName = ManaProtectedHeal
+function MBH_CastHeal(SPN, LAR, HAR)
+    local MPH, MPLAR , MPHAR = MBH_ManaProtection(SPN, LAR, HAR)
+    Session.SpellName = MPH
 	if Session.CastTime[Session.SpellName] then
-		MBH_Cast(Session.SpellName, ManaProtectedLowRank, ManaProtectedHighRank)
+		MBH_Cast(Session.SpellName, MPLAR, MPHAR)
 	end
 end
 
@@ -817,12 +786,12 @@ function MBH_ManaProtection(SPN, LAR, HAR)
         MBH_InitializeManaProtectionThresholds()
     end
 
-    local spellData = ManaProtectionThresholds[SPN]
+    local MPData = ManaProtectionThresholds[SPN]
 
-    if spellData and spellData.ThresholdCheck() then
-        SPN = spellData.Spell
-        LAR = spellData.LAR or 1
-        HAR = spellData.HAR or MBH_GetMaxSpellRank(SPN)
+    if MPData and MPData.ThresholdCheck() then
+        SPN = MPData.Spell
+        LAR = MPData.LAR or 1
+        HAR = MPData.HAR or MBH_GetMaxSpellRank(SPN)
     else
         LAR = LAR or 1
         HAR = HAR or MBH_GetMaxSpellRank(SPN)
