@@ -379,7 +379,8 @@ DefaultOptions = {
     AdvancedOptions = {
         Mana_Protection = true,
         LagPrevention = {
-            Frequency = 0,
+            Enabled = false,
+            Frequency = 1,
         },
     },
     ManaProtectionValues = {
@@ -587,9 +588,10 @@ MBH:SetScript("OnEvent", MBH.OnEvent)
 function MBH:OnUpdate()
     Session.Elapsed = arg1
 
-    local Time = MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency
-    if Session.InCombat then
-        Time = 0
+    local Time = 0
+
+    if MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled and not Session.InCombat then
+        Time = MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency
     end
 
     Session.AdvancedOptions.LagPrevention.Time = Session.AdvancedOptions.LagPrevention.Time + Session.Elapsed

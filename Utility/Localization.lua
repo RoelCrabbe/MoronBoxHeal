@@ -55,6 +55,7 @@ MBH_LINEOFSIGHT = "TimeOut When Line of Sight: "
 MBH_LINEOFSIGHTFREQUENCY = "Update every: $p sec"
 
 MBH_MANAPROTECTION = "Mana Protection: "
+MBH_IDLEPROTECTIONENABLE = "Idle Protection: "
 MBH_IDLEPROTECTIONFREQUENCY = "Idle Update every: $p sec"
 
 MBH_SPELL_FLASH_HEAL = "Flash Heal"

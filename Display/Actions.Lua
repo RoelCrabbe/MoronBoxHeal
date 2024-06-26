@@ -141,7 +141,7 @@ end
 
 function MBH_IdleProtectionSlider_OnShow()
     local Frame = MoronBoxHealIdleProtectionlider
-    MBH_InitializeSlider(Frame, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 0, 5, 0.25)
+    MBH_InitializeSlider(Frame, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
 end
 
 function MBH_IdleProtectionSlider_OnValueChanged()

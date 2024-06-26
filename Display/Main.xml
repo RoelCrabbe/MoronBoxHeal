@@ -563,7 +563,7 @@
                         <Anchors>
                             <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealAdvancedOptionFrame">
                                 <Offset>
-                                    <AbsDimension x="0" y="35"/>
+                                    <AbsDimension x="0" y="65"/>
                                 </Offset>
                             </Anchor>                            
                         </Anchors>
@@ -593,14 +593,48 @@
                         </Scripts>
                     </CheckButton>
 
-                    <Slider name="MoronBoxHealIdleProtectionlider" inherits="MoronBoxHealOptionSlicerTemplate">
-                        
+                    <CheckButton name="MoronBoxHealLagPreventionCheckButton" inherits="OptionsCheckButtonTemplate">
+
                         <Anchors>
-                            <Anchor point="CENTER" relativePoint="TOP" relativeTo="MoronBoxHealOptionManaProtectionCheckbox">
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealOptionManaProtectionCheckbox">
                                 <Offset>
-                                    <AbsDimension y="-83" />
+                                    <AbsDimension y="-60"/>
                                 </Offset>
-                            </Anchor>
+                            </Anchor>                            
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="MoronBoxHealLagPreventionCheckButtonText" inherits="GameFontNormal" text="MBH_IDLEPROTECTIONENABLE">
+                                     <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="MoronBoxHealLagPreventionCheckButton">
+                                            <Offset>
+                                                <AbsDimension x="-5" y="0"/>
+                                            </Offset>
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Scripts>
+                            <OnClick>
+                                MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled = (this:GetChecked() == 1);
+                            </OnClick>
+                            <OnShow>
+                                this:SetChecked(MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled and 1 or 0);
+                            </OnShow>
+                        </Scripts>
+                    </CheckButton>
+
+                    <Slider name="MoronBoxHealIdleProtectionlider" inherits="MoronBoxHealOptionSlicerTemplate">
+                                              
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="CENTER" relativeTo="MoronBoxHealLagPreventionCheckButton">
+                                <Offset>
+                                    <AbsDimension y="-60"/>
+                                </Offset>
+                            </Anchor>                            
                         </Anchors>
                         
                         <Scripts>
