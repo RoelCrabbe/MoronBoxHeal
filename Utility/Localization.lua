@@ -60,12 +60,9 @@ MBH_IDLEPROTECTIONFREQUENCY = "Idle Update every: $p sec"
 MBH_SPELL_FLASH_HEAL = "Flash Heal"
 MBH_SPELL_HEAL = "Heal"
 MBH_SPELL_GREATER_HEAL = "Greater Heal"
-
 MBH_SPELL_CHAIN_HEAL = "Chain Heal"
 MBH_SPELL_LESSER_HEALING_WAVE = "Lesser Healing Wave"
-
 MBH_SPELL_HOLY_LIGHT = "Holy Light"
-
 MBH_SPELL_REGROWTH = "Regrowth"
 
 MBH_MANAPERCENTAGETO = "Mana Percentage to Cast "
