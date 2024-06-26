@@ -89,10 +89,13 @@ MBH_ACTIVE_REGROWTH_SWITCH = MBH_SPELL_REGROWTH..MNH_ACTIVESWITCH
 
 MBH_RESTOREDEFAULT = "Restore Default Settings"
 MBH_RESTOREDEFAULTCONFIRM = "Are you sure you want to restore default values?"
+MBH_RESTOREUNSUCCESS = "Unable To Reset Back To Defaults! Try And Clear WDB."
 
 MBH_PRESETSETTINGS = "Advanced Settings"
 MBH_PRESETSETTINGSCONFIRM = "Are you sure you want to load preset values?"
+MBH_PRESETSETTINGSUNSUCCESS = "There Is No Preset For You!"
 
 MBH_RELOADUI = "(This settings will reload your UI)"
 MBH_YES = "Yes"
 MBH_NO = "No"
+

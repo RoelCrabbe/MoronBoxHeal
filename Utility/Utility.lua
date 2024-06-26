@@ -6,8 +6,7 @@ function MBH_SetDefaultValues()
         ReloadUI()
         return
 	end
-
-    MBH_ErrorMessage("Unable to reset back to default, clear WDB.")
+    MBH_ErrorMessage(MBH_RESTOREUNSUCCESS)
 end
 
 function MBH_LoadPresetSettings()
@@ -22,8 +21,7 @@ function MBH_LoadPresetSettings()
             return
         end
     end
-
-    MBH_ErrorMessage("There is no preset for you.")
+    MBH_ErrorMessage(MBH_PRESETSETTINGSUNSUCCESS)
 end
 
 function GetColorValue(colorKey)
@@ -41,17 +39,16 @@ function MBH_ManaProtectionThresholdCheck(PCT)
 end
 
 function MBH_PrintMessage(message)
-    local titleColor = "|cffC71585" -- This color code represents gold
-    local messageColor = "|cff00ff00" -- This color code represents green
+    local titleColor = "|cffC71585"
+    local messageColor = "|cff00ff00"
 
-    DEFAULT_CHAT_FRAME:AddMessage(titleColor .. MBH_TITLE .. ": " .. messageColor .. message)
+    DEFAULT_CHAT_FRAME:AddMessage(titleColor..MBH_TITLE..": "..messageColor..message)
 end
 
 function MBH_ErrorMessage(message)
-    local titleColor = "|cffC71585" -- This color code represents gold
-    local errorMessageColor = "|cFFFF0000" -- This color code represents red
-
-    DEFAULT_CHAT_FRAME:AddMessage(titleColor .. MBH_TITLE .. ": " .. errorMessageColor .. message)
+    local titleColor = "|cffC71585"
+    local errorMessageColor = "|cFFFF0000"
+    DEFAULT_CHAT_FRAME:AddMessage(titleColor..MBH_TITLE..": "..errorMessageColor..message)
 end
 
 function MBH_ExtractRank(str)
