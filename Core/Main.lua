@@ -481,7 +481,6 @@ Session = {
 -------------------------------------------------------------------------------
 
 MBH = CreateFrame("Frame", "MBH")
-MBH:SetScript("OnEvent", MBH.OnEvent) 
 
 do
 	for _, event in {
@@ -614,10 +613,6 @@ function MBH_SetupSavedVariables()
     if not MoronBoxHeal_Options then 
         MoronBoxHeal_Options = DefaultOptions
     end
-
-    if not MoronBoxHeal_Debug then
-        MoronBoxHeal_Debug = {}
-	end
 end
 
 -------------------------------------------------------------------------------
@@ -690,9 +685,7 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
                 ClearTarget()
             end
 
-            -- Cast spell & log if enabled
             CastSpellByName(Castable)
-            MBH_LogDebug("Casting: "..Castable.." on "..UnitName(UnitID))
 
             -- Target the unit if the spell requires targeting
             if SpellIsTargeting() then

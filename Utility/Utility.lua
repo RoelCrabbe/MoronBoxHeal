@@ -54,26 +54,6 @@ function MBH_ErrorMessage(message)
     DEFAULT_CHAT_FRAME:AddMessage(titleColor .. MBH_TITLE .. ": " .. errorMessageColor .. message)
 end
 
-local COOLDOWN_DURATION = 60
-local lastMessage = ""
-local lastMessageTime = 0
-
-function MBH_LogDebug(Msg)
-    if Session.Debug then
-        local currentTime = GetTime()
-        local debugMessage = MBG_DEBUGTIME .. " - " .. Msg
-        
-        if Msg == lastMessage and (currentTime - lastMessageTime) < COOLDOWN_DURATION then
-            return
-        end
-        
-        lastMessage = Msg
-        lastMessageTime = currentTime
-        
-        table.insert(MoronBoxHeal_Debug, debugMessage)
-    end
-end
-
 function MBH_ExtractRank(str)
     local num = ""
     local foundDigit = false
