@@ -70,9 +70,7 @@ function MBH_InitalData()
 	MBH.Track["player"].HealName = nil
 end
 
-function MBH_ClearData(elapsed)
-	Session.Elapsed = elapsed
-	
+function MBH_ClearData()
 	for i = 1, Session.MaxData do
 		MBH.GroupData[i].HealthDeficite = 0
 		MBH.GroupData[i].UnitID = ""

@@ -576,9 +576,14 @@ end
 MBH:SetScript("OnEvent", MBH.OnEvent) 
 
 function MBH:OnUpdate()
-    MBH_ClearData(arg1)
+    Session.Elapsed = arg1
+
+    MBH_ClearData()
     MBH_UpdateData()
-    if MoronBoxHeal_Options.ExtendedRange.Enable then MBH_UpdateRange() end
+
+    if MoronBoxHeal_Options.ExtendedRange.Enable then 
+        MBH_UpdateRange() 
+    end
 end
 
 MBH:SetScript("OnUpdate", MBH.OnUpdate) 
