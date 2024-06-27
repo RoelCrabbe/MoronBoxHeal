@@ -4,21 +4,6 @@
 
 function MBH_GetHealSpell()
 
-	local spellNames = {
-		"Holy Light", 
-		"Flash of Light",
-		"Healing Wave",
-		"Lesser Healing Wave",
-		"Chain Heal",
-		"Lesser Heal",
-		"Heal",
-		"Flash Heal",
-		"Greater Heal",
-		"Renew",
-		"Healing Touch",
-		"Regrowth",
-	}
-
 	Session.HealSpell = nil
 
 	for i = 1, 120 do
@@ -26,9 +11,11 @@ function MBH_GetHealSpell()
 		MBH.ScanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
 		MBH.ScanningTooltip:SetAction(i)
 
-		if ScanningTooltipTextLeft1:GetText() == spellNames[1] or ScanningTooltipTextLeft1:GetText() == spellNames[2] or ScanningTooltipTextLeft1:GetText() == spellNames[3] or ScanningTooltipTextLeft1:GetText() == spellNames[4] or ScanningTooltipTextLeft1:GetText() == spellNames[5] or ScanningTooltipTextLeft1:GetText() == spellNames[6] or ScanningTooltipTextLeft1:GetText() == spellNames[7] or ScanningTooltipTextLeft1:GetText() == spellNames[8] or ScanningTooltipTextLeft1:GetText() == spellNames[3] or ScanningTooltipTextLeft1:GetText() == spellNames[10] or ScanningTooltipTextLeft1:GetText() == spellNames[11] or ScanningTooltipTextLeft1:GetText() == spellNames[12] or ScanningTooltipTextLeft1:GetText() == spellNames[13] then
-			Session.HealSpell = i
-			break 
+		for SPN, Time in pairs(Session.CastTime) do
+			if tooltipText == SPN then
+				Session.HealSpell = i
+				break
+			end
 		end
 	end
 end
