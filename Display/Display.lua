@@ -1182,7 +1182,7 @@ function CreateEditBox(Parent, Text, Width, Height)
 
     local EditBoxText = EditBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     EditBoxText:SetText(Text)
-    EditBoxText:SetPoint("CENTER", EditBox, "LEFT", -70, 0)
+    EditBoxText:SetPoint("RIGHT", EditBox, "LEFT", -40, 0)
     EditBox.Text = EditBoxText
 
     local function EditBox_OnEscapePressed()
@@ -1195,7 +1195,7 @@ end
 
 function CreateCheckButton(Parent, Text, XAsis)
 
-    XAsis = XAsis or -78.5
+    XAsis = XAsis or -48.5
 
     local CheckButton = CreateFrame("CheckButton", nil, Parent, "OptionsCheckButtonTemplate")
     local CheckButtonText = CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
