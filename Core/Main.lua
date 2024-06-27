@@ -480,7 +480,7 @@ Session = {
 -- Core Event Code {{{
 -------------------------------------------------------------------------------
 
-MBH = CreateFrame("Frame", "MBH")
+MBH = CreateFrame("Frame", "MBH", UIParent)
 
 do
 	for _, event in {
@@ -526,6 +526,8 @@ function MBH:OnEvent()
         MBH_SetupData()
         MBH_GetHealSpell()
         MBH_InitalData()
+
+        MBH_Minimap:CreateMinimapIcon()
 
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 

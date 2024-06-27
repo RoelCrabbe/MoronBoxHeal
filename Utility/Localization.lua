@@ -12,6 +12,7 @@ MBH_OPTIONS = 'Options'
 MBH_PROTECTION = 'Mana Protection'
 MBH_HIDE = 'Close'
 MBH_EXIT = "Get lost!"
+MBH_MINIMAPHOVER = "Click to show/hide the main frame."
 
 MBH_WELCOME = "|cffe3e3e3Welcome To "..MBH_TITLE.."|r"
 MBH_INFORMATION = 
@@ -99,3 +100,12 @@ MBH_RELOADUI = "(This settings will reload your UI)"
 MBH_YES = "Yes"
 MBH_NO = "No"
 
+-------------------------------------------------------------------------------
+-- Frame Creation {{{
+-------------------------------------------------------------------------------
+
+LeftButton = "LeftButton"
+LeftButtonUp = LeftButton.."Up"
+
+RightButton = "RightButton"
+RightButtonUp = RightButton.."Up"
