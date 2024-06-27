@@ -152,6 +152,20 @@ local BackDrop = {
     }
 }
 
+local SliderBackDrop = {
+    bgFile = "Interface/Buttons/UI-SliderBar-Background",
+    edgeFile = "Interface/Buttons/UI-SliderBar-Border",
+    tile = false,
+    tileSize = 16,
+    edgeSize = 1,
+    insets = {
+        left = 0,
+        right = 0,
+        top = 0,
+        bottom = 0
+    }
+}
+
 function MBH.MainFrame:CreateMainFrame()
 
     DefaultFrameTemplate(self)
@@ -187,6 +201,49 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     DefaultFrameButtons(self)
 
     self.InnerContainer = CreateInnerContainer(self)
+
+    -- Priest
+    local FlashHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+    FlashHealTitle:SetText(MBH_SPELL_FLASH_HEAL)
+    FlashHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 85, -25)
+
+    local FlashHealSlider = CreateSlider(self.InnerContainer, "FlashHealSlider", 180)
+    FlashHealSlider:SetPoint("CENTER", FlashHealTitle, "CENTER", 0, -50)
+
+    local function FlashHealSlider_OnShow()
+        InitializeSlider(FlashHealSlider , MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
+    end
+
+    FlashHealSlider:SetScript("OnShow", FlashHealSlider_OnShow)
+    FlashHealSlider:SetScript("OnValueChanged", FlashHealSlider_OnValueChanged)
+
+    local HealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+    HealTitle:SetText(MBH_SPELL_HEAL)
+    HealTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
+
+    local HealSlider = CreateSlider(self.InnerContainer, "HealSlider", 180)
+    HealSlider:SetPoint("CENTER", HealTitle, "CENTER", 0, -50)
+
+    local function HealSlider_OnShow()
+        InitializeSlider(HealSlider, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
+    end
+
+    HealSlider:SetScript("OnShow", HealSlider_OnShow)
+    HealSlider:SetScript("OnValueChanged", HealSlider_OnValueChanged)
+
+    local GreaterHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+    GreaterHealTitle:SetText(MBH_SPELL_GREATER_HEAL)
+    GreaterHealTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -85, -25)
+
+    local GreaterHealSlider = CreateSlider(self.InnerContainer, "GreaterHealSlider", 180)
+    GreaterHealSlider:SetPoint("CENTER", GreaterHealTitle, "CENTER", 0, -50)
+
+    local function GreaterHealSlider_OnShow()
+        InitializeSlider(GreaterHealSlider, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
+    end
+
+    GreaterHealSlider:SetScript("OnShow", GreaterHealSlider_OnShow)
+    GreaterHealSlider:SetScript("OnValueChanged", GreaterHealSlider_OnValueChanged)
 
     self:Hide()
 end
@@ -488,4 +545,39 @@ function DefaultFrameButtons(Frame)
     Frame.PresetSettingsButton:SetScript("OnEnter", PresetSettingsButton_OnEnter)
     Frame.PresetSettingsButton:SetScript("OnLeave", PresetSettingsButton_OnLeave)
     Frame.PresetSettingsButton:SetScript("OnClick", PresetSettingsButton_OnClick)
+end
+
+function CreateSlider(Parent, Name, Width, Height)
+    
+    Width = Width or 220
+    Height = Height or 16
+
+    local Slider = CreateFrame("Slider", Name, Parent, 'OptionsSliderTemplate')
+    Slider:SetWidth(Width)
+	Slider:SetHeight(Height)
+    Slider:SetBackdrop(SliderBackDrop)
+    return Slider
+end
+
+function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
+    getglobal(Slider:GetName().."Text"):SetText(string.gsub(String, "$p", Value))
+    getglobal(Slider:GetName().."Text"):SetPoint("BOTTOM", Slider, "TOP", 0, 5)
+
+    MinStep = MinStep or 1
+    MaxStep = MaxStep or 100
+
+    Slider:SetMinMaxValues(MinStep, MaxStep)
+    Slider:SetValueStep(ValStep or 1)
+    Slider:SetValue(Value)
+
+    getglobal(Slider:GetName().."Low"):Hide()
+    getglobal(Slider:GetName().."High"):Hide()
+
+    local minValueText = Slider:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    minValueText:SetText(MinStep)
+    minValueText:SetPoint("CENTER", Slider, "LEFT", -10, 0)
+
+    local maxValueText = Slider:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    maxValueText:SetText(MaxStep)
+    maxValueText:SetPoint("CENTER", Slider, "RIGHT", 10, 0)
 end
