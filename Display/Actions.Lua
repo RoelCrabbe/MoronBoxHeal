@@ -416,7 +416,7 @@ function MBH_UpdateInputField(Frame, Value)
 	Frame:SetText(Value)
 end
 
----- 
+-- Slicer
 
 function FlashHealSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold = this:GetValue()
@@ -432,3 +432,10 @@ function GreaterHealSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold, MBH_GREATERHEALPROTECTIONTHRESHOLD)
 end
+
+-- EditBox
+
+-- function FlashHealLAR_OnTextChanged()
+--     Print("FlashHealLAR_OnTextChanged")
+--     MBH_ValidateLAR(MoronBoxHealFlashHealProtectionThresholdHAR, "Flash_Heal")
+-- end
