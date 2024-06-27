@@ -528,7 +528,10 @@ function MBH:OnEvent()
         MBH_InitalData()
 
         MBH.MiniMapButton:CreateMinimapIcon()
-
+        MBH.MainFrame:CreateMainFrame()
+        MBH.OptionFrame:CreateOptionFrame()
+        MBH.ProtectionFrame:CreateProtectionFrame()
+        
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 
 		Session.CurrentUnit = nil
