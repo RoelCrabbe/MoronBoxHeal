@@ -217,6 +217,19 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     FlashHealSlider:SetScript("OnShow", FlashHealSlider_OnShow)
     FlashHealSlider:SetScript("OnValueChanged", FlashHealSlider_OnValueChanged)
 
+    local FlashHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
+    FlashHealLAR:SetPoint("CENTER", FlashHealSlider, "CENTER", 50, -50)
+    FlashHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
+
+    local FlashHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
+    FlashHealHAR:SetPoint("CENTER", FlashHealLAR, "CENTER", 0, -50)
+    FlashHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
+
+    local FlashHealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
+    FlashHealEnable:SetPoint("CENTER", FlashHealHAR, "CENTER", 0, -50)
+
+
+
     local HealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
     HealTitle:SetText(MBH_SPELL_HEAL)
     HealTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
@@ -231,6 +244,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     HealSlider:SetScript("OnShow", HealSlider_OnShow)
     HealSlider:SetScript("OnValueChanged", HealSlider_OnValueChanged)
 
+    local HealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
+    HealLAR:SetPoint("CENTER", HealSlider, "CENTER", 50, -50)
+    HealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
+
+    local HealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
+    HealHAR:SetPoint("CENTER", HealLAR, "CENTER", 0, -50)
+    HealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
+
+    local HealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
+    HealEnable:SetPoint("CENTER", HealHAR, "CENTER", 0, -50)
+
+
+
+
     local GreaterHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
     GreaterHealTitle:SetText(MBH_SPELL_GREATER_HEAL)
     GreaterHealTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -85, -25)
@@ -244,6 +271,19 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
 
     GreaterHealSlider:SetScript("OnShow", GreaterHealSlider_OnShow)
     GreaterHealSlider:SetScript("OnValueChanged", GreaterHealSlider_OnValueChanged)
+
+    local GreaterHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
+    GreaterHealLAR:SetPoint("CENTER", GreaterHealSlider, "CENTER", 50, -50)
+    GreaterHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
+
+    local GreaterHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
+    GreaterHealHAR:SetPoint("CENTER", GreaterHealLAR, "CENTER", 0, -50)
+    GreaterHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
+    
+    local GreaterHealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
+    GreaterHealEnable:SetPoint("CENTER", GreaterHealHAR, "CENTER", 0, -50)
+
+
 
     self:Hide()
 end
@@ -580,4 +620,59 @@ function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
     local maxValueText = Slider:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
     maxValueText:SetText(MaxStep)
     maxValueText:SetPoint("CENTER", Slider, "RIGHT", 10, 0)
+end
+
+function CreateEditBox(Parent, Text, Width, Height)
+
+    Width = Width or 50
+    Height = Height or 20
+
+    local EditBox = CreateFrame("EditBox", nil, Parent)
+    EditBox:SetWidth(Width)
+    EditBox:SetHeight(Height)
+    EditBox:SetAutoFocus(false)
+    EditBox:SetMaxLetters(256)
+    EditBox:SetFontObject(GameFontHighlight)
+
+    local LeftCurve = EditBox:CreateTexture(nil, "BACKGROUND")
+    LeftCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
+    LeftCurve:SetWidth(12)
+    LeftCurve:SetHeight(29)
+    LeftCurve:SetPoint("TOPLEFT", -11, 2)
+    LeftCurve:SetTexCoord(0, 0.09375, 0, 1.0)
+
+    local RightCurve = EditBox:CreateTexture(nil, "BACKGROUND")
+    RightCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
+    RightCurve:SetWidth(12)
+    RightCurve:SetHeight(29)
+    RightCurve:SetPoint("TOPRIGHT", 4, 2)
+    RightCurve:SetTexCoord(0.90625, 1.0, 0, 1.0)
+
+    local MiddleTexture = EditBox:CreateTexture(nil, "BACKGROUND")
+    MiddleTexture:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
+    MiddleTexture:SetPoint("TOPLEFT", LeftCurve, "TOPRIGHT")
+    MiddleTexture:SetPoint("BOTTOMRIGHT", RightCurve, "BOTTOMLEFT")
+    MiddleTexture:SetTexCoord(0.09375, 0.90625, 0, 1.0)
+
+    local EditBoxText = EditBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    EditBoxText:SetText(Text)
+    EditBoxText:SetPoint("CENTER", EditBox, "LEFT", -70, 0)
+    EditBox.Text = EditBoxText
+
+    local function EditBox_OnEscapePressed()
+        EditBox:ClearFocus()
+    end
+
+    EditBox:SetScript("OnEscapePressed", EditBox_OnEscapePressed)
+    return EditBox
+end
+
+function CreateCheckButton(Parent, Text)
+
+    local CheckButton = CreateFrame("CheckButton", nil, Parent, "OptionsCheckButtonTemplate")
+    local CheckButtonText = CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    CheckButtonText:SetText(Text)
+    CheckButtonText:SetPoint("CENTER", CheckButton, "LEFT", -78.5, 0)
+    CheckButton.Text = CheckButtonText
+    return CheckButton
 end
