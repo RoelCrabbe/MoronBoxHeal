@@ -3,7 +3,25 @@
 -------------------------------------------------------------------------------
 
 MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap) -- Minimap Frame
-MBH.MainFrame = CreateFrame("Frame", nil , UIParent) -- MainFrame Frame
+
+ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", UIParent, "GameTooltipTemplate")
+ScanningTooltip:SetScript("OnLoad", function()
+    this:SetOwner(this, "ANCHOR_NONE")
+end)
+
+MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
+
+function MBH_ResetAllWindow()
+    MBH_ResetFramePosition(MBH.MainFrame)
+    MBH_ResetFramePosition(MBH.OptionFrame)
+    MBH_ResetFramePosition(MBH.ProtectionFrame)
+    MBH_ResetFramePosition(MBH.PopupPresetFrame)
+    MBH_ResetFramePosition(MBH.PopupDefaultFrame)
+end
 
 local BackDrop = {
     bgFile = "Interface/Buttons/WHITE8X8",
@@ -16,6 +34,20 @@ local BackDrop = {
         right = 1,
         top = 1,
         bottom = 1
+    }
+}
+
+local SliderBackDrop = {
+    bgFile = "Interface/Buttons/UI-SliderBar-Background",
+    edgeFile = "Interface/Buttons/UI-SliderBar-Border",
+    tile = false,
+    tileSize = 16,
+    edgeSize = 1,
+    insets = {
+        left = 0,
+        right = 0,
+        top = 0,
+        bottom = 0
     }
 }
 
@@ -66,11 +98,11 @@ function MBH.MiniMapButton:CreateMinimapIcon()
 
     local function OnClick()
         MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
-        if MoronBoxHealMainFrame:IsShown() then
-            MoronBoxHealMainFrame:Hide()
+        if MBH.MainFrame:IsShown() then
+            MBH.MainFrame:Hide()
         else 
             MBH_ResetAllWindow()
-            MoronBoxHealMainFrame:Show()
+            MBH.MainFrame:Show()
         end
     end
 
@@ -134,38 +166,6 @@ end
 -- Main Frame {{{
 -------------------------------------------------------------------------------
 
-MBH.MainFrame = CreateFrame("Frame", nil , UIParent) -- MainFrame Frame
-MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) -- MainFrame Frame
-MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) -- MainFrame Frame
-
-local BackDrop = {
-    bgFile = "Interface/Buttons/WHITE8X8",
-    edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-    tile = false,
-    tileSize = 16,
-    edgeSize = 4,
-    insets = {
-        left = 1,
-        right = 1,
-        top = 1,
-        bottom = 1
-    }
-}
-
-local SliderBackDrop = {
-    bgFile = "Interface/Buttons/UI-SliderBar-Background",
-    edgeFile = "Interface/Buttons/UI-SliderBar-Border",
-    tile = false,
-    tileSize = 16,
-    edgeSize = 1,
-    insets = {
-        left = 0,
-        right = 0,
-        top = 0,
-        bottom = 0
-    }
-}
-
 function MBH.MainFrame:CreateMainFrame()
 
     DefaultFrameTemplate(self)
@@ -183,6 +183,8 @@ function MBH.MainFrame:CreateMainFrame()
 	InformationText:SetHeight(350)
     InformationText:SetPoint("CENTER", self.InnerContainer, "CENTER")
     SetFontSize(InformationText, 13)
+
+    self:Hide()
 end
 
 -------------------------------------------------------------------------------
@@ -761,6 +763,48 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
 end
 
 -------------------------------------------------------------------------------
+-- PopupPreset Frame {{{
+-------------------------------------------------------------------------------
+
+function MBH.PopupPresetFrame:CreatePopupPresetFrame()
+
+    CreatePopupFrame(self)
+
+    local PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    PopupPresetText:SetText(MBH_PRESETSETTINGSCONFIRM)
+    PopupPresetText:SetPoint("CENTER", self, "TOP", 0, -25)
+
+    local function YesButton_OnClick()
+        MBH_LoadPresetSettings()
+        self:Hide()
+    end
+
+    self.AcceptButton:SetScript("OnClick", YesButton_OnClick)
+    self:Hide()
+end
+
+-------------------------------------------------------------------------------
+-- PopupDefault Frame {{{
+-------------------------------------------------------------------------------
+
+function MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
+
+    CreatePopupFrame(self)
+
+    local PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    PopupPresetText:SetText(MBH_RESTOREDEFAULTCONFIRM)
+    PopupPresetText:SetPoint("CENTER", self, "TOP", 0, -25)
+
+    local function YesButton_OnClick()
+        MBH_SetDefaultValues()
+        self:Hide()
+    end
+
+    self.AcceptButton:SetScript("OnClick", YesButton_OnClick)
+    self:Hide()
+end
+
+-------------------------------------------------------------------------------
 -- Helper Functions {{{
 -------------------------------------------------------------------------------
 
@@ -785,8 +829,7 @@ function CreateButton(Parent, Text, Width, Height)
 	Button:SetHeight(Height)
     Button:SetFrameLevel(8)
     Button:SetBackdrop(BackDrop)
-    Button:SetBackdropColor(GetColorValue("Gray600"))
-    Button:SetBackdropBorderColor(GetColorValue("Gray600"))
+    SetBackdropColor(Button, "Gray600")
 
     local Overlay = Button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     Overlay:SetText(Text)
@@ -794,15 +837,15 @@ function CreateButton(Parent, Text, Width, Height)
     Button.Overlay = Overlay
 
     local function OnEnter()
-        MBH_SetBackdropColors("Gray400")
+        SetBackdropColor(this, "Gray400")
     end
 
     local function OnLeave()
-        MBH_SetBackdropColors("Gray600")
+        SetBackdropColor(this, "Gray600")
     end
 
     local function OnShow()
-        MBH_SetBackdropColors("Gray600")
+        SetBackdropColor(this, "Gray600")
     end
 
     Button:SetScript("OnEnter", OnEnter)
@@ -1041,10 +1084,10 @@ function DefaultFrameButtons(Frame)
     end
 
     local function DefaultSettingsButton_OnClick()
-        if (MoronBoxHealMainPopupPresetFrame:IsShown()) then
-            MoronBoxHealMainPopupPresetFrame:Hide()
+        if (MBH.PopupPresetFrame:IsShown()) then
+            MBH.PopupPresetFrame:Hide()
         end
-        MoronBoxHealMainPopupDefaultFrame:Show()
+        MBH.PopupDefaultFrame :Show()
     end
 
     Frame.DefaultSettingsButton:SetScript("OnEnter", DefaultSettingsButton_OnEnter)
@@ -1063,10 +1106,10 @@ function DefaultFrameButtons(Frame)
     end
 
     local function PresetSettingsButton_OnClick()
-        if (MoronBoxHealMainPopupDefaultFrame:IsShown()) then
-            MoronBoxHealMainPopupDefaultFrame:Hide()
+        if (MBH.PopupDefaultFrame :IsShown()) then
+            MBH.PopupDefaultFrame :Hide()
         end
-        MoronBoxHealMainPopupPresetFrame:Show()
+        MBH.PopupPresetFrame:Show()
     end
 
     Frame.PresetSettingsButton:SetScript("OnEnter", PresetSettingsButton_OnEnter)
@@ -1164,4 +1207,84 @@ function CreateCheckButton(Parent, Text, XAsis)
     CheckButtonText:SetPoint("RIGHT", CheckButton, "LEFT", XAsis, 0)
     CheckButton.Text = CheckButtonText
     return CheckButton
+end
+
+function CreatePopupFrame(PopupFrame)
+    local IsMoving = false
+
+    PopupFrame:SetFrameStrata("HIGH")
+    PopupFrame:SetWidth(300)
+    PopupFrame:SetHeight(110)
+    PopupFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    PopupFrame:SetBackdrop(BackDrop)
+    SetBackdropColor(PopupFrame, "Gray800")
+    PopupFrame:SetMovable(true)
+    PopupFrame:EnableMouse(true)
+
+    local PopupFrameText = PopupFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    PopupFrameText:SetText(MBH_RELOADUI)
+    PopupFrameText:SetPoint("CENTER", PopupFrame, "CENTER", 0, 0)
+    PopupFrame.Text = PopupFrameText
+
+    local AcceptButton = CreateButton(PopupFrame, MBH_YES, 100) 
+    AcceptButton:SetPoint("BOTTOMLEFT", PopupFrame, "BOTTOMLEFT", 5, 7.5)
+    SetBackdropColor(AcceptButtonn, "Gray600")
+    PopupFrame.AcceptButton = AcceptButton
+
+    local function AcceptButton_OnEnter()
+        SetBackdropColor(AcceptButton, "Green600")
+    end
+
+    local function AcceptButton_OnLeave()
+        SetBackdropColor(AcceptButton, "Gray600")
+    end
+
+    AcceptButton:SetScript("OnEnter", AcceptButton_OnEnter)
+    AcceptButton:SetScript("OnLeave", AcceptButton_OnLeave)
+
+    local DeclineButton = CreateButton(PopupFrame, MBH_NO, 100) 
+    DeclineButton:SetPoint("BOTTOMRIGHT", PopupFrame, "BOTTOMRIGHT", -5, 7.5)
+    SetBackdropColor(DeclineButton, "Gray600")
+    PopupFrame.DeclineButton = DeclineButton
+
+    local function DeclineButton_OnEnter()
+        SetBackdropColor(DeclineButton, "Red500")
+    end
+
+    local function DeclineButton_OnLeave()
+        SetBackdropColor(DeclineButton, "Gray600")
+    end
+
+    local function DeclineButton_OnClick()
+        PopupFrame:Hide()
+    end
+
+    DeclineButton:SetScript("OnEnter", DeclineButton_OnEnter)
+    DeclineButton:SetScript("OnLeave", DeclineButton_OnLeave)
+    DeclineButton:SetScript("OnClick", DeclineButton_OnClick)
+
+    local function PopupFrame_OnMouseUp()
+        if IsMoving then
+            PopupFrame:StopMovingOrSizing()
+            IsMoving = false
+        end
+    end
+
+    local function PopupFrame_OnMouseDown()
+        if not IsMoving and arg1 == "LeftButton" then
+            PopupFrame:StartMoving()
+            IsMoving = true
+        end
+    end
+
+    local function PopupFrame_OnHide()
+        if IsMoving then
+            PopupFrame:StopMovingOrSizing()
+            IsMoving = false
+        end
+    end
+
+    PopupFrame:SetScript("OnMouseUp", PopupFrame_OnMouseUp)
+    PopupFrame:SetScript("OnMouseDown", PopupFrame_OnMouseDown)
+    PopupFrame:SetScript("OnHide", PopupFrame_OnHide)
 end

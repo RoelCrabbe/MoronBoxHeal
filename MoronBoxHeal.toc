@@ -22,6 +22,4 @@ Core\Range.lua
 Core\Main.lua
 
 Display\Actions.lua
-Display\Templates.xml
 Display\Display.lua
-Display\Main.xml

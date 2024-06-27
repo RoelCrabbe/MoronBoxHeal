@@ -105,6 +105,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = true,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Priest = {
@@ -140,6 +144,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = true,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Priest = {
@@ -175,6 +183,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = true,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Priest = {
@@ -212,6 +224,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = false,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Shaman = {
@@ -243,6 +259,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = true,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Shaman = {
@@ -276,6 +296,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = false,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Paladin = {
@@ -305,6 +329,10 @@ PresetSettings = {
             },
             AdvancedOptions = {
                 Mana_Protection = true,
+                LagPrevention = {
+                    Enabled = false,
+                    Frequency = 1,
+                },
             },
             ManaProtectionValues = {
                 Druid = {
@@ -531,7 +559,9 @@ function MBH:OnEvent()
         MBH.MainFrame:CreateMainFrame()
         MBH.OptionFrame:CreateOptionFrame()
         MBH.ProtectionFrame:CreateProtectionFrame()
-        
+        MBH.PopupPresetFrame:CreatePopupPresetFrame()
+        MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
+
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 
 		Session.CurrentUnit = nil
