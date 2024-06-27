@@ -23,8 +23,8 @@ function MBH_GetHealSpell()
 
 	for i = 1, 120 do
 
-		ScanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
-		ScanningTooltip:SetAction(i)
+		MBH.ScanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+		MBH.ScanningTooltip:SetAction(i)
 
 		if ScanningTooltipTextLeft1:GetText() == spellNames[1] or ScanningTooltipTextLeft1:GetText() == spellNames[2] or ScanningTooltipTextLeft1:GetText() == spellNames[3] or ScanningTooltipTextLeft1:GetText() == spellNames[4] or ScanningTooltipTextLeft1:GetText() == spellNames[5] or ScanningTooltipTextLeft1:GetText() == spellNames[6] or ScanningTooltipTextLeft1:GetText() == spellNames[7] or ScanningTooltipTextLeft1:GetText() == spellNames[8] or ScanningTooltipTextLeft1:GetText() == spellNames[3] or ScanningTooltipTextLeft1:GetText() == spellNames[10] or ScanningTooltipTextLeft1:GetText() == spellNames[11] or ScanningTooltipTextLeft1:GetText() == spellNames[12] or ScanningTooltipTextLeft1:GetText() == spellNames[13] then
 			Session.HealSpell = i

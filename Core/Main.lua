@@ -202,6 +202,28 @@ PresetSettings = {
                     Greater_Heal_Threshold = 42,
                     Greater_Heal_LAR = 1,
                     Greater_Heal_HAR = 4
+                },
+                Shaman = {
+                    Chain_Heal_Switch = false,
+                    Chain_Heal_Threshold = 12.5,
+                    Chain_Heal_LAR = 3,
+                    Chain_Heal_HAR = 7,
+                    Lesser_Healing_Wave_Switch = false,
+                    Lesser_Healing_Wave_Threshold = 35,
+                    Lesser_Healing_Wave_LAR = 3,
+                    Lesser_Healing_Wave_HAR = 7
+                },
+                Paladin = {
+                    Holy_Light_Switch = false,
+                    Holy_Light_Threshold = 5,
+                    Holy_Light_LAR = 1,
+                    Holy_Light_HAR = 6
+                },
+                Druid = {
+                    Regrowth_Switch = true,
+                    Regrowth_Threshold = 50,
+                    Regrowth_LAR = 1,
+                    Regrowth_HAR = 11,
                 }
             }
         },
@@ -230,6 +252,20 @@ PresetSettings = {
                 },
             },
             ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Switch = true,
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Switch = true,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                    Greater_Heal_Switch = true,
+                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                },
                 Shaman = {
                     Chain_Heal_Switch = false,
                     Chain_Heal_Threshold = 12.5,
@@ -265,12 +301,26 @@ PresetSettings = {
                 },
             },
             ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Switch = true,
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Switch = true,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                    Greater_Heal_Switch = true,
+                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                },
                 Shaman = {
-                    Chain_Heal_Switch = true,
+                    Chain_Heal_Switch = false,
                     Chain_Heal_Threshold = 12.5,
                     Chain_Heal_LAR = 3,
                     Chain_Heal_HAR = 7,
-                    Lesser_Healing_Wave_Switch = true,
+                    Lesser_Healing_Wave_Switch = false,
                     Lesser_Healing_Wave_Threshold = 35,
                     Lesser_Healing_Wave_LAR = 3,
                     Lesser_Healing_Wave_HAR = 7
@@ -302,6 +352,30 @@ PresetSettings = {
                 },
             },
             ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Switch = true,
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Switch = true,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                    Greater_Heal_Switch = true,
+                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                },
+                Shaman = {
+                    Chain_Heal_Switch = false,
+                    Chain_Heal_Threshold = 12.5,
+                    Chain_Heal_LAR = 3,
+                    Chain_Heal_HAR = 7,
+                    Lesser_Healing_Wave_Switch = false,
+                    Lesser_Healing_Wave_Threshold = 35,
+                    Lesser_Healing_Wave_LAR = 3,
+                    Lesser_Healing_Wave_HAR = 7
+                },
                 Paladin = {
                     Holy_Light_Switch = false,
                     Holy_Light_Threshold = 5,
@@ -335,6 +409,36 @@ PresetSettings = {
                 },
             },
             ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Switch = true,
+                    Flash_Heal_Threshold = 20,
+                    Flash_Heal_LAR = 1,
+                    Flash_Heal_HAR = 4,
+                    Heal_Switch = true,
+                    Heal_Threshold = 5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                    Greater_Heal_Switch = true,
+                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                },
+                Shaman = {
+                    Chain_Heal_Switch = false,
+                    Chain_Heal_Threshold = 12.5,
+                    Chain_Heal_LAR = 3,
+                    Chain_Heal_HAR = 7,
+                    Lesser_Healing_Wave_Switch = false,
+                    Lesser_Healing_Wave_Threshold = 35,
+                    Lesser_Healing_Wave_LAR = 3,
+                    Lesser_Healing_Wave_HAR = 7
+                },
+                Paladin = {
+                    Holy_Light_Switch = false,
+                    Holy_Light_Threshold = 5,
+                    Holy_Light_LAR = 1,
+                    Holy_Light_HAR = 6
+                },
                 Druid = {
                     Regrowth_Switch = true,
                     Regrowth_Threshold = 50,

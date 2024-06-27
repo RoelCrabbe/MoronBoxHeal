@@ -4,11 +4,7 @@
 
 MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap) -- Minimap Frame
 
-ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", UIParent, "GameTooltipTemplate")
-ScanningTooltip:SetScript("OnLoad", function()
-    this:SetOwner(this, "ANCHOR_NONE")
-end)
-
+MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", UIParent, "GameTooltipTemplate")
 MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
 MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
 MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
