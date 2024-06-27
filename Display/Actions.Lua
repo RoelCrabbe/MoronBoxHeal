@@ -459,3 +459,28 @@ end
 --     Print("FlashHealLAR_OnTextChanged")
 --     MBH_ValidateLAR(MoronBoxHealFlashHealProtectionThresholdHAR, "Flash_Heal")
 -- end
+
+function OverHealHealSlider_OnValueChanged()
+    MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage, MBH_ALLOWEDOVERHEAL)
+end
+
+function HealTargetSlider_OnValueChanged()
+    MoronBoxHeal_Options.AutoHeal.Heal_Target_Number = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, MBH_HEALTARGETNUMBER)
+end
+
+function ExtendedRangeFrequencySlider_OnValueChanged()
+    MoronBoxHeal_Options.ExtendedRange.Frequency = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ExtendedRange.Frequency, MBH_EXTENDEDRANGEFREQUENCY)
+end
+
+function LightOfSightFrequencySlider_OnValueChanged()
+    MoronBoxHeal_Options.LineOfSight.TimeOut = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.LineOfSight.TimeOut, MBH_LINEOFSIGHTFREQUENCY)
+end
+
+function IdleProtectionFrequencySlider_OnValueChanged()
+    MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, MBH_IDLEPROTECTIONFREQUENCY)
+end

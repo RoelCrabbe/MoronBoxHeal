@@ -39,10 +39,10 @@ MBH_INFORMATION =
 
 "Be sure to checkout the option's panel!";
 
-MBH_HEALSETTINGS = "Healing Settings: "
-MBH_RANGSETTINGS = "Extended Range Settings: "
-MBH_LOSETTINGS = "Line of Sight Settings: "
-MBH_SPECIALSETTINGS = "Special Settings: "
+MBH_HEALSETTINGS = "Healing Settings"
+MBH_RANGSETTINGS = "Extended Range Settings"
+MBH_LOSETTINGS = "Line of Sight Settings"
+MBH_SPECIALSETTINGS = "Special Settings"
 
 MBH_SMARTHEAL = "Smart Heal: "
 MBH_ALLOWEDOVERHEAL = "Allowed Overheal: $p %"
@@ -52,7 +52,7 @@ MBH_HEALTARGETNUMBER = "Heal Target Number: $p"
 MBH_EXTENDEDRANGE = "Extended Range: "
 MBH_EXTENDEDRANGEFREQUENCY = "Update Every: $p Sec"
 
-MBH_LINEOFSIGHT = "TimeOut When Line of Sight: "
+MBH_LINEOFSIGHT = "LOS TimeOut: "
 MBH_LINEOFSIGHTFREQUENCY = "Update every: $p sec"
 
 MBH_MANAPROTECTION = "Mana Protection: "
