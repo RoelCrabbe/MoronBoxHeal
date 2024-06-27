@@ -285,12 +285,8 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end)
 
         -- Flash Heal Events 
-        local function FlashHealLAR_OnTextChanged()
-            MBH_ValidateLAR(FlashHealHAR, "Flash_Heal")
-        end
-
         local function FlashHealLAR_OnEnterPressed()
-            FlashHealLAR_OnTextChanged()
+            MBH_ValidateLAR(FlashHealHAR, "Flash_Heal")
             FlashHealLAR:ClearFocus()
         end
 
@@ -303,17 +299,12 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             FlashHealHAR:SetFocus()
         end
 
-        FlashHealLAR:SetScript("OnTextChanged", FlashHealLAR_OnTextChanged)
         FlashHealLAR:SetScript("OnEnterPressed", FlashHealLAR_OnEnterPressed)
         FlashHealLAR:SetScript("OnEscapePressed", FlashHealLAR_OnExitFrame)
         FlashHealLAR:SetScript("OnTabPressed", FlashHealLAR_OnTabPressed)
 
-        local function FlashHealHAR_OnTextChanged()
-            MBH_ValidateHAR(FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
-        end
-
         local function FlashHealHAR_OnEnterPressed()
-            FlashHealHAR_OnTextChanged()
+            MBH_ValidateHAR(FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
             FlashHealHAR:ClearFocus()
         end
 
@@ -326,18 +317,13 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             HealLAR:SetFocus()
         end
 
-        FlashHealHAR:SetScript("OnTextChanged", FlashHealHAR_OnTextChanged)
         FlashHealHAR:SetScript("OnEnterPressed", FlashHealHAR_OnEnterPressed)
         FlashHealHAR:SetScript("OnEscapePressed", FlashHealHAR_OnExitFrame)
         FlashHealHAR:SetScript("OnTabPressed", FlashHealHAR_OnTabPressed)
 
         -- Heal Events
-        local function HealLAR_OnTextChanged()
-            MBH_ValidateLAR(HealHAR, "Heal")
-        end
-        
         local function HealLAR_OnEnterPressed()
-            HealLAR_OnTextChanged()
+            MBH_ValidateLAR(HealHAR, "Heal")
             HealLAR:ClearFocus()
         end
         
@@ -350,17 +336,12 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             HealHAR:SetFocus()
         end
         
-        HealLAR:SetScript("OnTextChanged", HealLAR_OnTextChanged)
         HealLAR:SetScript("OnEnterPressed", HealLAR_OnEnterPressed)
         HealLAR:SetScript("OnEscapePressed", HealLAR_OnExitFrame)
         HealLAR:SetScript("OnTabPressed", HealLAR_OnTabPressed)
         
-        local function HealHAR_OnTextChanged()
-            MBH_ValidateHAR(HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
-        end
-        
         local function HealHAR_OnEnterPressed()
-            HealHAR_OnTextChanged()
+            MBH_ValidateHAR(HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
             HealHAR:ClearFocus()
         end
         
@@ -373,18 +354,13 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             GreaterHealLAR:SetFocus()
         end
         
-        HealHAR:SetScript("OnTextChanged", HealHAR_OnTextChanged)
         HealHAR:SetScript("OnEnterPressed", HealHAR_OnEnterPressed)
         HealHAR:SetScript("OnEscapePressed", HealHAR_OnExitFrame)
         HealHAR:SetScript("OnTabPressed", HealHAR_OnTabPressed)
 
         -- Greater Heal Events
-        local function GreaterHealLAR_OnTextChanged()
-            MBH_ValidateLAR(GreaterHealHAR, "Greater_Heal")
-        end
-        
         local function GreaterHealLAR_OnEnterPressed()
-            GreaterHealLAR_OnTextChanged()
+            MBH_ValidateLAR(GreaterHealHAR, "Greater_Heal")
             GreaterHealLAR:ClearFocus()
         end
         
@@ -397,17 +373,12 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             GreaterHealHAR:SetFocus()
         end
         
-        GreaterHealLAR:SetScript("OnTextChanged", GreaterHealLAR_OnTextChanged)
         GreaterHealLAR:SetScript("OnEnterPressed", GreaterHealLAR_OnEnterPressed)
         GreaterHealLAR:SetScript("OnEscapePressed", GreaterHealLAR_OnExitFrame)
         GreaterHealLAR:SetScript("OnTabPressed", GreaterHealLAR_OnTabPressed)
         
-        local function GreaterHealHAR_OnTextChanged()
-            MBH_ValidateHAR(GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
-        end
-        
         local function GreaterHealHAR_OnEnterPressed()
-            GreaterHealHAR_OnTextChanged()
+            MBH_ValidateHAR(GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
             GreaterHealHAR:ClearFocus()
         end
         
@@ -420,7 +391,6 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             GreaterHealHAR:ClearFocus()
         end
         
-        GreaterHealHAR:SetScript("OnTextChanged", GreaterHealHAR_OnTextChanged)
         GreaterHealHAR:SetScript("OnEnterPressed", GreaterHealHAR_OnEnterPressed)
         GreaterHealHAR:SetScript("OnEscapePressed", GreaterHealHAR_OnExitFrame)
         GreaterHealHAR:SetScript("OnTabPressed", GreaterHealHAR_OnTabPressed)
@@ -482,12 +452,8 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end)
 
         -- Flash Heal Events 
-        local function ChainHealLAR_OnTextChanged()
-            MBH_ValidateLAR(ChainHealHAR, "Chain_Heal")
-        end
-
         local function ChainHealLAR_OnEnterPressed()
-            ChainHealLAR_OnTextChanged()
+            MBH_ValidateLAR(ChainHealHAR, "Chain_Heal")
             ChainHealLAR:ClearFocus()
         end
 
@@ -500,17 +466,12 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             ChainHealHAR:SetFocus()
         end
 
-        ChainHealLAR:SetScript("OnTextChanged", ChainHealLAR_OnTextChanged)
         ChainHealLAR:SetScript("OnEnterPressed", ChainHealLAR_OnEnterPressed)
         ChainHealLAR:SetScript("OnEscapePressed", ChainHealLAR_OnExitFrame)
         ChainHealLAR:SetScript("OnTabPressed", ChainHealLAR_OnTabPressed)
 
-        local function ChainHealHAR_OnTextChanged()
-            MBH_ValidateHAR(ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
-        end
-
         local function ChainHealHAR_OnEnterPressed()
-            ChainHealHAR_OnTextChanged()
+            MBH_ValidateHAR(ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
             ChainHealHAR:ClearFocus()
         end
 
@@ -523,18 +484,13 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             LesserHealingWaveLAR:SetFocus()
         end
 
-        ChainHealHAR:SetScript("OnTextChanged", ChainHealHAR_OnTextChanged)
         ChainHealHAR:SetScript("OnEnterPressed", ChainHealHAR_OnEnterPressed)
         ChainHealHAR:SetScript("OnEscapePressed", ChainHealHAR_OnExitFrame)
         ChainHealHAR:SetScript("OnTabPressed", ChainHealHAR_OnTabPressed)
 
         -- Lesser Healing Wave Events
-        local function LesserHealingWaveLAR_OnTextChanged()
-            MBH_ValidateLAR(LesserHealingWaveHAR, "Lesser_Healing_Wave")
-        end
-        
         local function LesserHealingWaveLAR_OnEnterPressed()
-            LesserHealingWaveLAR_OnTextChanged()
+            MBH_ValidateLAR(LesserHealingWaveHAR, "Lesser_Healing_Wave")
             LesserHealingWaveLAR:ClearFocus()
         end
         
@@ -547,18 +503,12 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             LesserHealingWaveHAR:SetFocus()
         end
         
-        LesserHealingWaveLAR:SetScript("OnTextChanged", LesserHealingWaveLAR_OnTextChanged)
         LesserHealingWaveLAR:SetScript("OnEnterPressed", LesserHealingWaveLAR_OnEnterPressed)
         LesserHealingWaveLAR:SetScript("OnEscapePressed", LesserHealingWaveLAR_OnExitFrame)
         LesserHealingWaveLAR:SetScript("OnTabPressed", LesserHealingWaveLAR_OnTabPressed)
         
-        local function LesserHealingWaveHAR_OnTextChanged()
-            MBH_ValidateHAR(LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
-        end
-        
         local function LesserHealingWaveHAR_OnEnterPressed()
-            Print("LesserHealingWaveHAR_OnEnterPressed")
-            LesserHealingWaveHAR_OnTextChanged()
+            MBH_ValidateHAR(LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
             LesserHealingWaveHAR:ClearFocus()
         end
         
@@ -571,19 +521,143 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             LesserHealingWaveHAR:ClearFocus()
         end
         
-        LesserHealingWaveHAR:SetScript("OnTextChanged", LesserHealingWaveHAR_OnTextChanged)
         LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
         LesserHealingWaveHAR:SetScript("OnEscapePressed", LesserHealingWaveHAR_OnExitFrame)
         LesserHealingWaveHAR:SetScript("OnTabPressed", LesserHealingWaveHAR_OnTabPressed)
 
     elseif ( Session.PlayerClass == "Paladin" ) then
-        self.PaladinContainer:Show()
+        
+        -- Holy Light Section
+        local HolyLightTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        HolyLightTitle:SetText(MBH_SPELL_HOLY_LIGHT)
+        HolyLightTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
+
+        local HolyLightSlider = CreateSlider(self.InnerContainer, "HolyLightSlider", 180)
+        HolyLightSlider:SetPoint("CENTER", HolyLightTitle, "CENTER", 0, -50)
+        HolyLightSlider:SetScript("OnValueChanged", HolyLightSlider_OnValueChanged)
+        HolyLightSlider:SetScript("OnShow", function()
+            InitializeSlider(HolyLightSlider, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
+        end)
+
+        local HolyLightLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
+        HolyLightLAR:SetPoint("CENTER", HolyLightSlider, "CENTER", 50, -50)
+        HolyLightLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
+
+        local HolyLightHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
+        HolyLightHAR:SetPoint("CENTER", HolyLightLAR, "CENTER", 0, -50)
+        HolyLightHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+
+        local HolyLightEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
+        HolyLightEnable:SetPoint("CENTER", HolyLightHAR, "CENTER", 0, -50)
+        HolyLightEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch and 1 or 0)
+        HolyLightEnable:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (HolyLightEnable:GetChecked() == 1)
+        end)
+
+        -- Holy Light Events 
+        local function HolyLightLAR_OnEnterPressed()
+            MBH_ValidateLAR(HolyLightHAR, "Holy_Light")
+            HolyLightLAR:ClearFocus()
+        end
+
+        local function HolyLightLAR_OnExitFrame()
+            HolyLightLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
+            HolyLightLAR:ClearFocus()
+        end
+
+        local function HolyLightLAR_OnTabPressed()
+            HolyLightHAR:SetFocus()
+        end
+
+        HolyLightLAR:SetScript("OnEnterPressed", HolyLightLAR_OnEnterPressed)
+        HolyLightLAR:SetScript("OnEscapePressed", HolyLightLAR_OnExitFrame)
+        HolyLightLAR:SetScript("OnTabPressed", HolyLightLAR_OnTabPressed)
+
+        local function HolyLightHAR_OnEnterPressed()
+            MBH_ValidateHAR(HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+            HolyLightHAR:ClearFocus()
+        end
+
+        local function HolyLightHAR_OnExitFrame()
+            HolyLightHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+            HolyLightHAR:ClearFocus()
+        end
+
+        local function HolyLightHAR_OnTabPressed()
+            HolyLightHAR:ClearFocus()
+        end
+
+        HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
+        HolyLightHAR:SetScript("OnEscapePressed", HolyLightHAR_OnExitFrame)
+        HolyLightHAR:SetScript("OnTabPressed", HolyLightHAR_OnTabPressed)
+
     elseif ( Session.PlayerClass == "Druid" ) then
-        self.DruidContainer:Show()
+        
+        -- Regrowth Section
+        local RegrowthTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        RegrowthTitle:SetText(MBH_SPELL_REGROWTH)
+        RegrowthTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
+
+        local RegrowthSlider = CreateSlider(self.InnerContainer, "RegrowthSlider", 180)
+        RegrowthSlider:SetPoint("CENTER", RegrowthTitle, "CENTER", 0, -50)
+        RegrowthSlider:SetScript("OnValueChanged", RegrowthSlider_OnValueChanged)
+        RegrowthSlider:SetScript("OnShow", function()
+            InitializeSlider(RegrowthSlider, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
+        end)
+
+        local RegrowthLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
+        RegrowthLAR:SetPoint("CENTER", RegrowthSlider, "CENTER", 50, -50)
+        RegrowthLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
+
+        local RegrowthHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
+        RegrowthHAR:SetPoint("CENTER", RegrowthLAR, "CENTER", 0, -50)
+        RegrowthHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
+
+        local RegrowthEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
+        RegrowthEnable:SetPoint("CENTER", RegrowthHAR, "CENTER", 0, -50)
+        RegrowthEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch and 1 or 0)
+        RegrowthEnable:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (RegrowthEnable:GetChecked() == 1)
+        end)
+
+        -- Regrowth Events 
+        local function RegrowthLAR_OnEnterPressed()
+            MBH_ValidateLAR(RegrowthHAR, "Regrowth")
+            RegrowthLAR:ClearFocus()
+        end
+
+        local function RegrowthLAR_OnExitFrame()
+            RegrowthLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
+            RegrowthLAR:ClearFocus()
+        end
+
+        local function RegrowthLAR_OnTabPressed()
+            RegrowthHAR:SetFocus()
+        end
+
+        RegrowthLAR:SetScript("OnEnterPressed", RegrowthLAR_OnEnterPressed)
+        RegrowthLAR:SetScript("OnEscapePressed", RegrowthLAR_OnExitFrame)
+        RegrowthLAR:SetScript("OnTabPressed", RegrowthLAR_OnTabPressed)
+
+        local function RegrowthHAR_OnEnterPressed()
+            MBH_ValidateHAR(RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+            RegrowthHAR:ClearFocus()
+        end
+
+        local function RegrowthHAR_OnExitFrame()
+            RegrowthHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
+            RegrowthHAR:ClearFocus()
+        end
+
+        local function RegrowthHAR_OnTabPressed()
+            RegrowthHAR:ClearFocus()
+        end
+
+        RegrowthHAR:SetScript("OnEnterPressed", RegrowthHAR_OnEnterPressed)
+        RegrowthHAR:SetScript("OnEscapePressed", RegrowthHAR_OnExitFrame)
+        RegrowthHAR:SetScript("OnTabPressed", RegrowthHAR_OnTabPressed)
     end
     
-
-
     self:Hide()
 end
 

@@ -214,28 +214,28 @@ function MBH_ValidateLAR(FrameHAR, Value)
     local LARValue = tonumber(this:GetText())
     local HARValue = tonumber(FrameHAR:GetText())
 
-    if ( LARValue and LARValue >= 1) then
+    if ( LARValue and LARValue >= 1 ) then
         if ( HARValue and LARValue <= HARValue ) then
             MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"] = LARValue
         end
-        
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"])
     end
+
+    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"])
 end
 
 function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
     local HARValue = tonumber(this:GetText())
     local LARValue = tonumber(FrameLAR:GetText())
 
-    if ( HARValue ) then
+    if ( HARValue and HARValue >= 1 ) then
         if ( HARValue <= MaxRank ) and ( LARValue and HARValue >= LARValue ) then
             MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = HARValue
         else
             MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = MaxRank
         end
-
-        this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"])
     end
+
+    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"])
 end
 
 -------------------------------------------------------------------------------
@@ -441,6 +441,16 @@ end
 function LesserHealingWaveSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD)
+end
+
+function HolyLightSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold, MBH_HOLYLIGHTPROTECTIONTHRESHOLD)
+end
+
+function RegrowthSlider_OnValueChanged()
+    MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold = this:GetValue()
+    MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold, MBH_REGROWTHPROTECTIONTHRESHOLD)
 end
 
 -- EditBox
