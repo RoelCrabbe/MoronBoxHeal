@@ -527,7 +527,7 @@ function MBH:OnEvent()
         MBH_GetHealSpell()
         MBH_InitalData()
 
-        MBH_Minimap:CreateMinimapIcon()
+        MBH.MiniMapButton:CreateMinimapIcon()
 
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 

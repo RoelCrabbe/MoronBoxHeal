@@ -99,13 +99,3 @@ MBH_PRESETSETTINGSUNSUCCESS = "There Is No Preset For You!"
 MBH_RELOADUI = "(This settings will reload your UI)"
 MBH_YES = "Yes"
 MBH_NO = "No"
-
--------------------------------------------------------------------------------
--- Frame Creation {{{
--------------------------------------------------------------------------------
-
-LeftButton = "LeftButton"
-LeftButtonUp = LeftButton.."Up"
-
-RightButton = "RightButton"
-RightButtonUp = RightButton.."Up"

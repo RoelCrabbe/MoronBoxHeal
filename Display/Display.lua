@@ -1,10 +1,14 @@
 -------------------------------------------------------------------------------
+-- Frame Names {{{
+-------------------------------------------------------------------------------
+
+MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap) -- Minimap Frame
+
+-------------------------------------------------------------------------------
 -- MiniMap Button {{{
 -------------------------------------------------------------------------------
 
-MBH_Minimap = CreateFrame("Frame", nil , Minimap) -- Minimap Frame
-
-function MBH_Minimap:CreateMinimapIcon()
+function MBH.MiniMapButton:CreateMinimapIcon()
     local IsMiniMapMoving = false
 
     self:SetFrameStrata("LOW")
@@ -18,8 +22,8 @@ function MBH_Minimap:CreateMinimapIcon()
 	self.Button:SetHeight(32)
 	self.Button:SetFrameLevel(8)
 	self.Button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-    self.Button:RegisterForClicks(LeftButtonUp, RightButtonUp)
-    self.Button:RegisterForDrag(LeftButton)
+    self.Button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+    self.Button:RegisterForDrag("LeftButton")
 
 	local Overlay = self:CreateTexture(nil, "OVERLAY", self)
 	Overlay:SetWidth(52)
@@ -35,7 +39,7 @@ function MBH_Minimap:CreateMinimapIcon()
 	MinimapIcon:SetPoint("CENTER", 0, 0)
 
     local function OnEnter()
-        GameTooltip:SetOwner(MBH_Minimap, "ANCHOR_BOTTOMLEFT")
+        GameTooltip:SetOwner(MBH.MiniMapButton, "ANCHOR_BOTTOMLEFT")
         GameTooltip:SetText(MBH_TITLE, 1, 1, 0.5)
         GameTooltip:AddLine(MBH_MINIMAPHOVER)
         GameTooltip:Show()
@@ -76,7 +80,7 @@ function MBH_Minimap:CreateMinimapIcon()
                 iconPos = iconPos + 360
             end
 
-            MBH_Minimap:SetPoint(
+            MBH.MiniMapButton:SetPoint(
                 "TOPLEFT",
                 "Minimap",
                 "TOPLEFT",
