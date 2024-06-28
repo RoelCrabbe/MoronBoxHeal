@@ -60,34 +60,6 @@ end
 -- MiniMap Button {{{
 -------------------------------------------------------------------------------
 
-function SetSize(Frame, Width, Height)
-    Frame:SetWidth(Width)
-	Frame:SetHeight(Height)
-    Frame:SetPoint("CENTER", 0, 0)
-end
-
-function ShowToolTip(Parent, Title, Text)
-    GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
-    GameTooltip:SetText(Title, 1, 1, 0.5)
-    GameTooltip:AddLine(Text)
-    GameTooltip:Show()
-end
-
-function HideTooltip()
-    GameTooltip:Hide()
-end
-
-function RegisterAllClicksAndDrags(Frame)
-    Frame:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")
-    Frame:RegisterForDrag("LeftButton", "RightButton")
-end
-
-function ClearFrameFocus(Frame, Text)
-    Frame:ClearFocus()
-    if Text then Frame:SetText(Text) end
-end
-
-
 function MBH.MiniMapButton:CreateMinimapIcon()
     local IsMiniMapMoving = false
 
@@ -840,6 +812,28 @@ end
 function SetFontSize(fontString, size)
     local font, _, flags = fontString:GetFont()
     fontString:SetFont(font, size, flags)
+end
+
+function SetSize(Frame, Width, Height)
+    Frame:SetWidth(Width)
+	Frame:SetHeight(Height)
+    Frame:SetPoint("CENTER", 0, 0)
+end
+
+function ShowToolTip(Parent, Title, Text)
+    GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
+    GameTooltip:SetText(Title, 1, 1, 0.5)
+    GameTooltip:AddLine(Text)
+    GameTooltip:Show()
+end
+
+function HideTooltip()
+    GameTooltip:Hide()
+end
+
+function RegisterAllClicksAndDrags(Frame)
+    Frame:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")
+    Frame:RegisterForDrag("LeftButton", "RightButton")
 end
 
 function CreateButton(Parent, Text, Width, Height)
