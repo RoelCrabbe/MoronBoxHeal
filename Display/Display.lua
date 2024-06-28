@@ -594,134 +594,136 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     elseif ( Session.PlayerClass == "Paladin" ) then
         
         -- Holy Light Section
-        local HolyLightTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        HolyLightTitle:SetText(MBH_SPELL_HOLY_LIGHT)
-        HolyLightTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
+        self.HolyLightTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.HolyLightTitle:SetText(MBH_SPELL_HOLY_LIGHT)
+        self.HolyLightTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
 
-        local HolyLightSlider = CreateSlider(self.InnerContainer, "HolyLightSlider", 180)
-        HolyLightSlider:SetPoint("CENTER", HolyLightTitle, "CENTER", 0, -50)
-        HolyLightSlider:SetScript("OnValueChanged", HolyLightSlider_OnValueChanged)
-        HolyLightSlider:SetScript("OnShow", function()
-            InitializeSlider(HolyLightSlider, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
+        self.HolyLightThresholdSlider = CreateSlider(self.InnerContainer, "HolyLightThresholdSlider", 180)
+        self.HolyLightThresholdSlider:SetPoint("CENTER", self.HolyLightTitle, "CENTER", 0, -50)
+        self.HolyLightThresholdSlider:SetScript("OnValueChanged", HolyLightThresholdSlider_OnValueChanged)
+        self.HolyLightThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.HolyLightThresholdSlider, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
         end)
 
-        local HolyLightLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        HolyLightLAR:SetPoint("CENTER", HolyLightSlider, "CENTER", 50, -50)
-        HolyLightLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
+        self.HolyLightLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
+        self.HolyLightLAR:SetPoint("CENTER", self.HolyLightThresholdSlider, "CENTER", 50, -50)
 
-        local HolyLightHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        HolyLightHAR:SetPoint("CENTER", HolyLightLAR, "CENTER", 0, -50)
-        HolyLightHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+        self.HolyLightHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+        self.HolyLightHAR:SetPoint("CENTER", self.HolyLightLAR, "CENTER", 0, -50)
 
-        local HolyLightEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        HolyLightEnable:SetPoint("CENTER", HolyLightHAR, "CENTER", 0, -50)
-        HolyLightEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch and 1 or 0)
-        HolyLightEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (HolyLightEnable:GetChecked() == 1)
+        self.HolyLightCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch)
+        self.HolyLightCheckButton:SetPoint("CENTER", self.HolyLightHAR, "CENTER", 0, -50)
+        self.HolyLightCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (self.HolyLightCheckButton:GetChecked() == 1)
         end)
 
         -- Holy Light Events 
         local function HolyLightLAR_OnEnterPressed()
-            MBH_ValidateLAR(HolyLightHAR, "Holy_Light")
-            HolyLightLAR:ClearFocus()
+            ClearFrameFocus(self.HolyLightLAR)
+            MBH_ValidateLAR(self.HolyLightHAR, "Holy_Light")
         end
 
         local function HolyLightLAR_OnExitFrame()
-            HolyLightLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
-            HolyLightLAR:ClearFocus()
+            ClearFrameFocus(self.HolyLightLAR, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
         end
 
         local function HolyLightLAR_OnTabPressed()
-            HolyLightHAR:SetFocus()
+            self.HolyLightHAR:SetFocus()
         end
 
-        HolyLightLAR:SetScript("OnEnterPressed", HolyLightLAR_OnEnterPressed)
-        HolyLightLAR:SetScript("OnEscapePressed", HolyLightLAR_OnExitFrame)
-        HolyLightLAR:SetScript("OnTabPressed", HolyLightLAR_OnTabPressed)
+        self.HolyLightLAR:SetScript("OnEnterPressed", HolyLightLAR_OnEnterPressed)
+        self.HolyLightLAR:SetScript("OnEscapePressed", HolyLightLAR_OnExitFrame)
+        self.HolyLightLAR:SetScript("OnTabPressed", HolyLightLAR_OnTabPressed)
 
         local function HolyLightHAR_OnEnterPressed()
-            MBH_ValidateHAR(HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
-            HolyLightHAR:ClearFocus()
+            ClearFrameFocus(self.HolyLightHAR)
+            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
         end
 
         local function HolyLightHAR_OnExitFrame()
-            HolyLightHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
-            HolyLightHAR:ClearFocus()
+            ClearFrameFocus(self.HolyLightHAR, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
         end
 
         local function HolyLightHAR_OnTabPressed()
-            HolyLightHAR:ClearFocus()
+            self.HolyLightHAR:ClearFocus()
         end
 
-        HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
-        HolyLightHAR:SetScript("OnEscapePressed", HolyLightHAR_OnExitFrame)
-        HolyLightHAR:SetScript("OnTabPressed", HolyLightHAR_OnTabPressed)
+        self.HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
+        self.HolyLightHAR:SetScript("OnEscapePressed", HolyLightHAR_OnExitFrame)
+        self.HolyLightHAR:SetScript("OnTabPressed", HolyLightHAR_OnTabPressed)
 
     elseif ( Session.PlayerClass == "Druid" ) then
         
         -- Regrowth Section
-        local RegrowthTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        RegrowthTitle:SetText(MBH_SPELL_REGROWTH)
-        RegrowthTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
+        self.RegrowthTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.RegrowthTitle:SetText(MBH_SPELL_REGROWTH)
+        self.RegrowthTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
 
-        local RegrowthSlider = CreateSlider(self.InnerContainer, "RegrowthSlider", 180)
-        RegrowthSlider:SetPoint("CENTER", RegrowthTitle, "CENTER", 0, -50)
-        RegrowthSlider:SetScript("OnValueChanged", RegrowthSlider_OnValueChanged)
-        RegrowthSlider:SetScript("OnShow", function()
-            InitializeSlider(RegrowthSlider, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
+        self.RegrowthThresholdSlider = CreateSlider(self.InnerContainer, "RegrowthThresholdSlider", 180)
+        self.RegrowthThresholdSlider:SetPoint("CENTER", self.RegrowthTitle, "CENTER", 0, -50)
+        self.RegrowthThresholdSlider:SetScript("OnValueChanged", RegrowthThresholdSlider_OnValueChanged)
+        self.RegrowthThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.RegrowthThresholdSlider, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
         end)
 
-        local RegrowthLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        RegrowthLAR:SetPoint("CENTER", RegrowthSlider, "CENTER", 50, -50)
-        RegrowthLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
+        self.RegrowthLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
+        self.RegrowthLAR:SetPoint("CENTER", self.RegrowthThresholdSlider, "CENTER", 50, -50)
 
-        local RegrowthHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        RegrowthHAR:SetPoint("CENTER", RegrowthLAR, "CENTER", 0, -50)
-        RegrowthHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
+        self.RegrowthHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
+        self.RegrowthHAR:SetPoint("CENTER", self.RegrowthLAR, "CENTER", 0, -50)
 
-        local RegrowthEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        RegrowthEnable:SetPoint("CENTER", RegrowthHAR, "CENTER", 0, -50)
-        RegrowthEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch and 1 or 0)
-        RegrowthEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (RegrowthEnable:GetChecked() == 1)
+        self.RegrowthCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch)
+        self.RegrowthCheckButton:SetPoint("CENTER", self.RegrowthHAR, "CENTER", 0, -50)
+        self.RegrowthCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (self.RegrowthCheckButton:GetChecked() == 1)
         end)
 
         -- Regrowth Events 
-        local function RegrowthLAR_OnEnterPressed()
-            MBH_ValidateLAR(RegrowthHAR, "Regrowth")
-            RegrowthLAR:ClearFocus()
+        local function RegrowthLAR_OnEditFocusLost()
+            self.RegrowthLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
         end
 
-        local function RegrowthLAR_OnExitFrame()
-            RegrowthLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
-            RegrowthLAR:ClearFocus()
+        local function RegrowthLAR_OnEscapePressed()
+            RegrowthLAR_OnEditFocusLost()
+            self.RegrowthLAR:ClearFocus()
         end
 
         local function RegrowthLAR_OnTabPressed()
-            RegrowthHAR:SetFocus()
+            self.RegrowthLAR:ClearFocus()
         end
 
-        RegrowthLAR:SetScript("OnEnterPressed", RegrowthLAR_OnEnterPressed)
-        RegrowthLAR:SetScript("OnEscapePressed", RegrowthLAR_OnExitFrame)
-        RegrowthLAR:SetScript("OnTabPressed", RegrowthLAR_OnTabPressed)
-
-        local function RegrowthHAR_OnEnterPressed()
-            MBH_ValidateHAR(RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
-            RegrowthHAR:ClearFocus()
+        local function RegrowthLAR_OnEnterPressed()
+            MBH_ValidateLAR(self.RegrowthHAR, "Regrowth")
+            RegrowthLAR_OnEscapePressed()
         end
 
-        local function RegrowthHAR_OnExitFrame()
-            RegrowthHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
-            RegrowthHAR:ClearFocus()
+        self.RegrowthLAR:SetScript("OnEditFocusLost", RegrowthLAR_OnEditFocusLost)
+        self.RegrowthLAR:SetScript("OnEscapePressed", RegrowthLAR_OnExitFrame)
+        self.RegrowthLAR:SetScript("OnTabPressed", RegrowthLAR_OnTabPressed)
+        self.RegrowthLAR:SetScript("OnEnterPressed", RegrowthLAR_OnEnterPressed)
+
+        local function RegrowthHAR_OnEditFocusLost()
+            self.RegrowthHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
+        end
+
+        local function RegrowthHAR_OnEscapePressed()
+            RegrowthHAR_OnEditFocusLost()
+            self.RegrowthHAR:ClearFocus()
         end
 
         local function RegrowthHAR_OnTabPressed()
-            RegrowthHAR:ClearFocus()
+            self.RegrowthHAR:ClearFocus()
         end
 
-        RegrowthHAR:SetScript("OnEnterPressed", RegrowthHAR_OnEnterPressed)
-        RegrowthHAR:SetScript("OnEscapePressed", RegrowthHAR_OnExitFrame)
-        RegrowthHAR:SetScript("OnTabPressed", RegrowthHAR_OnTabPressed)
+        local function RegrowthHAR_OnEnterPressed()
+            MBH_ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+            RegrowthHAR_OnEscapePressed()
+        end
+
+        self.RegrowthHAR:SetScript("OnEditFocusLost", RegrowthHAR_OnEditFocusLost)
+        self.RegrowthHAR:SetScript("OnEscapePressed", RegrowthHAR_OnExitFrame)
+        self.RegrowthHAR:SetScript("OnTabPressed", RegrowthHAR_OnTabPressed)
+        self.RegrowthHAR:SetScript("OnEnterPressed", RegrowthHAR_OnEnterPressed)
     end
     
     self:Hide()
