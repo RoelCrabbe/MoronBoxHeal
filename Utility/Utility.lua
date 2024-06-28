@@ -2,6 +2,100 @@
 -- Table Settings {{{
 -------------------------------------------------------------------------------
 
+local PresetSettings = {
+    ["Priest"] = {
+        ["Flash Heal"] = {
+            AutoHeal = {
+                Allowed_Overheal_Percentage = 9,
+                Random_Target = true,
+                Heal_Target_Number = 2
+            },
+            ManaProtectionValues = {
+                Priest = {
+                    Flash_Heal_Threshold = 12.5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                }
+            }
+        },
+        ["Heal"] = {
+            AutoHeal = {
+                Allowed_Overheal_Percentage = 25,
+            },
+            ManaProtectionValues = {
+                Priest = {
+                    Heal_Threshold = 7.5,
+                    Heal_LAR = 3,
+                    Heal_HAR = 3,
+                }
+            }
+        },
+        ["Greater Heal"] = {
+            AutoHeal = {
+                Allowed_Overheal_Percentage = 35,
+            },
+            ManaProtectionValues = {
+                Priest = {
+                    Greater_Heal_Threshold = 35,
+                    Greater_Heal_LAR = 1,
+                    Greater_Heal_HAR = 4
+                },
+            }
+        },
+    },
+    ["Shaman"] = {
+        ["Chain Heal"] = {
+            AutoHeal = {
+                Random_Target = true,
+                Heal_Target_Number = 2
+            }
+        },
+        ["Healing Wave"] = {
+            AutoHeal = {
+                Allowed_Overheal_Percentage = 25,
+            },
+            ManaProtectionValues = {
+                Shaman = {
+                    Chain_Heal_Threshold = 25,
+                    Chain_Heal_LAR = 3,
+                    Chain_Heal_HAR = 7,
+                    Lesser_Healing_Wave_Threshold = 35,
+                    Lesser_Healing_Wave_LAR = 3,
+                    Lesser_Healing_Wave_HAR = 7
+                }
+            }
+        }
+    },
+    ["Paladin"] = {
+        ["Default"] = {
+            AutoHeal = {
+                Allowed_Overheal_Percentage = 35,
+                Random_Target = true,
+                Heal_Target_Number = 2
+            },
+        }
+    },
+    ["Druid"] = {
+        ["Default"] = {
+            AutoHeal = {
+                Allowed_Overheal_Percentage = 13,
+                Random_Target = true,
+            },
+            AdvancedOptions = {
+                Mana_Protection = true
+            },
+            ManaProtectionValues = {
+                Druid = {
+                    Regrowth_Switch = true,
+                    Regrowth_Threshold = 50,
+                    Regrowth_LAR = 3,
+                    Regrowth_HAR = 3,
+                }
+            }
+        }
+    }
+}
+
 function MBH_LoadPresetSettings()
     local Settings = PresetSettings[Session.PlayerClass]
 

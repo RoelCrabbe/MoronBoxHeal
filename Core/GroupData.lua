@@ -6,27 +6,15 @@ function MBH_SetupData()
 
 	if UnitInRaid("player") and GetNumRaidMembers() > 0 then
 
-		Session.Group = {
-            3,
-            GetNumRaidMembers(), -- Raid Members
-            "raid"
-        }
+		Session.Group = { 3, GetNumRaidMembers(), "raid" }
 
 	elseif not UnitInRaid("player") and GetNumPartyMembers() > 0 then 
 
-		Session.Group = {
-            2,
-            GetNumPartyMembers(), -- Party Members
-            "party"
-        }
+		Session.Group = { 2, GetNumPartyMembers(), "party" }
 
 	elseif not UnitInRaid("player") and GetNumRaidMembers() == 0 and GetNumPartyMembers() == 0 then
         
-		Session.Group = {
-            1,
-            1,
-            "player"
-        }
+		Session.Group = { 1, 1, "player" }
 	end 
 end
 
