@@ -4,7 +4,7 @@
 ## Notes: |cff00ccffMoronSort|r is a advanced healing addon that supports "Chain Heal" kept as lightweight as possible and optimized for Multiboxing.
 ## Dependencies: MoronBoxCore
 ## LoadOnDemand: 0
-## SavedVariablesPerCharacter: MoronBoxHeal_Options, MoronBoxHeal_Debug
+## SavedVariablesPerCharacter: MoronBoxHeal_Options
 
 ..\Ace2\AceLibrary\AceLibrary.lua
 ..\Ace2\AceOO-2.0\AceOO-2.0.lua

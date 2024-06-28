@@ -822,8 +822,8 @@ end
 
 function MBH_SetBackdropColor(Frame, Color)
     if not Frame or not Color then return end
-    Frame:SetBackdropColor(GetColorValue(Color))
-    Frame:SetBackdropBorderColor(GetColorValue(Color))
+    Frame:SetBackdropColor(MBH_GetColorValue(Color))
+    Frame:SetBackdropBorderColor(MBH_GetColorValue(Color))
 end
 
 function MBH_SetFontSize(FontString, Size)
@@ -850,6 +850,10 @@ end
 
 function MBH_HideTooltip()
     GameTooltip:Hide()
+end
+
+function MBH_GetColorValue(colorKey)
+    return ColorPicker[colorKey].r, ColorPicker[colorKey].g, ColorPicker[colorKey].b, ColorPicker[colorKey].a
 end
 
 function MBH_RegisterAllClicksAndDrags(Frame)

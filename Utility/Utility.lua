@@ -1,70 +1,71 @@
-
-function MBH_SetDefaultValues()
-	if MoronBoxHeal_Options then
-		MoronBoxHeal_Options = {}
-        MoronBoxHeal_Options = DefaultOptions
-        ReloadUI()
-        return
-	end
-    MBH_ErrorMessage(MBH_RESTOREUNSUCCESS)
-end
+-------------------------------------------------------------------------------
+-- Table Settings {{{
+-------------------------------------------------------------------------------
 
 function MBH_LoadPresetSettings()
     local Settings = PresetSettings[Session.PlayerClass]
 
     if Settings then
         local SpecialSettings = Settings[MB_myHealSpell] or Settings["Default"]
-        
+
         if SpecialSettings then
-            MoronBoxHeal_Options = SpecialSettings
+            MoronBoxHeal_Options = MBH_DeepCopyTable(DefaultOptions)
+            MBH_SetPresetSettings(MoronBoxHeal_Options, SpecialSettings)
             ReloadUI()
             return
         end
     end
+
     MBH_ErrorMessage(MBH_PRESETSETTINGSUNSUCCESS)
 end
 
-function GetColorValue(colorKey)
-    return ColorPicker[colorKey].r, ColorPicker[colorKey].g, ColorPicker[colorKey].b, ColorPicker[colorKey].a
+function MBH_SetDefaultValues()
+	if MoronBoxHeal_Options then
+        MoronBoxHeal_Options = MBH_DeepCopyTable(DefaultOptions)
+        ReloadUI()
+        return
+	end
 end
 
-function MBH_ConvertToFractionFromPercentage(value)
-	local commaValue = value / 100
-	local newValue = 1 - commaValue
-	return newValue
+-------------------------------------------------------------------------------
+-- Table Functions {{{
+-------------------------------------------------------------------------------
+
+function MBH_DeepCopyTable(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[MBH_DeepCopyTable(orig_key)] = MBH_DeepCopyTable(orig_value)
+        end
+        setmetatable(copy, MBH_DeepCopyTable(getmetatable(orig)))
+    else
+        copy = orig
+    end
+    return copy
 end
 
-function MBH_ManaProtectionThresholdCheck(PCT) 
-    return mb_manaPct("player") < (PCT / 100)
-end
+function MBH_SetPresetSettings(targetTable, presetTable)
+    if type(targetTable) ~= "table" or type(presetTable) ~= "table" then
+        return
+    end
 
-function MBH_PrintMessage(message)
-    local titleColor = "|cffC71585"
-    local messageColor = "|cff00ff00"
-
-    DEFAULT_CHAT_FRAME:AddMessage(titleColor..MBH_TITLE..": "..messageColor..message)
-end
-
-function MBH_ErrorMessage(message)
-    local titleColor = "|cffC71585"
-    local errorMessageColor = "|cFFFF0000"
-    DEFAULT_CHAT_FRAME:AddMessage(titleColor..MBH_TITLE..": "..errorMessageColor..message)
-end
-
-function MBH_ExtractRank(str)
-    local num = ""
-    local foundDigit = false
-    for i = 1, string.len(str) do
-        local char = string.sub(str, i, i)
-        if tonumber(char) then
-            num = num .. char
-            foundDigit = true
-        elseif foundDigit then
-            break
+    for key, value in pairs(presetTable) do
+        if type(value) == "table" then
+            if type(targetTable[key]) ~= "table" then
+                targetTable[key] = {}
+            end
+            MBH_SetPresetSettings(targetTable[key], value)
+        else
+            targetTable[key] = value
         end
     end
-    return tonumber(num)
 end
+
+-------------------------------------------------------------------------------
+-- Spell Functions {{{
+-------------------------------------------------------------------------------
 
 function MBH_GetMaxSpellRank(SpellName)
     local i = 1;
@@ -99,4 +100,26 @@ function MBH_ExtractSpell(spell)
 		r = tonumber(r)
 		return s, r
 	end
+end
+
+-------------------------------------------------------------------------------
+-- Calc Functions {{{
+-------------------------------------------------------------------------------
+
+function MBH_ConvertToFractionFromPercentage(value)
+	local commaValue = value / 100
+	local newValue = 1 - commaValue
+	return newValue
+end
+
+function MBH_ManaProtectionThresholdCheck(PCT) 
+    return mb_manaPct("player") < (PCT / 100)
+end
+
+function MBH_PrintMessage(message) 
+    DEFAULT_CHAT_FRAME:AddMessage("|cffC71585"..MBH_TITLE..": |cff00ff00"..message) 
+end
+
+function MBH_ErrorMessage(message) 
+    DEFAULT_CHAT_FRAME:AddMessage("|cffC71585"..MBH_TITLE..": |cFFFF0000"..message) 
 end

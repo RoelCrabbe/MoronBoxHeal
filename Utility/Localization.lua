@@ -44,19 +44,19 @@ MBH_RANGSETTINGS = "Extended Range Settings"
 MBH_LOSETTINGS = "Line of Sight Settings"
 MBH_SPECIALSETTINGS = "Special Settings"
 
-MBH_SMARTHEAL = "Smart Heal: "
+MBH_SMARTHEAL = "Smart Heal:"
 MBH_ALLOWEDOVERHEAL = "Allowed Overheal: $p %"
-MBH_RANDOMTARGET = "Random Target: "
+MBH_RANDOMTARGET = "Random Target:"
 MBH_HEALTARGETNUMBER = "Heal Target Number: $p"
 
-MBH_EXTENDEDRANGE = "Extended Range: "
+MBH_EXTENDEDRANGE = "Extended Range:"
 MBH_EXTENDEDRANGEFREQUENCY = "Update Every: $p Sec"
 
-MBH_LINEOFSIGHT = "LOS TimeOut: "
+MBH_LINEOFSIGHT = "LOS TimeOut:"
 MBH_LINEOFSIGHTFREQUENCY = "Update every: $p sec"
 
-MBH_MANAPROTECTION = "Mana Protection: "
-MBH_IDLEPROTECTIONENABLE = "Idle Protection: "
+MBH_MANAPROTECTION = "Mana Protection:"
+MBH_IDLEPROTECTIONENABLE = "Idle Protection:"
 MBH_IDLEPROTECTIONFREQUENCY = "Idle Update every: $p sec"
 
 MBH_SPELL_FLASH_HEAL = "Flash Heal"
@@ -78,7 +78,6 @@ MBH_REGROWTHPROTECTIONTHRESHOLD = MBH_MANAPERCENTAGETO.."Healing Touch: $p %"
 
 MBH_LOWEST_RANK = "Lowest Rank:"
 MBH_HIGHEST_RANK = "Highest Rank:"
-
 MNH_ACTIVESWITCH = " Active Switch:"
 
 MBH_RESTOREDEFAULT = "Restore Default Settings"

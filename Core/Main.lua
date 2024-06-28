@@ -90,237 +90,59 @@ PresetSettings = {
     ["Priest"] = {
         ["Flash Heal"] = {
             AutoHeal = {
-                Smart_Heal = true,
                 Allowed_Overheal_Percentage = 9,
-                Random_Target = false,
+                Random_Target = true,
                 Heal_Target_Number = 2
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = true,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
             },
             ManaProtectionValues = {
                 Priest = {
-                    Flash_Heal_Switch = true,
                     Flash_Heal_Threshold = 12.5,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
                     Heal_LAR = 3,
                     Heal_HAR = 3,
-                    Greater_Heal_Switch = false,
-                    Greater_Heal_Threshold = 50,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
                 }
             }
         },
         ["Heal"] = {
             AutoHeal = {
-                Smart_Heal = true,
                 Allowed_Overheal_Percentage = 25,
-                Random_Target = false,
-                Heal_Target_Number = 1
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = true,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
             },
             ManaProtectionValues = {
                 Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
+                    Heal_Threshold = 7.5,
                     Heal_LAR = 3,
                     Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
                 }
             }
         },
         ["Greater Heal"] = {
             AutoHeal = {
-                Smart_Heal = true,
                 Allowed_Overheal_Percentage = 35,
-                Random_Target = false,
-                Heal_Target_Number = 1
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = true,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
             },
             ManaProtectionValues = {
                 Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
-                    Heal_LAR = 3,
-                    Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
+                    Greater_Heal_Threshold = 35,
                     Greater_Heal_LAR = 1,
                     Greater_Heal_HAR = 4
                 },
-                Shaman = {
-                    Chain_Heal_Switch = false,
-                    Chain_Heal_Threshold = 12.5,
-                    Chain_Heal_LAR = 3,
-                    Chain_Heal_HAR = 7,
-                    Lesser_Healing_Wave_Switch = false,
-                    Lesser_Healing_Wave_Threshold = 35,
-                    Lesser_Healing_Wave_LAR = 3,
-                    Lesser_Healing_Wave_HAR = 7
-                },
-                Paladin = {
-                    Holy_Light_Switch = false,
-                    Holy_Light_Threshold = 5,
-                    Holy_Light_LAR = 1,
-                    Holy_Light_HAR = 6
-                },
-                Druid = {
-                    Regrowth_Switch = true,
-                    Regrowth_Threshold = 50,
-                    Regrowth_LAR = 1,
-                    Regrowth_HAR = 11,
-                }
             }
         },
     },
     ["Shaman"] = {
         ["Chain Heal"] = {
             AutoHeal = {
-                Smart_Heal = true,
-                Allowed_Overheal_Percentage = 19,
                 Random_Target = true,
                 Heal_Target_Number = 2
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = false,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
-            },
-            ManaProtectionValues = {
-                Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
-                    Heal_LAR = 3,
-                    Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
-                },
-                Shaman = {
-                    Chain_Heal_Switch = false,
-                    Chain_Heal_Threshold = 12.5,
-                    Chain_Heal_LAR = 3,
-                    Chain_Heal_HAR = 7,
-                    Lesser_Healing_Wave_Switch = false,
-                    Lesser_Healing_Wave_Threshold = 35,
-                    Lesser_Healing_Wave_LAR = 3,
-                    Lesser_Healing_Wave_HAR = 7
-                }
             }
         },
         ["Healing Wave"] = {
             AutoHeal = {
-                Smart_Heal = true,
                 Allowed_Overheal_Percentage = 25,
-                Random_Target = false,
-                Heal_Target_Number = 1
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = true,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
             },
             ManaProtectionValues = {
-                Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
-                    Heal_LAR = 3,
-                    Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
-                },
                 Shaman = {
-                    Chain_Heal_Switch = false,
-                    Chain_Heal_Threshold = 12.5,
+                    Chain_Heal_Threshold = 25,
                     Chain_Heal_LAR = 3,
                     Chain_Heal_HAR = 7,
-                    Lesser_Healing_Wave_Switch = false,
                     Lesser_Healing_Wave_Threshold = 35,
                     Lesser_Healing_Wave_LAR = 3,
                     Lesser_Healing_Wave_HAR = 7
@@ -331,119 +153,27 @@ PresetSettings = {
     ["Paladin"] = {
         ["Default"] = {
             AutoHeal = {
-                Smart_Heal = true,
                 Allowed_Overheal_Percentage = 35,
                 Random_Target = true,
                 Heal_Target_Number = 2
             },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
-            },
-            AdvancedOptions = {
-                Mana_Protection = false,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
-            },
-            ManaProtectionValues = {
-                Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
-                    Heal_LAR = 3,
-                    Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
-                },
-                Shaman = {
-                    Chain_Heal_Switch = false,
-                    Chain_Heal_Threshold = 12.5,
-                    Chain_Heal_LAR = 3,
-                    Chain_Heal_HAR = 7,
-                    Lesser_Healing_Wave_Switch = false,
-                    Lesser_Healing_Wave_Threshold = 35,
-                    Lesser_Healing_Wave_LAR = 3,
-                    Lesser_Healing_Wave_HAR = 7
-                },
-                Paladin = {
-                    Holy_Light_Switch = false,
-                    Holy_Light_Threshold = 5,
-                    Holy_Light_LAR = 1,
-                    Holy_Light_HAR = 6
-                }
-            }
         }
     },
     ["Druid"] = {
         ["Default"] = {
             AutoHeal = {
-                Smart_Heal = true,
                 Allowed_Overheal_Percentage = 13,
                 Random_Target = true,
-                Heal_Target_Number = 1
-            },
-            ExtendedRange = {
-                Enable = true,
-                Frequency = 5
-            },
-            LineOfSight = {
-                Enable = true,
-                TimeOut = 4
             },
             AdvancedOptions = {
-                Mana_Protection = true,
-                LagPrevention = {
-                    Enabled = false,
-                    Frequency = 1,
-                },
+                Mana_Protection = true
             },
             ManaProtectionValues = {
-                Priest = {
-                    Flash_Heal_Switch = true,
-                    Flash_Heal_Threshold = 20,
-                    Flash_Heal_LAR = 1,
-                    Flash_Heal_HAR = 4,
-                    Heal_Switch = true,
-                    Heal_Threshold = 5,
-                    Heal_LAR = 3,
-                    Heal_HAR = 3,
-                    Greater_Heal_Switch = true,
-                    Greater_Heal_Threshold = 42,
-                    Greater_Heal_LAR = 1,
-                    Greater_Heal_HAR = 4
-                },
-                Shaman = {
-                    Chain_Heal_Switch = false,
-                    Chain_Heal_Threshold = 12.5,
-                    Chain_Heal_LAR = 3,
-                    Chain_Heal_HAR = 7,
-                    Lesser_Healing_Wave_Switch = false,
-                    Lesser_Healing_Wave_Threshold = 35,
-                    Lesser_Healing_Wave_LAR = 3,
-                    Lesser_Healing_Wave_HAR = 7
-                },
-                Paladin = {
-                    Holy_Light_Switch = false,
-                    Holy_Light_Threshold = 5,
-                    Holy_Light_LAR = 1,
-                    Holy_Light_HAR = 6
-                },
                 Druid = {
                     Regrowth_Switch = true,
                     Regrowth_Threshold = 50,
-                    Regrowth_LAR = 1,
-                    Regrowth_HAR = 11,
+                    Regrowth_LAR = 3,
+                    Regrowth_HAR = 3,
                 }
             }
         }
@@ -664,7 +394,6 @@ function MBH:OnEvent()
         MBH_SetupData()
         MBH_GetHealSpell()
         MBH_InitalData()
-
         MBH:CreateWindows()
 
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
