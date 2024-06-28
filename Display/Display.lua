@@ -12,11 +12,28 @@ MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent)
 MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
 
 function MBH_ResetAllWindow()
-    MBH_ResetFramePosition(MBH.MainFrame)
-    MBH_ResetFramePosition(MBH.OptionFrame)
-    MBH_ResetFramePosition(MBH.ProtectionFrame)
-    MBH_ResetFramePosition(MBH.PopupPresetFrame)
-    MBH_ResetFramePosition(MBH.PopupDefaultFrame)
+    ResetFramePosition(MBH.MainFrame)
+    ResetFramePosition(MBH.OptionFrame)
+    ResetFramePosition(MBH.ProtectionFrame)
+    ResetFramePosition(MBH.PopupPresetFrame)
+    ResetFramePosition(MBH.PopupDefaultFrame)
+end
+
+function OpenMainFrame()
+    if MBH.MainFrame:IsShown() then
+        MBH_CloseAllWindow()
+    else 
+        MBH.MainFrame:Show()
+    end
+end
+
+function MBH_CloseAllWindow()
+    MBH_ResetAllWindow()
+    MBH.MainFrame:Hide()
+    MBH.OptionFrame:Hide()
+    MBH.ProtectionFrame:Hide()
+    MBH.PopupPresetFrame:Hide()
+    MBH.PopupDefaultFrame:Hide()
 end
 
 local BackDrop = {
@@ -46,15 +63,6 @@ local SliderBackDrop = {
         bottom = 0
     }
 }
-
-function OpenMainFrame()
-    if MBH.MainFrame:IsShown() then
-        MBH.MainFrame:Hide()
-    else 
-        MBH_ResetAllWindow()
-        MBH.MainFrame:Show()
-    end
-end
 
 -------------------------------------------------------------------------------
 -- MiniMap Button {{{
@@ -150,7 +158,7 @@ function MBH.MainFrame:CreateMainFrame()
     self.InformationText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     self.InformationText:SetText(MBH_INFORMATION)
     SetSize(self.InformationText, 480, 350)
-    SetFontSize(self.InformationText, 13)
+    SetFontSize(self.InformationText)
 
     self:Hide()
 end
@@ -353,7 +361,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function FlashHealLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.FlashHealHAR, "Flash_Heal")
+            ValidateLAR(self.FlashHealHAR, "Flash_Heal")
             FlashHealLAR_OnEscapePressed()
         end
         
@@ -376,7 +384,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function FlashHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
+            ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
             FlashHealHAR_OnEscapePressed()
         end
         
@@ -400,7 +408,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function HealLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.HealHAR, "Heal")
+            ValidateLAR(self.HealHAR, "Heal")
             HealLAR_OnEscapePressed()
         end
         
@@ -423,7 +431,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function HealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
+            ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
             HealHAR_OnEscapePressed()
         end
         
@@ -447,7 +455,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function GreaterHealLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.GreaterHealHAR, "Greater_Heal")
+            ValidateLAR(self.GreaterHealHAR, "Greater_Heal")
             GreaterHealLAR_OnEscapePressed()
         end
         
@@ -466,7 +474,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function GreaterHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
+            ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
             GreaterHealHAR_OnEscapePressed()
         end
         
@@ -540,7 +548,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function ChainHealLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.ChainHealHAR, "Chain_Heal")
+            ValidateLAR(self.ChainHealHAR, "Chain_Heal")
             ChainHealLAR_OnEscapePressed()
         end
         
@@ -563,7 +571,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function ChainHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
+            ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
             ChainHealHAR_OnEscapePressed()
         end
         
@@ -587,7 +595,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function LesserHealingWaveLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
+            ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
             LesserHealingWaveLAR_OnEscapePressed()
         end
         
@@ -606,7 +614,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function LesserHealingWaveHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
+            ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
             LesserHealingWaveHAR_OnEscapePressed()
         end
         
@@ -656,7 +664,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function HolyLightLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.HolyLightHAR, "Holy_Light")
+            ValidateLAR(self.HolyLightHAR, "Holy_Light")
             HolyLightLAR_OnEscapePressed()
         end
 
@@ -675,7 +683,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function HolyLightHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+            ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
             HolyLightHAR_OnEscapePressed()
         end
 
@@ -725,7 +733,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function RegrowthLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.RegrowthHAR, "Regrowth")
+            ValidateLAR(self.RegrowthHAR, "Regrowth")
             RegrowthLAR_OnEscapePressed()
         end
 
@@ -744,7 +752,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function RegrowthHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+            ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
             RegrowthHAR_OnEscapePressed()
         end
 
@@ -765,16 +773,15 @@ function MBH.PopupPresetFrame:CreatePopupPresetFrame()
 
     CreatePopupFrame(self)
 
-    local PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    PopupPresetText:SetText(MBH_PRESETSETTINGSCONFIRM)
-    PopupPresetText:SetPoint("CENTER", self, "TOP", 0, -25)
+    self.PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    self.PopupPresetText:SetText(MBH_PRESETSETTINGSCONFIRM)
+    self.PopupPresetText:SetPoint("CENTER", self, "TOP", 0, -25)
 
-    local function YesButton_OnClick()
+    self.AcceptButton:SetScript("OnClick", function()
         MBH_LoadPresetSettings()
         self:Hide()
-    end
+    end)
 
-    self.AcceptButton:SetScript("OnClick", YesButton_OnClick)
     self:Hide()
 end
 
@@ -786,16 +793,15 @@ function MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
 
     CreatePopupFrame(self)
 
-    local PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    PopupPresetText:SetText(MBH_RESTOREDEFAULTCONFIRM)
-    PopupPresetText:SetPoint("CENTER", self, "TOP", 0, -25)
+    self.PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    self.PopupPresetText:SetText(MBH_RESTOREDEFAULTCONFIRM)
+    self.PopupPresetText:SetPoint("CENTER", self, "TOP", 0, -25)
 
-    local function YesButton_OnClick()
+    self.AcceptButton:SetScript("OnClick", function()
         MBH_SetDefaultValues()
         self:Hide()
-    end
+    end)
 
-    self.AcceptButton:SetScript("OnClick", YesButton_OnClick)
     self:Hide()
 end
 
@@ -803,24 +809,36 @@ end
 -- Helper Functions {{{
 -------------------------------------------------------------------------------
 
-function SetBackdropColor(Frame, Color)
+function ResetFramePosition(Frame)
     if not Frame then return end
+
+    Frame:ClearAllPoints()
+    Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    Frame:Hide()
+end
+
+function SetBackdropColor(Frame, Color)
+    if not Frame or not Color then return end
     Frame:SetBackdropColor(GetColorValue(Color))
     Frame:SetBackdropBorderColor(GetColorValue(Color))
 end
 
-function SetFontSize(fontString, size)
-    local font, _, flags = fontString:GetFont()
-    fontString:SetFont(font, size, flags)
+function SetFontSize(FontString, Size)
+    if not FontString then return end
+    if not Size then Size = 13 end
+    local font, _, flags = FontString:GetFont()
+    FontString:SetFont(font, Size, flags)
 end
 
 function SetSize(Frame, Width, Height)
+    if not Frame or not Width or not Height then return end
     Frame:SetWidth(Width)
 	Frame:SetHeight(Height)
-    Frame:SetPoint("CENTER", 0, 0)
+    Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 end
 
 function ShowToolTip(Parent, Title, Text)
+    if not Parent or not Title or not Text then return end
     GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
     GameTooltip:SetText(Title, 1, 1, 0.5)
     GameTooltip:AddLine(Text)
@@ -832,20 +850,20 @@ function HideTooltip()
 end
 
 function RegisterAllClicksAndDrags(Frame)
+    if not Frame then return end
     Frame:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")
     Frame:RegisterForDrag("LeftButton", "RightButton")
 end
 
 function CreateButton(Parent, Text, Width, Height)
-    
+    if not Parent or not Text then return end
+
     Width = Width or 60
     Height = Height or 25
 
     local Button = CreateFrame("Button", nil, Parent)
-    Button:SetWidth(Width)
-	Button:SetHeight(Height)
-    Button:SetFrameLevel(8)
     Button:SetBackdrop(BackDrop)
+    SetSize(Button, Width, Height)
     SetBackdropColor(Button, "Gray600")
 
     local Overlay = Button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -853,47 +871,45 @@ function CreateButton(Parent, Text, Width, Height)
     Overlay:SetPoint("CENTER", Button, "CENTER")
     Button.Overlay = Overlay
 
-    local function OnEnter()
-        SetBackdropColor(this, "Gray400")
+    local function Button_OnEnter()
+        SetBackdropColor(Button, "Gray400")
     end
 
-    local function OnLeave()
-        SetBackdropColor(this, "Gray600")
+    local function Button_OnLeave()
+        SetBackdropColor(Button, "Gray600")
     end
 
-    local function OnShow()
-        SetBackdropColor(this, "Gray600")
-    end
-
-    Button:SetScript("OnEnter", OnEnter)
-    Button:SetScript("OnLeave", OnLeave)
-    Button:SetScript("OnShow", OnShow)
+    Button:SetScript("OnEnter", Button_OnEnter)
+    Button:SetScript("OnLeave", Button_OnLeave)
     return Button
 end
 
 function CreateInnerContainer(Parent)
+    if not Parent then return end
 
     local InnerContainer = CreateFrame("Frame", nil, Parent)
-    InnerContainer:SetWidth(730)
-	InnerContainer:SetHeight(415)
-    InnerContainer:SetPoint("TOPLEFT", Parent, "TOPLEFT", 35, -75)
     InnerContainer:SetBackdrop(BackDrop)
+    SetSize(InnerContainer, 730, 415)
     SetBackdropColor(InnerContainer, "Gray600")
+    InnerContainer:SetPoint("TOPLEFT", Parent, "TOPLEFT", 35, -75)
+    Parent.InnerContainer = InnerContainer
+
     return InnerContainer
 end
 
-function CreateSmallInnerContainer(Parent, Text)
+function CreateSmallInnerContainer(Parent, Title)
+    if not Parent or not Title then return end
 
     local SmallInnerContainer = CreateFrame("Frame", nil, Parent)
-    SmallInnerContainer:SetWidth(350)
-	SmallInnerContainer:SetHeight(200)
     SmallInnerContainer:SetBackdrop(BackDrop)
+    SetSize(SmallInnerContainer, 350, 200)
     SetBackdropColor(SmallInnerContainer, "Gray600")
 
-    local SmallInnerContainerTitle = SmallInnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    SmallInnerContainerTitle:SetText(Text)
-    SmallInnerContainerTitle:SetPoint("TOPRIGHT", SmallInnerContainer, "TOPRIGHT", -5, 13)
-    SmallInnerContainer.Text = SmallInnerContainerTitle
+    local Title = SmallInnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    Title:SetText(Title)
+    Title:SetPoint("TOPRIGHT", SmallInnerContainer, "TOPRIGHT", -5, 13)
+    SmallInnerContainer.Title = Title
+
     return SmallInnerContainer
 end
 
@@ -901,21 +917,21 @@ function DefaultFrameTemplate(Frame)
     local IsMoving = false
 
     Frame:SetFrameStrata("LOW")
-    Frame:SetWidth(800)
-    Frame:SetHeight(550)
-    Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
     Frame:SetBackdrop(BackDrop)
-    SetBackdropColor(Frame, "Gray800")
     Frame:SetMovable(true)
     Frame:EnableMouse(true)
-    
+    SetSize(Frame, 800, 550)
+    SetBackdropColor(Frame, "Gray800")
+
     local Title = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
     Title:SetText(MBH_TITLE)
     Title:SetPoint("CENTER", Frame, "TOP", 0, -30)
+    Frame.Title = Title
 
     local Author = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     Author:SetText(MBH_AUTHOR)
     Author:SetPoint("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -10, 15)
+    Frame.Author = Author
 
     local function Frame_OnMouseUp()
         if IsMoving then
@@ -931,219 +947,173 @@ function DefaultFrameTemplate(Frame)
         end
     end
 
-    local function Frame_OnHide()
-        if IsMoving then
-            Frame:StopMovingOrSizing()
-            IsMoving = false
-        end
-    end
-
     Frame:SetScript("OnMouseUp", Frame_OnMouseUp)
     Frame:SetScript("OnMouseDown", Frame_OnMouseDown)
-    Frame:SetScript("OnHide", Frame_OnHide)
+    Frame:SetScript("OnHide", Frame_OnMouseUp)
 end
 
-function DefaultFrameButtons(Frame)
+function DefaultFrameButtons(Parent)
 
-    Frame.GeneralButton = CreateButton(Frame, MBH_GENERAL) 
-    Frame.GeneralButton:SetPoint("TOPLEFT", Frame, "TOPLEFT", 10, -15)
-
-    local function GeneralButton_OnShow()
-        if (Frame == MBH.MainFrame) then
-            SetBackdropColor(Frame.GeneralButton, "Blue600")
-        else
-            SetBackdropColor(Frame.GeneralButton, "Gray600")
-        end
-    end
-
-    local function GeneralButton_OnEnter()
-        if (Frame == MBH.MainFrame) then
-            SetBackdropColor(Frame.GeneralButton, "Blue500")
-        else
-            SetBackdropColor(Frame.GeneralButton, "Gray400")
-        end
-    end
-
-    local function GeneralButton_OnClick()
-        if (not MBH.MainFrame:IsShown()) then
-            MBH_ResetAllWindow()
-            MBH.MainFrame:Show()
-        end
-
-        if Frame == MBH.MainFrame then
-            return
-        end
+    local GeneralButton = CreateButton(Parent, MBH_GENERAL) 
+    GeneralButton:SetPoint("TOPLEFT", Parent, "TOPLEFT", 10, -15)
+    Parent.GeneralButton = GeneralButton
     
-        Frame:Hide()
-    end
+    local function GeneralButton_OnShow()
+        SetBackdropColor(GeneralButton, "Gray600")
 
-    local function GeneralButton_OnLeave()
-        GeneralButton_OnShow()
+        if (Parent == MBH.MainFrame) then
+            SetBackdropColor(GeneralButton, "Blue600")
+        end
     end
 
     GeneralButton_OnShow()
-    Frame.GeneralButton:SetScript("OnEnter", GeneralButton_OnEnter)
-    Frame.GeneralButton:SetScript("OnClick", GeneralButton_OnClick)
-    Frame.GeneralButton:SetScript("OnLeave", GeneralButton_OnLeave)
 
-    Frame.OptionButton = CreateButton(Frame, MBH_OPTIONS) 
-    Frame.OptionButton:SetPoint("TOPLEFT", Frame.GeneralButton, "TOPRIGHT", 5, 0)
+    local function GeneralButton_OnEnter()
+        SetBackdropColor(GeneralButton, "Gray400")
+
+        if (Frame == MBH.MainFrame) then
+            SetBackdropColor(GeneralButton, "Blue500")
+        end
+    end
+    
+    GeneralButton:SetScript("OnEnter", GeneralButton_OnEnter)
+    GeneralButton:SetScript("OnLeave", GeneralButton_OnShow)
+    GeneralButton:SetScript("OnClick", function()
+        if MBH.MainFrame:Show() then return end
+        MBH_CloseAllWindow()
+        MBH.MainFrame:Show()
+    end)
+
+    local OptionButton = CreateButton(Parent, MBH_OPTIONS) 
+    OptionButton:SetPoint("TOPLEFT", GeneralButton, "TOPRIGHT", 5, 0)
+    Parent.OptionButton = OptionButton
 
     local function OptionButton_OnShow()
-        if (Frame == MBH.OptionFrame) then
-            SetBackdropColor(Frame.OptionButton, "Blue600")
-        else
-            SetBackdropColor(Frame.OptionButton, "Gray600")
-        end
-    end
-    
-    local function OptionButton_OnEnter()
-        if (Frame == MBH.OptionFrame) then
-            SetBackdropColor(Frame.OptionButton, "Blue500")
-        else
-            SetBackdropColor(Frame.OptionButton, "Gray400")
-        end
-    end
-    
-    local function OptionButton_OnClick()
-        if (not MBH.OptionFrame:IsShown()) then
-            MBH_ResetAllWindow()
-            MBH.OptionFrame:Show()
-        end
+        SetBackdropColor(OptionButton, "Gray600")
 
-        if Frame == MBH.OptionFrame then
-            return
+        if (Parent == MBH.OptionFrame) then
+            SetBackdropColor(OptionButton, "Blue600")
         end
-    
-        Frame:Hide()
-    end
-    
-    local function OptionButton_OnLeave()
-        OptionButton_OnShow()
     end
     
     OptionButton_OnShow()
-    Frame.OptionButton:SetScript("OnEnter", OptionButton_OnEnter)
-    Frame.OptionButton:SetScript("OnClick", OptionButton_OnClick)
-    Frame.OptionButton:SetScript("OnLeave", OptionButton_OnLeave)
 
-    Frame.ProtectionButton = CreateButton(Frame, MBH_PROTECTION, 80) 
-    Frame.ProtectionButton:SetPoint("TOPLEFT", Frame.OptionButton, "TOPRIGHT", 5, 0)
+    local function OptionButton_OnEnter()
+        SetBackdropColor(OptionButton, "Gray400")
+
+        if (Parent == MBH.OptionFrame) then
+            SetBackdropColor(OptionButton, "Blue500")
+        end
+    end
+    
+    OptionButton:SetScript("OnEnter", OptionButton_OnEnter)
+    OptionButton:SetScript("OnLeave", OptionButton_OnShow)
+    OptionButton:SetScript("OnClick", function()
+        if MBH.OptionFrame:Show() then return end
+        MBH_CloseAllWindow()
+        MBH.OptionFrame:Show()
+    end)
+
+    local ProtectionButton = CreateButton(Parent, MBH_PROTECTION, 80) 
+    ProtectionButton:SetPoint("TOPLEFT", OptionButton, "TOPRIGHT", 5, 0)
+    Parent.ProtectionButton = ProtectionButton
 
     local function ProtectionButton_OnShow()
-        if (Frame == MBH.ProtectionFrame) then
-            SetBackdropColor(Frame.ProtectionButton, "Blue600")
-        else
-            SetBackdropColor(Frame.ProtectionButton, "Gray600")
-        end
-    end
-    
-    local function ProtectionButton_OnEnter()
-        if (Frame == MBH.ProtectionFrame) then
-            SetBackdropColor(Frame.ProtectionButton, "Blue500")
-        else
-            SetBackdropColor(Frame.ProtectionButton, "Gray400")
-        end
-    end
-    
-    local function ProtectionButton_OnClick()
-        if (not MBH.ProtectionFrame:IsShown()) then
-            MBH_ResetAllWindow()
-            MBH.ProtectionFrame:Show()
-        end
+        SetBackdropColor(ProtectionButton, "Gray600")
 
-        if Frame == MBH.ProtectionFrame then
-            return
+        if (Parent == MBH.ProtectionFrame) then
+            SetBackdropColor(ProtectionButton, "Blue600")
         end
-    
-        Frame:Hide()
-    end
-    
-    local function ProtectionButton_OnLeave()
-        ProtectionButton_OnShow()
     end
     
     ProtectionButton_OnShow()
-    Frame.ProtectionButton:SetScript("OnEnter", ProtectionButton_OnEnter)
-    Frame.ProtectionButton:SetScript("OnClick", ProtectionButton_OnClick)
-    Frame.ProtectionButton:SetScript("OnLeave", ProtectionButton_OnLeave)
 
-    Frame.CloseButton = CreateButton(Frame, MBH_HIDE) 
-    Frame.CloseButton:SetPoint("TOPRIGHT", Frame, "TOPRIGHT", -10, -15)
+    local function ProtectionButton_OnEnter()
+        if (Parent == MBH.ProtectionFrame) then
+            SetBackdropColor(ProtectionButton, "Blue500")
+        else
+            SetBackdropColor(ProtectionButton, "Gray400")
+        end
+    end
     
+    ProtectionButton:SetScript("OnEnter", ProtectionButton_OnEnter)
+    ProtectionButton:SetScript("OnLeave", ProtectionButton_OnShow)
+    ProtectionButton:SetScript("OnClick", function()
+        if MBH.ProtectionFrame:Show() then return end
+        MBH_CloseAllWindow()
+        MBH.ProtectionFrame:Show()
+    end)
+
+    local CloseButton = CreateButton(Parent, MBH_HIDE) 
+    CloseButton:SetPoint("TOPRIGHT", Parent, "TOPRIGHT", -10, -15)
+    Parent.CloseButton = CloseButton
+
     local function CloseButton_OnEnter()
-        SetBackdropColor(Frame.CloseButton, "Red500")
-        Frame.CloseButton.Overlay:SetText(MBH_EXIT)
+        SetBackdropColor(CloseButton, "Red500")
+        CloseButton.Overlay:SetText(MBH_EXIT)
     end
 
     local function CloseButton_OnLeave()
-        SetBackdropColor(Frame.CloseButton, "Gray600")
-        Frame.CloseButton.Overlay:SetText(MBH_HIDE)
+        SetBackdropColor(CloseButton, "Gray600")
+        CloseButton.Overlay:SetText(MBH_HIDE)
     end
 
-    local function CloseButton_OnClick()
-        Frame:Hide()
-    end
+    CloseButton:SetScript("OnEnter", CloseButton_OnEnter)
+    CloseButton:SetScript("OnLeave", CloseButton_OnLeave)
+    CloseButton:SetScript("OnClick", function()
+        Parent:Hide()
+    end)
 
-    Frame.CloseButton:SetScript("OnEnter", CloseButton_OnEnter)
-    Frame.CloseButton:SetScript("OnLeave", CloseButton_OnLeave)
-    Frame.CloseButton:SetScript("OnClick", CloseButton_OnClick)
-
-    Frame.DefaultSettingsButton = CreateButton(Frame, MBH_RESTOREDEFAULT, 120) 
-    Frame.DefaultSettingsButton:SetPoint("BOTTOMLEFT", Frame, "BOTTOMLEFT", 10, 15)
+    local DefaultSettingsButton = CreateButton(Parent, MBH_RESTOREDEFAULT, 120) 
+    DefaultSettingsButton:SetPoint("BOTTOMLEFT", Parent, "BOTTOMLEFT", 10, 15)
+    Parent.DefaultSettingsButton = DefaultSettingsButton
 
     local function DefaultSettingsButton_OnEnter()
-        SetBackdropColor(Frame.DefaultSettingsButton, "Blue600")
+        SetBackdropColor(DefaultSettingsButton, "Blue600")
     end
 
-    local function DefaultSettingsButton_OnLeave()
-        SetBackdropColor(Frame.DefaultSettingsButton, "Gray600")
-    end
-
-    local function DefaultSettingsButton_OnClick()
+    DefaultSettingsButton:SetScript("OnEnter", DefaultSettingsButton_OnEnter)
+    DefaultSettingsButton:SetScript("OnClick", function()
         if (MBH.PopupPresetFrame:IsShown()) then
             MBH.PopupPresetFrame:Hide()
         end
-        MBH.PopupDefaultFrame :Show()
-    end
+        MBH.PopupDefaultFrame:Show()
+    end)
 
-    Frame.DefaultSettingsButton:SetScript("OnEnter", DefaultSettingsButton_OnEnter)
-    Frame.DefaultSettingsButton:SetScript("OnLeave", DefaultSettingsButton_OnLeave)
-    Frame.DefaultSettingsButton:SetScript("OnClick", DefaultSettingsButton_OnClick)
-
-    Frame.PresetSettingsButton = CreateButton(Frame, MBH_PRESETSETTINGS, 100) 
-    Frame.PresetSettingsButton:SetPoint("TOPLEFT", Frame.DefaultSettingsButton, "TOPRIGHT", 5, 0)
+    local PresetSettingsButton = CreateButton(Parent, MBH_PRESETSETTINGS, 100) 
+    PresetSettingsButton:SetPoint("TOPLEFT", DefaultSettingsButton, "TOPRIGHT", 5, 0)
+    Parent.PresetSettingsButton = PresetSettingsButton
 
     local function PresetSettingsButton_OnEnter()
-        SetBackdropColor(Frame.PresetSettingsButton, "Blue600")
+        SetBackdropColor(PresetSettingsButton, "Blue600")
     end
 
-    local function PresetSettingsButton_OnLeave()
-        SetBackdropColor(Frame.PresetSettingsButton, "Gray600")
-    end
-
-    local function PresetSettingsButton_OnClick()
-        if (MBH.PopupDefaultFrame :IsShown()) then
-            MBH.PopupDefaultFrame :Hide()
+    PresetSettingsButton:SetScript("OnEnter", PresetSettingsButton_OnEnter)
+    PresetSettingsButton:SetScript("OnClick", function()
+        if (MBH.PopupDefaultFrame:IsShown()) then
+            MBH.PopupDefaultFrame:Hide()
         end
         MBH.PopupPresetFrame:Show()
-    end
-
-    Frame.PresetSettingsButton:SetScript("OnEnter", PresetSettingsButton_OnEnter)
-    Frame.PresetSettingsButton:SetScript("OnLeave", PresetSettingsButton_OnLeave)
-    Frame.PresetSettingsButton:SetScript("OnClick", PresetSettingsButton_OnClick)
+    end)
 end
 
 function CreateSlider(Parent, Name, Width, Height)
-    
+    if not Parent or not Name then return end
+
     Width = Width or 220
     Height = Height or 16
 
     local Slider = CreateFrame("Slider", Name, Parent, 'OptionsSliderTemplate')
-    Slider:SetWidth(Width)
-	Slider:SetHeight(Height)
     Slider:SetBackdrop(SliderBackDrop)
+    SetSize(Slider, Width, Height)
+    Parent.Slider = Slider
+
     return Slider
+end
+
+function SliderValueChanged(Value, String)
+    getglobal(this:GetName().."Text"):SetText(string.gsub(String, "$p", Value))
+    getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
 function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
@@ -1170,61 +1140,63 @@ function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
 end
 
 function CreateEditBox(Parent, Name, PlaceHolder, Width, Height)
+    if not Parent or not Name then return end
 
+    PlaceHolder = PlaceHolder or ""
     Width = Width or 50
     Height = Height or 20
 
     local EditBox = CreateFrame("EditBox", nil, Parent)
-    EditBox:SetWidth(Width)
-    EditBox:SetHeight(Height)
     EditBox:SetText(PlaceHolder)
     EditBox:SetAutoFocus(false)
     EditBox:SetMaxLetters(256)
     EditBox:SetFontObject(GameFontHighlight)
+    SetSize(EditBox, Width, Height)
 
-    local LeftCurve = EditBox:CreateTexture(nil, "BACKGROUND")
-    LeftCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
-    LeftCurve:SetWidth(12)
-    LeftCurve:SetHeight(29)
-    LeftCurve:SetPoint("TOPLEFT", -11, 2)
-    LeftCurve:SetTexCoord(0, 0.09375, 0, 1.0)
+    EditBox.LeftCurve = EditBox:CreateTexture(nil, "BACKGROUND")
+    SetSize(EditBox.LeftCurve, 12, 29)
+    EditBox.LeftCurve:SetPoint("TOPLEFT", -11, 2)
+    EditBox.LeftCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
+    EditBox.LeftCurve:SetTexCoord(0, 0.09375, 0, 1.0)
 
-    local RightCurve = EditBox:CreateTexture(nil, "BACKGROUND")
-    RightCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
-    RightCurve:SetWidth(12)
-    RightCurve:SetHeight(29)
-    RightCurve:SetPoint("TOPRIGHT", 4, 2)
-    RightCurve:SetTexCoord(0.90625, 1.0, 0, 1.0)
+    EditBox.RightCurve = EditBox:CreateTexture(nil, "BACKGROUND")
+    SetSize(EditBox.RightCurve, 12, 29)
+    EditBox.RightCurve:SetPoint("TOPRIGHT", 4, 2)
+    EditBox.RightCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
+    EditBox.RightCurve:SetTexCoord(0.90625, 1.0, 0, 1.0)
 
-    local MiddleTexture = EditBox:CreateTexture(nil, "BACKGROUND")
-    MiddleTexture:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
-    MiddleTexture:SetPoint("TOPLEFT", LeftCurve, "TOPRIGHT")
-    MiddleTexture:SetPoint("BOTTOMRIGHT", RightCurve, "BOTTOMLEFT")
-    MiddleTexture:SetTexCoord(0.09375, 0.90625, 0, 1.0)
+    EditBox.MiddleTexture = EditBox:CreateTexture(nil, "BACKGROUND")
+    EditBox.MiddleTexture:SetPoint("TOPLEFT", EditBox.LeftCurve, "TOPRIGHT")
+    EditBox.MiddleTexture:SetPoint("BOTTOMRIGHT", EditBox.RightCurve, "BOTTOMLEFT")
+    EditBox.MiddleTexture:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
+    EditBox.MiddleTexture:SetTexCoord(0.09375, 0.90625, 0, 1.0)
 
     local EditBoxText = EditBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     EditBoxText:SetText(Name)
     EditBoxText:SetPoint("RIGHT", EditBox, "LEFT", -40, 0)
-    EditBox.Text = EditBoxText
+    EditBox.EditBoxText = EditBoxText
 
-    local function EditBox_OnEscapePressed()
+    EditBox:SetScript("OnEscapePressed", function()
         EditBox:ClearFocus()
-    end
+    end)
 
-    EditBox:SetScript("OnEscapePressed", EditBox_OnEscapePressed)
     return EditBox
 end
 
-function CreateCheckButton(Parent, Text, Value, XAsis)
+function CreateCheckButton(Parent, Title, Value, XAsis)
+    if not Parent or not Title then return end
 
+    Value = Value or 0
     XAsis = XAsis or -48.5
 
     local CheckButton = CreateFrame("CheckButton", nil, Parent, "OptionsCheckButtonTemplate")
     CheckButton:SetChecked(Value)
+    
     local CheckButtonText = CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    CheckButtonText:SetText(Text)
+    CheckButtonText:SetText(Title)
     CheckButtonText:SetPoint("RIGHT", CheckButton, "LEFT", XAsis, 0)
-    CheckButton.Text = CheckButtonText
+    CheckButton.CheckButtonText = CheckButtonText
+
     return CheckButton
 end
 
@@ -1232,55 +1204,39 @@ function CreatePopupFrame(PopupFrame)
     local IsMoving = false
 
     PopupFrame:SetFrameStrata("HIGH")
-    PopupFrame:SetWidth(300)
-    PopupFrame:SetHeight(110)
-    PopupFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-    PopupFrame:SetBackdrop(BackDrop)
-    SetBackdropColor(PopupFrame, "Gray800")
     PopupFrame:SetMovable(true)
     PopupFrame:EnableMouse(true)
+    PopupFrame:SetBackdrop(BackDrop)
+    SetSize(PopupFrame, 300, 110)
+    SetBackdropColor(PopupFrame, "Gray800")
 
     local PopupFrameText = PopupFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     PopupFrameText:SetText(MBH_RELOADUI)
     PopupFrameText:SetPoint("CENTER", PopupFrame, "CENTER", 0, 0)
-    PopupFrame.Text = PopupFrameText
+    PopupFrame.PopupFrameText = PopupFrameText
 
     local AcceptButton = CreateButton(PopupFrame, MBH_YES, 100) 
     AcceptButton:SetPoint("BOTTOMLEFT", PopupFrame, "BOTTOMLEFT", 5, 7.5)
-    SetBackdropColor(AcceptButtonn, "Gray600")
     PopupFrame.AcceptButton = AcceptButton
 
     local function AcceptButton_OnEnter()
         SetBackdropColor(AcceptButton, "Green600")
     end
 
-    local function AcceptButton_OnLeave()
-        SetBackdropColor(AcceptButton, "Gray600")
-    end
-
     AcceptButton:SetScript("OnEnter", AcceptButton_OnEnter)
-    AcceptButton:SetScript("OnLeave", AcceptButton_OnLeave)
 
     local DeclineButton = CreateButton(PopupFrame, MBH_NO, 100) 
     DeclineButton:SetPoint("BOTTOMRIGHT", PopupFrame, "BOTTOMRIGHT", -5, 7.5)
-    SetBackdropColor(DeclineButton, "Gray600")
     PopupFrame.DeclineButton = DeclineButton
 
     local function DeclineButton_OnEnter()
         SetBackdropColor(DeclineButton, "Red500")
     end
 
-    local function DeclineButton_OnLeave()
-        SetBackdropColor(DeclineButton, "Gray600")
-    end
-
-    local function DeclineButton_OnClick()
-        PopupFrame:Hide()
-    end
-
     DeclineButton:SetScript("OnEnter", DeclineButton_OnEnter)
-    DeclineButton:SetScript("OnLeave", DeclineButton_OnLeave)
-    DeclineButton:SetScript("OnClick", DeclineButton_OnClick)
+    DeclineButton:SetScript("OnClick", function()
+        PopupFrame:Hide()
+    end)
 
     local function PopupFrame_OnMouseUp()
         if IsMoving then
@@ -1296,14 +1252,39 @@ function CreatePopupFrame(PopupFrame)
         end
     end
 
-    local function PopupFrame_OnHide()
-        if IsMoving then
-            PopupFrame:StopMovingOrSizing()
-            IsMoving = false
+    PopupFrame:SetScript("OnMouseUp", PopupFrame_OnMouseUp)
+    PopupFrame:SetScript("OnMouseDown", PopupFrame_OnMouseDown)
+    PopupFrame:SetScript("OnHide", PopupFrame_OnMouseUp)
+end
+
+-------------------------------------------------------------------------------
+-- EditBox Checking {{{
+-------------------------------------------------------------------------------
+
+function ValidateLAR(FrameHAR, Value)
+    local LARValue = tonumber(this:GetText())
+    local HARValue = tonumber(FrameHAR:GetText())
+
+    if ( LARValue and LARValue >= 1 ) then
+        if ( HARValue and LARValue <= HARValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"] = LARValue
         end
     end
 
-    PopupFrame:SetScript("OnMouseUp", PopupFrame_OnMouseUp)
-    PopupFrame:SetScript("OnMouseDown", PopupFrame_OnMouseDown)
-    PopupFrame:SetScript("OnHide", PopupFrame_OnHide)
+    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"])
+end
+
+function ValidateHAR(FrameLAR, MaxRank, Value)
+    local HARValue = tonumber(this:GetText())
+    local LARValue = tonumber(FrameLAR:GetText())
+
+    if ( HARValue and HARValue >= 1 ) then
+        if ( HARValue <= MaxRank ) and ( LARValue and HARValue >= LARValue ) then
+            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = HARValue
+        else
+            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = MaxRank
+        end
+    end
+
+    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"])
 end
