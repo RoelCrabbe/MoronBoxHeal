@@ -6,7 +6,7 @@ This addon is designed, optimised for Multiboxing. I may or may not, change thin
 ![image](https://github.com/RoelCrabbe/MoronBoxHeal/assets/92096051/7b1b6b00-99f0-4698-ae53-faf7e59923c6)
 
 ### Healing Settings
-  Random Target : Is the character allowed to search targets randomly?
+  ``Random Target`` : Is the character allowed to search targets randomly?
   Heal Target : Once <Random Target> is disabled, this will use a 'set' value to search for the next target to heal.
   Allowed Overheal : Howmuch % do you want to allow?
   Smart Heal : Is disabled, this will only search random targets. (Keep it on, they it will do both)
