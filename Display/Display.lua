@@ -908,10 +908,10 @@ function MBH_CreateSmallInnerContainer(Parent, Title)
     MBH_SetSize(SmallInnerContainer, 350, 200)
     MBH_SetBackdropColor(SmallInnerContainer, "Gray600")
 
-    local Title = SmallInnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    Title:SetText(Title)
-    Title:SetPoint("TOPRIGHT", SmallInnerContainer, "TOPRIGHT", -5, 13)
-    SmallInnerContainer.Title = Title
+    local ContainerTitle = SmallInnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    ContainerTitle:SetText(Title)
+    ContainerTitle:SetPoint("TOPRIGHT", SmallInnerContainer, "TOPRIGHT", -5, 14)
+    SmallInnerContainer.ContainerTitle = ContainerTitle
 
     return SmallInnerContainer
 end
