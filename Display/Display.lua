@@ -77,8 +77,8 @@ function MBH.MiniMapButton:CreateMinimapIcon()
 	
 	self.Button = CreateFrame("Button", nil, self)
     SetSize(self.Button, 32, 32)
-	self.Button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
     RegisterAllClicksAndDrags(self.Button)
+	self.Button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 
 	self.Overlay = self:CreateTexture(nil, "OVERLAY", self)
     SetSize(self.Overlay, 52, 52)
@@ -834,7 +834,7 @@ function SetSize(Frame, Width, Height)
     if not Frame or not Width or not Height then return end
     Frame:SetWidth(Width)
 	Frame:SetHeight(Height)
-    Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    Frame:SetPoint("CENTER", 0, 0)
 end
 
 function ShowToolTip(Parent, Title, Text)
