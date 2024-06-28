@@ -390,25 +390,23 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
     end
 
     local Cache = {
-        HealNeed = 0,
+        HealthDown = 0,
         Spell = nil,
         Rank = nil,
         DefaultSpell = SPN .. "(Rank 1)"
     }
 
     Cache.Spell, Cache.Rank = MBH_ExtractSpell(Cache.DefaultSpell)
-    Print(SPN..", "..LAR..", "..HAR)
 
     if MBH.ACE.HealComm.Spells[Cache.Spell] then
         
-        Cache.Rank, Cache.HealNeed = MBH_CalculateRank(Cache.Spell, LAR, HAR, UnitID)
+        Cache.Rank, Cache.HealthDown = MBH_CalculateRank(Cache.Spell, LAR, HAR, UnitID)
 
         -- Verifies if the current heal amount meets requirements and casts the spell accordingly.
-        if Cache.HealNeed >= Session.Autoheal.CalculatedHeal then
+        if Cache.HealthDown >= Session.Autoheal.CalculatedHeal then
 
             local Castable = Cache.Spell.."(Rank "..Cache.Rank..")"   
-            Print(Cache.HealNeed.." - "..Castable)
-            
+
             -- Clear target if necessary
             if UnitCanAttack("player", UnitID) or (UnitExists("target") and not UnitCanAttack("player", "target") and not UnitIsUnit(UnitID, "target")) then
                 ClearTarget()
@@ -440,7 +438,7 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
 
     local HealBonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
     local MaxRank = MBH_GetMaxSpellRank(SPN)
-	local HealNeed = mb_healthDown(UnitID)
+	local HealthDown = mb_healthDown(UnitID)
 
     local TargetPower, TargetMod = MBH.ACE.HealComm:GetUnitSpellPower(UnitID, SPN)
     local BuffPower, BuffMod = MBH.ACE.HealComm:GetBuffSpellPower()
@@ -461,7 +459,7 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
         for i = MaxRank, 1, -1 do
             local HealOutput = ((MBH.ACE.HealComm.Spells[SPN][i](HealBonus) + TargetPower) * BuffMod * TargetMod)
             
-            if HealOutput < HealNeed then
+            if HealOutput < HealthDown then
                 if i < MaxRank then
                     CalculatedRank = i + 1
                 else
@@ -486,7 +484,7 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
   
     Session.Autoheal.OutgoingHeal = OutgoingHeal
     Session.Autoheal.CalculatedHeal = CalculatedHeal
-    return CalculatedRank, HealNeed
+    return CalculatedRank, HealthDown
 end
 
 function MBH_CastHeal(SPN, LAR, HAR)
