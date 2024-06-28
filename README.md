@@ -7,13 +7,13 @@ This addon is designed, optimised for Multiboxing. I may or may not, change thin
 
 ### Healing Settings
   ``Random Target`` : Is the character allowed to search targets randomly?
-  Heal Target : Once <Random Target> is disabled, this will use a 'set' value to search for the next target to heal.
-  Allowed Overheal : Howmuch % do you want to allow?
-  Smart Heal : Is disabled, this will only search random targets. (Keep it on, they it will do both)
+   ``Heal Target`` : Once <Random Target> is disabled, this will use a 'set' value to search for the next target to heal.
+  ``Allowed Overheal`` : Howmuch % do you want to allow?
+  ``Smart Heal`` : Is disabled, this will only search random targets. (Keep it on, they it will do both)
 
 ### Extended Range Settings
-  Extended Range : This is a settings that will keep track of targets that are in caster range (40yrds)
-  Update : Checking range of a unit requires OnUpdate to check where everyone is. This setting will allow you to pick howmany times it can run.
+  ``Extended Range`` : This is a settings that will keep track of targets that are in caster range (40yrds)
+  ``Update`` : Checking range of a unit requires OnUpdate to check where everyone is. This setting will allow you to pick howmany times it can run.
   
 ### Line of Sight Settings
   Line of Sight : Do we want targets that are not in line of sight to heal, be ignored?
