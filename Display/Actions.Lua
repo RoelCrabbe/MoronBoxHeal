@@ -142,17 +142,17 @@ end
 
 -- Slicer
 
-function FlashHealSlider_OnValueChanged()
+function FlashHealThresholdSlider__OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold, MBH_FLASHHEALPROTECTIONTHRESHOLD)
 end
 
-function HealSlider_OnValueChanged()
+function HealThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold, MBH_HEALPROTECTIONTHRESHOLD)
 end
 
-function GreaterHealSlider_OnValueChanged()
+function GreaterHealThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold, MBH_GREATERHEALPROTECTIONTHRESHOLD)
 end

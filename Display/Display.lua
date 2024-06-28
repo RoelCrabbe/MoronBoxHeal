@@ -82,6 +82,12 @@ function RegisterAllClicksAndDrags(Frame)
     Frame:RegisterForDrag("LeftButton", "RightButton")
 end
 
+function ClearFrameFocus(Frame, Text)
+    Frame:ClearFocus()
+    Frame:SetText(Text)
+end
+
+
 function MBH.MiniMapButton:CreateMinimapIcon()
     local IsMiniMapMoving = false
 
@@ -289,196 +295,181 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     if ( Session.PlayerClass == "Priest" ) then
 
         -- Flash Heal Section
-        local FlashHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        FlashHealTitle:SetText(MBH_SPELL_FLASH_HEAL)
-        FlashHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 85, -25)
+        self.FlashHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.FlashHealTitle:SetText(MBH_SPELL_FLASH_HEAL)
+        self.FlashHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 85, -25)
 
-        local FlashHealSlider = CreateSlider(self.InnerContainer, "FlashHealSlider", 180)
-        FlashHealSlider:SetPoint("CENTER", FlashHealTitle, "CENTER", 0, -50)
-        FlashHealSlider:SetScript("OnValueChanged", FlashHealSlider_OnValueChanged)
-        FlashHealSlider:SetScript("OnShow", function()
-            InitializeSlider(FlashHealSlider, MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
+        self.FlashHealThresholdSlider = CreateSlider(self.InnerContainer, "FlashHealThresholdSlider", 180)
+        self.FlashHealThresholdSlider:SetPoint("CENTER", self.FlashHealTitle, "CENTER", 0, -50)
+        self.FlashHealThresholdSlider:SetScript("OnValueChanged", FlashHealThresholdSlider__OnValueChanged)
+        self.FlashHealThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.FlashHealThresholdSlider, MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
         end)
 
-        local FlashHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        FlashHealLAR:SetPoint("CENTER", FlashHealSlider, "CENTER", 50, -50)
-        FlashHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
+        self.FlashHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
+        self.FlashHealLAR:SetPoint("CENTER", self.FlashHealThresholdSlider, "CENTER", 50, -50)
 
-        local FlashHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        FlashHealHAR:SetPoint("CENTER", FlashHealLAR, "CENTER", 0, -50)
-        FlashHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
-
-        local FlashHealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        FlashHealEnable:SetPoint("CENTER", FlashHealHAR, "CENTER", 0, -50)
-        FlashHealEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch and 1 or 0)
-        FlashHealEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = (FlashHealEnable:GetChecked() == 1)
+        self.FlashHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
+        self.FlashHealHAR:SetPoint("CENTER", self.FlashHealLAR, "CENTER", 0, -50)
+   
+        self.FlashHealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch)
+        self.FlashHealCheckButton:SetPoint("CENTER", self.FlashHealHAR, "CENTER", 0, -50)
+        self.FlashHealCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = (self.FlashHealCheckButton:GetChecked() == 1)
         end)
 
         -- Heal Section
-        local HealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        HealTitle:SetText(MBH_SPELL_HEAL)
-        HealTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
+        self.HealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.HealTitle:SetText(MBH_SPELL_HEAL)
+        self.HealTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
 
-        local HealSlider = CreateSlider(self.InnerContainer, "HealSlider", 180)
-        HealSlider:SetPoint("CENTER", HealTitle, "CENTER", 0, -50)
-        HealSlider:SetScript("OnValueChanged", HealSlider_OnValueChanged)
-        HealSlider:SetScript("OnShow", function()
-            InitializeSlider(HealSlider, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
+        self.HealThresholdSlider = CreateSlider(self.InnerContainer, "HealThresholdSlider", 180)
+        self.HealThresholdSlider:SetPoint("CENTER", self.HealTitle, "CENTER", 0, -50)
+        self.HealThresholdSlider:SetScript("OnValueChanged", HealThresholdSlider_OnValueChanged)
+        self.HealThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.HealThresholdSlider, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
         end)
 
-        local HealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        HealLAR:SetPoint("CENTER", HealSlider, "CENTER", 50, -50)
-        HealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
+        self.HealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
+        self.HealLAR:SetPoint("CENTER", self.HealThresholdSlider, "CENTER", 50, -50)
 
-        local HealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        HealHAR:SetPoint("CENTER", HealLAR, "CENTER", 0, -50)
-        HealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
+        self.HealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
+        self.HealHAR:SetPoint("CENTER", self.HealLAR, "CENTER", 0, -50)
 
-        local HealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        HealEnable:SetPoint("CENTER", HealHAR, "CENTER", 0, -50)
-        HealEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch and 1 or 0)
-        HealEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = (HealEnable:GetChecked() == 1)
+        self.HealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch)
+        self.HealCheckButton:SetPoint("CENTER", self.HealHAR, "CENTER", 0, -50)
+        self.HealCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = (self.HealCheckButton:GetChecked() == 1)
         end)
 
         -- Greater Heal
-        local GreaterHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        GreaterHealTitle:SetText(MBH_SPELL_GREATER_HEAL)
-        GreaterHealTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -85, -25)
+        self.GreaterHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.GreaterHealTitle:SetText(MBH_SPELL_GREATER_HEAL)
+        self.GreaterHealTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -85, -25)
 
-        local GreaterHealSlider = CreateSlider(self.InnerContainer, "GreaterHealSlider", 180)
-        GreaterHealSlider:SetPoint("CENTER", GreaterHealTitle, "CENTER", 0, -50)
-        GreaterHealSlider:SetScript("OnValueChanged", GreaterHealSlider_OnValueChanged)
-        GreaterHealSlider:SetScript("OnShow", function()
-            InitializeSlider(GreaterHealSlider, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
+        self.GreaterHealThresholdSlider = CreateSlider(self.InnerContainer, "GreaterHealThresholdSlider", 180)
+        self.GreaterHealThresholdSlider:SetPoint("CENTER", self.GreaterHealTitle, "CENTER", 0, -50)
+        self.GreaterHealThresholdSlider:SetScript("OnValueChanged", GreaterHealThresholdSlider_OnValueChanged)
+        self.GreaterHealThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.GreaterHealThresholdSlider, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
         end)
 
-        local GreaterHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        GreaterHealLAR:SetPoint("CENTER", GreaterHealSlider, "CENTER", 50, -50)
-        GreaterHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
+        self.GreaterHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
+        self.GreaterHealLAR:SetPoint("CENTER", self.GreaterHealThresholdSlider, "CENTER", 50, -50)
 
-        local GreaterHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        GreaterHealHAR:SetPoint("CENTER", GreaterHealLAR, "CENTER", 0, -50)
-        GreaterHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
+        self.GreaterHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
+        self.GreaterHealHAR:SetPoint("CENTER", self.GreaterHealLAR, "CENTER", 0, -50)
         
-        local GreaterHealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        GreaterHealEnable:SetPoint("CENTER", GreaterHealHAR, "CENTER", 0, -50)
-        GreaterHealEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch and 1 or 0)
-        GreaterHealEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = (GreaterHealEnable:GetChecked() == 1)
+        self.GreaterHealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch)
+        self.GreaterHealCheckButton:SetPoint("CENTER", self.GreaterHealHAR, "CENTER", 0, -50)
+        self.GreaterHealCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = (self.GreaterHealCheckButton:GetChecked() == 1)
         end)
 
         -- Flash Heal Events 
         local function FlashHealLAR_OnEnterPressed()
-            MBH_ValidateLAR(FlashHealHAR, "Flash_Heal")
-            FlashHealLAR:ClearFocus()
+            ClearFrameFocus(self.FlashHealLAR)
+            MBH_ValidateLAR(self.FlashHealHAR, "Flash_Heal")
         end
 
         local function FlashHealLAR_OnExitFrame()
-            FlashHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
-            FlashHealLAR:ClearFocus()
+            ClearFrameFocus(self.FlashHealLAR, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
         end
 
         local function FlashHealLAR_OnTabPressed()
-            FlashHealHAR:SetFocus()
+            self.FlashHealHAR:SetFocus()
         end
 
-        FlashHealLAR:SetScript("OnEnterPressed", FlashHealLAR_OnEnterPressed)
-        FlashHealLAR:SetScript("OnEscapePressed", FlashHealLAR_OnExitFrame)
-        FlashHealLAR:SetScript("OnTabPressed", FlashHealLAR_OnTabPressed)
+        self.FlashHealLAR:SetScript("OnEnterPressed", FlashHealLAR_OnEnterPressed)
+        self.FlashHealLAR:SetScript("OnEscapePressed", FlashHealLAR_OnExitFrame)
+        self.FlashHealLAR:SetScript("OnTabPressed", FlashHealLAR_OnTabPressed)
 
         local function FlashHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
-            FlashHealHAR:ClearFocus()
+            ClearFrameFocus(self.FlashHealHAR)
+            MBH_ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
         end
 
         local function FlashHealHAR_OnExitFrame()
-            FlashHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
-            FlashHealHAR:ClearFocus()
+            ClearFrameFocus(self.FlashHealHAR, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
         end
 
         local function FlashHealHAR_OnTabPressed()
-            HealLAR:SetFocus()
+            self.HealLAR:SetFocus()
         end
 
-        FlashHealHAR:SetScript("OnEnterPressed", FlashHealHAR_OnEnterPressed)
-        FlashHealHAR:SetScript("OnEscapePressed", FlashHealHAR_OnExitFrame)
-        FlashHealHAR:SetScript("OnTabPressed", FlashHealHAR_OnTabPressed)
+        self.FlashHealHAR:SetScript("OnEnterPressed", FlashHealHAR_OnEnterPressed)
+        self.FlashHealHAR:SetScript("OnEscapePressed", FlashHealHAR_OnExitFrame)
+        self.FlashHealHAR:SetScript("OnTabPressed", FlashHealHAR_OnTabPressed)
 
         -- Heal Events
         local function HealLAR_OnEnterPressed()
-            MBH_ValidateLAR(HealHAR, "Heal")
-            HealLAR:ClearFocus()
+            ClearFrameFocus(self.HealLAR)
+            MBH_ValidateLAR(self.HealHAR, "Heal")
         end
         
         local function HealLAR_OnExitFrame()
-            HealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
-            HealLAR:ClearFocus()
+            ClearFrameFocus(self.HealLAR, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
         end
         
         local function HealLAR_OnTabPressed()
-            HealHAR:SetFocus()
+            self.HealHAR:SetFocus()
         end
         
-        HealLAR:SetScript("OnEnterPressed", HealLAR_OnEnterPressed)
-        HealLAR:SetScript("OnEscapePressed", HealLAR_OnExitFrame)
-        HealLAR:SetScript("OnTabPressed", HealLAR_OnTabPressed)
+        self.HealLAR:SetScript("OnEnterPressed", HealLAR_OnEnterPressed)
+        self.HealLAR:SetScript("OnEscapePressed", HealLAR_OnExitFrame)
+        self.HealLAR:SetScript("OnTabPressed", HealLAR_OnTabPressed)
         
         local function HealHAR_OnEnterPressed()
-            MBH_ValidateHAR(HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
-            HealHAR:ClearFocus()
+            ClearFrameFocus(self.HealHAR)
+            MBH_ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
         end
         
         local function HealHAR_OnExitFrame()
-            HealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
-            HealHAR:ClearFocus()
+            ClearFrameFocus(self.HealHAR, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
         end
         
         local function HealHAR_OnTabPressed()
-            GreaterHealLAR:SetFocus()
+            self.GreaterHealLAR:SetFocus()
         end
         
-        HealHAR:SetScript("OnEnterPressed", HealHAR_OnEnterPressed)
-        HealHAR:SetScript("OnEscapePressed", HealHAR_OnExitFrame)
-        HealHAR:SetScript("OnTabPressed", HealHAR_OnTabPressed)
+        self.HealHAR:SetScript("OnEnterPressed", HealHAR_OnEnterPressed)
+        self.HealHAR:SetScript("OnEscapePressed", HealHAR_OnExitFrame)
+        self.HealHAR:SetScript("OnTabPressed", HealHAR_OnTabPressed)
 
         -- Greater Heal Events
         local function GreaterHealLAR_OnEnterPressed()
-            MBH_ValidateLAR(GreaterHealHAR, "Greater_Heal")
-            GreaterHealLAR:ClearFocus()
+            ClearFrameFocus(self.GreaterHealLAR)
+            MBH_ValidateLAR(self.GreaterHealHAR, "Greater_Heal")
         end
         
         local function GreaterHealLAR_OnExitFrame()
-            GreaterHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
-            GreaterHealLAR:ClearFocus()
+            ClearFrameFocus(self.GreaterHealLAR, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
         end
         
         local function GreaterHealLAR_OnTabPressed()
-            GreaterHealHAR:SetFocus()
+            self.GreaterHealHAR:SetFocus()
         end
         
-        GreaterHealLAR:SetScript("OnEnterPressed", GreaterHealLAR_OnEnterPressed)
-        GreaterHealLAR:SetScript("OnEscapePressed", GreaterHealLAR_OnExitFrame)
-        GreaterHealLAR:SetScript("OnTabPressed", GreaterHealLAR_OnTabPressed)
+        self.GreaterHealLAR:SetScript("OnEnterPressed", GreaterHealLAR_OnEnterPressed)
+        self.GreaterHealLAR:SetScript("OnEscapePressed", GreaterHealLAR_OnExitFrame)
+        self.GreaterHealLAR:SetScript("OnTabPressed", GreaterHealLAR_OnTabPressed)
         
         local function GreaterHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
-            GreaterHealHAR:ClearFocus()
+            ClearFrameFocus(self.GreaterHealHAR)
+            MBH_ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
         end
         
         local function GreaterHealHAR_OnExitFrame()
-            GreaterHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
-            GreaterHealHAR:ClearFocus()
+            ClearFrameFocus(self.GreaterHealHAR, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
         end
         
         local function GreaterHealHAR_OnTabPressed()
-            GreaterHealHAR:ClearFocus()
+            self.GreaterHealHAR:ClearFocus()
         end
         
-        GreaterHealHAR:SetScript("OnEnterPressed", GreaterHealHAR_OnEnterPressed)
-        GreaterHealHAR:SetScript("OnEscapePressed", GreaterHealHAR_OnExitFrame)
-        GreaterHealHAR:SetScript("OnTabPressed", GreaterHealHAR_OnTabPressed)
+        self.GreaterHealHAR:SetScript("OnEnterPressed", GreaterHealHAR_OnEnterPressed)
+        self.GreaterHealHAR:SetScript("OnEscapePressed", GreaterHealHAR_OnExitFrame)
+        self.GreaterHealHAR:SetScript("OnTabPressed", GreaterHealHAR_OnTabPressed)
 
     elseif ( Session.PlayerClass == "Shaman" ) then
         
@@ -1136,7 +1127,7 @@ function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
     maxValueText:SetPoint("CENTER", Slider, "RIGHT", 10, 0)
 end
 
-function CreateEditBox(Parent, Text, Width, Height)
+function CreateEditBox(Parent, Name, PlaceHolder, Width, Height)
 
     Width = Width or 50
     Height = Height or 20
@@ -1144,6 +1135,7 @@ function CreateEditBox(Parent, Text, Width, Height)
     local EditBox = CreateFrame("EditBox", nil, Parent)
     EditBox:SetWidth(Width)
     EditBox:SetHeight(Height)
+    EditBox:SetText(PlaceHolder)
     EditBox:SetAutoFocus(false)
     EditBox:SetMaxLetters(256)
     EditBox:SetFontObject(GameFontHighlight)
@@ -1169,7 +1161,7 @@ function CreateEditBox(Parent, Text, Width, Height)
     MiddleTexture:SetTexCoord(0.09375, 0.90625, 0, 1.0)
 
     local EditBoxText = EditBox:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    EditBoxText:SetText(Text)
+    EditBoxText:SetText(Name)
     EditBoxText:SetPoint("RIGHT", EditBox, "LEFT", -40, 0)
     EditBox.Text = EditBoxText
 
