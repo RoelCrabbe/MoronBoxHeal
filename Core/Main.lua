@@ -202,7 +202,8 @@ Session = {
     Autoheal = {
 		IsCasting = nil,
         UnitID = nil,
-        PlusHeal = 0,
+        OutgoingHeal = 0,
+        CalculatedHeal = 0,
         SortBuffer = {}
     },
     ExtendedRange = {
@@ -249,7 +250,8 @@ function MBH:OnEvent()
         
 		Session.CurrentUnit = nil
 		Session.Autoheal.IsCasting = nil
-		Session.Autoheal.PlusHeal = 0
+		Session.Autoheal.OutgoingHeal = 0
+        Session.Autoheal.CalculatedHeal = 0
 		Session.Autoheal.UnitID = nil
 
         if mb_equippedSetCount("Stormcaller's Garb") == 5 then
@@ -272,7 +274,8 @@ function MBH:OnEvent()
 
 		Session.CurrentUnit = nil
 		Session.Autoheal.IsCasting = nil
-		Session.Autoheal.PlusHeal = 0
+		Session.Autoheal.OutgoingHeal = 0
+        Session.Autoheal.CalculatedHeal = 0
 		Session.Autoheal.UnitID = nil
 		
 	elseif ( event == "SPELLCAST_START" ) then
@@ -363,7 +366,7 @@ end
 function MBH_Cast(SPN, LAR, HAR)
 
 	if Session.Autoheal.IsCasting and Session.Autoheal.UnitID then
-        local OverHealVal = Session.Autoheal.PlusHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
+        local OverHealVal = Session.Autoheal.OutgoingHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
 
 		if OverHealVal > mb_healthDown(Session.Autoheal.UnitID) then
 			SpellStopCasting()
@@ -394,33 +397,18 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
     }
 
     Cache.Spell, Cache.Rank = MBH_ExtractSpell(Cache.DefaultSpell)
+    Print(SPN..", "..LAR..", "..HAR)
 
     if MBH.ACE.HealComm.Spells[Cache.Spell] then
-        Cache.Rank, Cache.HealNeed = MBH_CalculateRank(Cache.Spell, UnitID)
-
-		-- Ensures Cache.Rank stays within the allowed spell rank range defined by LAR and HAR.
-		if LAR then
-			Cache.Rank = math.max(Cache.Rank, LAR)
-		end
-
-		if HAR then
-			Cache.Rank = math.min(Cache.Rank, HAR)
-		end
-
-        -- If Nature's Grace buff is active set Cache.Rank to 4 otherwise 3.
-        if Cache.Spell == "Healing Touch" then
-            if mb_hasBuffOrDebuff("Nature's Grace", "player", "buff") then
-                Cache.Rank = 4
-            end
-
-            Cache.Rank = 3            
-        end
+        
+        Cache.Rank, Cache.HealNeed = MBH_CalculateRank(Cache.Spell, LAR, HAR, UnitID)
 
         -- Verifies if the current heal amount meets requirements and casts the spell accordingly.
-        if Cache.HealNeed >= MBH_CalculateHeal(Cache.Spell, Cache.Rank, UnitID) then
+        if Cache.HealNeed >= Session.Autoheal.CalculatedHeal then
 
             local Castable = Cache.Spell.."(Rank "..Cache.Rank..")"   
-
+            Print(Cache.HealNeed.." - "..Castable)
+            
             -- Clear target if necessary
             if UnitCanAttack("player", UnitID) or (UnitExists("target") and not UnitCanAttack("player", "target") and not UnitIsUnit(UnitID, "target")) then
                 ClearTarget()
@@ -444,7 +432,7 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
     end
 end
 
-function MBH_CalculateRank(SPN, UnitID)
+function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
 
     if UnitID == UNKNOWNOBJECT or UnitID == UKNOWNBEING then
         return
@@ -460,48 +448,45 @@ function MBH_CalculateRank(SPN, UnitID)
     HealBonus = HealBonus + BuffPower
 
     local CalculatedRank = 1
-    local OutgoingHealing = 0
+    local OutgoingHeal = 0
+    local CalculatedHeal = 0
 
-    for i = MaxRank, 1, -1 do
-        local HealOutput = ((math.floor(MBH.ACE.HealComm.Spells[SPN][i](HealBonus)) + TargetPower) * BuffMod * TargetMod)
+    if (SPN == "Healing Touch") then
 
-        if HealOutput < HealNeed then
-            if i < MaxRank then
-                CalculatedRank = i + 1
-                OutgoingHealing = ((math.floor(MBH.ACE.HealComm.Spells[SPN][CalculatedRank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
-                break
-            else
-                CalculatedRank = i
-                OutgoingHealing = HealOutput
+        CalculatedRank = 3
+        if mb_hasBuffOrDebuff("Nature's Grace", "player", "buff") then
+            CalculatedRank = 4
+        end
+    else
+        for i = MaxRank, 1, -1 do
+            local HealOutput = ((MBH.ACE.HealComm.Spells[SPN][i](HealBonus) + TargetPower) * BuffMod * TargetMod)
+            
+            if HealOutput < HealNeed then
+                if i < MaxRank then
+                    CalculatedRank = i + 1
+                else
+                    CalculatedRank = i
+                end
                 break
             end
-        else
-            OutgoingHealing = HealOutput
+        end
+
+        if LAR then
+            CalculatedRank = math.max(CalculatedRank, LAR)
+        end
+
+        if HAR then
+            CalculatedRank = math.min(CalculatedRank, HAR)
         end
     end
 
-    Session.Autoheal.PlusHeal = OutgoingHealing
+    local CalculatedHealRank = (CalculatedRank > 1) and (CalculatedRank - 1) or 1
+    OutgoingHeal = ((math.floor(MBH.ACE.HealComm.Spells[SPN][CalculatedRank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
+    CalculatedHeal = ((math.floor(MBH.ACE.HealComm.Spells[SPN][CalculatedHealRank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
+  
+    Session.Autoheal.OutgoingHeal = OutgoingHeal
+    Session.Autoheal.CalculatedHeal = CalculatedHeal
     return CalculatedRank, HealNeed
-end
-
-function MBH_CalculateHeal(SPN, Rank, UnitID)
-
-    if UnitID == UNKNOWNOBJECT or UnitID == UKNOWNBEING then
-        return
-	end
-
-	local HealBonus = MBH.ACE.ItemBonus:GetBonus("HEAL")
-    local TargetPower, TargetMod = MBH.ACE.HealComm:GetUnitSpellPower(UnitID, SPN)
-    local BuffPower, BuffMod = MBH.ACE.HealComm:GetBuffSpellPower()
-
-	HealBonus = HealBonus + BuffPower
-
-    if Rank > 1 then
-        Rank = Rank - 1
-    end
-
-	local HealOutput = ((math.floor(MBH.ACE.HealComm.Spells[SPN][Rank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
-    return HealOutput
 end
 
 function MBH_CastHeal(SPN, LAR, HAR)
