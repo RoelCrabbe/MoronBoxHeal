@@ -1087,7 +1087,7 @@ function MBH_DefaultFrameButtons(Parent)
         MBH.PopupDefaultFrame:Show()
     end)
 
-    local PresetSettingsButton = MBH_CreateButton(Parent, MBH_PRESETSETTINGS, 100) 
+    local PresetSettingsButton = MBH_CreateButton(Parent, MBH_PRESETSETTINGS, 120) 
     PresetSettingsButton:SetPoint("TOPLEFT", DefaultSettingsButton, "TOPRIGHT", 5, 0)
     Parent.PresetSettingsButton = PresetSettingsButton
 
