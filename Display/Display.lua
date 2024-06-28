@@ -618,40 +618,52 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end)
 
         -- Holy Light Events 
-        local function HolyLightLAR_OnEnterPressed()
-            ClearFrameFocus(self.HolyLightLAR)
-            MBH_ValidateLAR(self.HolyLightHAR, "Holy_Light")
+        local function HolyLightLAR_OnEditFocusLost()
+            self.HolyLightLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
         end
 
-        local function HolyLightLAR_OnExitFrame()
-            ClearFrameFocus(self.HolyLightLAR, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
+        local function HolyLightLAR_OnEscapePressed()
+            HolyLightLAR_OnEditFocusLost()
+            self.HolyLightLAR:ClearFocus()
         end
 
         local function HolyLightLAR_OnTabPressed()
             self.HolyLightHAR:SetFocus()
         end
 
-        self.HolyLightLAR:SetScript("OnEnterPressed", HolyLightLAR_OnEnterPressed)
-        self.HolyLightLAR:SetScript("OnEscapePressed", HolyLightLAR_OnExitFrame)
-        self.HolyLightLAR:SetScript("OnTabPressed", HolyLightLAR_OnTabPressed)
-
-        local function HolyLightHAR_OnEnterPressed()
-            ClearFrameFocus(self.HolyLightHAR)
-            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+        local function HolyLightLAR_OnEnterPressed()
+            MBH_ValidateLAR(self.HolyLightHAR, "Holy_Light")
+            HolyLightLAR_OnEscapePressed()
         end
 
-        local function HolyLightHAR_OnExitFrame()
-            ClearFrameFocus(self.HolyLightHAR, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+        self.HolyLightLAR:SetScript("OnEditFocusLost", HolyLightLAR_OnEditFocusLost)
+        self.HolyLightLAR:SetScript("OnEscapePressed", HolyLightLAR_OnExitFrame)
+        self.HolyLightLAR:SetScript("OnTabPressed", HolyLightLAR_OnTabPressed)
+        self.HolyLightLAR:SetScript("OnEnterPressed", HolyLightLAR_OnEnterPressed)
+
+        local function HolyLightHAR_OnEditFocusLost()
+            self.HolyLightHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+        end
+
+        local function HolyLightHAR_OnEscapePressed()
+            HolyLightHAR_OnEditFocusLost()
+            self.HolyLightHAR:ClearFocus()
         end
 
         local function HolyLightHAR_OnTabPressed()
             self.HolyLightHAR:ClearFocus()
         end
 
-        self.HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
+        local function HolyLightHAR_OnEnterPressed()
+            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+            HolyLightHAR_OnEscapePressed()
+        end
+
+        self.HolyLightHAR:SetScript("OnEditFocusLost", HolyLightHAR_OnEditFocusLost)
         self.HolyLightHAR:SetScript("OnEscapePressed", HolyLightHAR_OnExitFrame)
         self.HolyLightHAR:SetScript("OnTabPressed", HolyLightHAR_OnTabPressed)
-
+        self.HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
+        
     elseif ( Session.PlayerClass == "Druid" ) then
         
         -- Regrowth Section
@@ -689,7 +701,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function RegrowthLAR_OnTabPressed()
-            self.RegrowthLAR:ClearFocus()
+            self.RegrowthHAR:SetFocus()
         end
 
         local function RegrowthLAR_OnEnterPressed()
