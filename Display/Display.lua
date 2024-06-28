@@ -521,75 +521,99 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (self.LesserHealingWaveCheckButton:GetChecked() == 1)
         end)
 
-        -- Flash Heal Events 
-        local function ChainHealLAR_OnEnterPressed()
-            ClearFrameFocus(self.ChainHealLAR)
-            MBH_ValidateLAR(self.ChainHealHAR, "Chain_Heal")
+        -- Chain Heal Events 
+        local function ChainHealLAR_OnEditFocusLost()
+            self.ChainHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
         end
-
-        local function ChainHealLAR_OnExitFrame()
-            ClearFrameFocus(self.ChainHealLAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
+        
+        local function ChainHealLAR_OnEscapePressed()
+            ChainHealLAR_OnEditFocusLost()
+            self.ChainHealLAR:ClearFocus()
         end
-
+        
         local function ChainHealLAR_OnTabPressed()
             self.ChainHealHAR:SetFocus()
         end
-
-        self.ChainHealLAR:SetScript("OnEnterPressed", ChainHealLAR_OnEnterPressed)
-        self.ChainHealLAR:SetScript("OnEscapePressed", ChainHealLAR_OnExitFrame)
-        self.ChainHealLAR:SetScript("OnTabPressed", ChainHealLAR_OnTabPressed)
-
-        local function ChainHealHAR_OnEnterPressed()
-            ClearFrameFocus(self.ChainHealHAR)
-            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
-        end
-
-        local function ChainHealHAR_OnExitFrame()
-            ClearFrameFocus(self.ChainHealHAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
-        end
-
-        local function ChainHealHAR_OnTabPressed()
-            self.LesserHealingWaveLAR:SetFocus()
-        end
-
-        self.ChainHealHAR:SetScript("OnEnterPressed", ChainHealHAR_OnEnterPressed)
-        self.ChainHealHAR:SetScript("OnEscapePressed", ChainHealHAR_OnExitFrame)
-        self.ChainHealHAR:SetScript("OnTabPressed", ChainHealHAR_OnTabPressed)
-
-        -- Lesser Healing Wave Events
-        local function LesserHealingWaveLAR_OnEnterPressed()
-            ClearFrameFocus(self.LesserHealingWaveLAR)
-            MBH_ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
+        
+        local function ChainHealLAR_OnEnterPressed()
+            MBH_ValidateLAR(self.ChainHealHAR, "Chain_Heal")
+            ChainHealLAR_OnEscapePressed()
         end
         
-        local function LesserHealingWaveLAR_OnExitFrame()
-            ClearFrameFocus(self.LesserHealingWaveLAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
+        self.ChainHealLAR:SetScript("OnEditFocusLost", ChainHealLAR_OnEditFocusLost)
+        self.ChainHealLAR:SetScript("OnEscapePressed", ChainHealLAR_OnExitFrame)
+        self.ChainHealLAR:SetScript("OnTabPressed", ChainHealLAR_OnTabPressed)
+        self.ChainHealLAR:SetScript("OnEnterPressed", ChainHealLAR_OnEnterPressed)
+        
+        local function ChainHealHAR_OnEditFocusLost()
+            self.ChainHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
+        end
+        
+        local function ChainHealHAR_OnEscapePressed()
+            ChainHealHAR_OnEditFocusLost()
+            self.ChainHealHAR:ClearFocus()
+        end
+        
+        local function ChainHealHAR_OnTabPressed()
+            self.ChainHealHAR:ClearFocus()
+        end
+        
+        local function ChainHealHAR_OnEnterPressed()
+            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
+            ChainHealHAR_OnEscapePressed()
+        end
+        
+        self.ChainHealHAR:SetScript("OnEditFocusLost", ChainHealHAR_OnEditFocusLost)
+        self.ChainHealHAR:SetScript("OnEscapePressed", ChainHealHAR_OnExitFrame)
+        self.ChainHealHAR:SetScript("OnTabPressed", ChainHealHAR_OnTabPressed)
+        self.ChainHealHAR:SetScript("OnEnterPressed", ChainHealHAR_OnEnterPressed)
+
+        -- Lesser Healing Wave Events
+        local function LesserHealingWaveLAR_OnEditFocusLost()
+            self.LesserHealingWaveLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
+        end
+        
+        local function LesserHealingWaveLAR_OnEscapePressed()
+            LesserHealingWaveLAR_OnEditFocusLost()
+            self.LesserHealingWaveLAR:ClearFocus()
         end
         
         local function LesserHealingWaveLAR_OnTabPressed()
             self.LesserHealingWaveHAR:SetFocus()
         end
         
-        self.LesserHealingWaveLAR:SetScript("OnEnterPressed", LesserHealingWaveLAR_OnEnterPressed)
-        self.LesserHealingWaveLAR:SetScript("OnEscapePressed", LesserHealingWaveLAR_OnExitFrame)
-        self.LesserHealingWaveLAR:SetScript("OnTabPressed", LesserHealingWaveLAR_OnTabPressed)
-        
-        local function LesserHealingWaveHAR_OnEnterPressed()
-            ClearFrameFocus(self.LesserHealingWaveHAR)
-            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
+        local function LesserHealingWaveLAR_OnEnterPressed()
+            MBH_ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
+            LesserHealingWaveLAR_OnEscapePressed()
         end
         
-        local function LesserHealingWaveHAR_OnExitFrame()
-            ClearFrameFocus(self.LesserHealingWaveHAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
+        self.LesserHealingWaveLAR:SetScript("OnEditFocusLost", LesserHealingWaveLAR_OnEditFocusLost)
+        self.LesserHealingWaveLAR:SetScript("OnEscapePressed", LesserHealingWaveLAR_OnExitFrame)
+        self.LesserHealingWaveLAR:SetScript("OnTabPressed", LesserHealingWaveLAR_OnTabPressed)
+        self.LesserHealingWaveLAR:SetScript("OnEnterPressed", LesserHealingWaveLAR_OnEnterPressed)
+        
+        local function LesserHealingWaveHAR_OnEditFocusLost()
+            self.LesserHealingWaveHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
+        end
+        
+        local function LesserHealingWaveHAR_OnEscapePressed()
+            LesserHealingWaveHAR_OnEditFocusLost()
+            self.LesserHealingWaveHAR:ClearFocus()
         end
         
         local function LesserHealingWaveHAR_OnTabPressed()
             self.LesserHealingWaveHAR:ClearFocus()
         end
         
-        self.LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
+        local function LesserHealingWaveHAR_OnEnterPressed()
+            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
+            LesserHealingWaveHAR_OnEscapePressed()
+        end
+        
+        self.LesserHealingWaveHAR:SetScript("OnEditFocusLost", LesserHealingWaveHAR_OnEditFocusLost)
         self.LesserHealingWaveHAR:SetScript("OnEscapePressed", LesserHealingWaveHAR_OnExitFrame)
         self.LesserHealingWaveHAR:SetScript("OnTabPressed", LesserHealingWaveHAR_OnTabPressed)
+        self.LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
 
     elseif ( Session.PlayerClass == "Paladin" ) then
         
