@@ -157,12 +157,12 @@ function GreaterHealThresholdSlider_OnValueChanged()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold, MBH_GREATERHEALPROTECTIONTHRESHOLD)
 end
 
-function ChainHealSlider_OnValueChanged()
+function ChainHealThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold, MBH_CHAINHEALPROTECTIONTHRESHOLD)
 end
 
-function LesserHealingWaveSlider_OnValueChanged()
+function LesserHealingWaveThresholdSlider_OnValueChanged()
     MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold = this:GetValue()
     MBH_SliderValueChanged(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD)
 end

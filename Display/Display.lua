@@ -84,7 +84,7 @@ end
 
 function ClearFrameFocus(Frame, Text)
     Frame:ClearFocus()
-    Frame:SetText(Text)
+    if Text then Frame:SetText(Text) end
 end
 
 
@@ -474,132 +474,122 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     elseif ( Session.PlayerClass == "Shaman" ) then
         
         -- Chain Heal Section
-        local ChainHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        ChainHealTitle:SetText(MBH_SPELL_CHAIN_HEAL)
-        ChainHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 145, -25)
+        self.ChainHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.ChainHealTitle:SetText(MBH_SPELL_CHAIN_HEAL)
+        self.ChainHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 145, -25)
 
-        local ChainHealSlider = CreateSlider(self.InnerContainer, "ChainHealSlider", 180)
-        ChainHealSlider:SetPoint("CENTER", ChainHealTitle, "CENTER", 0, -50)
-        ChainHealSlider:SetScript("OnValueChanged", ChainHealSlider_OnValueChanged)
-        ChainHealSlider:SetScript("OnShow", function()
-            InitializeSlider(ChainHealSlider, MBH_CHAINHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold)
+        self.ChainHealThresholdSlider = CreateSlider(self.InnerContainer, "ChainHealThresholdSlider", 180)
+        self.ChainHealThresholdSlider:SetPoint("CENTER", self.ChainHealTitle, "CENTER", 0, -50)
+        self.ChainHealThresholdSlider:SetScript("OnValueChanged", ChainHealThresholdSlider_OnValueChanged)
+        self.ChainHealThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.ChainHealThresholdSlider, MBH_CHAINHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold)
         end)
 
-        local ChainHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        ChainHealLAR:SetPoint("CENTER", ChainHealSlider, "CENTER", 50, -50)
-        ChainHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
+        self.ChainHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
+        self.ChainHealLAR:SetPoint("CENTER", self.ChainHealThresholdSlider, "CENTER", 50, -50)
 
-        local ChainHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        ChainHealHAR:SetPoint("CENTER", ChainHealLAR, "CENTER", 0, -50)
-        ChainHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
+        self.ChainHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
+        self.ChainHealHAR:SetPoint("CENTER", self.ChainHealLAR, "CENTER", 0, -50)
 
-        local ChainHealEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        ChainHealEnable:SetPoint("CENTER", ChainHealHAR, "CENTER", 0, -50)
-        ChainHealEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch and 1 or 0)
-        ChainHealEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = (ChainHealEnable:GetChecked() == 1)
+        self.ChainHealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch)
+        self.ChainHealCheckButton:SetPoint("CENTER", self.ChainHealHAR, "CENTER", 0, -50)
+        self.ChainHealCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = (self.ChainHealCheckButton:GetChecked() == 1)
         end)
 
         -- Lesser Healing Wave
-        local LesserHealingWaveTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-        LesserHealingWaveTitle:SetText(MBH_SPELL_LESSER_HEALING_WAVE)
-        LesserHealingWaveTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -145, -25)
+        self.LesserHealingWaveTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+        self.LesserHealingWaveTitle:SetText(MBH_SPELL_LESSER_HEALING_WAVE)
+        self.LesserHealingWaveTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -145, -25)
 
-        local LesserHealingWaveSlider = CreateSlider(self.InnerContainer, "LesserHealingWaveSlider", 180)
-        LesserHealingWaveSlider:SetPoint("CENTER", LesserHealingWaveTitle, "CENTER", 0, -50)
-        LesserHealingWaveSlider:SetScript("OnValueChanged", LesserHealingWaveSlider_OnValueChanged)
-        LesserHealingWaveSlider:SetScript("OnShow", function()
-            InitializeSlider(LesserHealingWaveSlider, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold)
+        self.LesserHealingWaveThresholdSlider = CreateSlider(self.InnerContainer, "LesserHealingWaveThresholdSlider", 180)
+        self.LesserHealingWaveThresholdSlider:SetPoint("CENTER", self.LesserHealingWaveTitle, "CENTER", 0, -50)
+        self.LesserHealingWaveThresholdSlider:SetScript("OnValueChanged", LesserHealingWaveThresholdSlider_OnValueChanged)
+        self.LesserHealingWaveThresholdSlider:SetScript("OnShow", function()
+            InitializeSlider(self.LesserHealingWaveThresholdSlider, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold)
         end)
 
-        local LesserHealingWaveLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK)
-        LesserHealingWaveLAR:SetPoint("CENTER", LesserHealingWaveSlider, "CENTER", 50, -50)
-        LesserHealingWaveLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
+        self.LesserHealingWaveLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
+        self.LesserHealingWaveLAR:SetPoint("CENTER", self.LesserHealingWaveThresholdSlider, "CENTER", 50, -50)
 
-        local LesserHealingWaveHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK)
-        LesserHealingWaveHAR:SetPoint("CENTER", LesserHealingWaveLAR, "CENTER", 0, -50)
-        LesserHealingWaveHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
-        
-        local LesserHealingWaveEnable = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH)
-        LesserHealingWaveEnable:SetPoint("CENTER", LesserHealingWaveHAR, "CENTER", 0, -50)
-        LesserHealingWaveEnable:SetChecked(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch and 1 or 0)
-        LesserHealingWaveEnable:SetScript("OnClick", function()
-            MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (LesserHealingWaveEnable:GetChecked() == 1)
+        self.LesserHealingWaveHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
+        self.LesserHealingWaveHAR:SetPoint("CENTER", self.LesserHealingWaveLAR, "CENTER", 0, -50)
+
+        self.LesserHealingWaveCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch)
+        self.LesserHealingWaveCheckButton:SetPoint("CENTER", self.LesserHealingWaveHAR, "CENTER", 0, -50)
+        self.LesserHealingWaveCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (self.LesserHealingWaveCheckButton:GetChecked() == 1)
         end)
 
         -- Flash Heal Events 
         local function ChainHealLAR_OnEnterPressed()
-            MBH_ValidateLAR(ChainHealHAR, "Chain_Heal")
-            ChainHealLAR:ClearFocus()
+            ClearFrameFocus(self.ChainHealLAR)
+            MBH_ValidateLAR(self.ChainHealHAR, "Chain_Heal")
         end
 
         local function ChainHealLAR_OnExitFrame()
-            ChainHealLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
-            ChainHealLAR:ClearFocus()
+            ClearFrameFocus(self.ChainHealLAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
         end
 
         local function ChainHealLAR_OnTabPressed()
-            ChainHealHAR:SetFocus()
+            self.ChainHealHAR:SetFocus()
         end
 
-        ChainHealLAR:SetScript("OnEnterPressed", ChainHealLAR_OnEnterPressed)
-        ChainHealLAR:SetScript("OnEscapePressed", ChainHealLAR_OnExitFrame)
-        ChainHealLAR:SetScript("OnTabPressed", ChainHealLAR_OnTabPressed)
+        self.ChainHealLAR:SetScript("OnEnterPressed", ChainHealLAR_OnEnterPressed)
+        self.ChainHealLAR:SetScript("OnEscapePressed", ChainHealLAR_OnExitFrame)
+        self.ChainHealLAR:SetScript("OnTabPressed", ChainHealLAR_OnTabPressed)
 
         local function ChainHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
-            ChainHealHAR:ClearFocus()
+            ClearFrameFocus(self.ChainHealHAR)
+            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
         end
 
         local function ChainHealHAR_OnExitFrame()
-            ChainHealHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
-            ChainHealHAR:ClearFocus()
+            ClearFrameFocus(self.ChainHealHAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
         end
 
         local function ChainHealHAR_OnTabPressed()
-            LesserHealingWaveLAR:SetFocus()
+            self.LesserHealingWaveLAR:SetFocus()
         end
 
-        ChainHealHAR:SetScript("OnEnterPressed", ChainHealHAR_OnEnterPressed)
-        ChainHealHAR:SetScript("OnEscapePressed", ChainHealHAR_OnExitFrame)
-        ChainHealHAR:SetScript("OnTabPressed", ChainHealHAR_OnTabPressed)
+        self.ChainHealHAR:SetScript("OnEnterPressed", ChainHealHAR_OnEnterPressed)
+        self.ChainHealHAR:SetScript("OnEscapePressed", ChainHealHAR_OnExitFrame)
+        self.ChainHealHAR:SetScript("OnTabPressed", ChainHealHAR_OnTabPressed)
 
         -- Lesser Healing Wave Events
         local function LesserHealingWaveLAR_OnEnterPressed()
-            MBH_ValidateLAR(LesserHealingWaveHAR, "Lesser_Healing_Wave")
-            LesserHealingWaveLAR:ClearFocus()
+            ClearFrameFocus(self.LesserHealingWaveLAR)
+            MBH_ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
         end
         
         local function LesserHealingWaveLAR_OnExitFrame()
-            LesserHealingWaveLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
-            LesserHealingWaveLAR:ClearFocus()
+            ClearFrameFocus(self.LesserHealingWaveLAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
         end
         
         local function LesserHealingWaveLAR_OnTabPressed()
-            LesserHealingWaveHAR:SetFocus()
+            self.LesserHealingWaveHAR:SetFocus()
         end
         
-        LesserHealingWaveLAR:SetScript("OnEnterPressed", LesserHealingWaveLAR_OnEnterPressed)
-        LesserHealingWaveLAR:SetScript("OnEscapePressed", LesserHealingWaveLAR_OnExitFrame)
-        LesserHealingWaveLAR:SetScript("OnTabPressed", LesserHealingWaveLAR_OnTabPressed)
+        self.LesserHealingWaveLAR:SetScript("OnEnterPressed", LesserHealingWaveLAR_OnEnterPressed)
+        self.LesserHealingWaveLAR:SetScript("OnEscapePressed", LesserHealingWaveLAR_OnExitFrame)
+        self.LesserHealingWaveLAR:SetScript("OnTabPressed", LesserHealingWaveLAR_OnTabPressed)
         
         local function LesserHealingWaveHAR_OnEnterPressed()
-            MBH_ValidateHAR(LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
-            LesserHealingWaveHAR:ClearFocus()
+            ClearFrameFocus(self.LesserHealingWaveHAR)
+            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
         end
         
         local function LesserHealingWaveHAR_OnExitFrame()
-            LesserHealingWaveHAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
-            LesserHealingWaveHAR:ClearFocus()
+            ClearFrameFocus(self.LesserHealingWaveHAR, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
         end
         
         local function LesserHealingWaveHAR_OnTabPressed()
-            LesserHealingWaveHAR:ClearFocus()
+            self.LesserHealingWaveHAR:ClearFocus()
         end
         
-        LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
-        LesserHealingWaveHAR:SetScript("OnEscapePressed", LesserHealingWaveHAR_OnExitFrame)
-        LesserHealingWaveHAR:SetScript("OnTabPressed", LesserHealingWaveHAR_OnTabPressed)
+        self.LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
+        self.LesserHealingWaveHAR:SetScript("OnEscapePressed", LesserHealingWaveHAR_OnExitFrame)
+        self.LesserHealingWaveHAR:SetScript("OnTabPressed", LesserHealingWaveHAR_OnTabPressed)
 
     elseif ( Session.PlayerClass == "Paladin" ) then
         
