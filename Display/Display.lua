@@ -47,9 +47,6 @@ local SliderBackDrop = {
     }
 }
 
-local MinimapIconCoords = { 0.075, 0.925, 0.075, 0.925 }
-local MinimapClickedCoords = { 0, 1, 0, 1 }
-
 function OpenMainFrame()
     if MBH.MainFrame:IsShown() then
         MBH.MainFrame:Hide()
@@ -58,6 +55,7 @@ function OpenMainFrame()
         MBH.MainFrame:Show()
     end
 end
+
 -------------------------------------------------------------------------------
 -- MiniMap Button {{{
 -------------------------------------------------------------------------------
@@ -77,10 +75,6 @@ end
 
 function HideTooltip()
     GameTooltip:Hide()
-end
-
-function UpdateTexCoord(Frame, Coords)
-    Frame:SetTexCoord(unpack(Coords))
 end
 
 function RegisterAllClicksAndDrags(Frame)
@@ -108,20 +102,7 @@ function MBH.MiniMapButton:CreateMinimapIcon()
 	self.MinimapIcon = self:CreateTexture(nil, "BACKGROUND")
     SetSize(self.MinimapIcon, 18, 18)
 	self.MinimapIcon:SetTexture("Interface\\Icons\\Spell_Nature_HealingTouch")
-	UpdateTexCoord(self.MinimapIcon, MinimapIconCoords)
-
-    local function OnMouseDown()
-        UpdateTexCoord(self.MinimapIcon, MinimapClickedCoords)
-    end
-
-    local function OnMouseUp()
-        UpdateTexCoord(self.MinimapIcon, MinimapIconCoords)
-    end
-
-    local function OnClick()
-        OnMouseUp()
-        OpenMainFrame()
-    end
+    self.MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
 
     local function OnUpdate()
         if IsMiniMapMoving then
@@ -147,7 +128,6 @@ function MBH.MiniMapButton:CreateMinimapIcon()
     end
 
     local function OnDragStart()
-        OnMouseDown() 
         if not IsMiniMapMoving and arg1 == "LeftButton" then
             self.Button:SetScript("OnUpdate", OnUpdate)
             IsMiniMapMoving = true
@@ -155,19 +135,22 @@ function MBH.MiniMapButton:CreateMinimapIcon()
     end
 
     local function OnDragStop()
-        OnMouseUp()
         if IsMiniMapMoving then
             self.Button:SetScript("OnUpdate", nil)
             IsMiniMapMoving = false
         end
     end
 
-    self.Button:SetScript("OnClick", OnClick)
+    local function OnClick()
+        OpenMainFrame()
+    end
+
     self.Button:SetScript("OnDragStart", OnDragStart)
     self.Button:SetScript("OnDragStop", OnDragStop)
+    self.Button:SetScript("OnClick", OnClick)
     self.Button:SetScript("OnLeave", HideTooltip)
     self.Button:SetScript("OnEnter", function()
-        ShowToolTip(this:GetParent(), MBH_TITLE, MBH_MINIMAPHOVER)
+        ShowToolTip(self, MBH_TITLE, MBH_MINIMAPHOVER)
     end)   
 end
 
@@ -203,98 +186,92 @@ function MBH.OptionFrame:CreateOptionFrame()
     DefaultFrameTemplate(self)
     DefaultFrameButtons(self)
 
-    -- Healign Settings
+    -- Healing Settings
     self.HealingContainer = CreateSmallInnerContainer(self, MBH_HEALSETTINGS)
     self.HealingContainer:SetPoint("TOPLEFT", self, "TOPLEFT", 35, -75)
 
-    local RandomTargetEnable = CreateCheckButton(self.HealingContainer, MBH_RANDOMTARGET, -15)
-    RandomTargetEnable:SetPoint("CENTER", self.HealingContainer, "TOP", 0, -35)
-    RandomTargetEnable:SetChecked(MoronBoxHeal_Options.AutoHeal.Random_Target and 1 or 0)
-    RandomTargetEnable:SetScript("OnClick", function()
-        MoronBoxHeal_Options.AutoHeal.Random_Target = (RandomTargetEnable:GetChecked() == 1)
-    end)
+        self.RandomTargetCheckButton = CreateCheckButton(self.HealingContainer, MBH_RANDOMTARGET, MoronBoxHeal_Options.AutoHeal.Random_Target, -15)
+        self.RandomTargetCheckButton:SetPoint("CENTER", self.HealingContainer, "TOP", 0, -35)
+        self.RandomTargetCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.AutoHeal.Random_Target = (self.RandomTargetCheckButton:GetChecked() == 1)
+        end)
 
-    local HealTargetSlider = CreateSlider(self.HealingContainer, "HealTargetSlider", 220)
-    HealTargetSlider:SetPoint("CENTER", RandomTargetEnable, "CENTER", 0, -50)
-    HealTargetSlider:SetScript("OnValueChanged", HealTargetSlider_OnValueChanged)
-    HealTargetSlider:SetScript("OnShow", function()
-        InitializeSlider(HealTargetSlider, MBH_HEALTARGETNUMBER, MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, 1, 5, 1)
-    end)
+        self.HealTargetSlider = CreateSlider(self.HealingContainer, "HealTargetSlider", 220)
+        self.HealTargetSlider:SetPoint("CENTER", self.RandomTargetCheckButton, "CENTER", 0, -50)
+        self.HealTargetSlider:SetScript("OnValueChanged", HealTargetSlider_OnValueChanged)
+        self.HealTargetSlider:SetScript("OnShow", function()
+            InitializeSlider(self.HealTargetSlider, MBH_HEALTARGETNUMBER, MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, 1, 5, 1)
+        end)
 
-    local OverHealHealSlider = CreateSlider(self.HealingContainer, "OverHealHealSlider", 220)
-    OverHealHealSlider:SetPoint("CENTER", HealTargetSlider, "CENTER", 0, -50)
-    OverHealHealSlider:SetScript("OnValueChanged", OverHealHealSlider_OnValueChanged)
-    OverHealHealSlider:SetScript("OnShow", function()
-        InitializeSlider(OverHealHealSlider, MBH_ALLOWEDOVERHEAL, MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
-    end)
+        self.OverHealHealSlider = CreateSlider(self.HealingContainer, "OverHealHealSlider", 220)
+        self.OverHealHealSlider:SetPoint("CENTER", self.HealTargetSlider, "CENTER", 0, -50)
+        self.OverHealHealSlider:SetScript("OnValueChanged", OverHealHealSlider_OnValueChanged)
+        self.OverHealHealSlider:SetScript("OnShow", function()
+            InitializeSlider(self.OverHealHealSlider, MBH_ALLOWEDOVERHEAL, MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
+        end)
 
-    local SmartHealEnable = CreateCheckButton(self.HealingContainer, MBH_SMARTHEAL, -15)
-    SmartHealEnable:SetPoint("CENTER", OverHealHealSlider, "CENTER", 0, -35)
-    SmartHealEnable:SetChecked(MoronBoxHeal_Options.AutoHeal.Smart_Heal and 1 or 0)
-    SmartHealEnable:SetScript("OnClick", function()
-        MoronBoxHeal_Options.AutoHeal.Smart_Heal = (SmartHealEnable:GetChecked() == 1)
-    end)
+        self.SmartHealCheckButton = CreateCheckButton(self.HealingContainer, MBH_SMARTHEAL, MoronBoxHeal_Options.AutoHeal.Smart_Heal, -15)
+        self.SmartHealCheckButton:SetPoint("CENTER", self.OverHealHealSlider, "CENTER", 0, -35)
+        self.SmartHealCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.AutoHeal.Smart_Heal = (self.SmartHealCheckButton:GetChecked() == 1)
+        end)
 
     -- Extended Range
     self.ExtendedRangeContainer = CreateSmallInnerContainer(self, MBH_RANGSETTINGS)
     self.ExtendedRangeContainer:SetPoint("TOPRIGHT", self, "TOPRIGHT", -35, -75)
 
-    local ExtendedRangeEnable = CreateCheckButton(self.ExtendedRangeContainer, MBH_EXTENDEDRANGE, -15)
-    ExtendedRangeEnable:SetPoint("CENTER", self.ExtendedRangeContainer, "CENTER", 0, 35)
-    ExtendedRangeEnable:SetChecked(MoronBoxHeal_Options.ExtendedRange.Enable and 1 or 0)
-    ExtendedRangeEnable:SetScript("OnClick", function()
-        MoronBoxHeal_Options.ExtendedRange.Enable = (ExtendedRangeEnable:GetChecked() == 1)
-    end)
+        self.ExtendedRangeCheckButton = CreateCheckButton(self.ExtendedRangeContainer, MBH_EXTENDEDRANGE, MoronBoxHeal_Options.ExtendedRange.Enable, -15)
+        self.ExtendedRangeCheckButton:SetPoint("CENTER", self.ExtendedRangeContainer, "CENTER", 0, 35)
+        self.ExtendedRangeCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ExtendedRange.Enable = (self.ExtendedRangeCheckButton:GetChecked() == 1)
+        end)
 
-    local ExtendedRangeFrequencySlider = CreateSlider(self.ExtendedRangeContainer, "ExtendedRangeFrequencySlider", 220)
-    ExtendedRangeFrequencySlider:SetPoint("CENTER", self.ExtendedRangeContainer, "CENTER", 0, -50)
-    ExtendedRangeFrequencySlider:SetScript("OnValueChanged", ExtendedRangeFrequencySlider_OnValueChanged)
-    ExtendedRangeFrequencySlider:SetScript("OnShow", function()
-        InitializeSlider(ExtendedRangeFrequencySlider, MBH_EXTENDEDRANGEFREQUENCY, MoronBoxHeal_Options.ExtendedRange.Frequency, 1, 5, 0.25)
-    end)
+        self.ExtendedRangeFrequencySlider = CreateSlider(self.ExtendedRangeContainer, "ExtendedRangeFrequencySlider", 220)
+        self.ExtendedRangeFrequencySlider:SetPoint("CENTER", self.ExtendedRangeContainer, "CENTER", 0, -50)
+        self.ExtendedRangeFrequencySlider:SetScript("OnValueChanged", ExtendedRangeFrequencySlider_OnValueChanged)
+        self.ExtendedRangeFrequencySlider:SetScript("OnShow", function()
+            InitializeSlider(self.ExtendedRangeFrequencySlider, MBH_EXTENDEDRANGEFREQUENCY, MoronBoxHeal_Options.ExtendedRange.Frequency, 1, 5, 0.25)
+        end)
 
     -- Light Of Sight
     self.LineOfSightContainer = CreateSmallInnerContainer(self, MBH_LOSETTINGS)
     self.LineOfSightContainer:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 35, 60)
 
-    local LineOfSightEnable = CreateCheckButton(self.LineOfSightContainer, MBH_LINEOFSIGHT, -15)
-    LineOfSightEnable:SetPoint("CENTER", self.LineOfSightContainer, "CENTER", 0, 35)
-    LineOfSightEnable:SetChecked(MoronBoxHeal_Options.LineOfSight.Enable and 1 or 0)
-    LineOfSightEnable:SetScript("OnClick", function()
-        MoronBoxHeal_Options.LineOfSight.Enable = (LineOfSightEnable:GetChecked() == 1)
-    end)
+        self.LineOfSightCheckButton = CreateCheckButton(self.LineOfSightContainer, MBH_LINEOFSIGHT, MoronBoxHeal_Options.LineOfSight.Enable, -15)
+        self.LineOfSightCheckButton:SetPoint("CENTER", self.LineOfSightContainer, "CENTER", 0, 35)
+        self.LineOfSightCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.LineOfSight.Enable = (self.LineOfSightCheckButton:GetChecked() == 1)
+        end)
 
-    local LineOfSightFrequencySlider = CreateSlider(self.LineOfSightContainer, "LineOfSightFrequencySlider", 220)
-    LineOfSightFrequencySlider:SetPoint("CENTER", self.LineOfSightContainer, "CENTER", 0, -50)
-    LineOfSightFrequencySlider:SetScript("OnValueChanged", LineOfSightFrequencySlider_OnValueChanged)
-    LineOfSightFrequencySlider:SetScript("OnShow", function()
-        InitializeSlider(LineOfSightFrequencySlider, MBH_LINEOFSIGHTFREQUENCY, MoronBoxHeal_Options.LineOfSight.TimeOut, 0.5, 5, 0.25)
-    end)
+        self.LineOfSightFrequencySlider = CreateSlider(self.LineOfSightContainer, "LineOfSightFrequencySlider", 220)
+        self.LineOfSightFrequencySlider:SetPoint("CENTER", self.LineOfSightContainer, "CENTER", 0, -50)
+        self.LineOfSightFrequencySlider:SetScript("OnValueChanged", LineOfSightFrequencySlider_OnValueChanged)
+        self.LineOfSightFrequencySlider:SetScript("OnShow", function()
+            InitializeSlider(self.LineOfSightFrequencySlider, MBH_LINEOFSIGHTFREQUENCY, MoronBoxHeal_Options.LineOfSight.TimeOut, 0.5, 5, 0.25)
+        end)
 
     -- Advanced Settings
     self.AdvancedOptionsContainer = CreateSmallInnerContainer(self, MBH_SPECIALSETTINGS)
     self.AdvancedOptionsContainer:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -35, 60)
 
-    local ManaProtectionEnable = CreateCheckButton(self.AdvancedOptionsContainer, MBH_MANAPROTECTION, -35)
-    ManaProtectionEnable:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, 50)
-    ManaProtectionEnable:SetChecked(MoronBoxHeal_Options.AdvancedOptions.Mana_Protection and 1 or 0)
-    ManaProtectionEnable:SetScript("OnClick", function()
-        MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = (ManaProtectionEnable:GetChecked() == 1)
-    end)
+        self.ManaProtectionCheckButton = CreateCheckButton(self.AdvancedOptionsContainer, MBH_MANAPROTECTION, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection, -15)
+        self.ManaProtectionCheckButton:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, 50)
+        self.ManaProtectionCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = (self.ManaProtectionCheckButton:GetChecked() == 1)
+        end)
 
-    local IdleProtectionEnable = CreateCheckButton(self.AdvancedOptionsContainer, MBH_IDLEPROTECTIONENABLE, -35)
-    IdleProtectionEnable:SetPoint("CENTER", ManaProtectionEnable, "CENTER", 0, -40)
-    IdleProtectionEnable:SetChecked(MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled and 1 or 0)
-    IdleProtectionEnable:SetScript("OnClick", function()
-        MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled = (IdleProtectionEnable:GetChecked() == 1)
-    end)
+        self.IdleProtectionCheckButton = CreateCheckButton(self.AdvancedOptionsContainer, MBH_IDLEPROTECTIONENABLE, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled, -15)
+        self.IdleProtectionCheckButton:SetPoint("CENTER", self.ManaProtectionCheckButton, "CENTER", 0, -40)
+        self.IdleProtectionCheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled = (self.IdleProtectionCheckButton:GetChecked() == 1)
+        end)
 
-    local IdleProtectionFrequencySlider = CreateSlider(self.AdvancedOptionsContainer, "IdleProtectionFrequencySlider", 220)
-    IdleProtectionFrequencySlider:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, -50)
-    IdleProtectionFrequencySlider:SetScript("OnValueChanged", IdleProtectionFrequencySlider_OnValueChanged)
-    IdleProtectionFrequencySlider:SetScript("OnShow", function()
-        InitializeSlider(IdleProtectionFrequencySlider, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
-    end)
+        self.IdleProtectionFrequencySlider = CreateSlider(self.AdvancedOptionsContainer, "IdleProtectionFrequencySlider", 220)
+        self.IdleProtectionFrequencySlider:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, -50)
+        self.IdleProtectionFrequencySlider:SetScript("OnValueChanged", IdleProtectionFrequencySlider_OnValueChanged)
+        self.IdleProtectionFrequencySlider:SetScript("OnShow", function()
+            InitializeSlider(self.IdleProtectionFrequencySlider, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
+        end)
 
     self:Hide()
 end
@@ -1204,11 +1181,12 @@ function CreateEditBox(Parent, Text, Width, Height)
     return EditBox
 end
 
-function CreateCheckButton(Parent, Text, XAsis)
+function CreateCheckButton(Parent, Text, Value, XAsis)
 
     XAsis = XAsis or -48.5
 
     local CheckButton = CreateFrame("CheckButton", nil, Parent, "OptionsCheckButtonTemplate")
+    CheckButton:SetChecked(Value)
     local CheckButtonText = CheckButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     CheckButtonText:SetText(Text)
     CheckButtonText:SetPoint("RIGHT", CheckButton, "LEFT", XAsis, 0)
