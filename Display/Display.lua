@@ -47,67 +47,80 @@ local SliderBackDrop = {
     }
 }
 
+local MinimapIconCoords = { 0.075, 0.925, 0.075, 0.925 }
+local MinimapClickedCoords = { 0, 1, 0, 1 }
+
+function OpenMainFrame()
+    if MBH.MainFrame:IsShown() then
+        MBH.MainFrame:Hide()
+    else 
+        MBH_ResetAllWindow()
+        MBH.MainFrame:Show()
+    end
+end
 -------------------------------------------------------------------------------
 -- MiniMap Button {{{
 -------------------------------------------------------------------------------
+
+function SetSize(Frame, Width, Height)
+    Frame:SetWidth(Width)
+	Frame:SetHeight(Height)
+    Frame:SetPoint("CENTER", 0, 0)
+end
+
+function ShowToolTip(Parent, Title, Text)
+    GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
+    GameTooltip:SetText(Title, 1, 1, 0.5)
+    GameTooltip:AddLine(Text)
+    GameTooltip:Show()
+end
+
+function HideTooltip()
+    GameTooltip:Hide()
+end
+
+function UpdateTexCoord(Frame, Coords)
+    Frame:SetTexCoord(unpack(Coords))
+end
+
+function RegisterAllClicksAndDrags(Frame)
+    Frame:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")
+    Frame:RegisterForDrag("LeftButton", "RightButton")
+end
 
 function MBH.MiniMapButton:CreateMinimapIcon()
     local IsMiniMapMoving = false
 
     self:SetFrameStrata("LOW")
-	self:SetWidth(32)
-	self:SetHeight(32)
+    SetSize(self, 32, 32)
 	self:SetPoint("TOPLEFT", 0, 0)
 	
 	self.Button = CreateFrame("Button", nil, self)
-	self.Button:SetPoint("CENTER", 0, 0)
-	self.Button:SetWidth(32)
-	self.Button:SetHeight(32)
-	self.Button:SetFrameLevel(8)
+    SetSize(self.Button, 32, 32)
 	self.Button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-    self.Button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-    self.Button:RegisterForDrag("LeftButton")
+    RegisterAllClicksAndDrags(self.Button)
 
-	local Overlay = self:CreateTexture(nil, "OVERLAY", self)
-	Overlay:SetWidth(52)
-	Overlay:SetHeight(52)
-	Overlay:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
-	Overlay:SetPoint("TOPLEFT", 0, 0)
+	self.Overlay = self:CreateTexture(nil, "OVERLAY", self)
+    SetSize(self.Overlay, 52, 52)
+    self.Overlay:SetPoint("TOPLEFT", 0, 0)
+	self.Overlay:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
 	
-	local MinimapIcon = self:CreateTexture(nil, "BACKGROUND")
-	MinimapIcon:SetWidth(18)
-	MinimapIcon:SetHeight(18)
-	MinimapIcon:SetTexture("Interface\\Icons\\Spell_Nature_HealingTouch")
-	MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
-	MinimapIcon:SetPoint("CENTER", 0, 0)
-
-    local function OnEnter()
-        GameTooltip:SetOwner(MBH.MiniMapButton, "ANCHOR_BOTTOMLEFT")
-        GameTooltip:SetText(MBH_TITLE, 1, 1, 0.5)
-        GameTooltip:AddLine(MBH_MINIMAPHOVER)
-        GameTooltip:Show()
-    end
-
-    local function OnLeave()
-        GameTooltip:Hide()
-    end
-
-    local function OnClick()
-        MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
-        if MBH.MainFrame:IsShown() then
-            MBH.MainFrame:Hide()
-        else 
-            MBH_ResetAllWindow()
-            MBH.MainFrame:Show()
-        end
-    end
+	self.MinimapIcon = self:CreateTexture(nil, "BACKGROUND")
+    SetSize(self.MinimapIcon, 18, 18)
+	self.MinimapIcon:SetTexture("Interface\\Icons\\Spell_Nature_HealingTouch")
+	UpdateTexCoord(self.MinimapIcon, MinimapIconCoords)
 
     local function OnMouseDown()
-        MinimapIcon:SetTexCoord(0, 1, 0, 1)
+        UpdateTexCoord(self.MinimapIcon, MinimapClickedCoords)
     end
 
     local function OnMouseUp()
-        MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
+        UpdateTexCoord(self.MinimapIcon, MinimapIconCoords)
+    end
+
+    local function OnClick()
+        OnMouseUp()
+        OpenMainFrame()
     end
 
     local function OnUpdate()
@@ -123,7 +136,7 @@ function MBH.MiniMapButton:CreateMinimapIcon()
                 iconPos = iconPos + 360
             end
 
-            MBH.MiniMapButton:SetPoint(
+            self:SetPoint(
                 "TOPLEFT",
                 "Minimap",
                 "TOPLEFT",
@@ -134,28 +147,28 @@ function MBH.MiniMapButton:CreateMinimapIcon()
     end
 
     local function OnDragStart()
-        MinimapIcon:SetTexCoord(0, 1, 0, 1)
-        if not IsMiniMapMoving and arg1 == LeftButton then
+        OnMouseDown() 
+        if not IsMiniMapMoving and arg1 == "LeftButton" then
             self.Button:SetScript("OnUpdate", OnUpdate)
             IsMiniMapMoving = true
         end
     end
 
     local function OnDragStop()
-        MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
+        OnMouseUp()
         if IsMiniMapMoving then
             self.Button:SetScript("OnUpdate", nil)
             IsMiniMapMoving = false
         end
     end
 
-    self.Button:SetScript("OnEnter", OnEnter)
-    self.Button:SetScript("OnLeave", OnLeave)
     self.Button:SetScript("OnClick", OnClick)
-    self.Button:SetScript("OnMouseDown", OnMouseDown)
-    self.Button:SetScript("OnMouseUp", OnMouseUp)
     self.Button:SetScript("OnDragStart", OnDragStart)
     self.Button:SetScript("OnDragStop", OnDragStop)
+    self.Button:SetScript("OnLeave", HideTooltip)
+    self.Button:SetScript("OnEnter", function()
+        ShowToolTip(this:GetParent(), MBH_TITLE, MBH_MINIMAPHOVER)
+    end)   
 end
 
 -------------------------------------------------------------------------------
@@ -169,16 +182,14 @@ function MBH.MainFrame:CreateMainFrame()
     
     self.InnerContainer = CreateInnerContainer(self)
 
-    local WelcomeText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
-    WelcomeText:SetText(MBH_WELCOME)
-    WelcomeText:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -30)
+    self.WelcomeText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
+    self.WelcomeText:SetText(MBH_WELCOME)
+    self.WelcomeText:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -30)
 
-    local InformationText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    InformationText:SetText(MBH_INFORMATION)
-    InformationText:SetWidth(480)
-	InformationText:SetHeight(350)
-    InformationText:SetPoint("CENTER", self.InnerContainer, "CENTER")
-    SetFontSize(InformationText, 13)
+    self.InformationText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    self.InformationText:SetText(MBH_INFORMATION)
+    SetSize(self.InformationText, 480, 350)
+    SetFontSize(self.InformationText, 13)
 
     self:Hide()
 end
