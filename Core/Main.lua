@@ -1,4 +1,17 @@
 -------------------------------------------------------------------------------
+-- InterFace Frames {{{
+-------------------------------------------------------------------------------
+
+MBH = CreateFrame("Frame", "MBH", UIParent)
+MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap)
+MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", nil, "GameTooltipTemplate")
+MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
+
+-------------------------------------------------------------------------------
 -- Local Variables {{{
 -------------------------------------------------------------------------------
 
@@ -208,15 +221,6 @@ Session = {
 -------------------------------------------------------------------------------
 -- Core Event Code {{{
 -------------------------------------------------------------------------------
-
-MBH = CreateFrame("Frame", "MBH", UIParent)
-MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap)
-MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", nil, "GameTooltipTemplate")
-MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
 
 do
 	for _, event in {
