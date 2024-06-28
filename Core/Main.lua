@@ -613,6 +613,13 @@ Session = {
 -------------------------------------------------------------------------------
 
 MBH = CreateFrame("Frame", "MBH", UIParent)
+MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap)
+MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", nil, "GameTooltipTemplate")
+MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
 
 do
 	for _, event in {
@@ -654,17 +661,11 @@ function MBH:OnEvent()
         MBH.ACE.Banzai = AceLibrary("Banzai-1.0")
         MBH.ACE.ItemBonus = AceLibrary("ItemBonusLib-1.0")
 
-        MBH_ResetAllWindow()
         MBH_SetupData()
         MBH_GetHealSpell()
         MBH_InitalData()
 
-        MBH.MiniMapButton:CreateMinimapIcon()
-        MBH.MainFrame:CreateMainFrame()
-        MBH.OptionFrame:CreateOptionFrame()
-        MBH.ProtectionFrame:CreateProtectionFrame()
-        MBH.PopupPresetFrame:CreatePopupPresetFrame()
-        MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
+        MBH:CreateWindows()
 
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 

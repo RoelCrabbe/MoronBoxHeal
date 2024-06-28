@@ -2,24 +2,27 @@
 -- Frame Names {{{
 -------------------------------------------------------------------------------
 
-MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap) -- Minimap Frame
+local _G, _M = getfenv(0), {}
+setfenv(1, setmetatable(_M, {__index=_G}))
 
-MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", UIParent, "GameTooltipTemplate")
-MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
-
-function MBH_ResetAllWindow()
-    ResetFramePosition(MBH.MainFrame)
-    ResetFramePosition(MBH.OptionFrame)
-    ResetFramePosition(MBH.ProtectionFrame)
-    ResetFramePosition(MBH.PopupPresetFrame)
-    ResetFramePosition(MBH.PopupDefaultFrame)
+function MBH:CreateWindows()
+    MBH.MiniMapButton:CreateMinimapIcon()
+    MBH.MainFrame:CreateMainFrame()
+    MBH.OptionFrame:CreateOptionFrame()
+    MBH.ProtectionFrame:CreateProtectionFrame()
+    MBH.PopupPresetFrame:CreatePopupPresetFrame()
+    MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
 end
 
-function OpenMainFrame()
+function MBH_ResetAllWindow()
+    MBH_ResetFramePosition(MBH.MainFrame)
+    MBH_ResetFramePosition(MBH.OptionFrame)
+    MBH_ResetFramePosition(MBH.ProtectionFrame)
+    MBH_ResetFramePosition(MBH.PopupPresetFrame)
+    MBH_ResetFramePosition(MBH.PopupDefaultFrame)
+end
+
+function MBH_OpenMainFrame()
     if MBH.MainFrame:IsShown() then
         MBH_CloseAllWindow()
     else 
@@ -72,21 +75,21 @@ function MBH.MiniMapButton:CreateMinimapIcon()
     local IsMiniMapMoving = false
 
     self:SetFrameStrata("LOW")
-    SetSize(self, 32, 32)
+    MBH_SetSize(self, 32, 32)
 	self:SetPoint("TOPLEFT", 0, 0)
 	
 	self.Button = CreateFrame("Button", nil, self)
-    SetSize(self.Button, 32, 32)
-    RegisterAllClicksAndDrags(self.Button)
+    MBH_SetSize(self.Button, 32, 32)
+    MBH_RegisterAllClicksAndDrags(self.Button)
 	self.Button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 
 	self.Overlay = self:CreateTexture(nil, "OVERLAY", self)
-    SetSize(self.Overlay, 52, 52)
+    MBH_SetSize(self.Overlay, 52, 52)
     self.Overlay:SetPoint("TOPLEFT", 0, 0)
 	self.Overlay:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
 	
 	self.MinimapIcon = self:CreateTexture(nil, "BACKGROUND")
-    SetSize(self.MinimapIcon, 18, 18)
+    MBH_SetSize(self.MinimapIcon, 18, 18)
 	self.MinimapIcon:SetTexture("Interface\\Icons\\Spell_Nature_HealingTouch")
     self.MinimapIcon:SetTexCoord(0.075, 0.925, 0.075, 0.925)
 
@@ -128,15 +131,15 @@ function MBH.MiniMapButton:CreateMinimapIcon()
     end
 
     local function OnClick()
-        OpenMainFrame()
+        MBH_OpenMainFrame()
     end
 
     self.Button:SetScript("OnDragStart", OnDragStart)
     self.Button:SetScript("OnDragStop", OnDragStop)
     self.Button:SetScript("OnClick", OnClick)
-    self.Button:SetScript("OnLeave", HideTooltip)
+    self.Button:SetScript("OnLeave", MBH_HideTooltip)
     self.Button:SetScript("OnEnter", function()
-        ShowToolTip(self, MBH_TITLE, MBH_MINIMAPHOVER)
+        MBH_ShowToolTip(self, MBH_TITLE, MBH_MINIMAPHOVER)
     end)   
 end
 
@@ -146,10 +149,10 @@ end
 
 function MBH.MainFrame:CreateMainFrame()
 
-    DefaultFrameTemplate(self)
-    DefaultFrameButtons(self)
+    MBH_DefaultFrameTemplate(self)
+    MBH_DefaultFrameButtons(self)
     
-    self.InnerContainer = CreateInnerContainer(self)
+    self.InnerContainer = MBH_CreateInnerContainer(self)
 
     self.WelcomeText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
     self.WelcomeText:SetText(MBH_WELCOME)
@@ -157,8 +160,8 @@ function MBH.MainFrame:CreateMainFrame()
 
     self.InformationText = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     self.InformationText:SetText(MBH_INFORMATION)
-    SetSize(self.InformationText, 480, 350)
-    SetFontSize(self.InformationText)
+    MBH_SetSize(self.InformationText, 480, 350)
+    MBH_SetFontSize(self.InformationText)
 
     self:Hide()
 end
@@ -169,94 +172,94 @@ end
 
 function MBH.OptionFrame:CreateOptionFrame()
 
-    DefaultFrameTemplate(self)
-    DefaultFrameButtons(self)
+    MBH_DefaultFrameTemplate(self)
+    MBH_DefaultFrameButtons(self)
 
     -- Healing Settings
-    self.HealingContainer = CreateSmallInnerContainer(self, MBH_HEALSETTINGS)
+    self.HealingContainer = MBH_CreateSmallInnerContainer(self, MBH_HEALSETTINGS)
     self.HealingContainer:SetPoint("TOPLEFT", self, "TOPLEFT", 35, -75)
 
-        self.RandomTargetCheckButton = CreateCheckButton(self.HealingContainer, MBH_RANDOMTARGET, MoronBoxHeal_Options.AutoHeal.Random_Target, -15)
+        self.RandomTargetCheckButton = MBH_CreateCheckButton(self.HealingContainer, MBH_RANDOMTARGET, MoronBoxHeal_Options.AutoHeal.Random_Target, -15)
         self.RandomTargetCheckButton:SetPoint("CENTER", self.HealingContainer, "TOP", 0, -35)
         self.RandomTargetCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.AutoHeal.Random_Target = (self.RandomTargetCheckButton:GetChecked() == 1)
         end)
 
-        self.HealTargetSlider = CreateSlider(self.HealingContainer, "HealTargetSlider", 220)
+        self.HealTargetSlider = MBH_CreateSlider(self.HealingContainer, "HealTargetSlider", 220)
         self.HealTargetSlider:SetPoint("CENTER", self.RandomTargetCheckButton, "CENTER", 0, -50)
         self.HealTargetSlider:SetScript("OnValueChanged", HealTargetSlider_OnValueChanged)
         self.HealTargetSlider:SetScript("OnShow", function()
-            InitializeSlider(self.HealTargetSlider, MBH_HEALTARGETNUMBER, MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, 1, 5, 1)
+            MBH_InitializeSlider(self.HealTargetSlider, MBH_HEALTARGETNUMBER, MoronBoxHeal_Options.AutoHeal.Heal_Target_Number, 1, 5, 1)
         end)
 
-        self.OverHealHealSlider = CreateSlider(self.HealingContainer, "OverHealHealSlider", 220)
+        self.OverHealHealSlider = MBH_CreateSlider(self.HealingContainer, "OverHealHealSlider", 220)
         self.OverHealHealSlider:SetPoint("CENTER", self.HealTargetSlider, "CENTER", 0, -50)
         self.OverHealHealSlider:SetScript("OnValueChanged", OverHealHealSlider_OnValueChanged)
         self.OverHealHealSlider:SetScript("OnShow", function()
-            InitializeSlider(self.OverHealHealSlider, MBH_ALLOWEDOVERHEAL, MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
+            MBH_InitializeSlider(self.OverHealHealSlider, MBH_ALLOWEDOVERHEAL, MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
         end)
 
-        self.SmartHealCheckButton = CreateCheckButton(self.HealingContainer, MBH_SMARTHEAL, MoronBoxHeal_Options.AutoHeal.Smart_Heal, -15)
+        self.SmartHealCheckButton = MBH_CreateCheckButton(self.HealingContainer, MBH_SMARTHEAL, MoronBoxHeal_Options.AutoHeal.Smart_Heal, -15)
         self.SmartHealCheckButton:SetPoint("CENTER", self.OverHealHealSlider, "CENTER", 0, -35)
         self.SmartHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.AutoHeal.Smart_Heal = (self.SmartHealCheckButton:GetChecked() == 1)
         end)
 
     -- Extended Range
-    self.ExtendedRangeContainer = CreateSmallInnerContainer(self, MBH_RANGSETTINGS)
+    self.ExtendedRangeContainer = MBH_CreateSmallInnerContainer(self, MBH_RANGSETTINGS)
     self.ExtendedRangeContainer:SetPoint("TOPRIGHT", self, "TOPRIGHT", -35, -75)
 
-        self.ExtendedRangeCheckButton = CreateCheckButton(self.ExtendedRangeContainer, MBH_EXTENDEDRANGE, MoronBoxHeal_Options.ExtendedRange.Enable, -15)
+        self.ExtendedRangeCheckButton = MBH_CreateCheckButton(self.ExtendedRangeContainer, MBH_EXTENDEDRANGE, MoronBoxHeal_Options.ExtendedRange.Enable, -15)
         self.ExtendedRangeCheckButton:SetPoint("CENTER", self.ExtendedRangeContainer, "CENTER", 0, 35)
         self.ExtendedRangeCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ExtendedRange.Enable = (self.ExtendedRangeCheckButton:GetChecked() == 1)
         end)
 
-        self.ExtendedRangeFrequencySlider = CreateSlider(self.ExtendedRangeContainer, "ExtendedRangeFrequencySlider", 220)
+        self.ExtendedRangeFrequencySlider = MBH_CreateSlider(self.ExtendedRangeContainer, "ExtendedRangeFrequencySlider", 220)
         self.ExtendedRangeFrequencySlider:SetPoint("CENTER", self.ExtendedRangeContainer, "CENTER", 0, -50)
         self.ExtendedRangeFrequencySlider:SetScript("OnValueChanged", ExtendedRangeFrequencySlider_OnValueChanged)
         self.ExtendedRangeFrequencySlider:SetScript("OnShow", function()
-            InitializeSlider(self.ExtendedRangeFrequencySlider, MBH_EXTENDEDRANGEFREQUENCY, MoronBoxHeal_Options.ExtendedRange.Frequency, 1, 5, 0.25)
+            MBH_InitializeSlider(self.ExtendedRangeFrequencySlider, MBH_EXTENDEDRANGEFREQUENCY, MoronBoxHeal_Options.ExtendedRange.Frequency, 1, 5, 0.25)
         end)
 
     -- Light Of Sight
-    self.LineOfSightContainer = CreateSmallInnerContainer(self, MBH_LOSETTINGS)
+    self.LineOfSightContainer = MBH_CreateSmallInnerContainer(self, MBH_LOSETTINGS)
     self.LineOfSightContainer:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 35, 60)
 
-        self.LineOfSightCheckButton = CreateCheckButton(self.LineOfSightContainer, MBH_LINEOFSIGHT, MoronBoxHeal_Options.LineOfSight.Enable, -15)
+        self.LineOfSightCheckButton = MBH_CreateCheckButton(self.LineOfSightContainer, MBH_LINEOFSIGHT, MoronBoxHeal_Options.LineOfSight.Enable, -15)
         self.LineOfSightCheckButton:SetPoint("CENTER", self.LineOfSightContainer, "CENTER", 0, 35)
         self.LineOfSightCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.LineOfSight.Enable = (self.LineOfSightCheckButton:GetChecked() == 1)
         end)
 
-        self.LineOfSightFrequencySlider = CreateSlider(self.LineOfSightContainer, "LineOfSightFrequencySlider", 220)
+        self.LineOfSightFrequencySlider = MBH_CreateSlider(self.LineOfSightContainer, "LineOfSightFrequencySlider", 220)
         self.LineOfSightFrequencySlider:SetPoint("CENTER", self.LineOfSightContainer, "CENTER", 0, -50)
         self.LineOfSightFrequencySlider:SetScript("OnValueChanged", LineOfSightFrequencySlider_OnValueChanged)
         self.LineOfSightFrequencySlider:SetScript("OnShow", function()
-            InitializeSlider(self.LineOfSightFrequencySlider, MBH_LINEOFSIGHTFREQUENCY, MoronBoxHeal_Options.LineOfSight.TimeOut, 0.5, 5, 0.25)
+            MBH_InitializeSlider(self.LineOfSightFrequencySlider, MBH_LINEOFSIGHTFREQUENCY, MoronBoxHeal_Options.LineOfSight.TimeOut, 0.5, 5, 0.25)
         end)
 
     -- Advanced Settings
-    self.AdvancedOptionsContainer = CreateSmallInnerContainer(self, MBH_SPECIALSETTINGS)
+    self.AdvancedOptionsContainer = MBH_CreateSmallInnerContainer(self, MBH_SPECIALSETTINGS)
     self.AdvancedOptionsContainer:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -35, 60)
 
-        self.ManaProtectionCheckButton = CreateCheckButton(self.AdvancedOptionsContainer, MBH_MANAPROTECTION, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection, -15)
+        self.ManaProtectionCheckButton = MBH_CreateCheckButton(self.AdvancedOptionsContainer, MBH_MANAPROTECTION, MoronBoxHeal_Options.AdvancedOptions.Mana_Protection, -15)
         self.ManaProtectionCheckButton:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, 50)
         self.ManaProtectionCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = (self.ManaProtectionCheckButton:GetChecked() == 1)
         end)
 
-        self.IdleProtectionCheckButton = CreateCheckButton(self.AdvancedOptionsContainer, MBH_IDLEPROTECTIONENABLE, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled, -15)
+        self.IdleProtectionCheckButton = MBH_CreateCheckButton(self.AdvancedOptionsContainer, MBH_IDLEPROTECTIONENABLE, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled, -15)
         self.IdleProtectionCheckButton:SetPoint("CENTER", self.ManaProtectionCheckButton, "CENTER", 0, -40)
         self.IdleProtectionCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled = (self.IdleProtectionCheckButton:GetChecked() == 1)
         end)
 
-        self.IdleProtectionFrequencySlider = CreateSlider(self.AdvancedOptionsContainer, "IdleProtectionFrequencySlider", 220)
+        self.IdleProtectionFrequencySlider = MBH_CreateSlider(self.AdvancedOptionsContainer, "IdleProtectionFrequencySlider", 220)
         self.IdleProtectionFrequencySlider:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, -50)
         self.IdleProtectionFrequencySlider:SetScript("OnValueChanged", IdleProtectionFrequencySlider_OnValueChanged)
         self.IdleProtectionFrequencySlider:SetScript("OnShow", function()
-            InitializeSlider(self.IdleProtectionFrequencySlider, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
+            MBH_InitializeSlider(self.IdleProtectionFrequencySlider, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
         end)
 
     self:Hide()
@@ -268,9 +271,9 @@ end
 
 function MBH.ProtectionFrame:CreateProtectionFrame()
 
-    DefaultFrameTemplate(self)
-    DefaultFrameButtons(self)
-    self.InnerContainer = CreateInnerContainer(self)
+    MBH_DefaultFrameTemplate(self)
+    MBH_DefaultFrameButtons(self)
+    self.InnerContainer = MBH_CreateInnerContainer(self)
 
     if ( Session.PlayerClass == "Priest" ) then
 
@@ -279,20 +282,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.FlashHealTitle:SetText(MBH_SPELL_FLASH_HEAL)
         self.FlashHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 85, -25)
 
-        self.FlashHealThresholdSlider = CreateSlider(self.InnerContainer, "FlashHealThresholdSlider", 180)
+        self.FlashHealThresholdSlider = MBH_CreateSlider(self.InnerContainer, "FlashHealThresholdSlider", 180)
         self.FlashHealThresholdSlider:SetPoint("CENTER", self.FlashHealTitle, "CENTER", 0, -50)
         self.FlashHealThresholdSlider:SetScript("OnValueChanged", FlashHealThresholdSlider__OnValueChanged)
         self.FlashHealThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.FlashHealThresholdSlider, MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
+            MBH_InitializeSlider(self.FlashHealThresholdSlider, MBH_FLASHHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold)
         end)
 
-        self.FlashHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
+        self.FlashHealLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR)
         self.FlashHealLAR:SetPoint("CENTER", self.FlashHealThresholdSlider, "CENTER", 50, -50)
 
-        self.FlashHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
+        self.FlashHealHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR)
         self.FlashHealHAR:SetPoint("CENTER", self.FlashHealLAR, "CENTER", 0, -50)
    
-        self.FlashHealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch)
+        self.FlashHealCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch)
         self.FlashHealCheckButton:SetPoint("CENTER", self.FlashHealHAR, "CENTER", 0, -50)
         self.FlashHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = (self.FlashHealCheckButton:GetChecked() == 1)
@@ -303,20 +306,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HealTitle:SetText(MBH_SPELL_HEAL)
         self.HealTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
 
-        self.HealThresholdSlider = CreateSlider(self.InnerContainer, "HealThresholdSlider", 180)
+        self.HealThresholdSlider = MBH_CreateSlider(self.InnerContainer, "HealThresholdSlider", 180)
         self.HealThresholdSlider:SetPoint("CENTER", self.HealTitle, "CENTER", 0, -50)
         self.HealThresholdSlider:SetScript("OnValueChanged", HealThresholdSlider_OnValueChanged)
         self.HealThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.HealThresholdSlider, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
+            MBH_InitializeSlider(self.HealThresholdSlider, MBH_HEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold)
         end)
 
-        self.HealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
+        self.HealLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR)
         self.HealLAR:SetPoint("CENTER", self.HealThresholdSlider, "CENTER", 50, -50)
 
-        self.HealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
+        self.HealHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR)
         self.HealHAR:SetPoint("CENTER", self.HealLAR, "CENTER", 0, -50)
 
-        self.HealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch)
+        self.HealCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch)
         self.HealCheckButton:SetPoint("CENTER", self.HealHAR, "CENTER", 0, -50)
         self.HealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = (self.HealCheckButton:GetChecked() == 1)
@@ -327,20 +330,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.GreaterHealTitle:SetText(MBH_SPELL_GREATER_HEAL)
         self.GreaterHealTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -85, -25)
 
-        self.GreaterHealThresholdSlider = CreateSlider(self.InnerContainer, "GreaterHealThresholdSlider", 180)
+        self.GreaterHealThresholdSlider = MBH_CreateSlider(self.InnerContainer, "GreaterHealThresholdSlider", 180)
         self.GreaterHealThresholdSlider:SetPoint("CENTER", self.GreaterHealTitle, "CENTER", 0, -50)
         self.GreaterHealThresholdSlider:SetScript("OnValueChanged", GreaterHealThresholdSlider_OnValueChanged)
         self.GreaterHealThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.GreaterHealThresholdSlider, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
+            MBH_InitializeSlider(self.GreaterHealThresholdSlider, MBH_GREATERHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold)
         end)
 
-        self.GreaterHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
+        self.GreaterHealLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR)
         self.GreaterHealLAR:SetPoint("CENTER", self.GreaterHealThresholdSlider, "CENTER", 50, -50)
 
-        self.GreaterHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
+        self.GreaterHealHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR)
         self.GreaterHealHAR:SetPoint("CENTER", self.GreaterHealLAR, "CENTER", 0, -50)
         
-        self.GreaterHealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch)
+        self.GreaterHealCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch)
         self.GreaterHealCheckButton:SetPoint("CENTER", self.GreaterHealHAR, "CENTER", 0, -50)
         self.GreaterHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = (self.GreaterHealCheckButton:GetChecked() == 1)
@@ -361,7 +364,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function FlashHealLAR_OnEnterPressed()
-            ValidateLAR(self.FlashHealHAR, "Flash_Heal")
+            MBH_ValidateLAR(self.FlashHealHAR, "Flash_Heal")
             FlashHealLAR_OnEscapePressed()
         end
         
@@ -384,7 +387,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function FlashHealHAR_OnEnterPressed()
-            ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
+            MBH_ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
             FlashHealHAR_OnEscapePressed()
         end
         
@@ -408,7 +411,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function HealLAR_OnEnterPressed()
-            ValidateLAR(self.HealHAR, "Heal")
+            MBH_ValidateLAR(self.HealHAR, "Heal")
             HealLAR_OnEscapePressed()
         end
         
@@ -431,7 +434,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function HealHAR_OnEnterPressed()
-            ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
+            MBH_ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
             HealHAR_OnEscapePressed()
         end
         
@@ -455,7 +458,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function GreaterHealLAR_OnEnterPressed()
-            ValidateLAR(self.GreaterHealHAR, "Greater_Heal")
+            MBH_ValidateLAR(self.GreaterHealHAR, "Greater_Heal")
             GreaterHealLAR_OnEscapePressed()
         end
         
@@ -474,7 +477,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function GreaterHealHAR_OnEnterPressed()
-            ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
+            MBH_ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
             GreaterHealHAR_OnEscapePressed()
         end
         
@@ -490,20 +493,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.ChainHealTitle:SetText(MBH_SPELL_CHAIN_HEAL)
         self.ChainHealTitle:SetPoint("TOPLEFT", self.InnerContainer, "TOPLEFT", 145, -25)
 
-        self.ChainHealThresholdSlider = CreateSlider(self.InnerContainer, "ChainHealThresholdSlider", 180)
+        self.ChainHealThresholdSlider = MBH_CreateSlider(self.InnerContainer, "ChainHealThresholdSlider", 180)
         self.ChainHealThresholdSlider:SetPoint("CENTER", self.ChainHealTitle, "CENTER", 0, -50)
         self.ChainHealThresholdSlider:SetScript("OnValueChanged", ChainHealThresholdSlider_OnValueChanged)
         self.ChainHealThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.ChainHealThresholdSlider, MBH_CHAINHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold)
+            MBH_InitializeSlider(self.ChainHealThresholdSlider, MBH_CHAINHEALPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold)
         end)
 
-        self.ChainHealLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
+        self.ChainHealLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR)
         self.ChainHealLAR:SetPoint("CENTER", self.ChainHealThresholdSlider, "CENTER", 50, -50)
 
-        self.ChainHealHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
+        self.ChainHealHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR)
         self.ChainHealHAR:SetPoint("CENTER", self.ChainHealLAR, "CENTER", 0, -50)
 
-        self.ChainHealCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch)
+        self.ChainHealCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch)
         self.ChainHealCheckButton:SetPoint("CENTER", self.ChainHealHAR, "CENTER", 0, -50)
         self.ChainHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = (self.ChainHealCheckButton:GetChecked() == 1)
@@ -514,20 +517,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.LesserHealingWaveTitle:SetText(MBH_SPELL_LESSER_HEALING_WAVE)
         self.LesserHealingWaveTitle:SetPoint("TOPRIGHT", self.InnerContainer, "TOPRIGHT", -145, -25)
 
-        self.LesserHealingWaveThresholdSlider = CreateSlider(self.InnerContainer, "LesserHealingWaveThresholdSlider", 180)
+        self.LesserHealingWaveThresholdSlider = MBH_CreateSlider(self.InnerContainer, "LesserHealingWaveThresholdSlider", 180)
         self.LesserHealingWaveThresholdSlider:SetPoint("CENTER", self.LesserHealingWaveTitle, "CENTER", 0, -50)
         self.LesserHealingWaveThresholdSlider:SetScript("OnValueChanged", LesserHealingWaveThresholdSlider_OnValueChanged)
         self.LesserHealingWaveThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.LesserHealingWaveThresholdSlider, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold)
+            MBH_InitializeSlider(self.LesserHealingWaveThresholdSlider, MBH_LESSERHEALINGWAVEPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold)
         end)
 
-        self.LesserHealingWaveLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
+        self.LesserHealingWaveLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR)
         self.LesserHealingWaveLAR:SetPoint("CENTER", self.LesserHealingWaveThresholdSlider, "CENTER", 50, -50)
 
-        self.LesserHealingWaveHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
+        self.LesserHealingWaveHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR)
         self.LesserHealingWaveHAR:SetPoint("CENTER", self.LesserHealingWaveLAR, "CENTER", 0, -50)
 
-        self.LesserHealingWaveCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch)
+        self.LesserHealingWaveCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch)
         self.LesserHealingWaveCheckButton:SetPoint("CENTER", self.LesserHealingWaveHAR, "CENTER", 0, -50)
         self.LesserHealingWaveCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (self.LesserHealingWaveCheckButton:GetChecked() == 1)
@@ -548,7 +551,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function ChainHealLAR_OnEnterPressed()
-            ValidateLAR(self.ChainHealHAR, "Chain_Heal")
+            MBH_ValidateLAR(self.ChainHealHAR, "Chain_Heal")
             ChainHealLAR_OnEscapePressed()
         end
         
@@ -571,7 +574,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function ChainHealHAR_OnEnterPressed()
-            ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
+            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
             ChainHealHAR_OnEscapePressed()
         end
         
@@ -595,7 +598,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function LesserHealingWaveLAR_OnEnterPressed()
-            ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
+            MBH_ValidateLAR(self.LesserHealingWaveHAR, "Lesser_Healing_Wave")
             LesserHealingWaveLAR_OnEscapePressed()
         end
         
@@ -614,7 +617,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function LesserHealingWaveHAR_OnEnterPressed()
-            ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
+            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
             LesserHealingWaveHAR_OnEscapePressed()
         end
         
@@ -630,20 +633,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HolyLightTitle:SetText(MBH_SPELL_HOLY_LIGHT)
         self.HolyLightTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
 
-        self.HolyLightThresholdSlider = CreateSlider(self.InnerContainer, "HolyLightThresholdSlider", 180)
+        self.HolyLightThresholdSlider = MBH_CreateSlider(self.InnerContainer, "HolyLightThresholdSlider", 180)
         self.HolyLightThresholdSlider:SetPoint("CENTER", self.HolyLightTitle, "CENTER", 0, -50)
         self.HolyLightThresholdSlider:SetScript("OnValueChanged", HolyLightThresholdSlider_OnValueChanged)
         self.HolyLightThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.HolyLightThresholdSlider, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
+            MBH_InitializeSlider(self.HolyLightThresholdSlider, MBH_HOLYLIGHTPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold)
         end)
 
-        self.HolyLightLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
+        self.HolyLightLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_LAR)
         self.HolyLightLAR:SetPoint("CENTER", self.HolyLightThresholdSlider, "CENTER", 50, -50)
 
-        self.HolyLightHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
+        self.HolyLightHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR)
         self.HolyLightHAR:SetPoint("CENTER", self.HolyLightLAR, "CENTER", 0, -50)
 
-        self.HolyLightCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch)
+        self.HolyLightCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch)
         self.HolyLightCheckButton:SetPoint("CENTER", self.HolyLightHAR, "CENTER", 0, -50)
         self.HolyLightCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (self.HolyLightCheckButton:GetChecked() == 1)
@@ -664,7 +667,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function HolyLightLAR_OnEnterPressed()
-            ValidateLAR(self.HolyLightHAR, "Holy_Light")
+            MBH_ValidateLAR(self.HolyLightHAR, "Holy_Light")
             HolyLightLAR_OnEscapePressed()
         end
 
@@ -683,7 +686,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function HolyLightHAR_OnEnterPressed()
-            ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
             HolyLightHAR_OnEscapePressed()
         end
 
@@ -699,20 +702,20 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.RegrowthTitle:SetText(MBH_SPELL_REGROWTH)
         self.RegrowthTitle:SetPoint("CENTER", self.InnerContainer, "TOP", 0, -35)
 
-        self.RegrowthThresholdSlider = CreateSlider(self.InnerContainer, "RegrowthThresholdSlider", 180)
+        self.RegrowthThresholdSlider = MBH_CreateSlider(self.InnerContainer, "RegrowthThresholdSlider", 180)
         self.RegrowthThresholdSlider:SetPoint("CENTER", self.RegrowthTitle, "CENTER", 0, -50)
         self.RegrowthThresholdSlider:SetScript("OnValueChanged", RegrowthThresholdSlider_OnValueChanged)
         self.RegrowthThresholdSlider:SetScript("OnShow", function()
-            InitializeSlider(self.RegrowthThresholdSlider, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
+            MBH_InitializeSlider(self.RegrowthThresholdSlider, MBH_REGROWTHPROTECTIONTHRESHOLD, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold)
         end)
 
-        self.RegrowthLAR = CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
+        self.RegrowthLAR = MBH_CreateEditBox(self.InnerContainer, MBH_LOWEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)
         self.RegrowthLAR:SetPoint("CENTER", self.RegrowthThresholdSlider, "CENTER", 50, -50)
 
-        self.RegrowthHAR = CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
+        self.RegrowthHAR = MBH_CreateEditBox(self.InnerContainer, MBH_HIGHEST_RANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR)
         self.RegrowthHAR:SetPoint("CENTER", self.RegrowthLAR, "CENTER", 0, -50)
 
-        self.RegrowthCheckButton = CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch)
+        self.RegrowthCheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_ACTIVESWITCH, MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch)
         self.RegrowthCheckButton:SetPoint("CENTER", self.RegrowthHAR, "CENTER", 0, -50)
         self.RegrowthCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (self.RegrowthCheckButton:GetChecked() == 1)
@@ -733,7 +736,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function RegrowthLAR_OnEnterPressed()
-            ValidateLAR(self.RegrowthHAR, "Regrowth")
+            MBH_ValidateLAR(self.RegrowthHAR, "Regrowth")
             RegrowthLAR_OnEscapePressed()
         end
 
@@ -752,7 +755,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function RegrowthHAR_OnEnterPressed()
-            ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+            MBH_ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
             RegrowthHAR_OnEscapePressed()
         end
 
@@ -771,7 +774,7 @@ end
 
 function MBH.PopupPresetFrame:CreatePopupPresetFrame()
 
-    CreatePopupFrame(self)
+    MBH_CreatePopupFrame(self)
 
     self.PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     self.PopupPresetText:SetText(MBH_PRESETSETTINGSCONFIRM)
@@ -791,7 +794,7 @@ end
 
 function MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
 
-    CreatePopupFrame(self)
+    MBH_CreatePopupFrame(self)
 
     self.PopupPresetText = self:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     self.PopupPresetText:SetText(MBH_RESTOREDEFAULTCONFIRM)
@@ -809,7 +812,7 @@ end
 -- Helper Functions {{{
 -------------------------------------------------------------------------------
 
-function ResetFramePosition(Frame)
+function MBH_ResetFramePosition(Frame)
     if not Frame then return end
 
     Frame:ClearAllPoints()
@@ -817,27 +820,27 @@ function ResetFramePosition(Frame)
     Frame:Hide()
 end
 
-function SetBackdropColor(Frame, Color)
+function MBH_SetBackdropColor(Frame, Color)
     if not Frame or not Color then return end
     Frame:SetBackdropColor(GetColorValue(Color))
     Frame:SetBackdropBorderColor(GetColorValue(Color))
 end
 
-function SetFontSize(FontString, Size)
+function MBH_SetFontSize(FontString, Size)
     if not FontString then return end
     if not Size then Size = 13 end
     local font, _, flags = FontString:GetFont()
     FontString:SetFont(font, Size, flags)
 end
 
-function SetSize(Frame, Width, Height)
+function MBH_SetSize(Frame, Width, Height)
     if not Frame or not Width or not Height then return end
     Frame:SetWidth(Width)
 	Frame:SetHeight(Height)
     Frame:SetPoint("CENTER", 0, 0)
 end
 
-function ShowToolTip(Parent, Title, Text)
+function MBH_ShowToolTip(Parent, Title, Text)
     if not Parent or not Title or not Text then return end
     GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
     GameTooltip:SetText(Title, 1, 1, 0.5)
@@ -845,17 +848,17 @@ function ShowToolTip(Parent, Title, Text)
     GameTooltip:Show()
 end
 
-function HideTooltip()
+function MBH_HideTooltip()
     GameTooltip:Hide()
 end
 
-function RegisterAllClicksAndDrags(Frame)
+function MBH_RegisterAllClicksAndDrags(Frame)
     if not Frame then return end
     Frame:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")
     Frame:RegisterForDrag("LeftButton", "RightButton")
 end
 
-function CreateButton(Parent, Text, Width, Height)
+function MBH_CreateButton(Parent, Text, Width, Height)
     if not Parent or not Text then return end
 
     Width = Width or 60
@@ -863,8 +866,8 @@ function CreateButton(Parent, Text, Width, Height)
 
     local Button = CreateFrame("Button", nil, Parent)
     Button:SetBackdrop(BackDrop)
-    SetSize(Button, Width, Height)
-    SetBackdropColor(Button, "Gray600")
+    MBH_SetSize(Button, Width, Height)
+    MBH_SetBackdropColor(Button, "Gray600")
 
     local Overlay = Button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     Overlay:SetText(Text)
@@ -872,11 +875,11 @@ function CreateButton(Parent, Text, Width, Height)
     Button.Overlay = Overlay
 
     local function Button_OnEnter()
-        SetBackdropColor(Button, "Gray400")
+        MBH_SetBackdropColor(Button, "Gray400")
     end
 
     local function Button_OnLeave()
-        SetBackdropColor(Button, "Gray600")
+        MBH_SetBackdropColor(Button, "Gray600")
     end
 
     Button:SetScript("OnEnter", Button_OnEnter)
@@ -884,26 +887,26 @@ function CreateButton(Parent, Text, Width, Height)
     return Button
 end
 
-function CreateInnerContainer(Parent)
+function MBH_CreateInnerContainer(Parent)
     if not Parent then return end
 
     local InnerContainer = CreateFrame("Frame", nil, Parent)
     InnerContainer:SetBackdrop(BackDrop)
-    SetSize(InnerContainer, 730, 415)
-    SetBackdropColor(InnerContainer, "Gray600")
+    MBH_SetSize(InnerContainer, 730, 415)
+    MBH_SetBackdropColor(InnerContainer, "Gray600")
     InnerContainer:SetPoint("TOPLEFT", Parent, "TOPLEFT", 35, -75)
     Parent.InnerContainer = InnerContainer
 
     return InnerContainer
 end
 
-function CreateSmallInnerContainer(Parent, Title)
+function MBH_CreateSmallInnerContainer(Parent, Title)
     if not Parent or not Title then return end
 
     local SmallInnerContainer = CreateFrame("Frame", nil, Parent)
     SmallInnerContainer:SetBackdrop(BackDrop)
-    SetSize(SmallInnerContainer, 350, 200)
-    SetBackdropColor(SmallInnerContainer, "Gray600")
+    MBH_SetSize(SmallInnerContainer, 350, 200)
+    MBH_SetBackdropColor(SmallInnerContainer, "Gray600")
 
     local Title = SmallInnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     Title:SetText(Title)
@@ -913,15 +916,15 @@ function CreateSmallInnerContainer(Parent, Title)
     return SmallInnerContainer
 end
 
-function DefaultFrameTemplate(Frame)
+function MBH_DefaultFrameTemplate(Frame)
     local IsMoving = false
 
     Frame:SetFrameStrata("LOW")
     Frame:SetBackdrop(BackDrop)
     Frame:SetMovable(true)
     Frame:EnableMouse(true)
-    SetSize(Frame, 800, 550)
-    SetBackdropColor(Frame, "Gray800")
+    MBH_SetSize(Frame, 800, 550)
+    MBH_SetBackdropColor(Frame, "Gray800")
 
     local Title = Frame:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
     Title:SetText(MBH_TITLE)
@@ -952,27 +955,27 @@ function DefaultFrameTemplate(Frame)
     Frame:SetScript("OnHide", Frame_OnMouseUp)
 end
 
-function DefaultFrameButtons(Parent)
+function MBH_DefaultFrameButtons(Parent)
 
-    local GeneralButton = CreateButton(Parent, MBH_GENERAL) 
+    local GeneralButton = MBH_CreateButton(Parent, MBH_GENERAL) 
     GeneralButton:SetPoint("TOPLEFT", Parent, "TOPLEFT", 10, -15)
     Parent.GeneralButton = GeneralButton
     
     local function GeneralButton_OnShow()
-        SetBackdropColor(GeneralButton, "Gray600")
+        MBH_SetBackdropColor(GeneralButton, "Gray600")
 
         if (Parent == MBH.MainFrame) then
-            SetBackdropColor(GeneralButton, "Blue600")
+            MBH_SetBackdropColor(GeneralButton, "Blue600")
         end
     end
 
     GeneralButton_OnShow()
 
     local function GeneralButton_OnEnter()
-        SetBackdropColor(GeneralButton, "Gray400")
+        MBH_SetBackdropColor(GeneralButton, "Gray400")
 
         if (Frame == MBH.MainFrame) then
-            SetBackdropColor(GeneralButton, "Blue500")
+            MBH_SetBackdropColor(GeneralButton, "Blue500")
         end
     end
     
@@ -984,25 +987,25 @@ function DefaultFrameButtons(Parent)
         MBH.MainFrame:Show()
     end)
 
-    local OptionButton = CreateButton(Parent, MBH_OPTIONS) 
+    local OptionButton = MBH_CreateButton(Parent, MBH_OPTIONS) 
     OptionButton:SetPoint("TOPLEFT", GeneralButton, "TOPRIGHT", 5, 0)
     Parent.OptionButton = OptionButton
 
     local function OptionButton_OnShow()
-        SetBackdropColor(OptionButton, "Gray600")
+        MBH_SetBackdropColor(OptionButton, "Gray600")
 
         if (Parent == MBH.OptionFrame) then
-            SetBackdropColor(OptionButton, "Blue600")
+            MBH_SetBackdropColor(OptionButton, "Blue600")
         end
     end
     
     OptionButton_OnShow()
 
     local function OptionButton_OnEnter()
-        SetBackdropColor(OptionButton, "Gray400")
+        MBH_SetBackdropColor(OptionButton, "Gray400")
 
         if (Parent == MBH.OptionFrame) then
-            SetBackdropColor(OptionButton, "Blue500")
+            MBH_SetBackdropColor(OptionButton, "Blue500")
         end
     end
     
@@ -1014,15 +1017,15 @@ function DefaultFrameButtons(Parent)
         MBH.OptionFrame:Show()
     end)
 
-    local ProtectionButton = CreateButton(Parent, MBH_PROTECTION, 80) 
+    local ProtectionButton = MBH_CreateButton(Parent, MBH_PROTECTION, 80) 
     ProtectionButton:SetPoint("TOPLEFT", OptionButton, "TOPRIGHT", 5, 0)
     Parent.ProtectionButton = ProtectionButton
 
     local function ProtectionButton_OnShow()
-        SetBackdropColor(ProtectionButton, "Gray600")
+        MBH_SetBackdropColor(ProtectionButton, "Gray600")
 
         if (Parent == MBH.ProtectionFrame) then
-            SetBackdropColor(ProtectionButton, "Blue600")
+            MBH_SetBackdropColor(ProtectionButton, "Blue600")
         end
     end
     
@@ -1030,9 +1033,9 @@ function DefaultFrameButtons(Parent)
 
     local function ProtectionButton_OnEnter()
         if (Parent == MBH.ProtectionFrame) then
-            SetBackdropColor(ProtectionButton, "Blue500")
+            MBH_SetBackdropColor(ProtectionButton, "Blue500")
         else
-            SetBackdropColor(ProtectionButton, "Gray400")
+            MBH_SetBackdropColor(ProtectionButton, "Gray400")
         end
     end
     
@@ -1044,17 +1047,17 @@ function DefaultFrameButtons(Parent)
         MBH.ProtectionFrame:Show()
     end)
 
-    local CloseButton = CreateButton(Parent, MBH_HIDE) 
+    local CloseButton = MBH_CreateButton(Parent, MBH_HIDE) 
     CloseButton:SetPoint("TOPRIGHT", Parent, "TOPRIGHT", -10, -15)
     Parent.CloseButton = CloseButton
 
     local function CloseButton_OnEnter()
-        SetBackdropColor(CloseButton, "Red500")
+        MBH_SetBackdropColor(CloseButton, "Red500")
         CloseButton.Overlay:SetText(MBH_EXIT)
     end
 
     local function CloseButton_OnLeave()
-        SetBackdropColor(CloseButton, "Gray600")
+        MBH_SetBackdropColor(CloseButton, "Gray600")
         CloseButton.Overlay:SetText(MBH_HIDE)
     end
 
@@ -1064,12 +1067,12 @@ function DefaultFrameButtons(Parent)
         Parent:Hide()
     end)
 
-    local DefaultSettingsButton = CreateButton(Parent, MBH_RESTOREDEFAULT, 120) 
+    local DefaultSettingsButton = MBH_CreateButton(Parent, MBH_RESTOREDEFAULT, 120) 
     DefaultSettingsButton:SetPoint("BOTTOMLEFT", Parent, "BOTTOMLEFT", 10, 15)
     Parent.DefaultSettingsButton = DefaultSettingsButton
 
     local function DefaultSettingsButton_OnEnter()
-        SetBackdropColor(DefaultSettingsButton, "Blue600")
+        MBH_SetBackdropColor(DefaultSettingsButton, "Blue600")
     end
 
     DefaultSettingsButton:SetScript("OnEnter", DefaultSettingsButton_OnEnter)
@@ -1080,12 +1083,12 @@ function DefaultFrameButtons(Parent)
         MBH.PopupDefaultFrame:Show()
     end)
 
-    local PresetSettingsButton = CreateButton(Parent, MBH_PRESETSETTINGS, 100) 
+    local PresetSettingsButton = MBH_CreateButton(Parent, MBH_PRESETSETTINGS, 100) 
     PresetSettingsButton:SetPoint("TOPLEFT", DefaultSettingsButton, "TOPRIGHT", 5, 0)
     Parent.PresetSettingsButton = PresetSettingsButton
 
     local function PresetSettingsButton_OnEnter()
-        SetBackdropColor(PresetSettingsButton, "Blue600")
+        MBH_SetBackdropColor(PresetSettingsButton, "Blue600")
     end
 
     PresetSettingsButton:SetScript("OnEnter", PresetSettingsButton_OnEnter)
@@ -1097,7 +1100,7 @@ function DefaultFrameButtons(Parent)
     end)
 end
 
-function CreateSlider(Parent, Name, Width, Height)
+function MBH_CreateSlider(Parent, Name, Width, Height)
     if not Parent or not Name then return end
 
     Width = Width or 220
@@ -1105,18 +1108,18 @@ function CreateSlider(Parent, Name, Width, Height)
 
     local Slider = CreateFrame("Slider", Name, Parent, 'OptionsSliderTemplate')
     Slider:SetBackdrop(SliderBackDrop)
-    SetSize(Slider, Width, Height)
+    MBH_SetSize(Slider, Width, Height)
     Parent.Slider = Slider
 
     return Slider
 end
 
-function SliderValueChanged(Value, String)
+function _G.MBH_SliderValueChanged(Value, String)
     getglobal(this:GetName().."Text"):SetText(string.gsub(String, "$p", Value))
     getglobal(this:GetName().."Text"):SetPoint("BOTTOM", this, "TOP", 0, 5)
 end
 
-function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
+function MBH_InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
     getglobal(Slider:GetName().."Text"):SetText(string.gsub(String, "$p", Value))
     getglobal(Slider:GetName().."Text"):SetPoint("BOTTOM", Slider, "TOP", 0, 5)
 
@@ -1139,7 +1142,7 @@ function InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
     maxValueText:SetPoint("CENTER", Slider, "RIGHT", 10, 0)
 end
 
-function CreateEditBox(Parent, Name, PlaceHolder, Width, Height)
+function MBH_CreateEditBox(Parent, Name, PlaceHolder, Width, Height)
     if not Parent or not Name then return end
 
     PlaceHolder = PlaceHolder or ""
@@ -1151,16 +1154,16 @@ function CreateEditBox(Parent, Name, PlaceHolder, Width, Height)
     EditBox:SetAutoFocus(false)
     EditBox:SetMaxLetters(256)
     EditBox:SetFontObject(GameFontHighlight)
-    SetSize(EditBox, Width, Height)
+    MBH_SetSize(EditBox, Width, Height)
 
     EditBox.LeftCurve = EditBox:CreateTexture(nil, "BACKGROUND")
-    SetSize(EditBox.LeftCurve, 12, 29)
+    MBH_SetSize(EditBox.LeftCurve, 12, 29)
     EditBox.LeftCurve:SetPoint("TOPLEFT", -11, 2)
     EditBox.LeftCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
     EditBox.LeftCurve:SetTexCoord(0, 0.09375, 0, 1.0)
 
     EditBox.RightCurve = EditBox:CreateTexture(nil, "BACKGROUND")
-    SetSize(EditBox.RightCurve, 12, 29)
+    MBH_SetSize(EditBox.RightCurve, 12, 29)
     EditBox.RightCurve:SetPoint("TOPRIGHT", 4, 2)
     EditBox.RightCurve:SetTexture("Interface/ClassTrainerFrame/UI-ClassTrainer-FilterBorder")
     EditBox.RightCurve:SetTexCoord(0.90625, 1.0, 0, 1.0)
@@ -1183,7 +1186,7 @@ function CreateEditBox(Parent, Name, PlaceHolder, Width, Height)
     return EditBox
 end
 
-function CreateCheckButton(Parent, Title, Value, XAsis)
+function MBH_CreateCheckButton(Parent, Title, Value, XAsis)
     if not Parent or not Title then return end
 
     Value = Value or 0
@@ -1200,37 +1203,37 @@ function CreateCheckButton(Parent, Title, Value, XAsis)
     return CheckButton
 end
 
-function CreatePopupFrame(PopupFrame)
+function MBH_CreatePopupFrame(PopupFrame)
     local IsMoving = false
 
     PopupFrame:SetFrameStrata("HIGH")
     PopupFrame:SetMovable(true)
     PopupFrame:EnableMouse(true)
     PopupFrame:SetBackdrop(BackDrop)
-    SetSize(PopupFrame, 300, 110)
-    SetBackdropColor(PopupFrame, "Gray800")
+    MBH_SetSize(PopupFrame, 300, 110)
+    MBH_SetBackdropColor(PopupFrame, "Gray800")
 
     local PopupFrameText = PopupFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     PopupFrameText:SetText(MBH_RELOADUI)
     PopupFrameText:SetPoint("CENTER", PopupFrame, "CENTER", 0, 0)
     PopupFrame.PopupFrameText = PopupFrameText
 
-    local AcceptButton = CreateButton(PopupFrame, MBH_YES, 100) 
+    local AcceptButton = MBH_CreateButton(PopupFrame, MBH_YES, 100) 
     AcceptButton:SetPoint("BOTTOMLEFT", PopupFrame, "BOTTOMLEFT", 5, 7.5)
     PopupFrame.AcceptButton = AcceptButton
 
     local function AcceptButton_OnEnter()
-        SetBackdropColor(AcceptButton, "Green600")
+        MBH_SetBackdropColor(AcceptButton, "Green600")
     end
 
     AcceptButton:SetScript("OnEnter", AcceptButton_OnEnter)
 
-    local DeclineButton = CreateButton(PopupFrame, MBH_NO, 100) 
+    local DeclineButton = MBH_CreateButton(PopupFrame, MBH_NO, 100) 
     DeclineButton:SetPoint("BOTTOMRIGHT", PopupFrame, "BOTTOMRIGHT", -5, 7.5)
     PopupFrame.DeclineButton = DeclineButton
 
     local function DeclineButton_OnEnter()
-        SetBackdropColor(DeclineButton, "Red500")
+        MBH_SetBackdropColor(DeclineButton, "Red500")
     end
 
     DeclineButton:SetScript("OnEnter", DeclineButton_OnEnter)
@@ -1261,7 +1264,7 @@ end
 -- EditBox Checking {{{
 -------------------------------------------------------------------------------
 
-function ValidateLAR(FrameHAR, Value)
+function MBH_ValidateLAR(FrameHAR, Value)
     local LARValue = tonumber(this:GetText())
     local HARValue = tonumber(FrameHAR:GetText())
 
@@ -1274,7 +1277,7 @@ function ValidateLAR(FrameHAR, Value)
     this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"])
 end
 
-function ValidateHAR(FrameLAR, MaxRank, Value)
+function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
     local HARValue = tonumber(this:GetText())
     local LARValue = tonumber(FrameLAR:GetText())
 
