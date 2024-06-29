@@ -377,9 +377,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.FlashHealCheckButton:SetPoint("CENTER", self.FlashHealHAR, "CENTER", 0, -50)
         self.FlashHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = (self.FlashHealCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.FlashHealCheckButton)
         end)
 
         -- Heal Section
@@ -404,9 +402,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HealCheckButton:SetPoint("CENTER", self.HealHAR, "CENTER", 0, -50)
         self.HealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = (self.HealCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.HealCheckButton)
         end)
 
         -- Greater Heal
@@ -431,9 +427,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.GreaterHealCheckButton:SetPoint("CENTER", self.GreaterHealHAR, "CENTER", 0, -50)
         self.GreaterHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = (self.GreaterHealCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.GreaterHealCheckButton)
         end)
 
         -- Flash Heal Events 
@@ -597,9 +591,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.ChainHealCheckButton:SetPoint("CENTER", self.ChainHealHAR, "CENTER", 0, -50)
         self.ChainHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = (self.ChainHealCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.ChainHealCheckButton)
         end)
 
         -- Lesser Healing Wave
@@ -624,9 +616,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.LesserHealingWaveCheckButton:SetPoint("CENTER", self.LesserHealingWaveHAR, "CENTER", 0, -50)
         self.LesserHealingWaveCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (self.LesserHealingWaveCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.LesserHealingWaveCheckButton)
         end)
 
         -- Chain Heal Events 
@@ -743,9 +733,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HolyLightCheckButton:SetPoint("CENTER", self.HolyLightHAR, "CENTER", 0, -50)
         self.HolyLightCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (self.HolyLightCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.HolyLightCheckButton)
         end)
 
         -- Holy Light Events 
@@ -815,9 +803,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.RegrowthCheckButton:SetPoint("CENTER", self.RegrowthHAR, "CENTER", 0, -50)
         self.RegrowthCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (self.RegrowthCheckButton:GetChecked() == 1)
-            if (not MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch) then
-                MBH_CheckAndDisableManaProtection()
-            end
+            MBH_CheckAndDisableManaProtection(self.RegrowthCheckButton)
         end)
 
         -- Regrowth Events 
@@ -1425,7 +1411,8 @@ function MBH_EnabledProtection()
     end
 end
 
-function MBH_CheckAndDisableManaProtection()
+function MBH_CheckAndDisableManaProtection(CheckBox)
+    if CheckBox:GetChecked() then return end
 
     if not next(ProtectionSpellsAndCheckbox) then
         MBH_InitializeProtectionSpellsAndCheckbox()
