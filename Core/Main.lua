@@ -3,13 +3,7 @@
 -------------------------------------------------------------------------------
 
 MBH = CreateFrame("Frame", "MBH", UIParent)
-MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap)
 MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", nil, "GameTooltipTemplate")
-MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
-MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
 
 -------------------------------------------------------------------------------
 -- Local Variables {{{
@@ -246,7 +240,6 @@ function MBH:OnEvent()
     if ( event == "ADDON_LOADED" and arg1 == "MoronBoxHeal" ) then
 
         MBH_SetupSavedVariables()
-        MBH_InitializeManaProtectionThresholds()
         
 		Session.CurrentUnit = nil
 		Session.Autoheal.IsCasting = nil
@@ -462,10 +455,11 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
             if HealOutput < HealthDown then
                 if i < MaxRank then
                     CalculatedRank = i + 1
+                    break
                 else
                     CalculatedRank = i
+                    break
                 end
-                break
             end
         end
 
@@ -487,18 +481,14 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
     return CalculatedRank, HealthDown
 end
 
-function MBH_CastHeal(SPN, LAR, HAR)
-    local MPH, MPLAR , MPHAR = MBH_ManaProtection(SPN, LAR, HAR)
-    Session.SpellName = MPH
-	if Session.CastTime[Session.SpellName] then
-		MBH_Cast(Session.SpellName, MPLAR, MPHAR)
-	end
-end
-
 function MBH_ManaProtection(SPN, LAR, HAR)
 
     if not MoronBoxHeal_Options.AdvancedOptions.Mana_Protection then
         return SPN, LAR or 1, HAR or MBH_GetMaxSpellRank(SPN)
+    end
+
+    if not next(ManaProtectionThresholds) then
+        MBH_InitializeManaProtectionThresholds()
     end
 
     local MPData = ManaProtectionThresholds[SPN]
@@ -512,6 +502,14 @@ function MBH_ManaProtection(SPN, LAR, HAR)
         HAR = HAR or MBH_GetMaxSpellRank(SPN)
     end
     return SPN, LAR, HAR
+end
+
+function MBH_CastHeal(SPN, LAR, HAR)
+    local MPH, MPLAR , MPHAR = MBH_ManaProtection(SPN, LAR, HAR)
+    Session.SpellName = MPH
+	if Session.CastTime[Session.SpellName] then
+		MBH_Cast(Session.SpellName, MPLAR, MPHAR)
+	end
 end
 
 ------------------------------------------------------------------------------------------------------

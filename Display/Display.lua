@@ -5,6 +5,13 @@
 local _G, _M = getfenv(0), {}
 setfenv(1, setmetatable(_M, {__index=_G}))
 
+MBH.MiniMapButton = CreateFrame("Frame", nil , Minimap)
+MBH.MainFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.OptionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.ProtectionFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupPresetFrame = CreateFrame("Frame", nil , UIParent) 
+MBH.PopupDefaultFrame = CreateFrame("Frame", nil , UIParent) 
+
 function MBH:CreateWindows()
     MBH.MiniMapButton:CreateMinimapIcon()
     MBH.MainFrame:CreateMainFrame()
@@ -38,6 +45,10 @@ function MBH_CloseAllWindow()
     MBH.PopupPresetFrame:Hide()
     MBH.PopupDefaultFrame:Hide()
 end
+
+-------------------------------------------------------------------------------
+-- Locals {{{
+-------------------------------------------------------------------------------
 
 local ColorPicker = {
     White = { r = 1, g = 1, b = 1, a = 1 },                 -- #ffffff
