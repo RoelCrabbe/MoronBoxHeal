@@ -97,13 +97,13 @@ local PresetSettings = {
 }
 
 function MBH_LoadPresetSettings()
-    local Settings = PresetSettings[Session.PlayerClass]
+    local Settings = PresetSettings[MBH.Session.PlayerClass]
 
     if Settings then
         local SpecialSettings = Settings[MB_myHealSpell] or Settings["Default"]
 
         if SpecialSettings then
-            MoronBoxHeal_Options = MBH_DeepCopyTable(DefaultOptions)
+            MoronBoxHeal_Options = MBH_DeepCopyTable(MBH.DefaultOptions)
             MBH_SetPresetSettings(MoronBoxHeal_Options, SpecialSettings)
             ReloadUI()
             return
@@ -115,7 +115,7 @@ end
 
 function MBH_SetDefaultValues()
 	if MoronBoxHeal_Options then
-        MoronBoxHeal_Options = MBH_DeepCopyTable(DefaultOptions)
+        MoronBoxHeal_Options = MBH_DeepCopyTable(MBH.DefaultOptions)
         ReloadUI()
         return
 	end

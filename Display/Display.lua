@@ -353,7 +353,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     MBH_DefaultFrameButtons(self)
     self.InnerContainer = MBH_CreateInnerContainer(self)
 
-    if ( Session.PlayerClass == "Priest" ) then
+    if ( MBH.Session.PlayerClass == "Priest" ) then
 
         -- Flash Heal Section
         self.FlashHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -567,7 +567,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.GreaterHealHAR:SetScript("OnTabPressed", GreaterHealHAR_OnEscapePressed)
         self.GreaterHealHAR:SetScript("OnEnterPressed", GreaterHealHAR_OnEnterPressed)
 
-    elseif ( Session.PlayerClass == "Shaman" ) then
+    elseif ( MBH.Session.PlayerClass == "Shaman" ) then
         
         -- Chain Heal Section
         self.ChainHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -709,7 +709,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.LesserHealingWaveHAR:SetScript("OnTabPressed", LesserHealingWaveHAR_OnEscapePressed)
         self.LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
 
-    elseif ( Session.PlayerClass == "Paladin" ) then
+    elseif ( MBH.Session.PlayerClass == "Paladin" ) then
         
         -- Holy Light Section
         self.HolyLightTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -779,7 +779,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HolyLightHAR:SetScript("OnTabPressed", HolyLightHAR_OnEscapePressed)
         self.HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
         
-    elseif ( Session.PlayerClass == "Druid" ) then
+    elseif ( MBH.Session.PlayerClass == "Druid" ) then
         
         -- Regrowth Section
         self.RegrowthTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -1359,11 +1359,11 @@ function MBH_ValidateLAR(FrameHAR, Value)
 
     if ( LARValue and LARValue >= 1 ) then
         if ( HARValue and LARValue <= HARValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"] = LARValue
+            MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass][Value.."_LAR"] = LARValue
         end
     end
 
-    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_LAR"])
+    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass][Value.."_LAR"])
 end
 
 function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
@@ -1372,13 +1372,13 @@ function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
 
     if ( HARValue and HARValue >= 1 ) then
         if ( HARValue <= MaxRank ) and ( LARValue and HARValue >= LARValue ) then
-            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = HARValue
+            MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass][Value.."_HAR"] = HARValue
         else
-            MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"] = MaxRank
+            MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass][Value.."_HAR"] = MaxRank
         end
     end
 
-    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"])
+    this:SetText(MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass][Value.."_HAR"])
 end
 
 -------------------------------------------------------------------------------
@@ -1391,11 +1391,11 @@ function MBH_EnabledProtection()
         MBH_InitializeProtectionSpellsAndCheckbox()
     end
 
-    local MPOptions = MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass]
+    local MPOptions = MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass]
 
     if MPOptions then
         local ShouldBeEnabled = true
-        for Spell, _ in pairs(ProtectionSpellsAndCheckbox[Session.PlayerClass]) do
+        for Spell, _ in pairs(ProtectionSpellsAndCheckbox[MBH.Session.PlayerClass]) do
             if MPOptions[Spell] then
                 ShouldBeEnabled = false
                 break
@@ -1403,7 +1403,7 @@ function MBH_EnabledProtection()
         end
 
         if ShouldBeEnabled then
-            for Spell, CheckButton in pairs(ProtectionSpellsAndCheckbox[Session.PlayerClass]) do
+            for Spell, CheckButton in pairs(ProtectionSpellsAndCheckbox[MBH.Session.PlayerClass]) do
                 MPOptions[Spell] = true
                 CheckButton:SetChecked(true)
             end
@@ -1418,11 +1418,11 @@ function MBH_CheckAndDisableManaProtection(CheckBox)
         MBH_InitializeProtectionSpellsAndCheckbox()
     end
 
-    local MPOptions = MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass]
+    local MPOptions = MoronBoxHeal_Options.ManaProtectionValues[MBH.Session.PlayerClass]
 
     if MPOptions then
         local shouldDisable = true
-        for Spell, _ in pairs(ProtectionSpellsAndCheckbox[Session.PlayerClass]) do
+        for Spell, _ in pairs(ProtectionSpellsAndCheckbox[MBH.Session.PlayerClass]) do
             if MPOptions[Spell] then
                 shouldDisable = false
             end

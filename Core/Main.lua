@@ -97,7 +97,7 @@ end
 -- The Stored Variables {{{
 -------------------------------------------------------------------------------
 
-DefaultOptions = {
+MBH.DefaultOptions = {
     AutoHeal = {
         Smart_Heal = true,
         Allowed_Overheal_Percentage = 11,
@@ -163,7 +163,7 @@ DefaultOptions = {
 -- DO NOT CHANGE {{{
 -------------------------------------------------------------------------------
 
-Session = {
+MBH.Session = {
     SpellName = nil,
     CurrentUnit = nil,
     MaxData = 60, -- Max. amount of players in the buffer -- change this to increase/decrease performance.
@@ -209,8 +209,7 @@ Session = {
         LagPrevention = {
             Time = 0,
         },
-    },
-    Debug = false
+    }
 }
 
 -------------------------------------------------------------------------------
@@ -241,16 +240,16 @@ function MBH:OnEvent()
 
         MBH_SetupSavedVariables()
         
-		Session.CurrentUnit = nil
-		Session.Autoheal.IsCasting = nil
-		Session.Autoheal.OutgoingHeal = 0
-        Session.Autoheal.CalculatedHeal = 0
-		Session.Autoheal.UnitID = nil
+		MBH.Session.CurrentUnit = nil
+		MBH.Session.Autoheal.IsCasting = nil
+		MBH.Session.Autoheal.OutgoingHeal = 0
+        MBH.Session.Autoheal.CalculatedHeal = 0
+		MBH.Session.Autoheal.UnitID = nil
 
         if mb_equippedSetCount("Stormcaller's Garb") == 5 then
-            Session.CastTime["Chain Heal"] = 2.1
+            MBH.Session.CastTime["Chain Heal"] = 2.1
         else
-            Session.CastTime["Chain Heal"] = 2.5
+            MBH.Session.CastTime["Chain Heal"] = 2.5
         end
 
         MBH.ACE = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0")
@@ -265,28 +264,28 @@ function MBH:OnEvent()
 
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 
-		Session.CurrentUnit = nil
-		Session.Autoheal.IsCasting = nil
-		Session.Autoheal.OutgoingHeal = 0
-        Session.Autoheal.CalculatedHeal = 0
-		Session.Autoheal.UnitID = nil
+		MBH.Session.CurrentUnit = nil
+		MBH.Session.Autoheal.IsCasting = nil
+		MBH.Session.Autoheal.OutgoingHeal = 0
+        MBH.Session.Autoheal.CalculatedHeal = 0
+		MBH.Session.Autoheal.UnitID = nil
 		
 	elseif ( event == "SPELLCAST_START" ) then
 
-		if Session.CastTime[arg1] then
-			Session.Autoheal.IsCasting = true
+		if MBH.Session.CastTime[arg1] then
+			MBH.Session.Autoheal.IsCasting = true
 			
-			if not Session.CurrentUnit then 
-				Session.CurrentUnit = "target" 
+			if not MBH.Session.CurrentUnit then 
+				MBH.Session.CurrentUnit = "target" 
 			end
 		end
 
     elseif ( event == "UI_ERROR_MESSAGE" ) then
 
-		if MoronBoxHeal_Options.LineOfSight.Enable and arg1 == "Target not in line of sight" and Session.CurrentUnit then
+		if MoronBoxHeal_Options.LineOfSight.Enable and arg1 == "Target not in line of sight" and MBH.Session.CurrentUnit then
 
-			for i = 1, Session.MaxData do 
-				if MBH.GroupData[i].UnitID == Session.CurrentUnit then
+			for i = 1, MBH.Session.MaxData do 
+				if MBH.GroupData[i].UnitID == MBH.Session.CurrentUnit then
                     MBH.Track[MBH.GroupData[i].UnitID].LOS = MoronBoxHeal_Options.LineOfSight.TimeOut
                     break
                 end
@@ -295,11 +294,11 @@ function MBH:OnEvent()
 
     elseif ( event == "PLAYER_REGEN_ENABLED" ) then
 
-		Session.InCombat = nil
+		MBH.Session.InCombat = nil
 
 	elseif ( event == "PLAYER_REGEN_DISABLED" ) then
 
-		Session.InCombat = true
+		MBH.Session.InCombat = true
 		
 	elseif ( event == "RAID_ROSTER_UPDATE" or event == "PARTY_MEMBERS_CHANGED" ) then
 
@@ -312,9 +311,9 @@ function MBH:OnEvent()
     elseif ( event == "UNIT_INVENTORY_CHANGED" ) then
 
         if mb_equippedSetCount("Stormcaller's Garb") == 5 then
-            Session.CastTime["Chain Heal"] = 2.1
+            MBH.Session.CastTime["Chain Heal"] = 2.1
         else
-            Session.CastTime["Chain Heal"] = 2.5
+            MBH.Session.CastTime["Chain Heal"] = 2.5
         end
     end
 end
@@ -322,18 +321,18 @@ end
 MBH:SetScript("OnEvent", MBH.OnEvent) 
 
 function MBH:OnUpdate()
-    Session.Elapsed = arg1
+    MBH.Session.Elapsed = arg1
 
     local Time = 0
 
-    if MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled and not Session.InCombat then
+    if MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled and not MBH.Session.InCombat then
         Time = MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency
     end
 
-    Session.AdvancedOptions.LagPrevention.Time = Session.AdvancedOptions.LagPrevention.Time + Session.Elapsed
-	if ( Session.AdvancedOptions.LagPrevention.Time >= Time ) then
+    MBH.Session.AdvancedOptions.LagPrevention.Time = MBH.Session.AdvancedOptions.LagPrevention.Time + MBH.Session.Elapsed
+	if ( MBH.Session.AdvancedOptions.LagPrevention.Time >= Time ) then
 
-        Session.AdvancedOptions.LagPrevention.Time = 0
+        MBH.Session.AdvancedOptions.LagPrevention.Time = 0
 
         MBH_ClearData()
         MBH_UpdateData()
@@ -348,7 +347,7 @@ MBH:SetScript("OnUpdate", MBH.OnUpdate)
 
 function MBH_SetupSavedVariables()
     if not MoronBoxHeal_Options then 
-        MoronBoxHeal_Options = DefaultOptions
+        MoronBoxHeal_Options = MBH.DefaultOptions
     end
 end
 
@@ -358,20 +357,20 @@ end
 
 function MBH_Cast(SPN, LAR, HAR)
 
-	if Session.Autoheal.IsCasting and Session.Autoheal.UnitID then
-        local OverHealVal = Session.Autoheal.OutgoingHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
+	if MBH.Session.Autoheal.IsCasting and MBH.Session.Autoheal.UnitID then
+        local OverHealVal = MBH.Session.Autoheal.OutgoingHeal * MBH_ConvertToFractionFromPercentage(MoronBoxHeal_Options.AutoHeal.Allowed_Overheal_Percentage)
 
-		if OverHealVal > mb_healthDown(Session.Autoheal.UnitID) then
+		if OverHealVal > mb_healthDown(MBH.Session.Autoheal.UnitID) then
 			SpellStopCasting()
 		end
 	else
 		local HealUnitID = MBH_GetHealUnitID(SPN)
 		
 		if HealUnitID then
-			Session.Autoheal.UnitID = HealUnitID
-			Session.CurrentUnit = HealUnitID
+			MBH.Session.Autoheal.UnitID = HealUnitID
+			MBH.Session.CurrentUnit = HealUnitID
 
-			MBH_CastSpell(SPN, LAR, HAR, Session.Autoheal.UnitID)
+			MBH_CastSpell(SPN, LAR, HAR, MBH.Session.Autoheal.UnitID)
 		end
 	end
 end
@@ -396,7 +395,7 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
         Cache.Rank, Cache.HealthDown = MBH_CalculateRank(Cache.Spell, LAR, HAR, UnitID)
 
         -- Verifies if the current heal amount meets requirements and casts the spell accordingly.
-        if Cache.HealthDown >= Session.Autoheal.CalculatedHeal then
+        if Cache.HealthDown >= MBH.Session.Autoheal.CalculatedHeal then
 
             local Castable = Cache.Spell.."(Rank "..Cache.Rank..")"   
 
@@ -476,8 +475,8 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
     OutgoingHeal = ((math.floor(MBH.ACE.HealComm.Spells[SPN][CalculatedRank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
     CalculatedHeal = ((math.floor(MBH.ACE.HealComm.Spells[SPN][CalculatedHealRank](HealBonus)) + TargetPower) * BuffMod * TargetMod)
   
-    Session.Autoheal.OutgoingHeal = OutgoingHeal
-    Session.Autoheal.CalculatedHeal = CalculatedHeal
+    MBH.Session.Autoheal.OutgoingHeal = OutgoingHeal
+    MBH.Session.Autoheal.CalculatedHeal = CalculatedHeal
     return CalculatedRank, HealthDown
 end
 
@@ -506,9 +505,9 @@ end
 
 function MBH_CastHeal(SPN, LAR, HAR)
     local MPH, MPLAR , MPHAR = MBH_ManaProtection(SPN, LAR, HAR)
-    Session.SpellName = MPH
-	if Session.CastTime[Session.SpellName] then
-		MBH_Cast(Session.SpellName, MPLAR, MPHAR)
+    MBH.Session.SpellName = MPH
+	if MBH.Session.CastTime[MBH.Session.SpellName] then
+		MBH_Cast(MBH.Session.SpellName, MPLAR, MPHAR)
 	end
 end
 
