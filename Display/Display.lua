@@ -120,6 +120,28 @@ local SliderBackDrop = {
     }
 }
 
+local ProtectionSpellsAndCheckbox = { }
+
+function MBH_InitializeProtectionSpellsAndCheckbox()
+    ProtectionSpellsAndCheckbox = {
+        Priest = {
+            Flash_Heal_Switch = MBH.ProtectionFrame.FlashHealCheckButton,
+            Heal_Switch = MBH.ProtectionFrame.HealCheckButton,
+            Greater_Heal_Switch = MBH.ProtectionFrame.GreaterHealCheckButton
+        },
+        Shaman = {
+            Chain_Heal_Switch = MBH.ProtectionFrame.ChainHealCheckButton,
+            Lesser_Healing_Wave_Switch = MBH.ProtectionFrame.LesserHealingWaveCheckButton
+        },
+        Paladin = {
+            Holy_Light_Switch = MBH.ProtectionFrame.HolyLightCheckButton
+        },
+        Druid = {
+            Regrowth_Switch = MBH.ProtectionFrame.RegrowthCheckButton
+        }
+    }
+end
+
 -------------------------------------------------------------------------------
 -- MiniMap Button {{{
 -------------------------------------------------------------------------------
@@ -300,6 +322,9 @@ function MBH.OptionFrame:CreateOptionFrame()
         self.ManaProtectionCheckButton:SetPoint("CENTER", self.AdvancedOptionsContainer, "CENTER", 0, 50)
         self.ManaProtectionCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = (self.ManaProtectionCheckButton:GetChecked() == 1)
+            if (MoronBoxHeal_Options.AdvancedOptions.Mana_Protection) then
+                MBH_EnabledProtection()
+            end
         end)
 
         self.IdleProtectionCheckButton = MBH_CreateCheckButton(self.AdvancedOptionsContainer, MBH_IDLEPROTECTIONENABLE, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Enabled, -15)
@@ -352,6 +377,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.FlashHealCheckButton:SetPoint("CENTER", self.FlashHealHAR, "CENTER", 0, -50)
         self.FlashHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch = (self.FlashHealCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Heal Section
@@ -376,6 +404,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HealCheckButton:SetPoint("CENTER", self.HealHAR, "CENTER", 0, -50)
         self.HealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch = (self.HealCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Greater Heal
@@ -400,6 +431,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.GreaterHealCheckButton:SetPoint("CENTER", self.GreaterHealHAR, "CENTER", 0, -50)
         self.GreaterHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch = (self.GreaterHealCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Flash Heal Events 
@@ -563,6 +597,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.ChainHealCheckButton:SetPoint("CENTER", self.ChainHealHAR, "CENTER", 0, -50)
         self.ChainHealCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch = (self.ChainHealCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Lesser Healing Wave
@@ -587,6 +624,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.LesserHealingWaveCheckButton:SetPoint("CENTER", self.LesserHealingWaveHAR, "CENTER", 0, -50)
         self.LesserHealingWaveCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch = (self.LesserHealingWaveCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Chain Heal Events 
@@ -703,6 +743,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HolyLightCheckButton:SetPoint("CENTER", self.HolyLightHAR, "CENTER", 0, -50)
         self.HolyLightCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch = (self.HolyLightCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Holy Light Events 
@@ -772,6 +815,9 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.RegrowthCheckButton:SetPoint("CENTER", self.RegrowthHAR, "CENTER", 0, -50)
         self.RegrowthCheckButton:SetScript("OnClick", function()
             MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch = (self.RegrowthCheckButton:GetChecked() == 1)
+            if (not MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch) then
+                MBH_CheckAndDisableManaProtection()
+            end
         end)
 
         -- Regrowth Events 
@@ -1347,4 +1393,57 @@ function MBH_ValidateHAR(FrameLAR, MaxRank, Value)
     end
 
     this:SetText(MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass][Value.."_HAR"])
+end
+
+-------------------------------------------------------------------------------
+-- CheckBox Checking {{{
+-------------------------------------------------------------------------------
+
+function MBH_EnabledProtection()
+
+    if not next(ProtectionSpellsAndCheckbox) then
+        MBH_InitializeProtectionSpellsAndCheckbox()
+    end
+
+    local MPOptions = MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass]
+
+    if MPOptions then
+        local ShouldBeEnabled = true
+        for Spell, _ in pairs(ProtectionSpellsAndCheckbox[Session.PlayerClass]) do
+            if MPOptions[Spell] then
+                ShouldBeEnabled = false
+                break
+            end
+        end
+
+        if ShouldBeEnabled then
+            for Spell, CheckButton in pairs(ProtectionSpellsAndCheckbox[Session.PlayerClass]) do
+                MPOptions[Spell] = true
+                CheckButton:SetChecked(true)
+            end
+        end
+    end
+end
+
+function MBH_CheckAndDisableManaProtection()
+
+    if not next(ProtectionSpellsAndCheckbox) then
+        MBH_InitializeProtectionSpellsAndCheckbox()
+    end
+
+    local MPOptions = MoronBoxHeal_Options.ManaProtectionValues[Session.PlayerClass]
+
+    if MPOptions then
+        local shouldDisable = true
+        for Spell, _ in pairs(ProtectionSpellsAndCheckbox[Session.PlayerClass]) do
+            if MPOptions[Spell] then
+                shouldDisable = false
+            end
+        end
+
+        if shouldDisable then
+            MoronBoxHeal_Options.AdvancedOptions.Mana_Protection = false
+            MBH.OptionFrame.ManaProtectionCheckButton:SetChecked(false)
+        end
+    end
 end
