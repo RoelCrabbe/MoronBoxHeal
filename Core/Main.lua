@@ -1,9 +1,8 @@
 -------------------------------------------------------------------------------
--- InterFace Frames {{{
+-- InterFace Frame {{{
 -------------------------------------------------------------------------------
 
 MBH = CreateFrame("Frame", "MBH", UIParent)
-MBH.ScanningTooltip = CreateFrame("GameTooltip", "MBH_ScanningTooltip", nil, "GameTooltipTemplate")
 
 -------------------------------------------------------------------------------
 -- Local Variables {{{

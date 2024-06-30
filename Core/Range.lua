@@ -2,18 +2,18 @@
 -- Healing Range / Calculating
 -------------------------------------------------------------------------------
 
+local MBH_ScanningTooltip = CreateFrame("GameTooltip", "MBH_ScanningTooltip", nil, "GameTooltipTemplate")
+
 function MBH_GetHealSpell()
 
 	MBH.Session.HealSpell = nil
-
-	for i = 1, 120 do
-
+	
+	for i = 1, 72 do
 		MBH_ScanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
 		MBH_ScanningTooltip:SetAction(i)
-		local tooltipText = MBH_ScanningTooltipTextLeft1:GetText()
 
 		for SPN, Time in pairs(MBH.Session.CastTime) do
-			if tooltipText == SPN then
+			if MBH_ScanningTooltipTextLeft1:GetText() == SPN then
 				MBH.Session.HealSpell = i
 				break
 			end
