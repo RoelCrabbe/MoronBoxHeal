@@ -217,3 +217,20 @@ end
 function MBH_ErrorMessage(message) 
     DEFAULT_CHAT_FRAME:AddMessage("|cffC71585"..MBH_TITLE..": |cFFFF0000"..message) 
 end
+
+function MBH_GetNumberOfParties()
+    local numberOfParties
+    local MAX_PARTIES, MIN_PARTIES, RAID_MEMBERS_PER_PARTY = 8, 4, 5
+
+    local numberOfRaidMembers = GetNumRaidMembers()
+
+    if numberOfRaidMembers > 0 then
+        numberOfParties = math.ceil(numberOfRaidMembers / RAID_MEMBERS_PER_PARTY)
+        numberOfParties = math.max(MIN_PARTIES, numberOfParties)
+        numberOfParties = math.min(MAX_PARTIES, numberOfParties)
+    else
+        numberOfParties = 2
+    end
+
+    return random(numberOfParties)
+end

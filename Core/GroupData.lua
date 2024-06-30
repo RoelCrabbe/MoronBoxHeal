@@ -182,7 +182,7 @@ function MBH_GetHealUnitID(SpellName)
 		local RandomTarget = MoronBoxHeal_Options.AutoHeal.Heal_Target_Number
 
 		if MoronBoxHeal_Options.AutoHeal.Random_Target then
-			RandomTarget = random(5)
+			RandomTarget = MBH_GetNumberOfParties()
 		end
 		
 		for i = RandomTarget, MBH.Session.MaxData do
