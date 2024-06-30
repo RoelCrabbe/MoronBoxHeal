@@ -385,7 +385,7 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
         HealthDown = 0,
         Spell = nil,
         Rank = nil,
-        DefaultSpell = SPN .. "(Rank 1)"
+        DefaultSpell = SPN.."(Rank 1)"
     }
 
     Cache.Spell, Cache.Rank = MBH_ExtractSpell(Cache.DefaultSpell)
@@ -394,29 +394,24 @@ function MBH_CastSpell(SPN, LAR, HAR, UnitID)
         
         Cache.Rank, Cache.HealthDown = MBH_CalculateRank(Cache.Spell, LAR, HAR, UnitID)
 
-        -- Verifies if the current heal amount meets requirements and casts the spell accordingly.
         if Cache.HealthDown >= MBH.Session.Autoheal.CalculatedHeal then
 
             local Castable = Cache.Spell.."(Rank "..Cache.Rank..")"   
 
-            -- Clear target if necessary
             if UnitCanAttack("player", UnitID) or (UnitExists("target") and not UnitCanAttack("player", "target") and not UnitIsUnit(UnitID, "target")) then
                 ClearTarget()
             end
 
             CastSpellByName(Castable)
 
-            -- Target the unit if the spell requires targeting
             if SpellIsTargeting() then
                 SpellTargetUnit(UnitID)
             end
 
-            -- Stop targeting if still targeting
             if SpellIsTargeting() then
                 SpellStopTargeting()
             end
 
-            -- Clear target after casting
             ClearTarget()
         end
     end
