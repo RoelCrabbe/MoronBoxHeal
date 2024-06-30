@@ -13,80 +13,80 @@ local ManaProtectionThresholds = {}
 
 function MBH_InitializeManaProtectionThresholds()
     ManaProtectionThresholds = {
-        ["Flash Heal"] = {
+        [MBH_SPELL_FLASH_HEAL] = {
             ["ThresholdCheck"] = function() 
                 return ( 
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_Switch 
                 )
             end,
-            ["Spell"] = "Heal",
+            ["Spell"] = MBH_SPELL_HEAL,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Flash_Heal_HAR,
         },
-        ["Heal"] = {
+        [MBH_SPELL_HEAL] = {
             ["ThresholdCheck"] = function() 
                 return ( 
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_Switch 
                 )
             end,
-            ["Spell"] = "Lesser Heal",
+            ["Spell"] = MBH_SPELL_LESSER_HEAL,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Heal_HAR,
         },
-        ["Greater Heal"] = {
+        [MBH_SPELL_GREATER_HEAL] = {
             ["ThresholdCheck"] = function() 
                 return ( 
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_Switch 
                 )
             end,
-            ["Spell"] = "Heal",
+            ["Spell"] = MBH_SPELL_HEAL,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Priest.Greater_Heal_HAR,
         },
-        ["Chain Heal"] = {
+        [MBH_SPELL_CHAIN_HEAL] = {
             ["ThresholdCheck"] = function() 
                 return ( 
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_Switch
                 )
             end,
-            ["Spell"] = "Healing Wave",
+            ["Spell"] = MBH_SPELL_HEALING_WAVE,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Chain_Heal_HAR,
         },
-        ["Lesser Healing Wave"] = {
+        [MBH_SPELL_LESSER_HEALING_WAVE] = {
             ["ThresholdCheck"] = function() 
                 return (
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_Switch
                 )
             end,
-            ["Spell"] = "Healing Wave",
+            ["Spell"] = MBH_SPELL_HEALING_WAVE,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Shaman.Lesser_Healing_Wave_HAR,
         },
-        ["Holy Light"] = {
+        [MBH_SPELL_HOLY_LIGHT] = {
             ["ThresholdCheck"] = function() 
                 return (
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_Switch
                 )
             end,
-            ["Spell"] = "Flash of Light",
+            ["Spell"] = MBH_SPELL_FLASH_OF_LIGHT,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Paladin.Holy_Light_HAR,
         },
-        ["Regrowth"] = {
+        [MBH_SPELL_REGROWTH] = {
             ["ThresholdCheck"] = function() 
                 return (
                     MBH_ManaProtectionThresholdCheck(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Threshold) 
                     and MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_Switch
                 )
             end,
-            ["Spell"] = "Healing Touch",
+            ["Spell"] = MBH_SPELL_HEALING_TOUCH,
             ["LAR"] = MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR,
             ["HAR"] = MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_HAR,
         },
@@ -179,19 +179,17 @@ MBH.Session = {
         "player"
     },
     CastTime = {
-        ["Chain Heal"] = 2.5,
-		["Holy Light"] = 2.5,
-		["Flash of Light"] = 1.5,
-		["Healing Wave"] = 2,
-		["Lesser Healing Wave"] = 1.5,
-		["Lesser Heal"] = 2,
-		["Heal"] = 2.5,
-		["Flash Heal"] = 1.5,
-		["Greater Heal"] = 2.5,
-		["Healing Touch"] = 2.5,
-		["Regrowth"] = 2,
-        ["Renew"] = 15,
-		["Rejuvenation"] = 12,
+        [MBH_SPELL_CHAIN_HEAL] = 2.5,
+		[MBH_SPELL_HOLY_LIGHT] = 2.5,
+		[MBH_SPELL_FLASH_OF_LIGHT] = 1.5,
+		[MBH_SPELL_HEALING_WAVE] = 2,
+		[MBH_SPELL_LESSER_HEALING_WAVE] = 1.5,
+		[MBH_SPELL_LESSER_HEAL] = 2,
+		[MBH_SPELL_HEAL] = 2.5,
+		[MBH_SPELL_FLASH_HEAL] = 1.5,
+		[MBH_SPELL_GREATER_HEAL] = 2.5,
+		[MBH_SPELL_HEALING_TOUCH] = 2.5,
+		[MBH_SPELL_REGROWTH] = 2
 	},
     Autoheal = {
 		IsCasting = nil,
@@ -236,7 +234,7 @@ do
 end
 
 function MBH:OnEvent()
-    if ( event == "ADDON_LOADED" and arg1 == "MoronBoxHeal" ) then
+    if ( event == "ADDON_LOADED" and arg1 == MBH_TITLE ) then
 
         MBH_SetupSavedVariables()
         
@@ -247,9 +245,9 @@ function MBH:OnEvent()
 		MBH.Session.Autoheal.UnitID = nil
 
         if mb_equippedSetCount("Stormcaller's Garb") == 5 then
-            MBH.Session.CastTime["Chain Heal"] = 2.1
+            MBH.Session.CastTime[MBH_SPELL_CHAIN_HEAL] = 2.1
         else
-            MBH.Session.CastTime["Chain Heal"] = 2.5
+            MBH.Session.CastTime[MBH_SPELL_CHAIN_HEAL] = 2.5
         end
 
         MBH.ACE = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0")
@@ -311,9 +309,9 @@ function MBH:OnEvent()
     elseif ( event == "UNIT_INVENTORY_CHANGED" ) then
 
         if mb_equippedSetCount("Stormcaller's Garb") == 5 then
-            MBH.Session.CastTime["Chain Heal"] = 2.1
+            MBH.Session.CastTime[MBH_SPELL_CHAIN_HEAL] = 2.1
         else
-            MBH.Session.CastTime["Chain Heal"] = 2.5
+            MBH.Session.CastTime[MBH_SPELL_CHAIN_HEAL] = 2.5
         end
     end
 end
@@ -436,7 +434,7 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
     local OutgoingHeal = 0
     local CalculatedHeal = 0
 
-    if (SPN == "Healing Touch") then
+    if (SPN == MBH_SPELL_HEALING_TOUCH) then
 
         CalculatedRank = 3
         if mb_hasBuffOrDebuff("Nature's Grace", "player", "buff") then

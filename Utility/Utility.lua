@@ -3,8 +3,8 @@
 -------------------------------------------------------------------------------
 
 local PresetSettings = {
-    ["Priest"] = {
-        ["Flash Heal"] = {
+    [MBH_CLASS_PRIEST] = {
+        [MBH_SPELL_FLASH_HEAL] = {
             AutoHeal = {
                 Allowed_Overheal_Percentage = 9,
                 Random_Target = true,
@@ -18,7 +18,7 @@ local PresetSettings = {
                 }
             }
         },
-        ["Heal"] = {
+        [MBH_SPELL_HEAL] = {
             AutoHeal = {
                 Allowed_Overheal_Percentage = 25,
             },
@@ -30,7 +30,7 @@ local PresetSettings = {
                 }
             }
         },
-        ["Greater Heal"] = {
+        [MBH_SPELL_GREATER_HEAL] = {
             AutoHeal = {
                 Allowed_Overheal_Percentage = 35,
             },
@@ -43,14 +43,14 @@ local PresetSettings = {
             }
         },
     },
-    ["Shaman"] = {
-        ["Chain Heal"] = {
+    [MBH_CLASS_SHAMAN] = {
+        [MBH_SPELL_CHAIN_HEAL] = {
             AutoHeal = {
                 Random_Target = true,
                 Heal_Target_Number = 2
             }
         },
-        ["Healing Wave"] = {
+        [MBH_SPELL_HEALING_WAVE] = {
             AutoHeal = {
                 Allowed_Overheal_Percentage = 25,
             },
@@ -66,8 +66,8 @@ local PresetSettings = {
             }
         }
     },
-    ["Paladin"] = {
-        ["Default"] = {
+    [MBH_CLASS_PALADIN] = {
+        [MBH_SPELL_DEFAULT] = {
             AutoHeal = {
                 Allowed_Overheal_Percentage = 35,
                 Random_Target = true,
@@ -75,8 +75,8 @@ local PresetSettings = {
             },
         }
     },
-    ["Druid"] = {
-        ["Default"] = {
+    [MBH_CLASS_DRUID] = {
+        [MBH_SPELL_DEFAULT] = {
             AutoHeal = {
                 Allowed_Overheal_Percentage = 13,
                 Random_Target = true,
@@ -100,7 +100,7 @@ function MBH_LoadPresetSettings()
     local Settings = PresetSettings[MBH.Session.PlayerClass]
 
     if Settings then
-        local SpecialSettings = Settings[MB_myHealSpell] or Settings["Default"]
+        local SpecialSettings = Settings[MB_myHealSpell] or Settings[MBH_SPELL_DEFAULT]
 
         if SpecialSettings then
             MoronBoxHeal_Options = MBH_DeepCopyTable(MBH.DefaultOptions)

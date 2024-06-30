@@ -353,7 +353,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
     MBH_DefaultFrameButtons(self)
     self.InnerContainer = MBH_CreateInnerContainer(self)
 
-    if ( MBH.Session.PlayerClass == "Priest" ) then
+    if ( MBH.Session.PlayerClass == MBH_CLASS_PRIEST ) then
 
         -- Flash Heal Section
         self.FlashHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -468,7 +468,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function FlashHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank("Heal"), "Flash_Heal")
+            MBH_ValidateHAR(self.FlashHealLAR, MBH_GetMaxSpellRank(MBH_SPELL_HEAL), "Flash_Heal")
             FlashHealHAR_OnEscapePressed()
         end
         
@@ -492,7 +492,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function HealLAR_OnEnterPressed()
-            MBH_ValidateLAR(self.HealHAR, "Heal")
+            MBH_ValidateLAR(self.HealHAR, MBH_SPELL_HEAL)
             HealLAR_OnEscapePressed()
         end
         
@@ -515,7 +515,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function HealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank("Lesser Heal"), "Heal")
+            MBH_ValidateHAR(self.HealLAR, MBH_GetMaxSpellRank(MBH_SPELL_LESSER_HEAL), MBH_SPELL_HEAL)
             HealHAR_OnEscapePressed()
         end
         
@@ -558,7 +558,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function GreaterHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank("Heal"), "Greater_Heal")
+            MBH_ValidateHAR(self.GreaterHealLAR, MBH_GetMaxSpellRank(MBH_SPELL_HEAL), "Greater_Heal")
             GreaterHealHAR_OnEscapePressed()
         end
         
@@ -567,7 +567,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.GreaterHealHAR:SetScript("OnTabPressed", GreaterHealHAR_OnEscapePressed)
         self.GreaterHealHAR:SetScript("OnEnterPressed", GreaterHealHAR_OnEnterPressed)
 
-    elseif ( MBH.Session.PlayerClass == "Shaman" ) then
+    elseif ( MBH.Session.PlayerClass == MBH_CLASS_SHAMAN ) then
         
         -- Chain Heal Section
         self.ChainHealTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -657,7 +657,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function ChainHealHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank("Healing Wave"), "Chain_Heal")
+            MBH_ValidateHAR(self.ChainHealLAR, MBH_GetMaxSpellRank(MBH_SPELL_HEALING_WAVE), "Chain_Heal")
             ChainHealHAR_OnEscapePressed()
         end
         
@@ -700,7 +700,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
         
         local function LesserHealingWaveHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank("Healing Wave"), "Lesser_Healing_Wave")
+            MBH_ValidateHAR(self.LesserHealingWaveLAR, MBH_GetMaxSpellRank(MBH_SPELL_HEALING_WAVE), "Lesser_Healing_Wave")
             LesserHealingWaveHAR_OnEscapePressed()
         end
         
@@ -709,7 +709,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.LesserHealingWaveHAR:SetScript("OnTabPressed", LesserHealingWaveHAR_OnEscapePressed)
         self.LesserHealingWaveHAR:SetScript("OnEnterPressed", LesserHealingWaveHAR_OnEnterPressed)
 
-    elseif ( MBH.Session.PlayerClass == "Paladin" ) then
+    elseif ( MBH.Session.PlayerClass == MBH_CLASS_PALADIN ) then
         
         -- Holy Light Section
         self.HolyLightTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -770,7 +770,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function HolyLightHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank("Flash of Light"), "Holy_Light")
+            MBH_ValidateHAR(self.HolyLightLAR, MBH_GetMaxSpellRank(MBH_SPELL_FLASH_OF_LIGHT), "Holy_Light")
             HolyLightHAR_OnEscapePressed()
         end
 
@@ -779,7 +779,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.HolyLightHAR:SetScript("OnTabPressed", HolyLightHAR_OnEscapePressed)
         self.HolyLightHAR:SetScript("OnEnterPressed", HolyLightHAR_OnEnterPressed)
         
-    elseif ( MBH.Session.PlayerClass == "Druid" ) then
+    elseif ( MBH.Session.PlayerClass == MBH_CLASS_DRUID ) then
         
         -- Regrowth Section
         self.RegrowthTitle = self.InnerContainer:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -840,7 +840,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         end
 
         local function RegrowthHAR_OnEnterPressed()
-            MBH_ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank("Healing Touch"), "Regrowth")
+            MBH_ValidateHAR(self.RegrowthLAR, MBH_GetMaxSpellRank(MBH_SPELL_HEALING_TOUCH), "Regrowth")
             RegrowthHAR_OnEscapePressed()
         end
 

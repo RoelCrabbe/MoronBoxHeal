@@ -4,12 +4,12 @@
 
 MBG_DEBUGTIME = date("%H:%M:%S")
 
-MBH_TITLE = 'MoronBoxHeal'
-MBH_AUTHOR = 'MoRoN'
-MBH_GENERAL = 'General'
-MBH_OPTIONS = 'Options'
-MBH_PROTECTION = 'Mana Protection'
-MBH_HIDE = 'Close'
+MBH_TITLE = "MoronBoxHeal"
+MBH_AUTHOR = "MoRoN"
+MBH_GENERAL = "General"
+MBH_OPTIONS = "Options"
+MBH_PROTECTION = "Mana Protection"
+MBH_HIDE = "Close"
 MBH_EXIT = "Get lost!"
 MBH_MINIMAPHOVER = "Click to show/hide the main frame."
 
@@ -19,13 +19,13 @@ MBH_INFORMATION =
 "UI & Features optimised by MoRoN for custom box support.\n\n"..
 
 "|cffe3e3e3How to use the addon?|r\n"..
-"This functions is build as follows : |cffC79C6EMBH_CastHeal(spell, LowRank, HighestRank);|r\n\n"..
+"This functions is build as follows : |cffC79C6EMBH_CastHeal(spell, LowRank, HighestRank)|r\n\n"..
 
 "|cffe3e3e3Example:|r\n"..
-"|cffC79C6E/script MBH_CastHeal(\"Healing Wave\");|r\n\n"..
+"|cffC79C6E/script MBH_CastHeal(\"Healing Wave\")|r\n\n"..
 
 "|cffe3e3e3Or define spell ranks:|r\n"..
-"|cffC79C6E/script MBH_CastHeal(\"Healing Wave\", 3, 7);|r\n\n"..
+"|cffC79C6E/script MBH_CastHeal(\"Healing Wave\", 3, 7)|r\n\n"..
 
 "- LowRank: The lowest rank a player is allowed to use.\n"..
 "- HighestRank: The highest rank a player is allowed to use.\n\n"..
@@ -36,7 +36,19 @@ MBH_INFORMATION =
 "|cff0070DEShamans|r: Healing Wave, Lesser Healing Wave, Chain Heal.\n"..
 "|cffF58CBAPaladins|r: Holy Light, Flash of Light.\n\n"..
 
-"Be sure to checkout the option's panel!";
+"Be sure to checkout the option's panel!"
+
+-- Dont Change
+    MBH_CLASS_DRUID   = "Druid"
+    MBH_CLASS_HUNTER  = "Hunter"
+    MBH_CLASS_MAGE    = "Mage"
+    MBH_CLASS_PALADIN = "Paladin"
+    MBH_CLASS_PRIEST  = "Priest"
+    MBH_CLASS_ROGUE   = "Rogue"
+    MBH_CLASS_SHAMAN  = "Shaman"
+    MBH_CLASS_WARLOCK = "Warlock"
+    MBH_CLASS_WARRIOR = "Warrior"
+--
 
 MBH_HEALSETTINGS = "Healing Settings"
 MBH_RANGSETTINGS = "Extended Range Settings"
@@ -58,13 +70,18 @@ MBH_MANAPROTECTION = "Mana Protection:"
 MBH_IDLEPROTECTIONENABLE = "Idle Protection:"
 MBH_IDLEPROTECTIONFREQUENCY = "Idle Update every: $p sec"
 
+MBH_SPELL_DEFAULT = "Default"
 MBH_SPELL_FLASH_HEAL = "Flash Heal"
+MBH_SPELL_LESSER_HEAL = "Lesser Heal"
 MBH_SPELL_HEAL = "Heal"
 MBH_SPELL_GREATER_HEAL = "Greater Heal"
 MBH_SPELL_CHAIN_HEAL = "Chain Heal"
+MBH_SPELL_HEALING_WAVE = "Healing Wave"
 MBH_SPELL_LESSER_HEALING_WAVE = "Lesser Healing Wave"
 MBH_SPELL_HOLY_LIGHT = "Holy Light"
+MBH_SPELL_FLASH_OF_LIGHT = "Flash of Light"
 MBH_SPELL_REGROWTH = "Regrowth"
+MBH_SPELL_HEALING_TOUCH = "Healing Touch"
 
 MBH_MANAPERCENTAGETO = "Mana Percentage to Cast "
 MBH_FLASHHEALPROTECTIONTHRESHOLD = MBH_MANAPERCENTAGETO..MBH_SPELL_HEAL..": $p %"

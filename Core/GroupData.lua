@@ -72,22 +72,20 @@ end
 function MBH_UpdateData()
 	MBH.Session.I = 1
 	
-	if MBH.Session.Group[1] == 3 or MBH.Session.Group[1] == 2 then -- We are in raid or party
-		for i = 1, MBH.Session.Group[2] do -- Members
+	if MBH.Session.Group[1] == 3 or MBH.Session.Group[1] == 2 then
+		for i = 1, MBH.Session.Group[2] do
 
 			MBH.GroupData[MBH.Session.I].UnitID = MBH.Session.Group[3]..MBH.Session.I
 			MBH.GroupData[MBH.Session.I].HealthDeficite = UnitHealthMax(MBH.GroupData[MBH.Session.I].UnitID)-UnitHealth(MBH.GroupData[MBH.Session.I].UnitID)
 			MBH.GroupData[MBH.Session.I].UnitRange = CheckInteractDistance(MBH.GroupData[MBH.Session.I].UnitID, 4)
 			MBH.GroupData[MBH.Session.I].Visible = UnitIsVisible(MBH.GroupData[MBH.Session.I].UnitID) and UnitIsConnected(MBH.GroupData[MBH.Session.I].UnitID) and not UnitIsGhost(MBH.GroupData[MBH.Session.I].UnitID) and not UnitIsDead(MBH.GroupData[MBH.Session.I].UnitID) and not UnitIsEnemy(MBH.GroupData[MBH.Session.I].UnitID,"player") and not UnitCanAttack("player",MBH.GroupData[MBH.Session.I].UnitID)
 
-			-- Extended Range
 			if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].ExtRange then
 				MBH.GroupData[MBH.Session.I].ExtRange = true
 			else 
 				MBH.GroupData[MBH.Session.I].ExtRange = nil 
 			end
 			
-			-- LOS
 			if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS then
 				if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS > 0 then 
 					MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS = MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS - MBH.Session.Elapsed
@@ -96,7 +94,6 @@ function MBH_UpdateData()
 				end 
 			end
 			
-			-- Healcomm
 			if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime then 
 				if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime > 0 then 
 					MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime = MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime - MBH.Session.Elapsed
@@ -122,10 +119,8 @@ function MBH_UpdateData()
 		MBH.GroupData[MBH.Session.I].UnitRange = CheckInteractDistance(MBH.GroupData[MBH.Session.I].UnitID, 4)
 		MBH.GroupData[MBH.Session.I].Visible = true
 		
-		-- Extended Range
 		MBH.GroupData[MBH.Session.I].ExtRange = true
 		
-		-- LOS
 		if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS then
 			if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS > 0 then 
 				MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS = MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].LOS - MBH.Session.Elapsed
@@ -134,7 +129,6 @@ function MBH_UpdateData()
 			end 
 		end
 		
-		-- Healcomm
 		if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime then 
 			if MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime > 0 then 
 				MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime = MBH.Track[MBH.GroupData[MBH.Session.I].UnitID].HealTime - MBH.Session.Elapsed
