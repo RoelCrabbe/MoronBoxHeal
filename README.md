@@ -47,6 +47,7 @@ When you are not happy with the chosen settings, the bottom left button can open
 ### Troubles or Nil values, clear WDB
 
 ## First Version of the addon:
+Mana Protection was an empty setting back then
 
 ![image](https://github.com/RoelCrabbe/MoronBoxHeal/assets/92096051/6e67845c-e9f6-447d-939f-6e88967a76f0)
 ![image](https://github.com/RoelCrabbe/MoronBoxHeal/assets/92096051/98d871cf-9ea4-472e-be27-0fffd59b8cdc)
