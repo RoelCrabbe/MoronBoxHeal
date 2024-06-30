@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 
 MBH = CreateFrame("Frame", "MBH", UIParent)
-MBH.ScanningTooltip = CreateFrame("GameTooltip", "ScanningTooltip", nil, "GameTooltipTemplate")
+MBH.ScanningTooltip = CreateFrame("GameTooltip", "MBH_ScanningTooltip", nil, "GameTooltipTemplate")
 
 -------------------------------------------------------------------------------
 -- Local Variables {{{

@@ -8,8 +8,9 @@ function MBH_GetHealSpell()
 
 	for i = 1, 120 do
 
-		MBH.ScanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
-		MBH.ScanningTooltip:SetAction(i)
+		MBH_ScanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+		MBH_ScanningTooltip:SetAction(i)
+		local tooltipText = MBH_ScanningTooltipTextLeft1:GetText()
 
 		for SPN, Time in pairs(MBH.Session.CastTime) do
 			if tooltipText == SPN then
