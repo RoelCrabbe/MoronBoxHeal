@@ -107,3 +107,14 @@ MBH_PRESETSETTINGSUNSUCCESS = "There Is No Preset For You!"
 MBH_RELOADUI = "(This settings will reload your UI)"
 MBH_YES = "Yes"
 MBH_NO = "No"
+
+MBH_ADDONLOADED = "Has been successfully loaded."
+MBH_ADDONDISABLED = "Addon has been disabled! Be sure to ReloadUI."
+
+MBH_DISABLEADDON = {
+    [MBH_CLASS_ROGUE] = true,
+    [MBH_CLASS_MAGE] = true,
+    [MBH_CLASS_WARRIOR] = true,
+    [MBH_CLASS_HUNTER] = true,
+    [MBH_CLASS_WARLOCK] = true
+}

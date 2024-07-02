@@ -3,6 +3,7 @@
 -------------------------------------------------------------------------------
 
 MBH = CreateFrame("Frame", "MBH", UIParent)
+local AddonInitializer = CreateFrame("Frame", nil)
 
 -------------------------------------------------------------------------------
 -- Local Variables {{{
@@ -206,6 +207,9 @@ MBH.Session = {
         LagPrevention = {
             Time = 0,
         },
+    },
+    AddonLoader = {
+        Cooldown = 2.5
     }
 }
 
@@ -258,6 +262,8 @@ function MBH:OnEvent()
         MBH_GetHealSpell()
         MBH_InitalData()
         MBH:CreateWindows()
+
+        AddonInitializer:SetScript("OnUpdate", AddonInitializer.OnUpdate)
 
     elseif ( event == "SPELLCAST_STOP" or event ==  "SPELLCAST_INTERRUPTED" or event == "SPELLCAST_FAILED" ) then
 
@@ -346,6 +352,23 @@ function MBH_SetupSavedVariables()
     if not MoronBoxHeal_Options then 
         MoronBoxHeal_Options = MBH.DefaultOptions
     end
+end
+
+function AddonInitializer:OnUpdate()
+
+    MBH.Session.AddonLoader.Cooldown = MBH.Session.AddonLoader.Cooldown - MBH.Session.Elapsed
+    if MBH.Session.AddonLoader.Cooldown > 0 then return end
+
+    MBH_PrintMessage(MBH_ADDONLOADED)
+
+    if MBH_DISABLEADDON[MBH.Session.PlayerClass] then
+        if GetAddOnInfo(MBH_TITLE) then
+            DisableAddOn(MBH_TITLE)
+            MBH_ErrorMessage(MBH_ADDONDISABLED)
+        end
+    end
+
+    AddonInitializer:SetScript("OnUpdate", nil)
 end
 
 -------------------------------------------------------------------------------
