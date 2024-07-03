@@ -17,9 +17,9 @@
 Utility\Localization.lua
 Utility\Utility.lua
 
+Core\Main.lua
 Core\GroupData.lua
 Core\Range.lua
-Core\Main.lua
 
 Display\Actions.lua
 Display\Display.lua
