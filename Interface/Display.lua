@@ -806,6 +806,12 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
             MBH_CheckAndDisableManaProtection(self.RegrowthCheckButton)
         end)
 
+        self.OnlyRank3CheckButton = MBH_CreateCheckButton(self.InnerContainer, MNH_DRUIDLOWRANK, MoronBoxHeal_Options.ManaProtectionValues.Druid.Only_Rank_3)
+        self.OnlyRank3CheckButton:SetPoint("CENTER", self.RegrowthCheckButton, "CENTER", 0, -50)
+        self.OnlyRank3CheckButton:SetScript("OnClick", function()
+            MoronBoxHeal_Options.ManaProtectionValues.Druid.Only_Rank_3 = (self.OnlyRank3CheckButton:GetChecked() == 1)
+        end)
+
         -- Regrowth Events 
         local function RegrowthLAR_OnEditFocusLost()
             self.RegrowthLAR:SetText(MoronBoxHeal_Options.ManaProtectionValues.Druid.Regrowth_LAR)

@@ -94,7 +94,7 @@ MBH_REGROWTHPROTECTIONTHRESHOLD = MBH_MANAPERCENTAGETO.."Healing Touch: $p %"
 
 MBH_LOWEST_RANK = "Lowest Rank:"
 MBH_HIGHEST_RANK = "Highest Rank:"
-MNH_ACTIVESWITCH = " Active Switch:"
+MNH_ACTIVESWITCH = "Active Switch:"
 
 MBH_RESTOREDEFAULT = "Restore Default Settings"
 MBH_RESTOREDEFAULTCONFIRM = "Are you sure you want to restore default values?"
@@ -118,3 +118,5 @@ MBH_DISABLEADDON = {
     [MBH_CLASS_HUNTER] = true,
     [MBH_CLASS_WARLOCK] = true
 }
+
+MNH_DRUIDLOWRANK = "Only Rank 3:"

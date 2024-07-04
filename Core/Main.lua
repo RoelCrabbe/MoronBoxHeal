@@ -152,6 +152,7 @@ MBH.DefaultOptions = {
         },
         Druid = {
             Regrowth_Switch = true,
+            Only_Rank_3 = true,
             Regrowth_Threshold = 50,
             Regrowth_LAR = 1,
             Regrowth_HAR = 11
@@ -456,7 +457,7 @@ function MBH_CalculateRank(SPN, LAR, HAR, UnitID)
     local OutgoingHeal = 0
     local CalculatedHeal = 0
 
-    if (SPN == MBH_SPELL_HEALING_TOUCH) then
+    if (SPN == MBH_SPELL_HEALING_TOUCH and MoronBoxHeal_Options.ManaProtectionValues.Druid.Only_Rank_3) then
 
         CalculatedRank = 3
         if mb_hasBuffOrDebuff("Nature's Grace", "player", "buff") then
