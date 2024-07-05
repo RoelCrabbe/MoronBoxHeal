@@ -350,9 +350,15 @@ end
 MBH:SetScript("OnUpdate", MBH.OnUpdate) 
 
 function MBH_SetupSavedVariables()
-    if not MoronBoxHeal_Options then 
-        MoronBoxHeal_Options = MBH.DefaultOptions
-    end
+    if not MoronBoxHeal_Options  then
+		MoronBoxHeal_Options = {}
+	end
+
+	for i in MBH.DefaultOptions do
+		if (not MoronBoxHeal_Options[i]) then
+			MoronBoxHeal_Options[i] = MBH.DefaultOptions[i]
+		end
+	end
 end
 
 function AddonInitializer:OnUpdate()
