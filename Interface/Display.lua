@@ -30,20 +30,20 @@ function MBH_ResetAllWindow()
 end
 
 function MBH_OpenMainFrame()
-    if MBH.MainFrame:IsShown() then
+    if MBH.MainFrame:IsVisible() then
         MBH_CloseAllWindow()
     else 
-        MBH.MainFrame:Show()
+        ShowUIPanel(MBH.MainFrame)
     end
 end
 
 function MBH_CloseAllWindow()
     MBH_ResetAllWindow()
-    MBH.MainFrame:Hide()
-    MBH.OptionFrame:Hide()
-    MBH.ProtectionFrame:Hide()
-    MBH.PopupPresetFrame:Hide()
-    MBH.PopupDefaultFrame:Hide()
+    HideUIPanel(MBH.MainFrame)
+    HideUIPanel(MBH.OptionFrame)
+    HideUIPanel(MBH.ProtectionFrame)
+    HideUIPanel(MBH.PopupPresetFrame)
+    HideUIPanel(MBH.PopupDefaultFrame)
 end
 
 -------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ function MBH.MainFrame:CreateMainFrame()
     MBH_SetSize(self.InformationText, 480, 350)
     MBH_SetFontSize(self.InformationText)
 
-    self:Hide()
+    HideUIPanel(self)
 end
 
 -------------------------------------------------------------------------------
@@ -340,7 +340,7 @@ function MBH.OptionFrame:CreateOptionFrame()
             MBH_InitializeSlider(self.IdleProtectionFrequencySlider, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
         end)
 
-    self:Hide()
+    HideUIPanel(self)
 end
 
 -------------------------------------------------------------------------------
@@ -856,7 +856,7 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.RegrowthHAR:SetScript("OnEnterPressed", RegrowthHAR_OnEnterPressed)
     end
     
-    self:Hide()
+    HideUIPanel(self)
 end
 
 -------------------------------------------------------------------------------
@@ -873,10 +873,8 @@ function MBH.PopupPresetFrame:CreatePopupPresetFrame()
 
     self.AcceptButton:SetScript("OnClick", function()
         MBH_LoadPresetSettings()
-        self:Hide()
+        HideUIPanel(self)
     end)
-
-    self:Hide()
 end
 
 -------------------------------------------------------------------------------
@@ -893,10 +891,8 @@ function MBH.PopupDefaultFrame:CreatePopupDefaultFrame()
 
     self.AcceptButton:SetScript("OnClick", function()
         MBH_SetDefaultValues()
-        self:Hide()
+        HideUIPanel(self)
     end)
-
-    self:Hide()
 end
 
 -------------------------------------------------------------------------------
@@ -908,7 +904,7 @@ function MBH_ResetFramePosition(Frame)
 
     Frame:ClearAllPoints()
     Frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-    Frame:Hide()
+    HideUIPanel(Frame)
 end
 
 function MBH_SetBackdropColor(Frame, Color)
@@ -936,11 +932,11 @@ function MBH_ShowToolTip(Parent, Title, Text)
     GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
     GameTooltip:SetText(Title, 1, 1, 0.5)
     GameTooltip:AddLine(Text)
-    GameTooltip:Show()
+    ShowUIPanel(GameTooltip)
 end
 
 function MBH_HideTooltip()
-    GameTooltip:Hide()
+    HideUIPanel(GameTooltip)
 end
 
 function MBH_GetColorValue(colorKey)
@@ -1077,9 +1073,9 @@ function MBH_DefaultFrameButtons(Parent)
     GeneralButton:SetScript("OnEnter", GeneralButton_OnEnter)
     GeneralButton:SetScript("OnLeave", GeneralButton_OnShow)
     GeneralButton:SetScript("OnClick", function()
-        if MBH.MainFrame:Show() then return end
+        if MBH.MainFrame:IsVisible() then return end
         MBH_CloseAllWindow()
-        MBH.MainFrame:Show()
+        ShowUIPanel(MBH.MainFrame)
     end)
 
     local OptionButton = MBH_CreateButton(Parent, MBH_OPTIONS) 
@@ -1107,9 +1103,9 @@ function MBH_DefaultFrameButtons(Parent)
     OptionButton:SetScript("OnEnter", OptionButton_OnEnter)
     OptionButton:SetScript("OnLeave", OptionButton_OnShow)
     OptionButton:SetScript("OnClick", function()
-        if MBH.OptionFrame:Show() then return end
+        if MBH.OptionFrame:IsVisible() then return end
         MBH_CloseAllWindow()
-        MBH.OptionFrame:Show()
+        ShowUIPanel(MBH.OptionFrame)
     end)
 
     local ProtectionButton = MBH_CreateButton(Parent, MBH_PROTECTION, 80) 
@@ -1137,9 +1133,9 @@ function MBH_DefaultFrameButtons(Parent)
     ProtectionButton:SetScript("OnEnter", ProtectionButton_OnEnter)
     ProtectionButton:SetScript("OnLeave", ProtectionButton_OnShow)
     ProtectionButton:SetScript("OnClick", function()
-        if MBH.ProtectionFrame:Show() then return end
+        if MBH.ProtectionFrame:IsVisible() then return end
         MBH_CloseAllWindow()
-        MBH.ProtectionFrame:Show()
+        ShowUIPanel(MBH.ProtectionFrame)
     end)
 
     local CloseButton = MBH_CreateButton(Parent, MBH_HIDE) 
@@ -1159,7 +1155,7 @@ function MBH_DefaultFrameButtons(Parent)
     CloseButton:SetScript("OnEnter", CloseButton_OnEnter)
     CloseButton:SetScript("OnLeave", CloseButton_OnLeave)
     CloseButton:SetScript("OnClick", function()
-        Parent:Hide()
+        HideUIPanel(Parent)
     end)
 
     local DefaultSettingsButton = MBH_CreateButton(Parent, MBH_RESTOREDEFAULT, 120) 
@@ -1172,10 +1168,10 @@ function MBH_DefaultFrameButtons(Parent)
 
     DefaultSettingsButton:SetScript("OnEnter", DefaultSettingsButton_OnEnter)
     DefaultSettingsButton:SetScript("OnClick", function()
-        if (MBH.PopupPresetFrame:IsShown()) then
-            MBH.PopupPresetFrame:Hide()
+        if (MBH.PopupDefaultFrame:IsVisible()) then
+            HideUIPanel(MBH.PopupDefaultFrame)
         end
-        MBH.PopupDefaultFrame:Show()
+        ShowUIPanel(MBH.PopupDefaultFrame)
     end)
 
     local PresetSettingsButton = MBH_CreateButton(Parent, MBH_PRESETSETTINGS, 120) 
@@ -1188,10 +1184,10 @@ function MBH_DefaultFrameButtons(Parent)
 
     PresetSettingsButton:SetScript("OnEnter", PresetSettingsButton_OnEnter)
     PresetSettingsButton:SetScript("OnClick", function()
-        if (MBH.PopupDefaultFrame:IsShown()) then
-            MBH.PopupDefaultFrame:Hide()
+        if (MBH.PopupDefaultFrame:IsVisible()) then
+            HideUIPanel(MBH.PopupDefaultFrame)
         end
-        MBH.PopupPresetFrame:Show()
+        ShowUIPanel(MBH.PopupPresetFrame)
     end)
 end
 
@@ -1225,8 +1221,8 @@ function MBH_InitializeSlider(Slider, String, Value, MinStep, MaxStep, ValStep)
     Slider:SetValueStep(ValStep or 1)
     Slider:SetValue(Value)
 
-    getglobal(Slider:GetName().."Low"):Hide()
-    getglobal(Slider:GetName().."High"):Hide()
+    HideUIPanel(getglobal(Slider:GetName().."Low"))
+    HideUIPanel(getglobal(Slider:GetName().."High"))
 
     local minValueText = Slider:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
     minValueText:SetText(MinStep)
@@ -1333,7 +1329,7 @@ function MBH_CreatePopupFrame(PopupFrame)
 
     DeclineButton:SetScript("OnEnter", DeclineButton_OnEnter)
     DeclineButton:SetScript("OnClick", function()
-        PopupFrame:Hide()
+        HideUIPanel(PopupFrame)
     end)
 
     local function PopupFrame_OnMouseUp()
@@ -1353,6 +1349,7 @@ function MBH_CreatePopupFrame(PopupFrame)
     PopupFrame:SetScript("OnMouseUp", PopupFrame_OnMouseUp)
     PopupFrame:SetScript("OnMouseDown", PopupFrame_OnMouseDown)
     PopupFrame:SetScript("OnHide", PopupFrame_OnMouseUp)
+    HideUIPanel(PopupFrame)
 end
 
 -------------------------------------------------------------------------------
