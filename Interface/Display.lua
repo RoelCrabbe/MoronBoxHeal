@@ -237,8 +237,6 @@ function MBH.MainFrame:CreateMainFrame()
     self.InformationText:SetText(MBH_INFORMATION)
     MBH_SetSize(self.InformationText, 480, 350)
     MBH_SetFontSize(self.InformationText)
-
-    HideUIPanel(self)
 end
 
 -------------------------------------------------------------------------------
@@ -339,8 +337,6 @@ function MBH.OptionFrame:CreateOptionFrame()
         self.IdleProtectionFrequencySlider:SetScript("OnShow", function()
             MBH_InitializeSlider(self.IdleProtectionFrequencySlider, MBH_IDLEPROTECTIONFREQUENCY, MoronBoxHeal_Options.AdvancedOptions.LagPrevention.Frequency, 1, 5, 0.25)
         end)
-
-    HideUIPanel(self)
 end
 
 -------------------------------------------------------------------------------
@@ -855,8 +851,6 @@ function MBH.ProtectionFrame:CreateProtectionFrame()
         self.RegrowthHAR:SetScript("OnTabPressed", RegrowthHAR_OnEscapePressed)
         self.RegrowthHAR:SetScript("OnEnterPressed", RegrowthHAR_OnEnterPressed)
     end
-    
-    HideUIPanel(self)
 end
 
 -------------------------------------------------------------------------------
@@ -932,11 +926,11 @@ function MBH_ShowToolTip(Parent, Title, Text)
     GameTooltip:SetOwner(Parent, "ANCHOR_BOTTOMLEFT")
     GameTooltip:SetText(Title, 1, 1, 0.5)
     GameTooltip:AddLine(Text)
-    ShowUIPanel(GameTooltip)
+    GameTooltip:Show()
 end
 
 function MBH_HideTooltip()
-    HideUIPanel(GameTooltip)
+    GameTooltip:Hide()
 end
 
 function MBH_GetColorValue(colorKey)
@@ -1044,6 +1038,7 @@ function MBH_DefaultFrameTemplate(Frame)
     Frame:SetScript("OnMouseUp", Frame_OnMouseUp)
     Frame:SetScript("OnMouseDown", Frame_OnMouseDown)
     Frame:SetScript("OnHide", Frame_OnMouseUp)
+    HideUIPanel(Frame)
 end
 
 function MBH_DefaultFrameButtons(Parent)
