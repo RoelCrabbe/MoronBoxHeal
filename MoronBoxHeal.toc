@@ -18,8 +18,12 @@ Utility\Localization.lua
 Utility\Utility.lua
 
 Core\Main.lua
-Core\GroupData.lua
-Core\Range.lua
+
+Modules\Healing\Main.lua
+Modules\Healing\GroupData.lua
+Modules\Healing\Range.lua
+
+Modules\Reviving\Main.lua
 
 Interface\Actions.lua
 Interface\Display.lua
