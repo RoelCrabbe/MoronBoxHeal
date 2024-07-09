@@ -125,6 +125,12 @@ end
 -- Table Functions {{{
 -------------------------------------------------------------------------------
 
+function MBH_ResurrectionBlackPlayer(Name)
+    if not MBH.Session.Reviving.ResurrectionBlackList[Name] then
+        MBH.Session.Reviving.ResurrectionBlackList[Name] = 15
+    end
+end
+
 function MBH_DeepCopyTable(orig)
     local orig_type = type(orig)
     local copy

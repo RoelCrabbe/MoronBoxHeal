@@ -240,7 +240,7 @@ function MBH:OnEvent()
     elseif ( event == "CHAT_MSG_ADDON" ) then
 
         if arg1 == MBH.Session.Reviving.Add_BlackList then
-            MBH_BlackListPlayer(arg2)
+            MBH_ResurrectionBlackPlayer(arg2)
         end
     end
 end
@@ -269,12 +269,12 @@ function MBH:OnUpdate()
         end
     end
 
-    if ( next(MBH.Session.Reviving.ResurrectionBlackList) ~= nil ) then
-        for UnitID, Timer in pairs(MBH.Session.Reviving.ResurrectionBlackList) do
+    if next(MBH.Session.Reviving.ResurrectionBlackList) then
+        for Name, Timer in MBH.Session.Reviving.ResurrectionBlackList do
             if Timer > 0 then
-                MBH.Session.Reviving.ResurrectionBlackList[UnitID] = Timer - MBH.Session.Elapsed
+                MBH.Session.Reviving.ResurrectionBlackList[Name] = Timer - MBH.Session.Elapsed
             else
-                MBH.Session.Reviving.ResurrectionBlackList[UnitID] = nil
+                MBH.Session.Reviving.ResurrectionBlackList[Name ] = nil
             end
         end
     end
