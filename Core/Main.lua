@@ -123,6 +123,10 @@ MBH.Session = {
     },
     AddonLoader = {
         Cooldown = 2.5
+    },
+    Reviving = {
+        ResurrectionBlackList = {},
+        Add_BlackList = "MBH_RESS",
     }
 }
 
@@ -143,7 +147,8 @@ do
         "UI_ERROR_MESSAGE",
         "ACTIONBAR_SLOT_CHANGED",
         "PLAYER_REGEN_ENABLED",
-        "PLAYER_REGEN_DISABLED"
+        "PLAYER_REGEN_DISABLED",
+        "CHAT_MSG_ADDON"
 		} 
 		do MBH:RegisterEvent(event)
 	end
@@ -231,6 +236,12 @@ function MBH:OnEvent()
         else
             MBH.Session.CastTime[MBH_SPELL_CHAIN_HEAL] = 2.5
         end
+    
+    elseif ( event == "CHAT_MSG_ADDON" ) then
+
+        if arg1 == MBH.Session.Reviving.Add_BlackList then
+            MBH_BlackListPlayer(arg2)
+        end
     end
 end
 
@@ -255,6 +266,16 @@ function MBH:OnUpdate()
 
         if MoronBoxHeal_Options.ExtendedRange.Enable then 
             MBH_UpdateRange() 
+        end
+    end
+
+    if ( next(MBH.Session.Reviving.ResurrectionBlackList) ~= nil ) then
+        for UnitID, Timer in pairs(MBH.Session.Reviving.ResurrectionBlackList) do
+            if Timer > 0 then
+                MBH.Session.Reviving.ResurrectionBlackList[UnitID] = Timer - MBH.Session.Elapsed
+            else
+                MBH.Session.Reviving.ResurrectionBlackList[UnitID] = nil
+            end
         end
     end
 end

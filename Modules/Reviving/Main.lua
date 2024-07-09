@@ -23,12 +23,22 @@ function MBH_GetClassInfo(Class)
     return nil
 end
 
+function MBH_BlackListPlayer(UnitID)
+    if not MBH.Session.Reviving.ResurrectionBlackList[UnitID] then
+        MBH.Session.Reviving.ResurrectionBlackList[UnitID] = 10
+    end
+end
+
+function MBH_IsPlayerBlackListed(UnitID)
+    return MBH.Session.Reviving.ResurrectionBlackList[UnitID] ~= nil
+end
+
 function MBH_PriorityReviving() -- /run MBH_PriorityReviving()
 
     local pClassInfo = MBH_GetClassInfo(MBH.Session.PlayerClass)
     local pSpellName = pClassInfo.Spell
 
-    if (MBH.Session.Group and MBH.Session.Group[3] == "player" and not pSpellName) or mb_imBusy() then
+    if (MBH.Session.Group and MBH.Session.Group[3] == "player" and not pSpellName) or mb_imBusy() or MBH.Session.InCombat then
         return
     end
 
@@ -40,7 +50,7 @@ function MBH_PriorityReviving() -- /run MBH_PriorityReviving()
 
         local UnitID = GroupType..n
         
-        if UnitIsDead(UnitID) and UnitIsConnected(UnitID) and UnitIsVisible(UnitID) and mb_in28yardRange(UnitID) then
+        if not MBH_IsPlayerBlackListed(UnitID) and UnitIsDead(UnitID) and UnitIsConnected(UnitID) and UnitIsVisible(UnitID) and mb_in28yardRange(UnitID) then
 
             local tClassInfo = MBH_GetClassInfo(UnitClass(UnitID))
             local tPriority = tClassInfo.Priority
@@ -57,8 +67,12 @@ function MBH_PriorityReviving() -- /run MBH_PriorityReviving()
     end	
     
     if table.getn(RessTable) == 0 then
-        MBH_ErrorMessage("There is no one to resurrect.") 
-        mb_setup()
+        if next(MBH.Session.Reviving.ResurrectionBlackList) ~= nil then
+            MBH_ErrorMessage("There is no one to resurrect.") 
+        else
+            MBH_ErrorMessage("All targets have received a res.") 
+            mb_setup()
+        end
         return
     end
     
@@ -74,9 +88,9 @@ function MBH_PriorityReviving() -- /run MBH_PriorityReviving()
         SpellTargetUnit(UnitID)
 
         if not SpellIsTargeting() then
-            --Thaliz_BlacklistPlayer(PlayerName)
-            --Thaliz_AnnounceResurrection(PlayerName)
-            -- Thaliz_SendAddonMessage("TX_RESBEGIN#"..PlayerName.."#")
+            MBH_BlackListPlayer(UnitID)
+            SendAddonMessage(MBH.Session.Reviving.Add_BlackList, UnitID, "RAID")
+            mb_message("Ressing <"..UnitName(UnitID)..">", 15)
         else
             SpellStopTargeting()
         end
