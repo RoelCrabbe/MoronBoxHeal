@@ -99,14 +99,19 @@ function MBH_Resurrection()
         SpellTargetUnit(tUnitID)
 
         if not SpellIsTargeting() then
-            local tName = UnitName(tUnitID)
-            MBH_ResurrectionBlackPlayer(tName)
-            SendAddonMessage(MBH.Session.Reviving.Add_BlackList, tName, pGroupChannel)
-            mb_message("Ressing <"..tName..">")
+
+            MBH_AnnounceResurrection(tUnitID)
         else
             SpellStopTargeting()
         end
     else
         SpellStopTargeting()
     end
+end
+
+function MBH_AnnounceResurrection(UnitID)
+    local tName = UnitName(UnitID)
+    MBH_ResurrectionBlackPlayer(tName)
+    SendAddonMessage(MBH.Session.Reviving.Add_BlackList, tName, pGroupChannel)
+    mb_message("Ressing <"..tName..">")
 end
