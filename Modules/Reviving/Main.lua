@@ -39,7 +39,7 @@ local function MBH_GetClassInfo(Class)
 end
 
 local function MBH_IsPlayerBlackListed(Name)
-    return MBH.Session.Reviving.ResurrectionBlackList[Name] ~= nil
+    return MBH.Session.Reviving.ResurrectionBlackList[Name]
 end
 
 local function MBH_NoRessTargets(RessTable)
@@ -55,11 +55,10 @@ local function MBH_NoRessTargets(RessTable)
     return false
 end
 
-local function MBH_AnnounceResurrection(UnitID)
-    local tName = UnitName(UnitID)
-    MBH_ResurrectionBlackPlayer(tName)
-    SendAddonMessage(MBH.Session.Reviving.Add_BlackList, tName, pGroupChannel)
-    mb_message("Ressing <"..tName..">")
+local function MBH_AnnounceResurrection(UnitID, Channel)
+    local Name = UnitName(UnitID)
+    SendAddonMessage(MBH.Session.Reviving.Add_BlackList, Name, Channel)
+    mb_message("Ressing <"..Name..">")
 end
 
 -------------------------------------------------------------------------------
@@ -102,7 +101,7 @@ function MBH_Resurrection()
     end	
 
     if MBH_NoRessTargets(RessTable) then return end
-    
+
     CastSpellByName(pSpellName)
     local tUnitID = MBH_ChooseCorpse(RessTable)	
 
@@ -112,7 +111,7 @@ function MBH_Resurrection()
 
         if not SpellIsTargeting() then
 
-            MBH_AnnounceResurrection(tUnitID)
+            MBH_AnnounceResurrection(tUnitID, pGroupChannel)
         else
             SpellStopTargeting()
         end
