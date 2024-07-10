@@ -42,6 +42,26 @@ local function MBH_IsPlayerBlackListed(Name)
     return MBH.Session.Reviving.ResurrectionBlackList[Name] ~= nil
 end
 
+local function MBH_NoRessTargets(RessTable)
+    if table.getn(RessTable) == 0 then
+        if next(MBH.Session.Reviving.ResurrectionBlackList) then
+            MBH_ErrorMessage("There is no one to resurrect.")
+        else
+            MBH_ErrorMessage("All targets have received a res.")
+            mb_setup()
+        end
+        return true
+    end
+    return false
+end
+
+local function MBH_AnnounceResurrection(UnitID)
+    local tName = UnitName(UnitID)
+    MBH_ResurrectionBlackPlayer(tName)
+    SendAddonMessage(MBH.Session.Reviving.Add_BlackList, tName, pGroupChannel)
+    mb_message("Ressing <"..tName..">")
+end
+
 -------------------------------------------------------------------------------
 -- Core Ress Code {{{
 -------------------------------------------------------------------------------
@@ -80,16 +100,8 @@ function MBH_Resurrection()
             table.insert(RessTable, { UnitID = UnitID, Priority = tPriority })
         end
     end	
-    
-    if table.getn(RessTable) == 0 then
-        if next(MBH.Session.Reviving.ResurrectionBlackList) then
-            MBH_ErrorMessage("There is no one to resurrect.") 
-        else
-            MBH_ErrorMessage("All targets have received a res.") 
-            mb_setup()
-        end
-        return
-    end
+
+    if MBH_NoRessTargets(RessTable) then return end
     
     CastSpellByName(pSpellName)
     local tUnitID = MBH_ChooseCorpse(RessTable)	
@@ -107,11 +119,4 @@ function MBH_Resurrection()
     else
         SpellStopTargeting()
     end
-end
-
-function MBH_AnnounceResurrection(UnitID)
-    local tName = UnitName(UnitID)
-    MBH_ResurrectionBlackPlayer(tName)
-    SendAddonMessage(MBH.Session.Reviving.Add_BlackList, tName, pGroupChannel)
-    mb_message("Ressing <"..tName..">")
 end
