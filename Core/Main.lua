@@ -126,7 +126,7 @@ MBH.Session = {
     },
     Reviving = {
         ResurrectionBlackList = {},
-        Add_BlackList = "MBH_RESS",
+        Add_BlackList = "TX_RESBEGIN",
     }
 }
 
