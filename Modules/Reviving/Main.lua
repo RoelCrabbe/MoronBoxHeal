@@ -23,10 +23,10 @@ local function MBH_ChooseCorpse(Table)
 
     for _, v in ipairs(Table) do
         if SpellCanTargetUnit(v.UnitID) then
-            return v.UnitID
+            return v.UnitID, UnitName(v.UnitID)
         end
     end
-	return nil
+	return nil, nil
 end
 
 local function MBH_GetClassInfo(Class)
@@ -55,8 +55,7 @@ local function MBH_NoRessTargets(RessTable)
     return false
 end
 
-local function MBH_AnnounceResurrection(UnitID, Channel)
-    local Name = UnitName(UnitID)
+local function MBH_AnnounceResurrection(Name, Channel)
     SendAddonMessage(MBH.Session.Reviving.Add_BlackList, Name, Channel)
     mb_message("Ressing <"..Name..">")
 end
@@ -103,7 +102,7 @@ function MBH_Resurrection()
     if MBH_NoRessTargets(RessTable) then return end
 
     CastSpellByName(pSpellName)
-    local tUnitID = MBH_ChooseCorpse(RessTable)	
+    local tUnitID, tName = MBH_ChooseCorpse(RessTable)	
 
     if tUnitID then
 
@@ -111,7 +110,7 @@ function MBH_Resurrection()
 
         if not SpellIsTargeting() then
 
-            MBH_AnnounceResurrection(tUnitID, pGroupChannel)
+            MBH_AnnounceResurrection(tName, pGroupChannel)
         else
             SpellStopTargeting()
         end
